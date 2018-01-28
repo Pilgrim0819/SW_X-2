@@ -1,20 +1,27 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class MenuAction : MonoBehaviour {
 
-    public GameObject[] cameras;
+    public GameObject camera;
+    public GameObject canvasToDeactivate;
+    public GameObject canvasToActivate;
 
-    public void MENU_ACTION_rotateTo(int phase)
+    private const float cameraDistanceZ = 1300.0f;
+    private const float cameraDistanceY = 800.0f;
+    private const float cameraDistanceX = 430.0f;
+
+    public void MENU_ACTION_rotateTo(GameObject target)
     {
-        GameObject camera1 = GameObject.Find("Main Camera");
-        Vector3 pos = camera1.transform.position;
-        pos.z += 1000;
+        Vector3 targetPosition = target.transform.position;
+        targetPosition.z -= cameraDistanceZ;
+        targetPosition.y += cameraDistanceY;
+        targetPosition.x -= cameraDistanceX;
+        camera.transform.position = targetPosition;
 
-        camera1.transform.position = pos;
-
-        GameObject mainMenu = GameObject.Find("Main Menu");
-        mainMenu.SetActive(false);
+        canvasToActivate.active = true;
+        canvasToDeactivate.active = false;
     }
 
 	// Use this for initialization
