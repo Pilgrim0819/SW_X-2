@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class MenuAction : MonoBehaviour {
@@ -14,14 +15,16 @@ public class MenuAction : MonoBehaviour {
 
     public void MENU_ACTION_rotateTo(GameObject target)
     {
-        Vector3 targetPosition = target.transform.position;
+        /*Vector3 targetPosition = target.transform.position;
         targetPosition.z -= cameraDistanceZ;
         targetPosition.y += cameraDistanceY;
         targetPosition.x -= cameraDistanceX;
         camera.transform.position = targetPosition;
 
         canvasToActivate.active = true;
-        canvasToDeactivate.active = false;
+        canvasToDeactivate.active = false;*/
+
+        SceneManager.LoadScene("Scene 2", LoadSceneMode.Single);
     }
 
 	// Use this for initialization
