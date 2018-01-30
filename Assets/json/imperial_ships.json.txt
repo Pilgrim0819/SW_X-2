@@ -1,0 +1,131 @@
+[{
+		"shipName": "TIE Fighter",
+		"weapon": 2,
+		"agility": 3,
+		"hull": 3,
+		"shield": 0,
+		"size": "small",
+		"actions": ["focus", "evade", "barrel rol"],
+		"maneuvers": [{
+				"speed": 1,
+				"bearing": "turn",
+				"difficulty": "1"
+			},
+			{
+				"speed": 2,
+				"bearing": "straight",
+				"difficulty": "0"
+			},
+			{
+				"speed": 2,
+				"bearing": "bank",
+				"difficulty": "0"
+			},
+			{
+				"speed": 2,
+				"bearing": "turn",
+				"difficulty": "1"
+			},
+			{
+				"speed": 3,
+				"bearing": "straight",
+				"difficulty": "0"
+			},
+			{
+				"speed": 3,
+				"bearing": "bank",
+				"difficulty": "1"
+			},
+			{
+				"speed": 3,
+				"bearing": "turn",
+				"difficulty": "1"
+			},
+			{
+				"speed": 3,
+				"bearing": "koiogran",
+				"difficulty": "2"
+			},
+			{
+				"speed": 4,
+				"bearing": "straight",
+				"difficulty": "1"
+			},
+			{
+				"speed": 4,
+				"bearing": "koiogran",
+				"difficulty": "2"
+			},
+			{
+				"speed": 5,
+				"bearing": "straight",
+				"difficulty": "1"
+			}
+		]
+	},
+	{
+		"shipName": "TIE/fo Fighter",
+		"weapon": 2,
+		"agility": 3,
+		"hull": 3,
+		"shield": 1,
+		"size": "small",
+		"actions": ["focus", "targetLock", "evade", "barrel roll"],
+		"maneuvers": [{
+				"speed": 1,
+				"bearing": "turn",
+				"difficulty": "1"
+			},
+			{
+				"speed": 2,
+				"bearing": "straight",
+				"difficulty": "0"
+			},
+			{
+				"speed": 2,
+				"bearing": "bank",
+				"difficulty": "0"
+			},
+			{
+				"speed": 2,
+				"bearing": "turn",
+				"difficulty": "0"
+			},
+			{
+				"speed": 2,
+				"bearing": "segnor loop",
+				"difficulty": "2"
+			},
+			{
+				"speed": 3,
+				"bearing": "straight",
+				"difficulty": "0"
+			},
+			{
+				"speed": 3,
+				"bearing": "bank",
+				"difficulty": "1"
+			},
+			{
+				"speed": 3,
+				"bearing": "turn",
+				"difficulty": "1"
+			},
+			{
+				"speed": 4,
+				"bearing": "straight",
+				"difficulty": "1"
+			},
+			{
+				"speed": 4,
+				"bearing": "koiogran",
+				"difficulty": "2"
+			},
+			{
+				"speed": 5,
+				"bearing": "straight",
+				"difficulty": "1"
+			}
+		]
+	}
+]

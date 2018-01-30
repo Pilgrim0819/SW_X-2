@@ -69,6 +69,14 @@
     <Compile Include="Assets\PlayerDatas.cs" />
     <Compile Include="Assets\SceneChangerManuAction.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\json\T-65_pilots.json.txt" />
+    <None Include="Assets\json\TIE Fighter_pilots.json.txt" />
+    <None Include="Assets\json\imperial_ships.json.txt" />
+    <None Include="Assets\json\other constants.txt" />
+    <None Include="Assets\json\phases.txt" />
+    <None Include="Assets\json\rebel_ships.json.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
 </Project>

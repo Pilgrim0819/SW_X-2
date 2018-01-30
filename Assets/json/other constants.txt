@@ -1,0 +1,14 @@
+dice results:
+
+nothing = 0
+focus = 1
+evade/hit = 2
+critical hit = 3
+
+weapons:
+primary = 0
+secondary = 1
+
+firing arc position:
+inside = 0
+outside = 1

@@ -1,0 +1,54 @@
+[{
+		"ship": "T-65 X-wing",
+		"name": "Rookie pilot",
+		"cost": 21,
+		"level": 2,
+		"text": "Designed by Incom Corporation, the T-65 X-Wing quickly proved to be one of the most effective military vehicles in the galaxy and a boon to the Rebellion.",
+		"slots": ["torpedo", "astromech", "modification"],
+		"ability": {}
+	},
+	{
+		"ship": "T-65 X-wing",
+		"name": "Wedge Antilles",
+		"cost": 29,
+		"level": 9,
+		"text": "When attacking, reduce the defender's agility value by 1 (to a minimum of 0).",
+		"slots": ["elite", "torpedo", "astromech", "modification"],
+		"ability": {
+			"phase": "onBeforeAttack",
+			"target": "enemy",
+			"targetScope": "attacked",
+			"targetRangeMin": 1,
+			"targetRangeMax": 3,
+			"valueToModify": "agility",
+			"modifier": -1,
+			"bonusAction": "",
+			"valueToCheck": "agility",
+			"conditionValue": 0,
+			"conditionWay": "greater_than",
+			"conditionCheckPhase": "onAfterValueModified"
+		}
+	},
+	{
+		"ship": "T-65 X-wing",
+		"name": "Garven Dreis",
+		"cost": 26,
+		"level": 6,
+		"text": "After spending a focus token, you may place that token on any other friendly ship at Range 1-2 (instead of discarding it).",
+		"slots": ["torpedo", "astromech", "modification"],
+		"ability": {
+			"phase": "onSpendFocus",
+			"target": "friendly",
+			"targetScope": "any",
+			"targetRangeMin": 1,
+			"targetRangeMax": 2,
+			"valueToModify": "focusTokenNumber",
+			"modifier": 1,
+			"bonusAction": "",
+			"valueToCheck": "agility",
+			"conditionValue": 0,
+			"conditionWay": "greater_than",
+			"conditionCheckPhase": "onAfterValueModified"
+		}
+	}
+]
