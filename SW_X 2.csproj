@@ -63,11 +63,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Actions.cs" />
+    <Compile Include="Assets\JSONLoader.cs" />
+    <Compile Include="Assets\Maneuver.cs" />
+    <Compile Include="Assets\Maneuvers.cs" />
     <Compile Include="Assets\MenuAction.cs" />
     <Compile Include="Assets\MenuElementMouseClick.cs" />
     <Compile Include="Assets\OnShipSelectionSceneLoad.cs" />
     <Compile Include="Assets\PlayerDatas.cs" />
     <Compile Include="Assets\SceneChangerManuAction.cs" />
+    <Compile Include="Assets\Ship.cs" />
+    <Compile Include="Assets\Ships.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\json\T-65_pilots.json.txt" />

@@ -1,0 +1,76 @@
+{"pilots": {
+  		"ship": "TIE Fighter",
+		"name": "Academy Pilot",
+		"cost": 12,
+		"level": 1,
+		"text": "Developed by Sienar Fleet Systems, the Empire used the fast and agile TIE/ln as its primary starfighter throughout most of the Galactic Civil War.",
+		"slots": ["modification"],
+		"ability": {}
+	},
+	{
+	  	"ship": "TIE Fighter",
+		"name": "Winged Gundark",
+		"cost": 15,
+		"level": 5,
+		"text": "When attacking at Range 1, you may change one of your hit results to a critical result.",
+		"slots": ["modification"],
+		"ability": {
+			"phase": "onAttack",
+			"target": "dice",
+			"targetScope": "own",
+			"targetRangeMin": -1,
+			"targetRangeMax": -1,
+			"valueToModify": "hit",
+			"modifier": 1,
+		  	"bonusAction": "",
+			"valueToCheck": "hit",
+			"conditionValue": 0,
+			"conditionWay": "greater_than",
+			"conditionCheckPhase": "onBeforeValueModified"
+		}
+	},
+	{
+	  	"ship": "TIE Fighter",
+		"name": "Backstabber",
+		"cost": 16,
+		"level": 6,
+		"text": "When attacking from outside the defender's firing arc, roll one additional attack die.",
+		"slots": ["modification"],
+		"ability": {
+			"phase": "onBeforeAttack",
+			"target": "friendly",
+			"targetScope": "self",
+			"targetRangeMin": -1,
+			"targetRangeMax": -1,
+			"valueToModify": "weapon",
+			"modifier": 1,
+		  	"bonusAction": "",
+			"valueToCheck": "enemyFiringArc",
+			"conditionValue": 0,
+			"conditionWay": "greater_than",
+			"conditionCheckPhase": "onBeforeValueModified"
+		}
+	},
+	 {
+	  	"ship": "TIE Fighter",
+		"name": "Howlrunner",
+		"cost": 18,
+		"level": 8,
+		"text": "When another friendly ship at range 1 is attacking with its primary weapon, it may reroll 1 attack die.",
+		"slots": ["elite", "modification"],
+		"ability": {
+			"phase": "onBeforeAttack",
+			"target": "friendly",
+			"targetScope": "any",
+			"targetRangeMin": 1,
+			"targetRangeMax": 1,
+			"valueToModify": "",
+			"modifier": 0,
+		  	"bonusAction": "rerollOneDie",
+			"valueToCheck": "weapon",
+			"conditionValue": 0,
+			"conditionWay": "equals",
+			"conditionCheckPhase": "onBeforeBonusAction"
+		}
+	}
+}

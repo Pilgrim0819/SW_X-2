@@ -1,0 +1,116 @@
+{"ships": [{
+		"shipName": "T-65 X-wing",
+		"weapon": 3,
+		"agility": 2,
+		"hull": 3,
+		"shield": 2,
+		"size": "small",
+		"actions": ["focus", "targetLock"],
+		"maneuvers": [{
+				"speed": 1,
+				"bearing": "straight",
+				"difficulty": 0
+			},
+			{
+				"speed": 1,
+				"bearing": "bank",
+				"difficulty": 0
+			},
+			{
+				"speed": 2,
+				"bearing": "straight",
+				"difficulty": 0
+			},
+			{
+				"speed": 2,
+				"bearing": "bank",
+				"difficulty": 1
+			},
+			{
+				"speed": 2,
+				"bearing": "turn",
+				"difficulty": 1
+			},
+			{
+				"speed": 3,
+				"bearing": "straight",
+				"difficulty": 1
+			},
+			{
+				"speed": 3,
+				"bearing": "bank",
+				"difficulty": 1
+			},
+			{
+				"speed": 3,
+				"bearing": "turn",
+				"difficulty": 1
+			},
+			{
+				"speed": 4,
+				"bearing": "koiogran",
+				"difficulty": 2
+			}
+		]
+	},
+	{
+		"shipName": "T-70 X-wing",
+		"weapon": 3,
+		"agility": 2,
+		"hull": 3,
+		"shield": 3,
+		"size": "small",
+		"actions": ["focus", "targetLock", "boost"],
+		"maneuvers": [{
+				"speed": 1,
+				"bearing": "straight",
+				"difficulty": 0
+			},
+			{
+				"speed": 1,
+				"bearing": "bank",
+				"difficulty": 0
+			},
+			{
+				"speed": 2,
+				"bearing": "straight",
+				"difficulty": 0
+			},
+			{
+				"speed": 2,
+				"bearing": "bank",
+				"difficulty": 1
+			},
+			{
+				"speed": 2,
+				"bearing": "turn",
+				"difficulty": 1
+			},
+			{
+				"speed": 3,
+				"bearing": "straight",
+				"difficulty": 0
+			},
+			{
+				"speed": 3,
+				"bearing": "bank",
+				"difficulty": 1
+			},
+			{
+				"speed": 3,
+				"bearing": "turn",
+				"difficulty": 1
+			},
+			{
+				"speed": 3,
+				"bearing": "tallon roll",
+				"difficulty": 2
+			},
+			{
+				"speed": 4,
+				"bearing": "koiogran",
+				"difficulty": 2
+			}
+		]
+	}]
+}

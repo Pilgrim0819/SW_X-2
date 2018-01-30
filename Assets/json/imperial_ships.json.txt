@@ -1,4 +1,4 @@
-[{
+{{
 		"shipName": "TIE Fighter",
 		"weapon": 2,
 		"agility": 3,
@@ -128,4 +128,4 @@
 			}
 		]
 	}
-]
+}
