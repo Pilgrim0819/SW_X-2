@@ -12,7 +12,7 @@ public class OnShipSelectionSceneLoad : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         string chosenSide = PlayerDatas.getChosenSide();
-        Ships shipsCollection = new Ships();
+        Ship[] shipsCollection = { };
 
         switch (chosenSide)
         {
@@ -24,9 +24,9 @@ public class OnShipSelectionSceneLoad : MonoBehaviour {
                 break;
         }
 
-        string testString = chosenSide + " ships (" + shipsCollection.ships.Length + "):";
+        string testString = chosenSide + " ships (" + shipsCollection.Length + "):";
 
-        foreach(Ship ship in shipsCollection.ships)
+        foreach(Ship ship in shipsCollection)
         {
             testString += " " + ship.shipName;
         }

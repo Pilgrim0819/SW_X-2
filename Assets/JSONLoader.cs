@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class JSONLoader {
 
-	public Ships getShips(string jsonToLoad)
+	public Ship[] getShips(string jsonToLoad)
     {
         string filePath = Path.Combine(Application.streamingAssetsPath, jsonToLoad);
 
@@ -13,7 +13,7 @@ public class JSONLoader {
         {
             string dataAsJson = File.ReadAllText(filePath);
 
-            Ships ships = JsonUtility.FromJson<Ships>(dataAsJson);
+            Ship[] ships = JSONHelper.FromJson<Ship>(dataAsJson);
 
             return ships;
         } else
