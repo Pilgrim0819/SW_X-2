@@ -10,7 +10,7 @@ public class Ship {
     public int hull { get; set; }
     public int shield { get; set; }
     public string size { get; set; }
-    public Actions actions { get; set; }
-    public Maneuvers maneuvers { get; set; }
+    public List<string> actions { get; set; }
+    public List<Maneuver> maneuvers { get; set; }
 
 }

@@ -1,5 +1,4 @@
-{
-	"ships": [{
+[{"ship": {
 			"shipName": "TIE Fighter",
 			"weapon": 2,
 			"agility": 3,
@@ -63,7 +62,8 @@
 					"difficulty": 1
 				}
 			]
-		},
+		}
+}, "ship": 
 		{
 			"shipName": "TIE/fo Fighter",
 			"weapon": 2,
@@ -92,7 +92,6 @@
 					"bearing": "turn",
 					"difficulty": 0
 				},
-				{
 					"speed": 2,
 					"bearing": "segnor loop",
 					"difficulty": 2
@@ -130,4 +129,3 @@
 			]
 		}
 	]
-}
