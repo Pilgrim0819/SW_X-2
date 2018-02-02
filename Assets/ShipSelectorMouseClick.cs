@@ -1,33 +1,34 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 using System.Collections;
+using UnityEngine.UI;
 
-public class ShipSelectorMouseClick : MonoBehaviour {
+public class ShipSelectorMouseClick : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler {
 
     public GameObject currentObject;
-    public string ship;
 
     private int onMouseOverOffsetY = 250;
 
-    private void OnMouseEnter()
+    public void OnPointerEnter(PointerEventData eventData)
     {
-        Vector3 position = currentObject.transform.position;
-        position.y += onMouseOverOffsetY;
-
-        currentObject.transform.position = position;
+        Color background = new Color(255,255,255,255);
+        Image img = currentObject.GetComponent<Image>();
+        img.color = background;
     }
 
-    private void OnMouseExit()
+    public void OnPointerExit(PointerEventData eventData)
     {
-        Vector3 position = currentObject.transform.position;
-        position.y -= onMouseOverOffsetY;
-
-        currentObject.transform.position = position;
+        Color background = new Color(255, 255, 255, 163);
+        Image img = currentObject.GetComponent<Image>();
+        img.color = background;
     }
 
-    private void OnMouseDown()
+    public void OnPointerClick(PointerEventData eventData)
     {
+        //Debug.Log("Pointer click event!!");
         LoadPilotsForSelector pilotLoader = new LoadPilotsForSelector();
-        PlayerDatas.setChosenShip(ship);
+        string shipName = currentObject.transform.Find("Ship Name").gameObject.GetComponent<UnityEngine.UI.Text>().text;
+        PlayerDatas.setChosenShip(shipName);
 
         pilotLoader.loadPilotsCards();
     }

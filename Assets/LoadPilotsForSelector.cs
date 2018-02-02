@@ -5,14 +5,16 @@ using PilotsXMLCSharp;
 
 public class LoadPilotsForSelector : MonoBehaviour {
 
-    public Transform shipCardPrefab;
     public GameObject cardsHolder;
 
     private const string IMAGE_FOLDER_NAME = "images";
+    private const string PREFAB_FOLDER_NAME = "Prefabs/PilotCardPrefab";
 
     public void loadPilotsCards()
     {
+        cardsHolder = GameObject.Find("Ships Scroll");
         string chosenShip = PlayerDatas.getChosenShip();
+        Debug.Log("Chosen ship: " + chosenShip);
         Pilots pilots = new Pilots();
 
         switch (chosenShip)
@@ -29,6 +31,7 @@ public class LoadPilotsForSelector : MonoBehaviour {
 
         foreach (PilotsXMLCSharp.Pilot pilot in pilots.Pilot)
         {
+            Transform pilotCardPrefab = Resources.Load<Transform>(PREFAB_FOLDER_NAME);
             Sprite pilotSprite = Resources.Load<Sprite>(IMAGE_FOLDER_NAME + "/" + pilot.Name);
             Vector3 position = cardsHolder.transform.position;
             int offsetX = 150;
@@ -36,7 +39,7 @@ public class LoadPilotsForSelector : MonoBehaviour {
             int shipCardWidth = 200;
 
             Transform shipCard = (Transform)GameObject.Instantiate(
-                shipCardPrefab,
+                pilotCardPrefab,
                 new Vector3((position.x - 1000) + (shipCardWidth * pilotIndex) + offsetX, position.y + offsetY, position.z),
                 Quaternion.identity
             );
