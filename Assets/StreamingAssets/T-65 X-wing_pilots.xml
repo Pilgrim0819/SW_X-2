@@ -1,0 +1,54 @@
+<pilots>
+	<pilot>
+		<name>Rookie pilot</name>
+		<cost>21</cost>
+		<level>2</level>
+		<text>Designed by Incom Corporation, the T-65 X-Wing quickly proved to be one of the most effective military vehicles in the galaxy and a boon to the Rebellion.</text>
+		<slots>
+			<slot>torpedo</slot>
+			<slot>astromech</slot>
+			<slot>modification</slot>
+		</slots>
+		<ability>
+			<phase></phase>
+			<target></target>
+			<targetScope></targetScope>
+			<targetRangeMin></targetRangeMin>
+			<targetRangeMax></targetRangeMax>
+			<valueToModify></valueToModify>
+			<modifier></modifier>
+		  	<bonusAction></bonusAction>
+			<valueToCheck></valueToCheck>
+			<conditionValue></conditionValue>
+			<conditionWay></conditionWay>
+			<conditionCheckPhase></conditionCheckPhase>
+		</ability>
+	</pilot>
+	
+	<pilot>
+		<name>Wedge Antilles</name>
+		<cost>29</cost>
+		<level>9</level>
+		<text>When attacking, reduce the defender's agility value by 1 (to a minimum of 0).</text>
+		<slots>
+			<slot>elite</slot>
+			<slot>torpedo</slot>
+			<slot>astromech</slot>
+			<slot>modification</slot>
+		</slots>
+		<ability>
+			<phase>onBeforeAttack</phase>
+			<target>enemy</target>
+			<targetScope>attacked</targetScope>
+			<targetRangeMin>1</targetRangeMin>
+			<targetRangeMax>3</targetRangeMax>
+			<valueToModify>agility</valueToModify>
+			<modifier>-1</modifier>
+		  	<bonusAction></bonusAction>
+			<valueToCheck>agility</valueToCheck>
+			<conditionValue>0</conditionValue>
+			<conditionWay>greater_than</conditionWay>
+			<conditionCheckPhase>onAfterValueModified</conditionCheckPhase>
+		</ability>
+	</pilot>
+</pilots>

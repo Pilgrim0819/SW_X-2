@@ -47,15 +47,19 @@
   <ItemGroup>
      <Compile Include="Assets\JSONHelper.cs" />
      <Compile Include="Assets\JSONLoader.cs" />
+     <Compile Include="Assets\LoadPilotsForSelector.cs" />
      <Compile Include="Assets\MenuAction.cs" />
      <Compile Include="Assets\MenuElementMouseClick.cs" />
      <Compile Include="Assets\OnShipSelectionSceneLoad.cs" />
+     <Compile Include="Assets\PilotsXMLModel.cs" />
      <Compile Include="Assets\PlayerDatas.cs" />
      <Compile Include="Assets\SceneChangerManuAction.cs" />
+     <Compile Include="Assets\ShipSelectorMouseClick.cs" />
      <Compile Include="Assets\ShipsXMLModel.cs" />
      <Compile Include="Assets\XMLLoader.cs" />
      <Compile Include="Assets\backup\Maneuver.cs" />
      <Compile Include="Assets\backup\Ship.cs" />
+     <None Include="Assets\StreamingAssets\rebel_ships.xml" />
      <None Include="Assets\StreamingAssets\imperial_ships.xml" />
      <None Include="Assets\json\imperial_ships.json.txt" />
      <None Include="Assets\json\phases.txt" />
@@ -63,6 +67,7 @@
      <None Include="Assets\json\rebel_ships.json.txt" />
      <None Include="Assets\json\T-65_pilots.json.txt" />
      <None Include="Assets\json\TIE Fighter_pilots.json.txt" />
+     <None Include="Assets\StreamingAssets\T-65 X-wing_pilots.xml" />
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

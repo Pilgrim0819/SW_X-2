@@ -5,8 +5,7 @@ using System.Collections.Generic;
 using ShipsXMLCSharp;
 
 public class OnShipSelectionSceneLoad : MonoBehaviour {
-
-    public GameObject shipCard;
+    
     public Transform shipCardPrefab;
     public GameObject cardsHolder;
 
