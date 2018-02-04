@@ -9,9 +9,16 @@ public class LoadPilotsForSelector : MonoBehaviour {
 
     private const string IMAGE_FOLDER_NAME = "images";
     private const string PREFAB_FOLDER_NAME = "Prefabs/PilotCardPrefab";
+    private const string PILOT_LEVEL_TEXT = "Level: ";
+    private const string PILOT_COST_TEXT = "Cost: ";
 
     public void loadPilotsCards()
     {
+        
+    }
+
+	// Use this for initialization
+	void Start () {
         cardsHolder = GameObject.Find("Ships Scroll");
         string chosenShip = PlayerDatas.getChosenShip();
         Debug.Log("Chosen ship: " + chosenShip);
@@ -45,21 +52,15 @@ public class LoadPilotsForSelector : MonoBehaviour {
             );
 
             shipCard.transform.SetParent(cardsHolder.transform, false);
-            shipCard.transform.Find("Ship Name").gameObject.GetComponent<UnityEngine.UI.Text>().text = pilot.Name.ToString();
-            shipCard.transform.Find("Ship Image").gameObject.GetComponent<Image>().sprite = pilotSprite;
-            shipCard.transform.Find("Attack Power Text").gameObject.GetComponent<UnityEngine.UI.Text>().text = pilot.Level;
-            shipCard.transform.Find("Agility Text").gameObject.GetComponent<UnityEngine.UI.Text>().text = pilot.Cost;
-            shipCard.transform.Find("Hull Text").gameObject.GetComponent<UnityEngine.UI.Text>().text = "";
-            shipCard.transform.Find("Shield Text").gameObject.GetComponent<UnityEngine.UI.Text>().text = "";
+            shipCard.transform.Find("Pilot Name").gameObject.GetComponent<UnityEngine.UI.Text>().text = pilot.Name.ToString();
+            shipCard.transform.Find("Pilot Image").gameObject.GetComponent<Image>().sprite = pilotSprite;
+            shipCard.transform.Find("Pilot Level Text").gameObject.GetComponent<UnityEngine.UI.Text>().text = PILOT_LEVEL_TEXT + pilot.Level;
+            shipCard.transform.Find("Pilot Cost Text").gameObject.GetComponent<UnityEngine.UI.Text>().text = PILOT_COST_TEXT + pilot.Cost;
+            shipCard.transform.Find("Pilot Description Text").gameObject.GetComponent<UnityEngine.UI.Text>().text = pilot.Text;
 
             pilotIndex++;
         }
     }
-
-	// Use this for initialization
-	void Start () {
-	
-	}
 	
 	// Update is called once per frame
 	void Update () {

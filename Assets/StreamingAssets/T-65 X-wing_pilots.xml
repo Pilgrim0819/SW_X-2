@@ -51,4 +51,30 @@
 			<conditionCheckPhase>onAfterValueModified</conditionCheckPhase>
 		</ability>
 	</pilot>
+	
+	<pilot>
+		<name>Garven Dreis</name>
+		<cost>26</cost>
+		<level>6</level>
+		<text>After spending a focus token, you may place that token on any other friendly ship at Range 1-2 (instead of discarding it).</text>
+		<slots>
+			<slot>torpedo</slot>
+			<slot>astromech</slot>
+			<slot>modification</slot>
+		</slots>
+		<ability>
+			<phase>onSpendFocus</phase>
+			<target>friendly</target>
+			<targetScope>any</targetScope>
+			<targetRangeMin>1</targetRangeMin>
+			<targetRangeMax>2</targetRangeMax>
+			<valueToModify>focusTokenNumber</valueToModify>
+			<modifier>1</modifier>
+		  	<bonusAction></bonusAction>
+			<valueToCheck>agility</valueToCheck>
+			<conditionValue>0</conditionValue>
+			<conditionWay>greater_than</conditionWay>
+			<conditionCheckPhase>onAfterValueModified</conditionCheckPhase>
+		</ability>
+	</pilot>
 </pilots>

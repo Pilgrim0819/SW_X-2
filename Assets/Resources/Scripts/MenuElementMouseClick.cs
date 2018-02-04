@@ -28,7 +28,7 @@ public class MenuElementMouseClick : MonoBehaviour {
     private void OnMouseDown()
     {
         PlayerDatas.setChosenSide(side);
-        SceneManager.LoadScene("scene3", LoadSceneMode.Single);
+        SceneManager.LoadScene("Scene 3", LoadSceneMode.Single);
     }
 
     // Use this for initialization

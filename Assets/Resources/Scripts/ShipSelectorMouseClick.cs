@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using System.Collections;
 using UnityEngine.UI;
 
@@ -30,7 +31,8 @@ public class ShipSelectorMouseClick : MonoBehaviour, IPointerEnterHandler, IPoin
         string shipName = currentObject.transform.Find("Ship Name").gameObject.GetComponent<UnityEngine.UI.Text>().text;
         PlayerDatas.setChosenShip(shipName);
 
-        pilotLoader.loadPilotsCards();
+        //pilotLoader.loadPilotsCards();
+        SceneManager.LoadScene("Scene 4", LoadSceneMode.Single);
     }
 
     // Use this for initialization
