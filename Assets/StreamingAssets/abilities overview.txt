@@ -1,0 +1,196 @@
+When attacking, reduce the defender's agility value by 1 (to a minimum of 0).
+
+<ability>
+	<phase>onBeforeAttack</phase>
+	<target>enemy</target>
+	<targetScope>attacked</targetScope>
+	<targetRangeMin>1</targetRangeMin>
+	<targetRangeMax>3</targetRangeMax>
+	<valueToModify>agility</valueToModify>
+	<modifier>-1</modifier>
+	<bonusAction></bonusAction>
+	<valueToCheck>agility</valueToCheck>
+	<conditionValue>0</conditionValue>
+	<conditionWay>greater_than</conditionWay>
+	<conditionCheckPhase>onAfterValueModified</conditionCheckPhase>
+</ability>
+
+
+After spending a focus token, you may place that token on any other friendly ship at Range 1-2 (instead of discarding it).
+
+<ability>
+	<phase>onSpendFocus</phase>
+	<target>friendly</target>
+	<targetScope>any</targetScope>
+	<targetRangeMin>1</targetRangeMin>
+	<targetRangeMax>2</targetRangeMax>
+	<valueToModify>focusTokenNumber</valueToModify>
+	<modifier>1</modifier>
+	<bonusAction></bonusAction>
+	<valueToCheck>agility</valueToCheck>
+	<conditionValue>0</conditionValue>
+	<conditionWay>greater_than</conditionWay>
+	<conditionCheckPhase>onAfterValueModified</conditionCheckPhase>
+</ability>
+
+
+When attacking at Range 1, you may change one of your hit results to a critical result.
+
+<ability>
+	<phase>onAfterAttack</phase>
+	<target>dice</target>
+	<targetScope>own</targetScope>
+	<targetRangeMin>-1</targetRangeMin>
+	<targetRangeMax>-1</targetRangeMax>
+	<valueToModify>hit</valueToModify>
+	<modifier>1</modifier>
+	<bonusAction></bonusAction>
+	<valueToCheck>hit</valueToCheck>
+	<conditionValue>0</conditionValue>
+	<conditionWay>greater_than</conditionWay>
+	<conditionCheckPhase>onBeforeValueModified</conditionCheckPhase>
+</ability>
+
+
+When attacking from outside the defender's firing arc, roll one additional attack die.
+
+<ability>
+	<phase>onBeforeAttack</phase>
+	<target>friendly</target>
+	<targetScope>self</targetScope>
+	<targetRangeMin>-1</targetRangeMin>
+	<targetRangeMax>-1</targetRangeMax>
+	<valueToModify>weapon</valueToModify>
+	<modifier>1</modifier>
+	<bonusAction></bonusAction>
+	<valueToCheck>enemyFiringArc</valueToCheck>
+	<conditionValue>0</conditionValue>
+	<conditionWay>greater_than</conditionWay>
+	<conditionCheckPhase>onBeforeValueModified</conditionCheckPhase>
+</ability>
+
+
+When another friendly ship at range 1 is attacking with its primary weapon, it may reroll 1 attack die.
+
+<ability>
+	<phase>onBeforeAttack</phase>
+	<target>friendly</target>
+	<targetScope>any</targetScope>
+	<targetRangeMin>1</targetRangeMin>
+	<targetRangeMax>1</targetRangeMax>
+	<valueToModify></valueToModify>
+	<modifier>0</modifier>
+	<bonusAction>rerollOneDie</bonusAction>
+	<valueToCheck>weapon</valueToCheck>
+	<conditionValue>0</conditionValue>
+	<conditionWay>equals</conditionWay>
+	<conditionCheckPhase>onBeforeBonusAction</conditionCheckPhase>
+</ability>
+
+
+You may perform actions even while you have stress tokens.
+
+<ability>
+	<phase>onBeforeAction</phase>
+	<target>friendly</target>
+	<targetScope>self</targetScope>
+	<targetRangeMin>-1</targetRangeMin>
+	<targetRangeMax>-1</targetRangeMax>
+	<valueToModify></valueToModify>
+	<modifier></modifier>
+	<bonusAction></bonusAction>
+	<valueToCheck></valueToCheck>
+	<conditionValue></conditionValue>
+	<conditionWay></conditionWay>
+	<conditionCheckPhase></conditionCheckPhase>
+</ability>
+
+
+You may declare an enemy ship inside your firing arc that you are touching as the target of your attack.
+
+<ability>
+	<phase>onSpendFocus</phase>
+	<target>friendly</target>
+	<targetScope>any</targetScope>
+	<targetRangeMin>1</targetRangeMin>
+	<targetRangeMax>2</targetRangeMax>
+	<valueToModify>focusTokenNumber</valueToModify>
+	<modifier>1</modifier>
+	<bonusAction></bonusAction>
+	<valueToCheck>agility</valueToCheck>
+	<conditionValue>0</conditionValue>
+	<conditionWay>greater_than</conditionWay>
+	<conditionCheckPhase>onAfterValueModified</conditionCheckPhase>
+</ability>
+
+
+During your "Perform Action" step, you may perform 2 actions.
+
+<ability>
+	<phase>onSpendFocus</phase>
+	<target>friendly</target>
+	<targetScope>any</targetScope>
+	<targetRangeMin>1</targetRangeMin>
+	<targetRangeMax>2</targetRangeMax>
+	<valueToModify>focusTokenNumber</valueToModify>
+	<modifier>1</modifier>
+	<bonusAction></bonusAction>
+	<valueToCheck>agility</valueToCheck>
+	<conditionValue>0</conditionValue>
+	<conditionWay>greater_than</conditionWay>
+	<conditionCheckPhase>onAfterValueModified</conditionCheckPhase>
+</ability>
+
+
+When your attack deals a faceup Damage card to the defender, instead draw 3 Damage cards, choose 1 to deal and discard the others.
+
+<ability>
+	<phase>onSpendFocus</phase>
+	<target>friendly</target>
+	<targetScope>any</targetScope>
+	<targetRangeMin>1</targetRangeMin>
+	<targetRangeMax>2</targetRangeMax>
+	<valueToModify>focusTokenNumber</valueToModify>
+	<modifier>1</modifier>
+	<bonusAction></bonusAction>
+	<valueToCheck>agility</valueToCheck>
+	<conditionValue>0</conditionValue>
+	<conditionWay>greater_than</conditionWay>
+	<conditionCheckPhase>onAfterValueModified</conditionCheckPhase>
+</ability>
+
+
+The first time you are hit by an attack each round, assign the "I'll Show You the Dark Side" Condition card to the attacker.
+
+<ability>
+	<phase>onSpendFocus</phase>
+	<target>friendly</target>
+	<targetScope>any</targetScope>
+	<targetRangeMin>1</targetRangeMin>
+	<targetRangeMax>2</targetRangeMax>
+	<valueToModify>focusTokenNumber</valueToModify>
+	<modifier>1</modifier>
+	<bonusAction></bonusAction>
+	<valueToCheck>agility</valueToCheck>
+	<conditionValue>0</conditionValue>
+	<conditionWay>greater_than</conditionWay>
+	<conditionCheckPhase>onAfterValueModified</conditionCheckPhase>
+</ability>
+
+
+When attacking, if the attack is obstructed, the defender rolls 2 fewer defense dice (to a minimum of 0).
+
+<ability>
+	<phase>onSpendFocus</phase>
+	<target>friendly</target>
+	<targetScope>any</targetScope>
+	<targetRangeMin>1</targetRangeMin>
+	<targetRangeMax>2</targetRangeMax>
+	<valueToModify>focusTokenNumber</valueToModify>
+	<modifier>1</modifier>
+	<bonusAction></bonusAction>
+	<valueToCheck>agility</valueToCheck>
+	<conditionValue>0</conditionValue>
+	<conditionWay>greater_than</conditionWay>
+	<conditionCheckPhase>onAfterValueModified</conditionCheckPhase>
+</ability>

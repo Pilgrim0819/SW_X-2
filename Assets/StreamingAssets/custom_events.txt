@@ -1,0 +1,58 @@
+onBeforeManeuverSelection
+onAfterManeuverSelection
+
+onBeforeActivation
+onAfterActivation
+
+onBeforeAction
+onAfterAction
+
+onBeforeAttack 	(before rolling dice)
+onAttack 	(after rolling dice)
+onAfterAttack	(after resolving effects [reroll with "Gunner", etc...])
+
+onBeforeDefense	(before rolling dice)
+onDefense	(after rolling dice)
+onAfterDefense	(after resolving effects [get one evade token...])
+
+onBeforeTurnEnd
+onAfterTurnEnd
+
+onBeforeSpendFocus
+onAfterSpendFocus
+onBeforeAcquireFocus
+onAfterAcquireFocus
+
+onBeforeSpendEvade
+onAfterSpendEvade
+onBeforeAcquireEvade
+onAfterAcquireEvade
+
+onBeforeAcquireStress
+onAfterAcquireStress
+onBeforeRemoveStress
+onAfterRemoveStress
+
+onBeforeAcquireIon
+onAfterAcquireIon
+onBeforeRemoveIon
+onAfterRemoveIon
+
+onBeforeAcquireShield
+onAfterAcquireShield
+onBeforeLoseShield
+onAfterLoseShield
+
+onBeforeAcquireDamage
+onAfterAcquireDamage
+onBeforeRemoveDamage
+onAfterRemoveDamage
+
+onBeforeAcquireCriticalDamage
+onAfterAcquireCriticalDamage
+onBeforeRemoveCriticalDamage
+onAfterRemoveCriticalDamage
+
+onBefore
+on
+onAfter
