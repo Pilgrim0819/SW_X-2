@@ -58,6 +58,9 @@ public class LoadPilotsForSelector : MonoBehaviour {
             shipCard.transform.Find("Pilot Cost Text").gameObject.GetComponent<UnityEngine.UI.Text>().text = PILOT_COST_TEXT + pilot.Cost;
             shipCard.transform.Find("Pilot Description Text").gameObject.GetComponent<UnityEngine.UI.Text>().text = pilot.Text;
 
+            AddPilotToSquardon shipcardPilotScript = shipCard.transform.GetComponent<AddPilotToSquardon>();
+            shipcardPilotScript.setPilot(pilot);
+
             pilotIndex++;
         }
     }

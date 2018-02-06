@@ -58,6 +58,12 @@
     <Reference Include="UnityEngine.Networking">
       <HintPath>G:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.Networking">
+      <HintPath>G:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>G:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEditor">
       <HintPath>G:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
     </Reference>
@@ -75,19 +81,22 @@
     <Compile Include="Assets\Resources\Scripts\SceneChangerManuAction.cs" />
     <Compile Include="Assets\Resources\Scripts\ShipSelectorMouseClick.cs" />
     <Compile Include="Assets\Resources\Scripts\ShipsXMLModel.cs" />
+    <Compile Include="Assets\Resources\Scripts\SideSelectionStartup.cs" />
+    <Compile Include="Assets\Resources\Scripts\SquadPointsChange.cs" />
     <Compile Include="Assets\Resources\Scripts\XMLLoader.cs" />
     <Compile Include="Assets\backup\Maneuver.cs" />
     <Compile Include="Assets\backup\Ship.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\StreamingAssets\T-65 X-wing_pilots.xml" />
+    <None Include="Assets\StreamingAssets\abilities overview.txt" />
+    <None Include="Assets\StreamingAssets\custom_events.txt" />
     <None Include="Assets\StreamingAssets\imperial_ships.xml" />
     <None Include="Assets\StreamingAssets\rebel_ships.xml" />
     <None Include="Assets\json\T-65_pilots.json.txt" />
     <None Include="Assets\json\TIE Fighter_pilots.json.txt" />
     <None Include="Assets\json\imperial_ships.json.txt" />
     <None Include="Assets\json\other constants.txt" />
-    <None Include="Assets\json\phases.txt" />
     <None Include="Assets\json\rebel_ships.json.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

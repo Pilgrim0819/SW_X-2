@@ -1,5 +1,6 @@
 <pilots>
 	<pilot>
+		<unique>false</unique>
 		<name>Rookie pilot</name>
 		<cost>21</cost>
 		<level>2</level>
@@ -26,6 +27,7 @@
 	</pilot>
 	
 	<pilot>
+		<unique>true</unique>
 		<name>Wedge Antilles</name>
 		<cost>29</cost>
 		<level>9</level>
@@ -53,6 +55,7 @@
 	</pilot>
 	
 	<pilot>
+		<unique>true</unique>
 		<name>Garven Dreis</name>
 		<cost>26</cost>
 		<level>6</level>

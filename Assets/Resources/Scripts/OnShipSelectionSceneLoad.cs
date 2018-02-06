@@ -8,6 +8,7 @@ public class OnShipSelectionSceneLoad : MonoBehaviour {
     
     public Transform shipCardPrefab;
     public GameObject cardsHolder;
+    public GameObject squadPointsHolder;
 
     private JSONLoader jsonLoader = new JSONLoader();
     private const string IMAGE_FOLDER_NAME = "images";
@@ -16,6 +17,7 @@ public class OnShipSelectionSceneLoad : MonoBehaviour {
 	void Start () {
         string chosenSide = PlayerDatas.getChosenSide();
         Ships ships = new Ships();
+        squadPointsHolder.GetComponent<Text>().text = PlayerDatas.getCumulatedSquadPoints() + "/" + PlayerDatas.getPointsToSpend();
 
         switch (chosenSide)
         {
