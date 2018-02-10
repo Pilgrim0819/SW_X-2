@@ -3,12 +3,24 @@ using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using System.Collections;
 using UnityEngine.UI;
+using ShipsXMLCSharp;
 
 public class ShipSelectorMouseClick : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler {
 
     public GameObject currentObject;
+    private Ship ship;
 
     private int onMouseOverOffsetY = 250;
+
+    public void setShip(Ship ship)
+    {
+        this.ship = ship;
+    }
+
+    public Ship getShip()
+    {
+        return this.ship;
+    }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
@@ -26,12 +38,11 @@ public class ShipSelectorMouseClick : MonoBehaviour, IPointerEnterHandler, IPoin
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        //Debug.Log("Pointer click event!!");
         LoadPilotsForSelector pilotLoader = new LoadPilotsForSelector();
         string shipName = currentObject.transform.Find("Ship Name").gameObject.GetComponent<UnityEngine.UI.Text>().text;
         PlayerDatas.setChosenShip(shipName);
-
-        //pilotLoader.loadPilotsCards();
+        PlayerDatas.setSelectedShip(ship);
+        
         SceneManager.LoadScene("Scene 4", LoadSceneMode.Single);
     }
 

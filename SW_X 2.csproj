@@ -58,12 +58,6 @@
     <Reference Include="UnityEngine.Networking">
       <HintPath>G:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.Networking">
-      <HintPath>G:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>G:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEditor">
       <HintPath>G:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
     </Reference>
@@ -73,8 +67,10 @@
     <Compile Include="Assets\Resources\Scripts\JSONHelper.cs" />
     <Compile Include="Assets\Resources\Scripts\JSONLoader.cs" />
     <Compile Include="Assets\Resources\Scripts\LoadPilotsForSelector.cs" />
+    <Compile Include="Assets\Resources\Scripts\LoadedShip.cs" />
     <Compile Include="Assets\Resources\Scripts\MenuAction.cs" />
     <Compile Include="Assets\Resources\Scripts\MenuElementMouseClick.cs" />
+    <Compile Include="Assets\Resources\Scripts\Mocker.cs" />
     <Compile Include="Assets\Resources\Scripts\OnShipSelectionSceneLoad.cs" />
     <Compile Include="Assets\Resources\Scripts\PilotsXMLModel.cs" />
     <Compile Include="Assets\Resources\Scripts\PlayerDatas.cs" />
@@ -84,11 +80,10 @@
     <Compile Include="Assets\Resources\Scripts\SideSelectionStartup.cs" />
     <Compile Include="Assets\Resources\Scripts\SquadPointsChange.cs" />
     <Compile Include="Assets\Resources\Scripts\XMLLoader.cs" />
-    <Compile Include="Assets\backup\Maneuver.cs" />
-    <Compile Include="Assets\backup\Ship.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\StreamingAssets\T-65 X-wing_pilots.xml" />
+    <None Include="Assets\StreamingAssets\TIE Fighter_pilots.xml" />
     <None Include="Assets\StreamingAssets\abilities overview.txt" />
     <None Include="Assets\StreamingAssets\custom_events.txt" />
     <None Include="Assets\StreamingAssets\imperial_ships.xml" />

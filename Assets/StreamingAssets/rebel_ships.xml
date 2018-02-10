@@ -1,5 +1,6 @@
 	<ships>
 		<ship>
+			<shipId>t65xw</shipId>
 			<shipName>T-65 X-wing</shipName>
 			<weapon>3</weapon>
 			<agility>2</agility>
@@ -65,6 +66,7 @@
 		</ship>
 		
 		<ship>
+			<shipId>t70xw</shipId>
 			<shipName>T-70 X-wing</shipName>
 			<weapon>3</weapon>
 			<agility>2</agility>

@@ -21,7 +21,6 @@ public class LoadPilotsForSelector : MonoBehaviour {
 	void Start () {
         cardsHolder = GameObject.Find("Ships Scroll");
         string chosenShip = PlayerDatas.getChosenShip();
-        Debug.Log("Chosen ship: " + chosenShip);
         Pilots pilots = new Pilots();
 
         switch (chosenShip)

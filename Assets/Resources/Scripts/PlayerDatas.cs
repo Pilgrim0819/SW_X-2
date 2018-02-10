@@ -1,13 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
 using PilotsXMLCSharp;
+using ShipsXMLCSharp;
 using System.Collections.Generic;
 
 public class PlayerDatas {
+    private static Pilots pilots = new Pilots();
+    private static Ship selectedShip;
     private static string chosenSide;
     private static string chosenShip;
-    private static Pilots pilots = new Pilots();
     private static int pointsToSpend = 100;
+    private static List<LoadedShip> squadron = new List<LoadedShip>();
 
     public static void setChosenSide(string side)
     {
@@ -34,20 +37,25 @@ public class PlayerDatas {
         return pilots;
     }
 
+    public static void setSelectedShip(Ship ship)
+    {
+       selectedShip = ship;
+    }
+
+    public static Ship getSelectedShip()
+    {
+        return selectedShip;
+    }
+
     public static void addPilotToSquadron(Pilot pilot)
     {
         bool canAddPilot = true;
 
-        if (pilots.Pilot == null || pilots.Pilot.Capacity == 0)
-        {
-            pilots.Pilot = new List<Pilot>();
-        }
-
         if (pilot.Unique)
         {
-            foreach (Pilot p in pilots.Pilot)
+            foreach (LoadedShip ls in squadron)
             {
-                if (p.Name.Equals(pilot.Name))
+                if (ls.getPilot().Name.Equals(pilot.Name))
                 {
                     canAddPilot = false;
                 }
@@ -62,6 +70,12 @@ public class PlayerDatas {
         if (canAddPilot)
         {
             pilots.Pilot.Add(pilot);
+
+            LoadedShip ls = new LoadedShip();
+            ls.setShip(selectedShip);
+            ls.setPilot(pilot);
+
+            squadron.Add(ls);
         } else
         {
             //TODO show error messages!
@@ -71,9 +85,19 @@ public class PlayerDatas {
 
     public static void removePilotFromSquadron(Pilot pilot)
     {
-        if (pilots.Pilot != null && pilots.Pilot.Capacity > 0) {
-            pilots.Pilot.Remove(pilot);
+        //TODO Test if only one ship gets deleted when pilot is not unique!!
+        LoadedShip shipToRemove = new LoadedShip();
+
+        foreach (LoadedShip ls in squadron)
+        {
+            if (ls.getPilot().Name.Equals(pilot.Name))
+            {
+                shipToRemove = ls;
+                break;
+            }
         }
+
+        squadron.Remove(shipToRemove);
     }
 
     public static void setPointsToSpend(int points)
@@ -90,11 +114,11 @@ public class PlayerDatas {
     {
         int total = 0;
 
-        if (pilots.Pilot != null && pilots.Pilot.Capacity > 0)
+        if (squadron != null && squadron.Capacity > 0)
         {
-            foreach (Pilot pilot in pilots.Pilot)
+            foreach (LoadedShip ls in squadron)
             {
-                total += System.Convert.ToInt32(pilot.Cost);
+                total += System.Convert.ToInt32(ls.getPilot().Cost);
             }
         }
 
