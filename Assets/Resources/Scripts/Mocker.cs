@@ -29,6 +29,11 @@ public class Mocker {
         LoadedShip ship3 = new LoadedShip();
         ship3.setShip(ships.Ship[0]);
         ship3.setPilot(pilots.Pilot[0]);
+
+        /*foreach (LoadedShip ls in PlayerDatas.getSquadron())
+        {
+            Debug.Log("Ship: " + ls.getShip().ShipName + ", Pilot: " + ls.getPilot().Name + ", PilotId: " + ls.getPilotId());
+        }*/
     }
 
 }

@@ -11,6 +11,7 @@ public class PlayerDatas {
     private static string chosenShip;
     private static int pointsToSpend = 100;
     private static List<LoadedShip> squadron = new List<LoadedShip>();
+    private static int currentPilotId = 1;
 
     public static void setChosenSide(string side)
     {
@@ -51,17 +52,12 @@ public class PlayerDatas {
     {
         bool canAddPilot = true;
 		bool duplicate = false;
-		int pilotId = 0;
 
 		foreach (LoadedShip ls in squadron)
 		{
 			if (ls.getPilot().Name.Equals(pilot.Name))
 			{
 				duplicate = true;
-			}
-
-			if (ls.getPilotId() > pilotId) {
-				pilotId = ls.getPilotId ();
 			}
 		}
 
@@ -76,14 +72,16 @@ public class PlayerDatas {
 
         if (canAddPilot)
         {
-            pilots.Pilot.Add(pilot);
+            //pilots.Pilot.Add(pilot);
 
             LoadedShip ls = new LoadedShip();
             ls.setShip(selectedShip);
             ls.setPilot(pilot);
-			ls.setPilotId (pilotId);
+			ls.setPilotId (currentPilotId);
 
             squadron.Add(ls);
+
+            currentPilotId++;
         } else
         {
             //TODO show error messages!
@@ -131,6 +129,11 @@ public class PlayerDatas {
         }
 
         return total;
+    }
+
+    public static List<LoadedShip> getSquadron()
+    {
+        return squadron;
     }
 
 }
