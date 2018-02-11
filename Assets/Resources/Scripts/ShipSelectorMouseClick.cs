@@ -10,8 +10,6 @@ public class ShipSelectorMouseClick : MonoBehaviour, IPointerEnterHandler, IPoin
     public GameObject currentObject;
     private Ship ship;
 
-    private int onMouseOverOffsetY = 250;
-
     public void setShip(Ship ship)
     {
         this.ship = ship;

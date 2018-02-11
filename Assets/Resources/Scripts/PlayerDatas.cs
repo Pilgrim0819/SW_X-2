@@ -50,17 +50,24 @@ public class PlayerDatas {
     public static void addPilotToSquadron(Pilot pilot)
     {
         bool canAddPilot = true;
+		bool duplicate = false;
+		int pilotId = 0;
 
-        if (pilot.Unique)
-        {
-            foreach (LoadedShip ls in squadron)
-            {
-                if (ls.getPilot().Name.Equals(pilot.Name))
-                {
-                    canAddPilot = false;
-                }
-            }
-        }
+		foreach (LoadedShip ls in squadron)
+		{
+			if (ls.getPilot().Name.Equals(pilot.Name))
+			{
+				duplicate = true;
+			}
+
+			if (ls.getPilotId() > pilotId) {
+				pilotId = ls.getPilotId ();
+			}
+		}
+
+		if (pilot.Unique && duplicate) {
+			canAddPilot = false;
+		}
 
         if ((getCumulatedSquadPoints() + pilot.Cost) > pointsToSpend)
         {
@@ -74,6 +81,7 @@ public class PlayerDatas {
             LoadedShip ls = new LoadedShip();
             ls.setShip(selectedShip);
             ls.setPilot(pilot);
+			ls.setPilotId (pilotId);
 
             squadron.Add(ls);
         } else
@@ -83,14 +91,14 @@ public class PlayerDatas {
         }
     }
 
-    public static void removePilotFromSquadron(Pilot pilot)
+	public static void removePilotFromSquadron(Pilot pilot, int pilotId)
     {
         //TODO Test if only one ship gets deleted when pilot is not unique!!
         LoadedShip shipToRemove = new LoadedShip();
 
         foreach (LoadedShip ls in squadron)
         {
-            if (ls.getPilot().Name.Equals(pilot.Name))
+			if (ls.getPilot().Name.Equals(pilot.Name) && ls.getPilotId() == pilotId)
             {
                 shipToRemove = ls;
                 break;

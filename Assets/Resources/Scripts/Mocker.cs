@@ -14,10 +14,14 @@ public class Mocker {
         LoadedShip ship1 = new LoadedShip();
         ship1.setShip(ships.Ship[0]);
         ship1.setPilot(pilots.Pilot[0]);
+		PlayerDatas.setSelectedShip(ship1.getShip());
+		PlayerDatas.addPilotToSquadron(ship1.getPilot());
 
         LoadedShip ship2 = new LoadedShip();
         ship2.setShip(ships.Ship[0]);
         ship2.setPilot(pilots.Pilot[1]);
+		PlayerDatas.setSelectedShip(ship2.getShip());
+		PlayerDatas.addPilotToSquadron(ship2.getPilot());
 
         Ships ships2 = XMLLoader.getShips("imperial_ships.xml");
         Pilots pilots2 = XMLLoader.getPilots("TIE Fighter_pilots.xml");

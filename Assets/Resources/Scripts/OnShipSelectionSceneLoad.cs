@@ -10,7 +10,6 @@ public class OnShipSelectionSceneLoad : MonoBehaviour {
     public GameObject cardsHolder;
     public GameObject squadPointsHolder;
 
-    private JSONLoader jsonLoader = new JSONLoader();
     private const string IMAGE_FOLDER_NAME = "images";
 
 	// Use this for initialization

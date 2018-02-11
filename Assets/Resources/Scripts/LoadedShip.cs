@@ -7,6 +7,15 @@ public class LoadedShip {
 
     private Pilot pilot;
     private Ship ship;
+	private int pilotId;
+
+	public int getPilotId(){
+		return this.pilotId;
+	}
+
+	public void setPilotId(int pilotId){
+		this.pilotId = pilotId;
+	}
 
     public void setPilot(Pilot pilot)
     {
