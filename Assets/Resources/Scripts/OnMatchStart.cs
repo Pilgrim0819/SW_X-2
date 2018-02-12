@@ -30,11 +30,11 @@ public class OnMatchStart : MonoBehaviour {
             int posY = 0;
             int posZ = 2000;
 
-            GameObject ship = (GameObject)GameObject.Instantiate(
+            /*GameObject ship = (GameObject)GameObject.Instantiate(
                 shipPrefab,
                 new Vector3(posX, posY, posZ),
                 Quaternion.identity
-            );
+            );*/
 
             loopIndex++;
         }
