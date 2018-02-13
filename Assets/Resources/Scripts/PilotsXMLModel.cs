@@ -43,12 +43,16 @@ namespace PilotsXMLCSharp
     [XmlRoot(ElementName = "pilot")]
     public class Pilot
     {
+        [XmlElement(ElementName = "shipId")]
+        public string ShipId { get; set; }
+        [XmlElement(ElementName = "unique")]
+        public bool Unique { get; set; }
         [XmlElement(ElementName = "name")]
         public string Name { get; set; }
         [XmlElement(ElementName = "cost")]
-        public string Cost { get; set; }
+        public int Cost { get; set; }
         [XmlElement(ElementName = "level")]
-        public string Level { get; set; }
+        public int Level { get; set; }
         [XmlElement(ElementName = "text")]
         public string Text { get; set; }
         [XmlElement(ElementName = "slots")]

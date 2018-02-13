@@ -32,16 +32,18 @@ namespace ShipsXMLCSharp
     [XmlRoot(ElementName = "ship")]
     public class Ship
     {
+        [XmlElement(ElementName = "shipId")]
+        public string ShipId { get; set; }
         [XmlElement(ElementName = "shipName")]
         public string ShipName { get; set; }
         [XmlElement(ElementName = "weapon")]
-        public string Weapon { get; set; }
+        public int Weapon { get; set; }
         [XmlElement(ElementName = "agility")]
-        public string Agility { get; set; }
+        public int Agility { get; set; }
         [XmlElement(ElementName = "hull")]
-        public string Hull { get; set; }
+        public int Hull { get; set; }
         [XmlElement(ElementName = "shield")]
-        public string Shield { get; set; }
+        public int Shield { get; set; }
         [XmlElement(ElementName = "size")]
         public string Size { get; set; }
         [XmlElement(ElementName = "actions")]

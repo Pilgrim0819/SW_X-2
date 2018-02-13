@@ -8,14 +8,15 @@ public class OnShipSelectionSceneLoad : MonoBehaviour {
     
     public Transform shipCardPrefab;
     public GameObject cardsHolder;
+    public GameObject squadPointsHolder;
 
-    private JSONLoader jsonLoader = new JSONLoader();
     private const string IMAGE_FOLDER_NAME = "images";
 
 	// Use this for initialization
 	void Start () {
         string chosenSide = PlayerDatas.getChosenSide();
         Ships ships = new Ships();
+        squadPointsHolder.GetComponent<Text>().text = PlayerDatas.getCumulatedSquadPoints() + "/" + PlayerDatas.getPointsToSpend();
 
         switch (chosenSide)
         {
@@ -46,10 +47,13 @@ public class OnShipSelectionSceneLoad : MonoBehaviour {
             shipCard.transform.SetParent(cardsHolder.transform, false);
             shipCard.transform.Find("Ship Name").gameObject.GetComponent<UnityEngine.UI.Text>().text = ship.ShipName.ToString();
             shipCard.transform.Find("Ship Image").gameObject.GetComponent<Image>().sprite = shipSprite;
-            shipCard.transform.Find("Attack Power Text").gameObject.GetComponent<UnityEngine.UI.Text>().text = ship.Weapon;
-            shipCard.transform.Find("Agility Text").gameObject.GetComponent<UnityEngine.UI.Text>().text = ship.Agility;
-            shipCard.transform.Find("Hull Text").gameObject.GetComponent<UnityEngine.UI.Text>().text = ship.Hull;
-            shipCard.transform.Find("Shield Text").gameObject.GetComponent<UnityEngine.UI.Text>().text = ship.Shield;
+            shipCard.transform.Find("Attack Power Text").gameObject.GetComponent<UnityEngine.UI.Text>().text = ship.Weapon.ToString();
+            shipCard.transform.Find("Agility Text").gameObject.GetComponent<UnityEngine.UI.Text>().text = ship.Agility.ToString();
+            shipCard.transform.Find("Hull Text").gameObject.GetComponent<UnityEngine.UI.Text>().text = ship.Hull.ToString();
+            shipCard.transform.Find("Shield Text").gameObject.GetComponent<UnityEngine.UI.Text>().text = ship.Shield.ToString();
+
+            ShipSelectorMouseClick shipSelector = shipCard.transform.GetComponent<ShipSelectorMouseClick>();
+            shipSelector.setShip(ship);
 
             shipIndex++;
         }

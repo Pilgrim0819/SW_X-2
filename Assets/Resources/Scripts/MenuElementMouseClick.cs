@@ -27,8 +27,16 @@ public class MenuElementMouseClick : MonoBehaviour {
 
     private void OnMouseDown()
     {
-        PlayerDatas.setChosenSide(side);
-        SceneManager.LoadScene("Scene 3", LoadSceneMode.Single);
+        if (PlayerDatas.getCumulatedSquadPoints() > 0 && !side.Equals(PlayerDatas.getChosenSide()))
+        {
+            //TODO show error message that a squadron already exists in another faction
+            Debug.Log("You has already started to build a squadron in another faction!");
+        }
+        else
+        {
+            PlayerDatas.setChosenSide(side);
+            SceneManager.LoadScene("Scene 3", LoadSceneMode.Single);
+        }
     }
 
     // Use this for initialization

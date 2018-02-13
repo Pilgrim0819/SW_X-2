@@ -6,6 +6,17 @@ using PilotsXMLCSharp;
 public class AddPilotToSquardon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     public GameObject currentObject;
+    private Pilot pilot;
+
+    public void setPilot(Pilot pilot)
+    {
+        this.pilot = pilot;
+    }
+
+    public Pilot getPilot()
+    {
+        return this.pilot;
+    }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
@@ -19,8 +30,6 @@ public class AddPilotToSquardon : MonoBehaviour, IPointerEnterHandler, IPointerE
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        Pilot pilot = new Pilot();
-        //TODO: get pilot datas
         PlayerDatas.addPilotToSquadron(pilot);
     }
 

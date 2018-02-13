@@ -1,5 +1,6 @@
 	<ships>
 		<ship>
+			<shipId>tief</shipId>
 			<shipName>TIE Fighter</shipName>
 			<weapon>2</weapon>
 			<agility>3</agility>
@@ -71,6 +72,7 @@
 		</ship>
 		
 		<ship>
+			<shipId>tiefof</shipId>
 			<shipName>TIE/fo Fighter</shipName>
 			<weapon>2</weapon>
 			<agility>3</agility>

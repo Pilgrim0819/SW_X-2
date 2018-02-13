@@ -21,7 +21,6 @@ public class LoadPilotsForSelector : MonoBehaviour {
 	void Start () {
         cardsHolder = GameObject.Find("Ships Scroll");
         string chosenShip = PlayerDatas.getChosenShip();
-        Debug.Log("Chosen ship: " + chosenShip);
         Pilots pilots = new Pilots();
 
         switch (chosenShip)
@@ -57,6 +56,9 @@ public class LoadPilotsForSelector : MonoBehaviour {
             shipCard.transform.Find("Pilot Level Text").gameObject.GetComponent<UnityEngine.UI.Text>().text = PILOT_LEVEL_TEXT + pilot.Level;
             shipCard.transform.Find("Pilot Cost Text").gameObject.GetComponent<UnityEngine.UI.Text>().text = PILOT_COST_TEXT + pilot.Cost;
             shipCard.transform.Find("Pilot Description Text").gameObject.GetComponent<UnityEngine.UI.Text>().text = pilot.Text;
+
+            AddPilotToSquardon shipcardPilotScript = shipCard.transform.GetComponent<AddPilotToSquardon>();
+            shipcardPilotScript.setPilot(pilot);
 
             pilotIndex++;
         }
