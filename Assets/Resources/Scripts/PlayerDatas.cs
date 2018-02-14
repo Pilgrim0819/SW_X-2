@@ -12,6 +12,8 @@ public class PlayerDatas {
     private static int pointsToSpend = 100;
     private static List<LoadedShip> squadron = new List<LoadedShip>();
     private static int currentPilotId = 1;
+    private static List<string> lastDiceResults = new List<string>();
+    private static float dt = 0.0f;
 
     public static void setChosenSide(string side)
     {
@@ -136,4 +138,33 @@ public class PlayerDatas {
         return squadron;
     }
 
+    public static void addDiceResult(string result)
+    {
+        lastDiceResults.Add(result);
+    }
+
+    public static List<string> getDiceResults()
+    {
+        return lastDiceResults;
+    }
+
+    public static void deleteDiceResults()
+    {
+        lastDiceResults = new List<string>();
+    }
+
+    public static void addDeltaTime(float time)
+    {
+        dt += time;
+    }
+
+    public static float getDeltaTime()
+    {
+        return dt;
+    }
+
+    public static void resetDeltaTime()
+    {
+        dt = 0.0f;
+    }
 }
