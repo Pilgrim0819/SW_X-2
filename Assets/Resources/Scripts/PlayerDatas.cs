@@ -15,6 +15,8 @@ public class PlayerDatas {
     private static List<string> lastDiceResults = new List<string>();
     private static float dt = 0.0f;
 
+    public static int numberOfDice = 5;
+
     public static void setChosenSide(string side)
     {
         chosenSide = side;
