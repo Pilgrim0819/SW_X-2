@@ -12,7 +12,7 @@ public class PlayerDatas {
     private static int pointsToSpend = 100;
     private static List<LoadedShip> squadron = new List<LoadedShip>();
     private static int currentPilotId = 1;
-    private static List<string> lastDiceResults = new List<string>();
+    private static List<int> lastDiceResults = new List<int>();
     private static float dt = 0.0f;
 
     public static int numberOfDice = 5;
@@ -140,19 +140,19 @@ public class PlayerDatas {
         return squadron;
     }
 
-    public static void addDiceResult(string result)
+    public static void addDiceResult(int result)
     {
         lastDiceResults.Add(result);
     }
 
-    public static List<string> getDiceResults()
+    public static List<int> getDiceResults()
     {
         return lastDiceResults;
     }
 
     public static void deleteDiceResults()
     {
-        lastDiceResults = new List<string>();
+        lastDiceResults = new List<int>();
     }
 
     public static void addDeltaTime(float time)

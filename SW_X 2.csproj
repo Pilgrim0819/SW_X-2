@@ -13,13 +13,11 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Full v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>WebPlayer:6</UnityBuildTarget>
     <UnityVersion>5.3.8p2</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
     <LangVersion>4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -64,17 +62,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Resources\Scripts\AddPilotToSquardon.cs" />
+    <Compile Include="Assets\Resources\Scripts\CameraHandler.cs" />
     <Compile Include="Assets\Resources\Scripts\DiceRollerBase.cs" />
+    <Compile Include="Assets\Resources\Scripts\DiceStateChecker.cs" />
     <Compile Include="Assets\Resources\Scripts\LoadPilotsForSelector.cs" />
     <Compile Include="Assets\Resources\Scripts\LoadedShip.cs" />
+    <Compile Include="Assets\Resources\Scripts\MatchDatas.cs" />
     <Compile Include="Assets\Resources\Scripts\MenuAction.cs" />
     <Compile Include="Assets\Resources\Scripts\MenuElementMouseClick.cs" />
     <Compile Include="Assets\Resources\Scripts\Mocker.cs" />
     <Compile Include="Assets\Resources\Scripts\OnMatchStart.cs" />
     <Compile Include="Assets\Resources\Scripts\OnShipSelectionSceneLoad.cs" />
     <Compile Include="Assets\Resources\Scripts\PilotsXMLModel.cs" />
+    <Compile Include="Assets\Resources\Scripts\Player.cs" />
     <Compile Include="Assets\Resources\Scripts\PlayerDatas.cs" />
-    <Compile Include="Assets\Resources\Scripts\CameraHandler.cs" />
     <Compile Include="Assets\Resources\Scripts\SceneChangerManuAction.cs" />
     <Compile Include="Assets\Resources\Scripts\ShipSelectorMouseClick.cs" />
     <Compile Include="Assets\Resources\Scripts\ShipsXMLModel.cs" />
