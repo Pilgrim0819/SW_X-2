@@ -9,7 +9,13 @@ public class SideSelectionStartup : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        inputField.text = "100";
+        if (PlayerDatas.getPointsToSpend() != null && PlayerDatas.getPointsToSpend() > 0)
+        {
+            inputField.text = PlayerDatas.getPointsToSpend().ToString();
+        } else
+        {
+            inputField.text = "100";
+        }
 
     }
 

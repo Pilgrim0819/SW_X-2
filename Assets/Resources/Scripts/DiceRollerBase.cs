@@ -10,7 +10,14 @@ public class DiceRollerBase : MonoBehaviour {
 
     private void Start()
     {
+        Vector3 torque;
+
+        torque.x = Random.Range(-200, 200) * 100;
+        torque.y = Random.Range(-200, 200) * 100;
+        torque.z = Random.Range(-200, 200) * 100;
+
         this.transform.rotation = Random.rotation;
+        this.GetComponent<Rigidbody>().AddTorque(torque);
     }
 
 
