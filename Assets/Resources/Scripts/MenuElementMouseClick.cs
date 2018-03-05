@@ -30,7 +30,7 @@ public class MenuElementMouseClick : MonoBehaviour {
         if (PlayerDatas.getCumulatedSquadPoints() > 0 && !side.Equals(PlayerDatas.getChosenSide()))
         {
             //TODO show error message that a squadron already exists in another faction
-            Debug.Log("You has already started to build a squadron in another faction!");
+            Debug.Log("You have already started to build a squadron in another faction!");
         }
         else
         {

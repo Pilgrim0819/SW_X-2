@@ -23,7 +23,7 @@ public class LoadPilotsForSelector : MonoBehaviour {
         string chosenShip = PlayerDatas.getChosenShip();
         Pilots pilots = new Pilots();
 
-        switch (chosenShip)
+        /*switch (chosenShip)
         {
             case "T-65 X-wing":
                 pilots = XMLLoader.getPilots("T-65 X-wing_pilots.xml");
@@ -31,7 +31,9 @@ public class LoadPilotsForSelector : MonoBehaviour {
             case "T-70 X-wing":
                 pilots = XMLLoader.getPilots("T-70 X-wing_pilots.xml");
                 break;
-        }
+        }*/
+
+        pilots = XMLLoader.getPilots(chosenShip + "_pilots.xml");
 
         int pilotIndex = 0;
 

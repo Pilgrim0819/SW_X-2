@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using PilotsXMLCSharp;
+using ShipsXMLCSharp;
 
 public class OnMatchStart : MonoBehaviour {
 
@@ -21,28 +23,32 @@ public class OnMatchStart : MonoBehaviour {
 
         mocker.mockPlayerSquadrons();
 
-		List<LoadedShip> ships = new List<LoadedShip>();
-        ships = PlayerDatas.getSquadron();
-
-        int loopIndex = 0;
-
-        foreach (LoadedShip ls in ships)
+        foreach (Player player in MatchDatas.getPlayers())
         {
-            string shipType = ls.getShip().ShipId;
-            GameObject shipPrefab = (GameObject)Resources.Load(PREFABS_FOLDER + "/" + shipType, typeof(GameObject));
+            if (player.getPlayerName().Equals("Player Number 1"))
+            {
+                int loopIndex = 0;
 
-            //TODO Tweak these coordinates!
-            int posX = 2000 + (loopIndex * offsetX);
-            int posY = 0;
-            int posZ = 2000;
+                foreach (LoadedShip loadedShip in player.getSquadron())
+                {
+                    Ship ship = loadedShip.getShip();
+                    string shipType = ship.ShipId;
+                    GameObject shipPrefab = (GameObject)Resources.Load(PREFABS_FOLDER + "/" + shipType, typeof(GameObject));
 
-            /*GameObject ship = (GameObject)GameObject.Instantiate(
-                shipPrefab,
-                new Vector3(posX, posY, posZ),
-                Quaternion.identity
-            );*/
+                    //TODO Tweak these coordinates!
+                    int posX = 2000 + (loopIndex * offsetX);
+                    int posY = 0;
+                    int posZ = 2000;
 
-            loopIndex++;
+                    GameObject shipGameObject = (GameObject)GameObject.Instantiate(
+                        shipPrefab,
+                        new Vector3(posX, posY, posZ),
+                        Quaternion.identity
+                    );
+
+                    loopIndex++;
+                };
+            }
         }
 	}
 
@@ -52,7 +58,6 @@ public class OnMatchStart : MonoBehaviour {
 
     IEnumerator CheckObjectsHaveStopped()
     {
-        print("checking... ");
         Rigidbody[] GOS = FindObjectsOfType(typeof(Rigidbody)) as Rigidbody[];
         bool allSleeping = false;
 
@@ -71,15 +76,7 @@ public class OnMatchStart : MonoBehaviour {
             }
 
         }
-        Debug.Log("All objects sleeping");
         getDiceResults(GOS);
-
-        Debug.Log("Results size: " + PlayerDatas.getDiceResults().Capacity);
-
-        foreach (int result in PlayerDatas.getDiceResults())
-        {
-            Debug.Log("Result: " + result);
-        }
     }
 
     private void getDiceResults(Rigidbody[] dice)

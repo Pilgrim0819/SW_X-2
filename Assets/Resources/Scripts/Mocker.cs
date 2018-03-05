@@ -23,17 +23,41 @@ public class Mocker {
 		PlayerDatas.setSelectedShip(ship2.getShip());
 		PlayerDatas.addPilotToSquadron(ship2.getPilot());
 
+        Player player1 = new Player();
+        player1.setChosenSide("Rebels");
+        player1.setPlayerName("Player Number 1");
+        player1.setSquadron(PlayerDatas.getSquadron());
+
+        PlayerDatas.deleteSquadron();
+
         Ships ships2 = XMLLoader.getShips("imperial_ships.xml");
         Pilots pilots2 = XMLLoader.getPilots("TIE Fighter_pilots.xml");
 
         LoadedShip ship3 = new LoadedShip();
         ship3.setShip(ships.Ship[0]);
         ship3.setPilot(pilots.Pilot[0]);
+        PlayerDatas.setSelectedShip(ship3.getShip());
+        PlayerDatas.addPilotToSquadron(ship3.getPilot());
 
-        /*foreach (LoadedShip ls in PlayerDatas.getSquadron())
-        {
-            Debug.Log("Ship: " + ls.getShip().ShipName + ", Pilot: " + ls.getPilot().Name + ", PilotId: " + ls.getPilotId());
-        }*/
+        LoadedShip ship4 = new LoadedShip();
+        ship4.setShip(ships.Ship[0]);
+        ship4.setPilot(pilots.Pilot[1]);
+        PlayerDatas.setSelectedShip(ship4.getShip());
+        PlayerDatas.addPilotToSquadron(ship4.getPilot());
+
+        LoadedShip ship5 = new LoadedShip();
+        ship5.setShip(ships.Ship[0]);
+        ship5.setPilot(pilots.Pilot[2]);
+        PlayerDatas.setSelectedShip(ship5.getShip());
+        PlayerDatas.addPilotToSquadron(ship5.getPilot());
+
+        Player player2 = new Player();
+        player2.setChosenSide("Empire");
+        player2.setPlayerName("Player Number 2");
+        player2.setSquadron(PlayerDatas.getSquadron());
+
+        MatchDatas.addPlayer(player1);
+        MatchDatas.addPlayer(player2);
     }
 
 }

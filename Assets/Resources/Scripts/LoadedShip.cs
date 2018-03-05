@@ -8,6 +8,7 @@ public class LoadedShip {
     private Pilot pilot;
     private Ship ship;
 	private int pilotId;
+    private bool alive = true;
 
 	public int getPilotId(){
 		return this.pilotId;
@@ -35,5 +36,15 @@ public class LoadedShip {
     public Ship getShip()
     {
         return this.ship;
+    }
+
+    public void setAlive(bool alive)
+    {
+        alive = alive;
+    }
+
+    public bool isAlive()
+    {
+        return alive;
     }
 }

@@ -14,8 +14,19 @@ public class PlayerDatas {
     private static int currentPilotId = 1;
     private static List<int> lastDiceResults = new List<int>();
     private static float dt = 0.0f;
+    private static string playerName;
 
     public static int numberOfDice = 5;
+
+    public static void setPlayerName(string name)
+    {
+        playerName = name;
+    }
+
+    public static string getPlayerName()
+    {
+        return playerName;
+    }
 
     public static void setChosenSide(string side)
     {
@@ -138,6 +149,11 @@ public class PlayerDatas {
     public static List<LoadedShip> getSquadron()
     {
         return squadron;
+    }
+
+    public static void deleteSquadron()
+    {
+        squadron.Clear();
     }
 
     public static void addDiceResult(int result)

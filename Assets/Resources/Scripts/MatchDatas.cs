@@ -23,7 +23,8 @@ public class MatchDatas {
 
     private static int currentPhase;
     private static int activePlayerIndex;
-    private static List<Player> players;
+    private static List<Player> players = new List<Player>();
+    private static int round = 0;
 
     public static void setCurrentPhase(int phase)
     {
@@ -56,4 +57,28 @@ public class MatchDatas {
         }
     }
 
+    public static void addPlayer(Player player)
+    {
+        players.Add(player);
+    }
+
+    public static void removePlayer(Player player)
+    {
+        players.Remove(player);
+    }
+
+    public static List<Player> getPlayers()
+    {
+        return players;
+    }
+
+    public static void nextRound()
+    {
+        round++;
+    }
+
+    public static int getRound()
+    {
+        return round;
+    }
 }

@@ -65,6 +65,7 @@
     <Compile Include="Assets\Resources\Scripts\CameraHandler.cs" />
     <Compile Include="Assets\Resources\Scripts\DiceRollerBase.cs" />
     <Compile Include="Assets\Resources\Scripts\DiceStateChecker.cs" />
+    <Compile Include="Assets\Resources\Scripts\GameObjectDragAndDrop.cs" />
     <Compile Include="Assets\Resources\Scripts\LoadPilotsForSelector.cs" />
     <Compile Include="Assets\Resources\Scripts\LoadedShip.cs" />
     <Compile Include="Assets\Resources\Scripts\MatchDatas.cs" />
@@ -73,6 +74,7 @@
     <Compile Include="Assets\Resources\Scripts\Mocker.cs" />
     <Compile Include="Assets\Resources\Scripts\OnMatchStart.cs" />
     <Compile Include="Assets\Resources\Scripts\OnShipSelectionSceneLoad.cs" />
+    <Compile Include="Assets\Resources\Scripts\PhaseChanger.cs" />
     <Compile Include="Assets\Resources\Scripts\PilotsXMLModel.cs" />
     <Compile Include="Assets\Resources\Scripts\Player.cs" />
     <Compile Include="Assets\Resources\Scripts\PlayerDatas.cs" />
