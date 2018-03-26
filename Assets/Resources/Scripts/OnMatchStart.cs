@@ -37,7 +37,7 @@ public class OnMatchStart : MonoBehaviour {
 
                     //TODO Tweak these coordinates!
                     int posX = 2000 + (loopIndex * offsetX);
-                    int posY = 0;
+                    int posY = 500;
                     int posZ = 2000;
 
                     GameObject shipGameObject = (GameObject)GameObject.Instantiate(
@@ -45,6 +45,9 @@ public class OnMatchStart : MonoBehaviour {
                         new Vector3(posX, posY, posZ),
                         Quaternion.identity
                     );
+
+                    shipGameObject.GetComponent<ShipProperties>().setPilot(loadedShip.getPilot());
+                    shipGameObject.GetComponent<ShipProperties>().setShip(loadedShip.getShip());
 
                     loopIndex++;
                 };

@@ -27,10 +27,10 @@ After spending a focus token, you may place that token on any other friendly shi
 	<valueToModify>focusTokenNumber</valueToModify>
 	<modifier>1</modifier>
 	<bonusAction></bonusAction>
-	<valueToCheck>agility</valueToCheck>
-	<conditionValue>0</conditionValue>
-	<conditionWay>greater_than</conditionWay>
-	<conditionCheckPhase>onAfterValueModified</conditionCheckPhase>
+	<valueToCheck></valueToCheck>
+	<conditionValue></conditionValue>
+	<conditionWay></conditionWay>
+	<conditionCheckPhase></conditionCheckPhase>
 </ability>
 
 
@@ -40,8 +40,8 @@ When attacking at Range 1, you may change one of your hit results to a critical 
 	<phase>onAfterAttack</phase>
 	<target>dice</target>
 	<targetScope>own</targetScope>
-	<targetRangeMin>-1</targetRangeMin>
-	<targetRangeMax>-1</targetRangeMax>
+	<targetRangeMin>1</targetRangeMin>
+	<targetRangeMax>1</targetRangeMax>
 	<valueToModify>hit</valueToModify>
 	<modifier>1</modifier>
 	<bonusAction></bonusAction>

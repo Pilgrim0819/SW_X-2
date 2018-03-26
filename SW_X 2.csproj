@@ -73,12 +73,14 @@
     <Compile Include="Assets\Resources\Scripts\MenuElementMouseClick.cs" />
     <Compile Include="Assets\Resources\Scripts\Mocker.cs" />
     <Compile Include="Assets\Resources\Scripts\OnMatchStart.cs" />
+    <Compile Include="Assets\Resources\Scripts\OnShipClick.cs" />
     <Compile Include="Assets\Resources\Scripts\OnShipSelectionSceneLoad.cs" />
     <Compile Include="Assets\Resources\Scripts\PhaseChanger.cs" />
     <Compile Include="Assets\Resources\Scripts\PilotsXMLModel.cs" />
     <Compile Include="Assets\Resources\Scripts\Player.cs" />
     <Compile Include="Assets\Resources\Scripts\PlayerDatas.cs" />
     <Compile Include="Assets\Resources\Scripts\SceneChangerManuAction.cs" />
+    <Compile Include="Assets\Resources\Scripts\ShipProperties.cs" />
     <Compile Include="Assets\Resources\Scripts\ShipSelectorMouseClick.cs" />
     <Compile Include="Assets\Resources\Scripts\ShipsXMLModel.cs" />
     <Compile Include="Assets\Resources\Scripts\SideSelectionStartup.cs" />
