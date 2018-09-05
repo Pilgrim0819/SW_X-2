@@ -82,6 +82,56 @@ public class OnMatchStart : MonoBehaviour {
         getDiceResults(GOS);
     }
 
+    /* INITIATIVE DETERMINATION PART */
+    private void determineInitiative() {
+        if (squadScoresAreEqual) {
+            Player player = rollForInitiative();
+            chooseInitiative(player);
+        } else {
+            chooseInitiative(getPlayerWithLowestSquadScore());
+        }
+    }
+
+    private Player rollForInitiative() {
+        Player result = null;
+
+        //TODO Roll dye with player #0!!!
+        if (PlayerDatas.getDiceResults()[0] == DICE_RESULT_HIT_OR_EVADE || PlayerDatas.getDiceResults()[0] == DICE_RESULT_CRIT) {
+            result = MatchDatas.getPlayers()[0];
+        } else {
+            result = MatchDatas.getPlayers()[1];
+        }
+    }
+
+    private bool squadScoresAreEqual() {
+        if (MatchDatas.getPlayers().Capacity > 2) {
+            if (PlayerDatas.getCumulatedSquadPoints() == PlayerDatas.getCumulatedSquadPoints()) {
+                return true;
+            }
+        } else {
+            if (PlayerDatas.getCumulatedSquadPoints() == PlayerDatas.getCumulatedSquadPoints() && PlayerDatas.getCumulatedSquadPoints() == PlayerDatas.getCumulatedSquadPoints()) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private Player getPlayerWithLowestSquadScore() {
+        Player result = null;
+
+        foreach (Player player in MatchDatas.getPlayers()) {
+            if (result == null) {
+                result = player;
+            } else {
+                result = result.getCumulatedSquadPoints() > player.getCumulatedSquadPoints() ? player : result;
+            }
+        }
+
+        return result;
+    }
+    /* INITIATIVE DETERMINATION PART */
+
     private void getDiceResults(Rigidbody[] dice)
     {
         foreach (Rigidbody dye in dice)
