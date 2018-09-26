@@ -9,6 +9,12 @@ public class Player {
     private string chosenSide;
     private List<int> lastDiceResults = new List<int>();
     private LoadedShip activeShip;
+    private bool hasInitiative = false;
+
+    public void setInitiative()
+    {
+        hasInitiative = true;
+    }
 
     public void setPlayerName(string name)
     {
@@ -59,5 +65,17 @@ public class Player {
     public LoadedShip getActiveShip()
     {
         return this.activeShip;
+    }
+
+    public int getCumulatedSquadPoints()
+    {
+        int result = 0;
+
+        foreach(LoadedShip ship in squadron)
+        {
+            result += ship.getPilot().Cost;
+        }
+
+        return result;
     }
 }

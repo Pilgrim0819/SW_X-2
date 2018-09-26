@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class OnShipClick : MonoBehaviour {
+
+    public static Action<LoadedShip> onShipSelection { get; internal set; }
 
     GameObject ReturnClickedObject(out RaycastHit hit)
     {

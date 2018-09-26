@@ -25,8 +25,6 @@ public class OnMatchStart : MonoBehaviour {
 
         foreach (Player player in MatchDatas.getPlayers())
         {
-            if (player.getPlayerName().Equals("Player Number 1"))
-            {
                 int loopIndex = 0;
 
                 foreach (LoadedShip loadedShip in player.getSquadron())
@@ -51,7 +49,6 @@ public class OnMatchStart : MonoBehaviour {
 
                     loopIndex++;
                 };
-            }
         }
 	}
 
@@ -84,7 +81,7 @@ public class OnMatchStart : MonoBehaviour {
 
     /* INITIATIVE DETERMINATION PART */
     private void determineInitiative() {
-        if (squadScoresAreEqual) {
+        if (squadScoresAreEqual()) {
             Player player = rollForInitiative();
             chooseInitiative(player);
         } else {
@@ -101,15 +98,17 @@ public class OnMatchStart : MonoBehaviour {
         } else {
             result = MatchDatas.getPlayers()[1];
         }
+
+        return result;
     }
 
     private bool squadScoresAreEqual() {
-        if (MatchDatas.getPlayers().Capacity > 2) {
-            if (PlayerDatas.getCumulatedSquadPoints() == PlayerDatas.getCumulatedSquadPoints()) {
+        if (MatchDatas.getPlayers().Capacity == 2) {
+            if (MatchDatas.getPlayers()[0].getCumulatedSquadPoints() == MatchDatas.getPlayers()[1].getCumulatedSquadPoints()) {
                 return true;
             }
-        } else {
-            if (PlayerDatas.getCumulatedSquadPoints() == PlayerDatas.getCumulatedSquadPoints() && PlayerDatas.getCumulatedSquadPoints() == PlayerDatas.getCumulatedSquadPoints()) {
+        } else if (MatchDatas.getPlayers().Capacity == 3) {
+            if (MatchDatas.getPlayers()[0].getCumulatedSquadPoints() == MatchDatas.getPlayers()[1].getCumulatedSquadPoints() && MatchDatas.getPlayers()[0].getCumulatedSquadPoints() == MatchDatas.getPlayers()[2].getCumulatedSquadPoints()) {
                 return true;
             }
         }
@@ -129,6 +128,14 @@ public class OnMatchStart : MonoBehaviour {
         }
 
         return result;
+    }
+
+    private void chooseInitiative(Player player)
+    {
+        //TODO implement actual functionality, NOT RANDOM!!
+        int randomIndex = Random.Range(0, 1);
+
+        MatchDatas.getPlayers()[randomIndex].setInitiative();
     }
     /* INITIATIVE DETERMINATION PART */
 
