@@ -16,6 +16,11 @@ public class Player {
         hasInitiative = true;
     }
 
+    public bool getHasInitiative()
+    {
+        return hasInitiative;
+    }
+
     public void setPlayerName(string name)
     {
         playerName = name;

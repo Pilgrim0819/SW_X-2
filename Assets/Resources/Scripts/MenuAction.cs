@@ -5,9 +5,9 @@ using System.Collections;
 
 public class MenuAction : MonoBehaviour {
 
-    public void MENU_ACTION_rotateTo(GameObject target)
+    public void MENU_ACTION_changeScene(string sceneName)
     {
-        SceneManager.LoadScene("Scene 2", LoadSceneMode.Single);
+        SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
     }
 
 	// Use this for initialization

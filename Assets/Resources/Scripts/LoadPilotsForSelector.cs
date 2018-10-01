@@ -23,15 +23,12 @@ public class LoadPilotsForSelector : MonoBehaviour {
         string chosenShip = PlayerDatas.getChosenShip();
         Pilots pilots = new Pilots();
 
-        /*switch (chosenShip)
+        /*********************************TODO remove when testing is done!!*/
+        if (chosenShip == null || chosenShip.Equals(""))
         {
-            case "T-65 X-wing":
-                pilots = XMLLoader.getPilots("T-65 X-wing_pilots.xml");
-                break;
-            case "T-70 X-wing":
-                pilots = XMLLoader.getPilots("T-70 X-wing_pilots.xml");
-                break;
-        }*/
+            chosenShip = "T-65 X-Wing";
+        }
+        /*********************************TODO remove when testing is done!!*/
 
         pilots = XMLLoader.getPilots(chosenShip + "_pilots.xml");
 

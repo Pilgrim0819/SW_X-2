@@ -15,6 +15,14 @@ public class OnShipSelectionSceneLoad : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         string chosenSide = PlayerDatas.getChosenSide();
+
+        /*********************************TODO remove when testing is done!!*/
+        if (chosenSide == null ||  chosenSide.Equals(""))
+        {
+            chosenSide = "Rebels";
+        }
+        /*********************************TODO remove when testing is done!!*/
+
         Ships ships = new Ships();
         squadPointsHolder.GetComponent<Text>().text = PlayerDatas.getCumulatedSquadPoints() + "/" + PlayerDatas.getPointsToSpend();
 
@@ -30,7 +38,7 @@ public class OnShipSelectionSceneLoad : MonoBehaviour {
 
         int shipIndex = 0;
 
-        foreach(ShipsXMLCSharp.Ship ship in ships.Ship)
+        foreach(Ship ship in ships.Ship)
         {
             Sprite shipSprite = Resources.Load<Sprite>(IMAGE_FOLDER_NAME + "/" + ship.ShipName.Replace("/", ""));
             Vector3 position = cardsHolder.transform.position;
@@ -40,7 +48,7 @@ public class OnShipSelectionSceneLoad : MonoBehaviour {
 
             Transform shipCard = (Transform) GameObject.Instantiate(
                 shipCardPrefab, 
-                new Vector3((position.x - 1000) + (shipCardWidth * shipIndex) + offsetX,position.y + offsetY,position.z), 
+                new Vector3((position.x - 500) + (shipCardWidth * shipIndex) + offsetX,position.y + offsetY,position.z), 
                 Quaternion.identity
             );
 

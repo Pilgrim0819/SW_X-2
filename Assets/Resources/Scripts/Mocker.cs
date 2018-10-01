@@ -23,10 +23,16 @@ public class Mocker {
 		PlayerDatas.setSelectedShip(ship2.getShip());
 		PlayerDatas.addPilotToSquadron(ship2.getPilot());
 
+        List<LoadedShip> squadron1 = new List<LoadedShip>();
+        foreach (LoadedShip ship in PlayerDatas.getSquadron())
+        {
+            squadron1.Add(ship);
+        }
+
         Player player1 = new Player();
         player1.setChosenSide("Rebels");
         player1.setPlayerName("Player Number 1");
-        player1.setSquadron(PlayerDatas.getSquadron());
+        player1.setSquadron(squadron1);
 
         PlayerDatas.deleteSquadron();
 
@@ -34,20 +40,20 @@ public class Mocker {
         Pilots pilots2 = XMLLoader.getPilots("TIE Fighter_pilots.xml");
 
         LoadedShip ship3 = new LoadedShip();
-        ship3.setShip(ships.Ship[0]);
-        ship3.setPilot(pilots.Pilot[0]);
+        ship3.setShip(ships2.Ship[0]);
+        ship3.setPilot(pilots2.Pilot[0]);
         PlayerDatas.setSelectedShip(ship3.getShip());
         PlayerDatas.addPilotToSquadron(ship3.getPilot());
 
         LoadedShip ship4 = new LoadedShip();
-        ship4.setShip(ships.Ship[0]);
-        ship4.setPilot(pilots.Pilot[1]);
+        ship4.setShip(ships2.Ship[0]);
+        ship4.setPilot(pilots2.Pilot[1]);
         PlayerDatas.setSelectedShip(ship4.getShip());
         PlayerDatas.addPilotToSquadron(ship4.getPilot());
 
         LoadedShip ship5 = new LoadedShip();
-        ship5.setShip(ships.Ship[0]);
-        ship5.setPilot(pilots.Pilot[2]);
+        ship5.setShip(ships2.Ship[0]);
+        ship5.setPilot(pilots2.Pilot[2]);
         PlayerDatas.setSelectedShip(ship5.getShip());
         PlayerDatas.addPilotToSquadron(ship5.getPilot());
 
