@@ -64,6 +64,8 @@ public class Mocker {
 
         MatchDatas.addPlayer(player1);
         MatchDatas.addPlayer(player2);
+
+        PlayerDatas.setPlayerName("Player Number 2");
     }
 
 }

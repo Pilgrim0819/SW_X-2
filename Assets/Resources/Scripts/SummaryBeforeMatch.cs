@@ -9,12 +9,14 @@ public class SummaryBeforeMatch : MonoBehaviour {
 
     private Mocker mocker = new Mocker();
     public GameObject cardsHolder;
+    public GameObject initiativePanel;
 
     private const string PREFABS_FOLDER = "Prefabs";
     private const string IMAGE_FOLDER_NAME = "images";
     private const string PREFAB_FOLDER_NAME = "Prefabs/PilotCardPrefab";
     private const string VS_PREFAB_NAME = "Prefabs/VSPrefab";
     private const string SUMMARY_UUPER_TEXT_PREFAB = "Prefabs/SummaryUpperTextPrefab";
+    private const string INITIATIVE_BUTTON_PREFAB_NAME = "Prefabs/InitiativeButtonPrefab";
     private const string PILOT_LEVEL_TEXT = "Level: ";
     private const string PILOT_COST_TEXT = "Cost: ";
     
@@ -28,7 +30,6 @@ public class SummaryBeforeMatch : MonoBehaviour {
     {
         StartCoroutine(checkObjectsHaveStopped());
         StartCoroutine(populateSummaryView());
-        determineInitiative();
     }
 
     void Update()
@@ -127,6 +128,8 @@ public class SummaryBeforeMatch : MonoBehaviour {
                 yield return new WaitForSeconds(iterationSleepTime);
             }
         }
+
+        determineInitiative();
     }
 
     /* INITIATIVE DETERMINATION PART */
@@ -135,22 +138,12 @@ public class SummaryBeforeMatch : MonoBehaviour {
         if (squadScoresAreEqual())
         {
             Player player = rollForInitiative();
-            chooseInitiative(player);
+            displayInitiativeChoser(player);
         }
         else
         {
-            chooseInitiative(getPlayerWithLowestSquadScore());
+            displayInitiativeChoser(getPlayerWithLowestSquadScore());
         }
-
-        /********************************************TODO remove when tesing is done!*/
-        if (MatchDatas.getPlayers()[0].getHasInitiative())
-        {
-            Debug.Log("Player " + MatchDatas.getPlayers()[0].getPlayerName() + " has initiative!");
-        } else
-        {
-            Debug.Log("Player " + MatchDatas.getPlayers()[1].getPlayerName() + " has initiative!");
-        }
-        /********************************************TODO remove when tesing is done!*/
     }
 
     private Player rollForInitiative()
@@ -209,12 +202,30 @@ public class SummaryBeforeMatch : MonoBehaviour {
         return result;
     }
 
-    private void chooseInitiative(Player player)
+    private void displayInitiativeChoser(Player player)
     {
-        //TODO implement actual functionality, NOT RANDOM!!
-        int randomIndex = Random.Range(0, 1);
+        Debug.Log(player.getPlayerName() + " can chose who gets initiative!");
+        int playerIndex = 0;
 
-        MatchDatas.getPlayers()[randomIndex].setInitiative();
+        if (PlayerDatas.getPlayerName().Equals(player.getPlayerName()))
+        {
+            foreach (Player currentPlayer in MatchDatas.getPlayers())
+            {
+                Transform InitiativeButtonPrefab = Resources.Load<Transform>(INITIATIVE_BUTTON_PREFAB_NAME);
+                Transform InitiativeButton = (Transform)GameObject.Instantiate(
+                    InitiativeButtonPrefab,
+                    new Vector3(InitiativeButtonPrefab.position.x, InitiativeButtonPrefab.position.y - playerIndex * 40, InitiativeButtonPrefab.position.z),
+                    Quaternion.identity
+                );
+
+                InitiativeButton.GetComponentInChildren<Text>().text = currentPlayer.getPlayerName();
+                InitiativeButton.transform.SetParent(initiativePanel.transform, false);
+
+                playerIndex++;
+            }
+
+            initiativePanel.SetActive(true);
+        }
     }
     /* INITIATIVE DETERMINATION PART */
 }

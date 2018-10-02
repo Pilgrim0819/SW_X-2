@@ -82,6 +82,7 @@
     <Compile Include="Assets\Resources\Scripts\Player.cs" />
     <Compile Include="Assets\Resources\Scripts\PlayerDatas.cs" />
     <Compile Include="Assets\Resources\Scripts\SceneChangerManuAction.cs" />
+    <Compile Include="Assets\Resources\Scripts\SetPlayerInitiative.cs" />
     <Compile Include="Assets\Resources\Scripts\ShipProperties.cs" />
     <Compile Include="Assets\Resources\Scripts\ShipSelectorMouseClick.cs" />
     <Compile Include="Assets\Resources\Scripts\ShipsXMLModel.cs" />
