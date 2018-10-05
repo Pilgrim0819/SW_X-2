@@ -10,6 +10,7 @@ public class SummaryBeforeMatch : MonoBehaviour {
     private Mocker mocker = new Mocker();
     public GameObject cardsHolder;
     public GameObject initiativePanel;
+    private DiceRollerBase diceRoller = new DiceRollerBase(ForceMode.VelocityChange, 10.0f, "Fire1");
 
     private const string PREFABS_FOLDER = "Prefabs";
     private const string IMAGE_FOLDER_NAME = "images";
@@ -39,16 +40,16 @@ public class SummaryBeforeMatch : MonoBehaviour {
 
     IEnumerator checkObjectsHaveStopped()
     {
-        Rigidbody[] GOS = FindObjectsOfType(typeof(Rigidbody)) as Rigidbody[];
+        Rigidbody[] dice = FindObjectsOfType(typeof(Rigidbody)) as Rigidbody[];
         bool allSleeping = false;
 
         while (!allSleeping)
         {
             allSleeping = true;
 
-            foreach (Rigidbody GO in GOS)
+            foreach (Rigidbody dye in dice)
             {
-                if (!GO.IsSleeping())
+                if (!dye.IsSleeping())
                 {
                     allSleeping = false;
                     yield return null;
@@ -57,7 +58,8 @@ public class SummaryBeforeMatch : MonoBehaviour {
             }
 
         }
-        DiceRollerBase.getDiceResults(GOS);
+
+        DiceRollerBase.getDiceResults(dice);
     }
 
     IEnumerator populateSummaryView()
@@ -130,6 +132,8 @@ public class SummaryBeforeMatch : MonoBehaviour {
         }
 
         determineInitiative();
+
+        diceRoller.showDiceArea(1, true);
     }
 
     /* INITIATIVE DETERMINATION PART */

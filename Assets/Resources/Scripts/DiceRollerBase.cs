@@ -3,6 +3,9 @@ using System.Collections;
 
 public class DiceRollerBase : MonoBehaviour {
 
+    private const string ATTACK_DYE_PREFAB_NAME = "Prefabs/attackDye";
+    private const string DEFENSE_DYE_PREFAB_NAME = "Prefabs/defenseDye";
+
     public ForceMode forceMode;
     public float force = 10.0f;
     public string button = "Fire1";
@@ -13,16 +16,16 @@ public class DiceRollerBase : MonoBehaviour {
     public const int DICE_RESULT_HIT_OR_EVADE = 2;
     public const int DICE_RESULT_CRIT = 3;
 
+    public DiceRollerBase(ForceMode forceMode, float force, string button)
+    {
+        this.forceMode = forceMode;
+        this.force = force;
+        this.button = button;
+    }
+
     private void Start()
     {
-        Vector3 torque;
-
-        torque.x = Random.Range(-200, 200) * 100;
-        torque.y = Random.Range(-200, 200) * 100;
-        torque.z = Random.Range(-200, 200) * 100;
-
-        this.transform.rotation = Random.rotation;
-        this.GetComponent<Rigidbody>().AddTorque(torque);
+        
     }
 
 
@@ -102,5 +105,48 @@ public class DiceRollerBase : MonoBehaviour {
         }
 
         Debug.Log("Dice results recorded!");
+    }
+
+    public void showDiceArea(int numOfDice, bool attack)
+    {
+        GameObject diceAreaHolder = GameObject.Find("DiceAreaHolder");
+        Transform dyePrefab = null;
+
+        if (attack)
+        {
+            dyePrefab = Resources.Load<Transform>(ATTACK_DYE_PREFAB_NAME);
+        } else
+        {
+            dyePrefab = Resources.Load<Transform>(DEFENSE_DYE_PREFAB_NAME);
+        }
+
+        diceAreaHolder.SetActive(true);
+
+        for(int i=0; i < numOfDice; i++)
+        {
+            Transform dye = (Transform)GameObject.Instantiate(dyePrefab, new Vector3(470 + i*30, 160, 425), Quaternion.identity);
+            dye.transform.SetParent(diceAreaHolder.transform, false);
+
+            Vector3 torque;
+
+            torque.x = Random.Range(-200, 200) * 100;
+            torque.y = Random.Range(-200, 200) * 100;
+            torque.z = Random.Range(-200, 200) * 100;
+
+            dye.transform.rotation = Random.rotation;
+            dye.GetComponent<Rigidbody>().AddTorque(torque);
+        }
+    }
+
+    public void hideDiceArea()
+    {
+        GameObject diceAreaHolder = GameObject.Find("DiceAreaHolder");
+
+        diceAreaHolder.SetActive(false);
+    }
+
+    public void clearDiceArea()
+    {
+        //TODO get all dice and destroy them
     }
 }
