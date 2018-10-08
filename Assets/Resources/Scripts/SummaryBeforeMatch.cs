@@ -10,7 +10,6 @@ public class SummaryBeforeMatch : MonoBehaviour {
     private Mocker mocker = new Mocker();
     public GameObject cardsHolder;
     public GameObject initiativePanel;
-    private DiceRollerBase diceRoller = new DiceRollerBase(ForceMode.VelocityChange, 10.0f, "Fire1");
 
     private const string PREFABS_FOLDER = "Prefabs";
     private const string IMAGE_FOLDER_NAME = "images";
@@ -29,7 +28,7 @@ public class SummaryBeforeMatch : MonoBehaviour {
 
     void Start()
     {
-        StartCoroutine(checkObjectsHaveStopped());
+        DiceRollerBase.setUpDiceRollerBase(ForceMode.VelocityChange, 10.0f, "Fire1");
         StartCoroutine(populateSummaryView());
     }
 
@@ -40,6 +39,8 @@ public class SummaryBeforeMatch : MonoBehaviour {
 
     IEnumerator checkObjectsHaveStopped()
     {
+        DiceRollerBase.showDiceArea(1, true);
+
         Rigidbody[] dice = FindObjectsOfType(typeof(Rigidbody)) as Rigidbody[];
         bool allSleeping = false;
 
@@ -60,6 +61,7 @@ public class SummaryBeforeMatch : MonoBehaviour {
         }
 
         DiceRollerBase.getDiceResults(dice);
+
     }
 
     IEnumerator populateSummaryView()
@@ -132,8 +134,6 @@ public class SummaryBeforeMatch : MonoBehaviour {
         }
 
         determineInitiative();
-
-        diceRoller.showDiceArea(1, true);
     }
 
     /* INITIATIVE DETERMINATION PART */
@@ -146,7 +146,9 @@ public class SummaryBeforeMatch : MonoBehaviour {
         }
         else
         {
-            displayInitiativeChoser(getPlayerWithLowestSquadScore());
+            //displayInitiativeChoser(getPlayerWithLowestSquadScore());
+            Player player = rollForInitiative();
+            displayInitiativeChoser(player);
         }
     }
 
@@ -154,7 +156,9 @@ public class SummaryBeforeMatch : MonoBehaviour {
     {
         Player result = null;
 
-        //TODO Roll dye with player #0!!!
+        StartCoroutine(checkObjectsHaveStopped());
+
+        //TODO Get dice rsults AFTER coroutine has stopped!!! (with custom events??)
         if (PlayerDatas.getDiceResults()[0] == DiceRollerBase.DICE_RESULT_HIT_OR_EVADE || PlayerDatas.getDiceResults()[0] == DiceRollerBase.DICE_RESULT_CRIT)
         {
             result = MatchDatas.getPlayers()[0];

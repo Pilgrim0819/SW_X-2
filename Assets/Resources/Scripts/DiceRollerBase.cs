@@ -5,22 +5,26 @@ public class DiceRollerBase : MonoBehaviour {
 
     private const string ATTACK_DYE_PREFAB_NAME = "Prefabs/attackDye";
     private const string DEFENSE_DYE_PREFAB_NAME = "Prefabs/defenseDye";
-
-    public ForceMode forceMode;
-    public float force = 10.0f;
-    public string button = "Fire1";
-    private bool resultChecked = false;
-
     public const int DICE_RESULT_MISS = 0;
     public const int DICE_RESULT_FOCUS = 1;
     public const int DICE_RESULT_HIT_OR_EVADE = 2;
     public const int DICE_RESULT_CRIT = 3;
 
-    public DiceRollerBase(ForceMode forceMode, float force, string button)
+    private static GameObject diceAreaHolder;
+
+    private static ForceMode forceMode;
+    private static float force = 10.0f;
+    private static string button = "Fire1";
+    private static bool resultChecked = false;
+
+    public static void setUpDiceRollerBase(ForceMode pforceMode, float pforce, string pbutton)
     {
-        this.forceMode = forceMode;
-        this.force = force;
-        this.button = button;
+        diceAreaHolder = GameObject.Find("DiceAreaHolder");
+        diceAreaHolder.SetActive(false);
+
+        forceMode = pforceMode;
+        force = pforce;
+        button = pbutton;
     }
 
     private void Start()
@@ -107,9 +111,8 @@ public class DiceRollerBase : MonoBehaviour {
         Debug.Log("Dice results recorded!");
     }
 
-    public void showDiceArea(int numOfDice, bool attack)
+    public static void showDiceArea(int numOfDice, bool attack)
     {
-        GameObject diceAreaHolder = GameObject.Find("DiceAreaHolder");
         Transform dyePrefab = null;
 
         if (attack)
@@ -138,15 +141,19 @@ public class DiceRollerBase : MonoBehaviour {
         }
     }
 
-    public void hideDiceArea()
+    public static void hideDiceArea()
     {
-        GameObject diceAreaHolder = GameObject.Find("DiceAreaHolder");
-
         diceAreaHolder.SetActive(false);
     }
 
-    public void clearDiceArea()
+    public static void clearDiceArea()
     {
-        //TODO get all dice and destroy them
+        GameObject[] dice = GameObject.FindGameObjectsWithTag("attackDye");
+
+        foreach (GameObject dye in dice)
+        {
+            Destroy(dye);
+        }
     }
+
 }
