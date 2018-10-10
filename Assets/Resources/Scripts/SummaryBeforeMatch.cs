@@ -62,6 +62,18 @@ public class SummaryBeforeMatch : MonoBehaviour {
 
         DiceRollerBase.getDiceResults(dice);
 
+        Player result = null;
+        
+        if (PlayerDatas.getDiceResults()[0] == DiceRollerBase.DICE_RESULT_HIT_OR_EVADE || PlayerDatas.getDiceResults()[0] == DiceRollerBase.DICE_RESULT_CRIT)
+        {
+            result = MatchDatas.getPlayers()[0];
+        }
+        else
+        {
+            result = MatchDatas.getPlayers()[1];
+        }
+
+        displayInitiativeChoser(result);
     }
 
     IEnumerator populateSummaryView()
@@ -141,34 +153,12 @@ public class SummaryBeforeMatch : MonoBehaviour {
     {
         if (squadScoresAreEqual())
         {
-            Player player = rollForInitiative();
-            displayInitiativeChoser(player);
+            StartCoroutine(checkObjectsHaveStopped());
         }
         else
         {
-            //displayInitiativeChoser(getPlayerWithLowestSquadScore());
-            Player player = rollForInitiative();
-            displayInitiativeChoser(player);
+            displayInitiativeChoser(getPlayerWithLowestSquadScore());
         }
-    }
-
-    private Player rollForInitiative()
-    {
-        Player result = null;
-
-        StartCoroutine(checkObjectsHaveStopped());
-
-        //TODO Get dice rsults AFTER coroutine has stopped!!! (with custom events??)
-        if (PlayerDatas.getDiceResults()[0] == DiceRollerBase.DICE_RESULT_HIT_OR_EVADE || PlayerDatas.getDiceResults()[0] == DiceRollerBase.DICE_RESULT_CRIT)
-        {
-            result = MatchDatas.getPlayers()[0];
-        }
-        else
-        {
-            result = MatchDatas.getPlayers()[1];
-        }
-
-        return result;
     }
 
     private bool squadScoresAreEqual()
