@@ -39,6 +39,7 @@ public class SummaryBeforeMatch : MonoBehaviour {
 
     IEnumerator checkObjectsHaveStopped()
     {
+        cardsHolder.SetActive(false);
         DiceRollerBase.showDiceArea(1, true);
 
         Rigidbody[] dice = FindObjectsOfType(typeof(Rigidbody)) as Rigidbody[];
@@ -73,6 +74,8 @@ public class SummaryBeforeMatch : MonoBehaviour {
             result = MatchDatas.getPlayers()[1];
         }
 
+        DiceRollerBase.hideDiceArea();
+        cardsHolder.SetActive(true);
         displayInitiativeChoser(result);
     }
 
@@ -157,7 +160,8 @@ public class SummaryBeforeMatch : MonoBehaviour {
         }
         else
         {
-            displayInitiativeChoser(getPlayerWithLowestSquadScore());
+            StartCoroutine(checkObjectsHaveStopped());
+            //displayInitiativeChoser(getPlayerWithLowestSquadScore());
         }
     }
 
