@@ -14,6 +14,9 @@ public class Mocker {
         LoadedShip ship1 = new LoadedShip();
         ship1.setShip(ships.Ship[0]);
         ship1.setPilot(pilots.Pilot[0]);
+        //Adding event actions to be registered for event handling.
+        //TODO Is the input parameter correct/enough??????
+        ship1.addEventAction(new EventActionWedgeAntilles(ship1));
 		PlayerDatas.setSelectedShip(ship1.getShip());
 		PlayerDatas.addPilotToSquadron(ship1.getPilot());
 
@@ -27,6 +30,12 @@ public class Mocker {
         foreach (LoadedShip ship in PlayerDatas.getSquadron())
         {
             squadron1.Add(ship);
+
+            //Registering event actions...
+            foreach (CustomEventBase eventAction in ship.getEventActions())
+            {
+                EventActionRegister.registerEventAction(eventAction);
+            }
         }
 
         Player player1 = new Player();

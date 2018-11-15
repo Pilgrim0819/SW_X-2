@@ -28,13 +28,25 @@ public class OnShipClick : MonoBehaviour {
 
             if (Physics.Raycast(ray, out hit))
             {
-                GameObject target = hit.transform.gameObject;
+                GameObject target = hit.transform.GetChild(0).gameObject;
                 LoadedShip activeShip = new LoadedShip();
 
-                activeShip.setShip(target.GetComponent<ShipProperties>().getShip());
-                activeShip.setPilot(target.GetComponent<ShipProperties>().getPilot());
+                //TODO Show basic ship info (level, attack, agility, shield, hull, pilot talent, upgrade slots(JUST text!!), actions (just image/text))
 
-                MatchDatas.getPlayers()[MatchDatas.getActivePlayerIndex()].setActiveShip(activeShip);
+                //IF the selected ship is the current player's
+                foreach (LoadedShip ship in MatchDatas.getPlayers()[MatchDatas.getActivePlayerIndex()].getSquadron())
+                {
+                    if (ship.getPilot().Equals(target.GetComponent<ShipProperties>().getPilot()))
+                    {
+                        //TODO Show extra ship info (actions (clickable), maneuvers (clickable ONLY in planning phase or in case of extra movement!!), upgrades (can be activated))
+
+                        //Set as active ship
+                        activeShip.setShip(target.GetComponent<ShipProperties>().getShip());
+                        activeShip.setPilot(target.GetComponent<ShipProperties>().getPilot());
+
+                        MatchDatas.getPlayers()[MatchDatas.getActivePlayerIndex()].setActiveShip(activeShip);
+                    }
+                }
             }
         }
     }

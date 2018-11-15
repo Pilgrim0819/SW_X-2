@@ -4,11 +4,43 @@ using System.Collections.Generic;
 
 namespace PilotsXMLCSharp
 {
-    [XmlRoot(ElementName = "slots")]
-    public class Slots
+    [XmlRoot(ElementName = "upgrade")]
+    public class Upgrade
     {
-        [XmlElement(ElementName = "slot")]
-        public List<string> Slot { get; set; }
+        [XmlElement(ElementName = "name")]
+        public string Name { get; set; }
+        [XmlElement(ElementName = "description")]
+        public string Description { get; set; }
+        [XmlElement(ElementName = "phase")]
+        public string Phase { get; set; }
+        [XmlElement(ElementName = "cost")]
+        public int Cost { get; set; }
+        [XmlElement(ElementName = "type")]
+        public string Type { get; set; }
+        [XmlElement(ElementName = "sideRestriction")]
+        public string SideRestriction { get; set; }
+        [XmlElement(ElementName = "sizeRestriction")]
+        public string SizeRestriction { get; set; }
+        [XmlElement(ElementName = "shipRestriction")]
+        public string ShipRestriction { get; set; }
+        [XmlElement(ElementName = "unique")]
+        public bool unique { get; set; }
+    }
+
+    [XmlRoot(ElementName = "upgradeSlot")]
+    public class UpgradeSlot
+    {
+        [XmlElement(ElementName = "type")]
+        public string Type { get; set; }
+        [XmlElement(ElementName = "upgrade")]
+        public Upgrade upgrade { get; set; }
+    }
+
+    [XmlRoot(ElementName = "upgradeSlots")]
+    public class UpgradeSlots
+    {
+        [XmlElement(ElementName = "upgradeSlot")]
+        public List<UpgradeSlot> UpgradeSlot { get; set; }
     }
 
     [XmlRoot(ElementName = "ability")]
@@ -55,8 +87,8 @@ namespace PilotsXMLCSharp
         public int Level { get; set; }
         [XmlElement(ElementName = "text")]
         public string Text { get; set; }
-        [XmlElement(ElementName = "slots")]
-        public Slots Slots { get; set; }
+        [XmlElement(ElementName = "upgradeSlots")]
+        public UpgradeSlots UpgradeSlots { get; set; }
         [XmlElement(ElementName = "ability")]
         public Ability Ability { get; set; }
     }

@@ -30,6 +30,7 @@ public class AddPilotToSquardon : MonoBehaviour, IPointerEnterHandler, IPointerE
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        Debug.Log(pilot.Name + " was selected!!");
         PlayerDatas.addPilotToSquadron(pilot);
     }
 

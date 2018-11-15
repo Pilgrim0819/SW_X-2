@@ -8,6 +8,7 @@ public class SceneChangerManuAction : MonoBehaviour {
 
     public void changeSceneAction()
     {
+        Debug.Log("Scene change initiated!! Param: " + sceneToLoad);
         SceneManager.LoadScene(sceneToLoad, LoadSceneMode.Single);
     }
 

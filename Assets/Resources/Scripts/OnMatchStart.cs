@@ -27,6 +27,7 @@ public class OnMatchStart : MonoBehaviour {
                 {
                     Ship ship = loadedShip.getShip();
                     string shipType = ship.ShipId;
+                    GameObject shipHolderPrefab = (GameObject)Resources.Load(PREFABS_FOLDER + "/SmallShipContainerPrefab", typeof(GameObject));
                     GameObject shipPrefab = (GameObject)Resources.Load(PREFABS_FOLDER + "/" + shipType, typeof(GameObject));
 
                     //TODO Tweak these coordinates!
@@ -34,11 +35,19 @@ public class OnMatchStart : MonoBehaviour {
                     int posY = 500;
                     int posZ = 2000;
 
-                    GameObject shipGameObject = (GameObject)GameObject.Instantiate(
-                        shipPrefab,
+                    GameObject shipHolderGameObject = (GameObject)GameObject.Instantiate(
+                        shipHolderPrefab,
                         new Vector3(posX, posY, posZ),
                         Quaternion.identity
                     );
+
+                    GameObject shipGameObject = (GameObject)GameObject.Instantiate(
+                        shipPrefab,
+                        new Vector3(posX + 2.81896f, posY - 0.08181581f, posZ + 3.286796f),
+                        Quaternion.identity
+                    );
+
+                    shipGameObject.transform.SetParent(shipHolderGameObject.transform, true);
 
                     shipGameObject.GetComponent<ShipProperties>().setPilot(loadedShip.getPilot());
                     shipGameObject.GetComponent<ShipProperties>().setShip(loadedShip.getShip());

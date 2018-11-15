@@ -2,6 +2,7 @@
 using System.Collections;
 using PilotsXMLCSharp;
 using ShipsXMLCSharp;
+using System.Collections.Generic;
 
 public class LoadedShip {
 
@@ -9,8 +10,20 @@ public class LoadedShip {
     private Ship ship;
 	private int pilotId;
     private bool alive = true;
+    private LoadedShip target;
+    private List<CustomEventBase> eventActions = new List<CustomEventBase>();
 
-	public int getPilotId(){
+    public List<CustomEventBase> getEventActions()
+    {
+        return eventActions;
+    }
+
+    public void addEventAction(CustomEventBase eventAction)
+    {
+        this.eventActions.Add(eventAction);
+    }
+
+    public int getPilotId(){
 		return this.pilotId;
 	}
 
@@ -46,5 +59,15 @@ public class LoadedShip {
     public bool isAlive()
     {
         return alive;
+    }
+
+    public LoadedShip getTarget()
+    {
+        return target;
+    }
+
+    public void setTarget(LoadedShip pTarget)
+    {
+        target = pTarget;
     }
 }

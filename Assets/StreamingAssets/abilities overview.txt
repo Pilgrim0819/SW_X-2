@@ -1,3 +1,27 @@
+*************NEW***********************
+//PHASE can be: action(user activates it after moving), attack(user activates it instead of a regular attack), eventaction(some event triggers it automatically)
+
+if (action) { loadedship.actions.add(...) }
+if (attack) { loadedship.attacks.add(...) }
+if (eventaction) {  }
+
+<upgrade>
+	<name>Expert handling</name>
+	<description>
+		Perform a barrel roll. If you do not have the barrel roll action icon, receive 1 stress token. You 				may then remove 1 enemy target lock from your ship.
+	</description>
+	<phase>action</phase>
+	<cost>2</cost>
+	<type>elite talent</type>
+	<sideRestriction>none</sideRestriction>
+	<sizeRestriction>none</sizeRestriction>
+	<shipRestriction>none</shipRestriction>
+	<unique>false</unique>
+</upgrade>
+
+
+
+***********OLD******************
 When attacking, reduce the defender's agility value by 1 (to a minimum of 0).
 
 <ability>

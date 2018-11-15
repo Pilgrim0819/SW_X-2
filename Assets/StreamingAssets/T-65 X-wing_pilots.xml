@@ -6,11 +6,17 @@
 		<cost>21</cost>
 		<level>2</level>
 		<text>Designed by Incom Corporation, the T-65 X-Wing quickly proved to be one of the most effective military vehicles in the galaxy and a boon to the Rebellion.</text>
-		<slots>
-			<slot>torpedo</slot>
-			<slot>astromech</slot>
-			<slot>modification</slot>
-		</slots>
+		<upgradeSlots>
+			<upgradeSlot>
+				<type>torpedo</type>
+			</upgradeSlot>
+			<upgradeSlot>
+				<type>astromech</type>
+			</upgradeSlot>
+			<upgradeSlot>
+				<type>modification</type>
+			</upgradeSlot>
+		</upgradeSlots>
 		<ability>
 			<phase></phase>
 			<target></target>
@@ -34,12 +40,20 @@
 		<cost>29</cost>
 		<level>9</level>
 		<text>When attacking, reduce the defender's agility value by 1 (to a minimum of 0).</text>
-		<slots>
-			<slot>elite</slot>
-			<slot>torpedo</slot>
-			<slot>astromech</slot>
-			<slot>modification</slot>
-		</slots>
+		<upgradeSlots>
+			<upgradeSlot>
+				<type>torpedo</type>
+			</upgradeSlot>
+			<upgradeSlot>
+				<type>astromech</type>
+			</upgradeSlot>
+			<upgradeSlot>
+				<type>modification</type>
+			</upgradeSlot>
+			<upgradeSlot>
+				<type>elite</type>
+			</upgradeSlot>
+		</upgradeSlots>
 		<ability>
 			<phase>onBeforeAttack</phase>
 			<target>enemy</target>
@@ -63,11 +77,17 @@
 		<cost>26</cost>
 		<level>6</level>
 		<text>After spending a focus token, you may place that token on any other friendly ship at Range 1-2 (instead of discarding it).</text>
-		<slots>
-			<slot>torpedo</slot>
-			<slot>astromech</slot>
-			<slot>modification</slot>
-		</slots>
+		<upgradeSlots>
+			<upgradeSlot>
+				<type>torpedo</type>
+			</upgradeSlot>
+			<upgradeSlot>
+				<type>astromech</type>
+			</upgradeSlot>
+			<upgradeSlot>
+				<type>modification</type>
+			</upgradeSlot>
+		</upgradeSlots>
 		<ability>
 			<phase>onSpendFocus</phase>
 			<target>friendly</target>

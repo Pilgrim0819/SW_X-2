@@ -10,6 +10,8 @@ public class CameraHandler : MonoBehaviour {
     private float pitch = 0.0f;
     private float yaw = 0.0f;
 
+    private bool rotateCamera = false;
+
     // Use this for initialization
     void Start () {
 	
@@ -17,10 +19,22 @@ public class CameraHandler : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        yaw += horizontalSpeed * Input.GetAxis("Mouse X");
-        pitch += verticalSpeed * Input.GetAxis("Mouse Y");
+        if (Input.GetMouseButtonDown(1))
+        {
+            rotateCamera = true;
+        }
 
-        transform.eulerAngles = new Vector3(pitch, yaw, 0.0f);
+        if (Input.GetMouseButtonUp(1))
+        {
+            rotateCamera = false;
+        }
+
+        if (rotateCamera)
+        {
+            yaw += horizontalSpeed * Input.GetAxis("Mouse X");
+            pitch += verticalSpeed * Input.GetAxis("Mouse Y");
+            transform.eulerAngles = new Vector3(pitch, yaw, 0.0f);
+        }
 
         if (Input.GetKey("w"))
         {

@@ -62,9 +62,4 @@ public class LoadPilotsForSelector : MonoBehaviour {
             pilotIndex++;
         }
     }
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 }

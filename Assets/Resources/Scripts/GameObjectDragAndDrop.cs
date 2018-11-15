@@ -56,11 +56,11 @@ public class GameObjectDragAndDrop : MonoBehaviour {
         {
             if (Input.GetAxis("Mouse ScrollWheel") > 0f) // forward
             {
-                target.transform.RotateAround(target.transform.position, target.transform.TransformDirection(Vector3.up), 22.5f);
+                target.transform.RotateAround(target.transform.position, target.transform.TransformDirection(Vector3.up), 2.5f);
             }
             else if (Input.GetAxis("Mouse ScrollWheel") < 0f) // backwards
             {
-                target.transform.RotateAround(target.transform.position, target.transform.TransformDirection(Vector3.up), -22.5f);
+                target.transform.RotateAround(target.transform.position, target.transform.TransformDirection(Vector3.up), -2.5f);
             }
         }
     }
