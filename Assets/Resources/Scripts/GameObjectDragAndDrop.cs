@@ -6,8 +6,9 @@ public class GameObjectDragAndDrop : MonoBehaviour {
 
     private GameObject target;
     private bool grabbed = false;
+    private Vector3 prevPos;
 
-    private const float dragSpeedMultiplier = 15.0f;
+    private const float dragSpeedMultiplier = 50.0f;
 
     GameObject ReturnClickedObject(out RaycastHit hit)
     {
@@ -43,6 +44,7 @@ public class GameObjectDragAndDrop : MonoBehaviour {
             {
                 Cursor.visible = false;
                 grabbed = true;
+                prevPos = target.transform.position;
             }
         }
 
@@ -50,6 +52,14 @@ public class GameObjectDragAndDrop : MonoBehaviour {
         {
             Cursor.visible = true;
             grabbed = false;
+
+            GameObject shipCollection = GameObject.Find("ShipCollection1");
+            GameObject setupField = GameObject.Find("Player1SetupField");
+
+            if (!shipCollection.GetComponent<Collider>().bounds.Contains(target.transform.position) && !setupField.GetComponent<Collider>().bounds.Contains(target.transform.position))
+            {
+                target.transform.position = prevPos;
+            }
         }
 
         if (grabbed && MatchDatas.getRound() == 0)

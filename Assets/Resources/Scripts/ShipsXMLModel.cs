@@ -36,6 +36,8 @@ namespace ShipsXMLCSharp
         public string ShipId { get; set; }
         [XmlElement(ElementName = "shipName")]
         public string ShipName { get; set; }
+        [XmlElement(ElementName = "shipDescription")]
+        public string ShipDescription { get; set; }
         [XmlElement(ElementName = "weapon")]
         public int Weapon { get; set; }
         [XmlElement(ElementName = "agility")]

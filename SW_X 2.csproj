@@ -13,11 +13,13 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Full v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>WebPlayer:6</UnityBuildTarget>
     <UnityVersion>5.3.8p2</UnityVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <LangVersion>4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -76,8 +78,10 @@
     <Compile Include="Assets\Resources\Scripts\GameObjectDragAndDrop.cs" />
     <Compile Include="Assets\Resources\Scripts\LoadPilotsForSelector.cs" />
     <Compile Include="Assets\Resources\Scripts\LoadedShip.cs" />
+    <Compile Include="Assets\Resources\Scripts\ManeuverHandler.cs" />
     <Compile Include="Assets\Resources\Scripts\MatchDatas.cs" />
     <Compile Include="Assets\Resources\Scripts\MenuAction.cs" />
+    <Compile Include="Assets\Resources\Scripts\MenuActions\SquadBuilderShipPanelEvents.cs" />
     <Compile Include="Assets\Resources\Scripts\MenuElementMouseClick.cs" />
     <Compile Include="Assets\Resources\Scripts\Mocker.cs" />
     <Compile Include="Assets\Resources\Scripts\OnMatchStart.cs" />
@@ -88,6 +92,7 @@
     <Compile Include="Assets\Resources\Scripts\Player.cs" />
     <Compile Include="Assets\Resources\Scripts\PlayerDatas.cs" />
     <Compile Include="Assets\Resources\Scripts\SceneChangerManuAction.cs" />
+    <Compile Include="Assets\Resources\Scripts\SceneHandlers\SquadBuilderHandler.cs" />
     <Compile Include="Assets\Resources\Scripts\SetPlayerInitiative.cs" />
     <Compile Include="Assets\Resources\Scripts\ShipProperties.cs" />
     <Compile Include="Assets\Resources\Scripts\ShipSelectorMouseClick.cs" />
@@ -98,12 +103,13 @@
     <Compile Include="Assets\Resources\Scripts\XMLLoader.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\StreamingAssets\T-65 X-wing_pilots.xml" />
     <None Include="Assets\StreamingAssets\TIE Fighter_pilots.xml" />
     <None Include="Assets\StreamingAssets\abilities overview.txt" />
     <None Include="Assets\StreamingAssets\custom_events.txt" />
     <None Include="Assets\StreamingAssets\imperial_ships.xml" />
     <None Include="Assets\StreamingAssets\rebel_ships.xml" />
+    <None Include="Assets\StreamingAssets\t65xw_pilots.xml" />
+    <None Include="Assets\StreamingAssets\t70xw_pilots.xml" />
     <None Include="Assets\json\T-65_pilots.json.txt" />
     <None Include="Assets\json\TIE Fighter_pilots.json.txt" />
     <None Include="Assets\json\imperial_ships.json.txt" />

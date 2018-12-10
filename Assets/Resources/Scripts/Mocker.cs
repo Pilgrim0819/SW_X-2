@@ -41,6 +41,7 @@ public class Mocker {
         Player player1 = new Player();
         player1.setChosenSide("Rebels");
         player1.setPlayerName("Player Number 1");
+        player1.setPLayerID(1);
         player1.setSquadron(squadron1);
 
         PlayerDatas.deleteSquadron();
@@ -69,6 +70,7 @@ public class Mocker {
         Player player2 = new Player();
         player2.setChosenSide("Empire");
         player2.setPlayerName("Player Number 2");
+        player2.setPLayerID(2);
         player2.setSquadron(PlayerDatas.getSquadron());
 
         MatchDatas.addPlayer(player1);

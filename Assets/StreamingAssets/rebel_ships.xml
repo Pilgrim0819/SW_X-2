@@ -2,6 +2,7 @@
 		<ship>
 			<shipId>t65xw</shipId>
 			<shipName>T-65 X-wing</shipName>
+			<shipDescription>Designed by Incom Corporation, the T-65 X-Wing quickly proved to be one of the most effective military vehicles in the galaxy and a boon to the Rebellion.</shipDescription>
 			<weapon>3</weapon>
 			<agility>2</agility>
 			<hull>3</hull>
@@ -19,7 +20,12 @@
 				</maneuver>
 				<maneuver>
 					<speed>1</speed>
-					<bearing>bank</bearing>
+					<bearing>bank_left</bearing>
+					<difficulty>0</difficulty>
+				</maneuver>
+				<maneuver>
+					<speed>1</speed>
+					<bearing>bank_right</bearing>
 					<difficulty>0</difficulty>
 				</maneuver>
 				<maneuver>
@@ -29,12 +35,22 @@
 				</maneuver>
 				<maneuver>
 					<speed>2</speed>
-					<bearing>bank</bearing>
+					<bearing>bank_left</bearing>
 					<difficulty>1</difficulty>
 				</maneuver>
 				<maneuver>
 					<speed>2</speed>
-					<bearing>turn</bearing>
+					<bearing>bank_right</bearing>
+					<difficulty>1</difficulty>
+				</maneuver>
+				<maneuver>
+					<speed>2</speed>
+					<bearing>turn_left</bearing>
+					<difficulty>1</difficulty>
+				</maneuver>
+				<maneuver>
+					<speed>2</speed>
+					<bearing>turn_right</bearing>
 					<difficulty>1</difficulty>
 				</maneuver>
 				<maneuver>
@@ -44,12 +60,22 @@
 				</maneuver>
 				<maneuver>
 					<speed>3</speed>
-					<bearing>bank</bearing>
+					<bearing>bank_left</bearing>
 					<difficulty>1</difficulty>
 				</maneuver>
 				<maneuver>
 					<speed>3</speed>
-					<bearing>turn</bearing>
+					<bearing>bank_right</bearing>
+					<difficulty>1</difficulty>
+				</maneuver>
+				<maneuver>
+					<speed>3</speed>
+					<bearing>turn_left</bearing>
+					<difficulty>1</difficulty>
+				</maneuver>
+				<maneuver>
+					<speed>3</speed>
+					<bearing>turn_right</bearing>
 					<difficulty>1</difficulty>
 				</maneuver>
 				<maneuver>
@@ -68,6 +94,7 @@
 		<ship>
 			<shipId>t70xw</shipId>
 			<shipName>T-70 X-wing</shipName>
+			<shipDescription>Designed by Incom Corporation, the T-70 X-Wing quickly proved to be one of the most effective military vehicles in the galaxy and a boon to the Rebellion.</shipDescription>
 			<weapon>3</weapon>
 			<agility>2</agility>
 			<hull>3</hull>
@@ -86,7 +113,12 @@
 				</maneuver>
 				<maneuver>
 					<speed>1</speed>
-					<bearing>bank</bearing>
+					<bearing>bank_left</bearing>
+					<difficulty>0</difficulty>
+				</maneuver>
+				<maneuver>
+					<speed>1</speed>
+					<bearing>bank_right</bearing>
 					<difficulty>0</difficulty>
 				</maneuver>
 				<maneuver>
@@ -96,12 +128,22 @@
 				</maneuver>
 				<maneuver>
 					<speed>2</speed>
-					<bearing>bank</bearing>
+					<bearing>bank_left</bearing>
 					<difficulty>1</difficulty>
 				</maneuver>
 				<maneuver>
 					<speed>2</speed>
-					<bearing>turn</bearing>
+					<bearing>bank_right</bearing>
+					<difficulty>1</difficulty>
+				</maneuver>
+				<maneuver>
+					<speed>2</speed>
+					<bearing>turn_left</bearing>
+					<difficulty>1</difficulty>
+				</maneuver>
+				<maneuver>
+					<speed>2</speed>
+					<bearing>turn_right</bearing>
 					<difficulty>1</difficulty>
 				</maneuver>
 				<maneuver>
@@ -111,17 +153,32 @@
 				</maneuver>
 				<maneuver>
 					<speed>3</speed>
-					<bearing>bank</bearing>
+					<bearing>bank_left</bearing>
 					<difficulty>1</difficulty>
 				</maneuver>
 				<maneuver>
 					<speed>3</speed>
-					<bearing>turn</bearing>
+					<bearing>bank_right</bearing>
 					<difficulty>1</difficulty>
 				</maneuver>
 				<maneuver>
 					<speed>3</speed>
-					<bearing>tallon roll</bearing>
+					<bearing>turn_left</bearing>
+					<difficulty>1</difficulty>
+				</maneuver>
+				<maneuver>
+					<speed>3</speed>
+					<bearing>turn_right</bearing>
+					<difficulty>1</difficulty>
+				</maneuver>
+				<maneuver>
+					<speed>3</speed>
+					<bearing>tallon_roll_left</bearing>
+					<difficulty>2</difficulty>
+				</maneuver>
+				<maneuver>
+					<speed>3</speed>
+					<bearing>tallon_roll_right</bearing>
 					<difficulty>2</difficulty>
 				</maneuver>
 				<maneuver>

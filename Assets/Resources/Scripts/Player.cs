@@ -10,6 +10,17 @@ public class Player {
     private List<int> lastDiceResults = new List<int>();
     private LoadedShip activeShip;
     private bool hasInitiative = false;
+    private int playerID;
+
+    public void setPLayerID(int id)
+    {
+        playerID = id;
+    }
+
+    public int getPlayerID()
+    {
+        return playerID;
+    }
 
     public void setInitiative()
     {

@@ -22,6 +22,7 @@ public class OnMatchStart : MonoBehaviour {
         foreach (Player player in MatchDatas.getPlayers())
         {
                 int loopIndex = 0;
+                Vector3 startingPosition = getShipCollectionHolderPosition(player.getPlayerID());
 
                 foreach (LoadedShip loadedShip in player.getSquadron())
                 {
@@ -31,9 +32,9 @@ public class OnMatchStart : MonoBehaviour {
                     GameObject shipPrefab = (GameObject)Resources.Load(PREFABS_FOLDER + "/" + shipType, typeof(GameObject));
 
                     //TODO Tweak these coordinates!
-                    int posX = 2000 + (loopIndex * offsetX);
-                    int posY = 500;
-                    int posZ = 2000;
+                    float posX = startingPosition.x + (loopIndex * offsetX);
+                    float posY = startingPosition.y;
+                    float posZ = startingPosition.z;
 
                     GameObject shipHolderGameObject = (GameObject)GameObject.Instantiate(
                         shipHolderPrefab,
@@ -83,5 +84,10 @@ public class OnMatchStart : MonoBehaviour {
         }
         
         DiceRollerBase.getDiceResults(GOS);
+    }
+
+    private Vector3 getShipCollectionHolderPosition(int playerID)
+    {
+        return GameObject.Find("ShipCollection" + playerID).transform.position;
     }
 }

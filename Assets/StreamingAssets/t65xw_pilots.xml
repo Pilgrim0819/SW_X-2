@@ -1,0 +1,106 @@
+<pilots>
+	<pilot>
+		<shipId>t65xw</shipId>
+		<unique>false</unique>
+		<name>Rookie pilot</name>
+		<cost>21</cost>
+		<level>2</level>
+		<text></text>
+		<upgradeSlots>
+			<upgradeSlot>
+				<type>torpedo</type>
+			</upgradeSlot>
+			<upgradeSlot>
+				<type>astromech</type>
+			</upgradeSlot>
+			<upgradeSlot>
+				<type>modification</type>
+			</upgradeSlot>
+		</upgradeSlots>
+		<ability>
+			<phase></phase>
+			<target></target>
+			<targetScope></targetScope>
+			<targetRangeMin></targetRangeMin>
+			<targetRangeMax></targetRangeMax>
+			<valueToModify></valueToModify>
+			<modifier></modifier>
+		  	<bonusAction></bonusAction>
+			<valueToCheck></valueToCheck>
+			<conditionValue></conditionValue>
+			<conditionWay></conditionWay>
+			<conditionCheckPhase></conditionCheckPhase>
+		</ability>
+	</pilot>
+	
+	<pilot>
+		<shipId>t65xw</shipId>
+		<unique>true</unique>
+		<name>Wedge Antilles</name>
+		<cost>29</cost>
+		<level>9</level>
+		<text>When attacking, reduce the defender's agility value by 1 (to a minimum of 0).</text>
+		<upgradeSlots>
+			<upgradeSlot>
+				<type>torpedo</type>
+			</upgradeSlot>
+			<upgradeSlot>
+				<type>astromech</type>
+			</upgradeSlot>
+			<upgradeSlot>
+				<type>modification</type>
+			</upgradeSlot>
+			<upgradeSlot>
+				<type>elite</type>
+			</upgradeSlot>
+		</upgradeSlots>
+		<ability>
+			<phase>onBeforeAttack</phase>
+			<target>enemy</target>
+			<targetScope>attacked</targetScope>
+			<targetRangeMin>1</targetRangeMin>
+			<targetRangeMax>3</targetRangeMax>
+			<valueToModify>agility</valueToModify>
+			<modifier>-1</modifier>
+		  	<bonusAction></bonusAction>
+			<valueToCheck>agility</valueToCheck>
+			<conditionValue>0</conditionValue>
+			<conditionWay>greater_than</conditionWay>
+			<conditionCheckPhase>onAfterValueModified</conditionCheckPhase>
+		</ability>
+	</pilot>
+	
+	<pilot>
+		<shipId>t65xw</shipId>
+		<unique>true</unique>
+		<name>Garven Dreis</name>
+		<cost>26</cost>
+		<level>6</level>
+		<text>After spending a focus token, you may place that token on any other friendly ship at Range 1-2 (instead of discarding it).</text>
+		<upgradeSlots>
+			<upgradeSlot>
+				<type>torpedo</type>
+			</upgradeSlot>
+			<upgradeSlot>
+				<type>astromech</type>
+			</upgradeSlot>
+			<upgradeSlot>
+				<type>modification</type>
+			</upgradeSlot>
+		</upgradeSlots>
+		<ability>
+			<phase>onSpendFocus</phase>
+			<target>friendly</target>
+			<targetScope>any</targetScope>
+			<targetRangeMin>1</targetRangeMin>
+			<targetRangeMax>2</targetRangeMax>
+			<valueToModify>focusTokenNumber</valueToModify>
+			<modifier>1</modifier>
+		  	<bonusAction></bonusAction>
+			<valueToCheck>agility</valueToCheck>
+			<conditionValue>0</conditionValue>
+			<conditionWay>greater_than</conditionWay>
+			<conditionCheckPhase>onAfterValueModified</conditionCheckPhase>
+		</ability>
+	</pilot>
+</pilots>

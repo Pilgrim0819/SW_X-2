@@ -1,0 +1,35 @@
+<pilots>
+	<pilot>
+		<shipId>t70xw</shipId>
+		<unique>false</unique>
+		<name>Rookie pilot</name>
+		<cost>21</cost>
+		<level>2</level>
+		<text></text>
+		<upgradeSlots>
+			<upgradeSlot>
+				<type>torpedo</type>
+			</upgradeSlot>
+			<upgradeSlot>
+				<type>astromech</type>
+			</upgradeSlot>
+			<upgradeSlot>
+				<type>modification</type>
+			</upgradeSlot>
+		</upgradeSlots>
+		<ability>
+			<phase></phase>
+			<target></target>
+			<targetScope></targetScope>
+			<targetRangeMin></targetRangeMin>
+			<targetRangeMax></targetRangeMax>
+			<valueToModify></valueToModify>
+			<modifier></modifier>
+		  	<bonusAction></bonusAction>
+			<valueToCheck></valueToCheck>
+			<conditionValue></conditionValue>
+			<conditionWay></conditionWay>
+			<conditionCheckPhase></conditionCheckPhase>
+		</ability>
+	</pilot>
+</pilots>
