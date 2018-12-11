@@ -1,8 +1,8 @@
-	<ships>
+<ships>
 		<ship>
 			<shipId>t65xw</shipId>
 			<shipName>T-65 X-wing</shipName>
-			<shipDescription>Designed by Incom Corporation, the T-65 X-Wing quickly proved to be one of the most effective military vehicles in the galaxy and a boon to the Rebellion.</shipDescription>
+			<shipDescription>Designed by Incom Corporation, the T-65 X-Wing quickly proved to be one of the most effective military vehicles in the galaxy and a boon to the Rebellion. Created as an elite starfighter squad, Red Squadron included some of the best pilots in the Rebel Alliance.</shipDescription>
 			<weapon>3</weapon>
 			<agility>2</agility>
 			<hull>3</hull>
@@ -94,7 +94,7 @@
 		<ship>
 			<shipId>t70xw</shipId>
 			<shipName>T-70 X-wing</shipName>
-			<shipDescription>Designed by Incom Corporation, the T-70 X-Wing quickly proved to be one of the most effective military vehicles in the galaxy and a boon to the Rebellion.</shipDescription>
+			<shipDescription>The modern incarnation of a classic design, the Incom T-70 X-wing fighter is the signature combat craft of the Resistance forces in their fight against the First Order. The T-70 model benefits from its redesigned thrusters with increased maneuverability in both space and atmospheric flight.</shipDescription>
 			<weapon>3</weapon>
 			<agility>2</agility>
 			<hull>3</hull>
@@ -188,6 +188,105 @@
 				</maneuver>
 				<maneuver>
 					<speed>4</speed>
+					<bearing>koiogran</bearing>
+					<difficulty>2</difficulty>
+				</maneuver>
+			</maneuvers>
+		</ship>
+
+		<ship>
+			<shipId>rz1aw</shipId>
+			<shipName>A-wing</shipName>
+			<shipDescription>Conceived by General Dodonna, the RZ-1 A-wing interceptor proved its worth by crippling Star Destroyers during the Battle of Endor. Due to its sensitive controls and high maneuverability, only the most talented pilots belong in an A-wing cockpit.</shipDescription>
+			<weapon>2</weapon>
+			<agility>3</agility>
+			<hull>2</hull>
+			<shield>2</shield>
+			<size>small</size>
+			<actions>
+				<action>focus</action>
+				<action>target lock</action>
+				<action>boost</action>
+				<action>evade</action>
+			</actions>
+			<maneuvers>
+				<maneuver>
+					<speed>1</speed>
+					<bearing>turn_left</bearing>
+					<difficulty>1</difficulty>
+				</maneuver>
+				<maneuver>
+					<speed>1</speed>
+					<bearing>turn_right</bearing>
+					<difficulty>1</difficulty>
+				</maneuver>
+				<maneuver>
+					<speed>2</speed>
+					<bearing>straight</bearing>
+					<difficulty>0</difficulty>
+				</maneuver>
+				<maneuver>
+					<speed>2</speed>
+					<bearing>turn_left</bearing>
+					<difficulty>0</difficulty>
+				</maneuver>
+				<maneuver>
+					<speed>2</speed>
+					<bearing>turn_right</bearing>
+					<difficulty>0</difficulty>
+				</maneuver>
+				<maneuver>
+					<speed>2</speed>
+					<bearing>bank_left</bearing>
+					<difficulty>0</difficulty>
+				</maneuver>
+				<maneuver>
+					<speed>2</speed>
+					<bearing>bank_right</bearing>
+					<difficulty>0</difficulty>
+				</maneuver>
+				<maneuver>
+					<speed>3</speed>
+					<bearing>straight</bearing>
+					<difficulty>0</difficulty>
+				</maneuver>
+				<maneuver>
+					<speed>3</speed>
+					<bearing>turn_left</bearing>
+					<difficulty>1</difficulty>
+				</maneuver>
+				<maneuver>
+					<speed>3</speed>
+					<bearing>turn_right</bearing>
+					<difficulty>1</difficulty>
+				</maneuver>
+				<maneuver>
+					<speed>3</speed>
+					<bearing>bank_left</bearing>
+					<difficulty>1</difficulty>
+				</maneuver>
+				<maneuver>
+					<speed>3</speed>
+					<bearing>bank_right</bearing>
+					<difficulty>1</difficulty>
+				</maneuver>
+				<maneuver>
+					<speed>3</speed>
+					<bearing>koiogran</bearing>
+					<difficulty>2</difficulty>
+				</maneuver>
+				<maneuver>
+					<speed>4</speed>
+					<bearing>straight</bearing>
+					<difficulty>0</difficulty>
+				</maneuver>
+				<maneuver>
+					<speed>5</speed>
+					<bearing>straight</bearing>
+					<difficulty>0</difficulty>
+				</maneuver>
+				<maneuver>
+					<speed>5</speed>
 					<bearing>koiogran</bearing>
 					<difficulty>2</difficulty>
 				</maneuver>
