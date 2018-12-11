@@ -2,6 +2,32 @@
 	<pilot>
 		<shipId>t65xw</shipId>
 		<unique>false</unique>
+		<name>Cavern Angels Zealot</name>
+		<cost>22</cost>
+		<level>1</level>
+		<text></text>
+		<upgradeSlots>
+			<upgradeSlot>
+				<type>torpedo</type>
+			</upgradeSlot>
+			<upgradeSlot>
+				<type>astromech</type>
+			</upgradeSlot>
+			<upgradeSlot>
+				<type>elite</type>
+			</upgradeSlot>
+			<upgradeSlot>
+				<type>modification</type>
+			</upgradeSlot>
+			<upgradeSlot>
+				<type>title</type>
+			</upgradeSlot>
+		</upgradeSlots>
+	</pilot>
+
+	<pilot>
+		<shipId>t65xw</shipId>
+		<unique>false</unique>
 		<name>Rookie pilot</name>
 		<cost>21</cost>
 		<level>2</level>
@@ -16,30 +42,19 @@
 			<upgradeSlot>
 				<type>modification</type>
 			</upgradeSlot>
+			<upgradeSlot>
+				<type>title</type>
+			</upgradeSlot>
 		</upgradeSlots>
-		<ability>
-			<phase></phase>
-			<target></target>
-			<targetScope></targetScope>
-			<targetRangeMin></targetRangeMin>
-			<targetRangeMax></targetRangeMax>
-			<valueToModify></valueToModify>
-			<modifier></modifier>
-		  	<bonusAction></bonusAction>
-			<valueToCheck></valueToCheck>
-			<conditionValue></conditionValue>
-			<conditionWay></conditionWay>
-			<conditionCheckPhase></conditionCheckPhase>
-		</ability>
 	</pilot>
-	
+
 	<pilot>
 		<shipId>t65xw</shipId>
 		<unique>true</unique>
-		<name>Wedge Antilles</name>
-		<cost>29</cost>
-		<level>9</level>
-		<text>When attacking, reduce the defender's agility value by 1 (to a minimum of 0).</text>
+		<name>Tarn Mison</name>
+		<cost>23</cost>
+		<level>3</level>
+		<text>When an enemy ship declares you as the target of an attack, you may acquire a target lock on that ship.</text>
 		<upgradeSlots>
 			<upgradeSlot>
 				<type>torpedo</type>
@@ -51,25 +66,106 @@
 				<type>modification</type>
 			</upgradeSlot>
 			<upgradeSlot>
-				<type>elite</type>
+				<type>title</type>
 			</upgradeSlot>
 		</upgradeSlots>
-		<ability>
-			<phase>onBeforeAttack</phase>
-			<target>enemy</target>
-			<targetScope>attacked</targetScope>
-			<targetRangeMin>1</targetRangeMin>
-			<targetRangeMax>3</targetRangeMax>
-			<valueToModify>agility</valueToModify>
-			<modifier>-1</modifier>
-		  	<bonusAction></bonusAction>
-			<valueToCheck>agility</valueToCheck>
-			<conditionValue>0</conditionValue>
-			<conditionWay>greater_than</conditionWay>
-			<conditionCheckPhase>onAfterValueModified</conditionCheckPhase>
-		</ability>
 	</pilot>
-	
+
+	<pilot>
+		<shipId>t65xw</shipId>
+		<unique>true</unique>
+		<name>Edrio “Two Tubes”</name>
+		<cost>24</cost>
+		<level>4</level>
+		<text>When you become the active ship during the Activation phase, if you have 1 or more focus tokens, you may perform a free action.</text>
+		<upgradeSlots>
+			<upgradeSlot>
+				<type>torpedo</type>
+			</upgradeSlot>
+			<upgradeSlot>
+				<type>astromech</type>
+			</upgradeSlot>
+			<upgradeSlot>
+				<type>elite</type>
+			</upgradeSlot>
+			<upgradeSlot>
+				<type>modification</type>
+			</upgradeSlot>
+			<upgradeSlot>
+				<type>title</type>
+			</upgradeSlot>
+		</upgradeSlots>
+	</pilot>
+
+	<pilot>
+		<shipId>t65xw</shipId>
+		<unique>false</unique>
+		<name>Red Squadron Pilot</name>
+		<cost>23</cost>
+		<level>4</level>
+		<text></text>
+		<upgradeSlots>
+			<upgradeSlot>
+				<type>torpedo</type>
+			</upgradeSlot>
+			<upgradeSlot>
+				<type>astromech</type>
+			</upgradeSlot>
+			<upgradeSlot>
+				<type>modification</type>
+			</upgradeSlot>
+			<upgradeSlot>
+				<type>title</type>
+			</upgradeSlot>
+		</upgradeSlots>
+	</pilot>
+
+	<pilot>
+		<shipId>t65xw</shipId>
+		<unique>true</unique>
+		<name>"Hobbie" Klivian</name>
+		<cost>25</cost>
+		<level>5</level>
+		<text>When you acquire or spend a target lock, you may remove 1 stress token from your ship.</text>
+		<upgradeSlots>
+			<upgradeSlot>
+				<type>torpedo</type>
+			</upgradeSlot>
+			<upgradeSlot>
+				<type>astromech</type>
+			</upgradeSlot>
+			<upgradeSlot>
+				<type>modification</type>
+			</upgradeSlot>
+			<upgradeSlot>
+				<type>title</type>
+			</upgradeSlot>
+		</upgradeSlots>
+	</pilot>
+
+	<pilot>
+		<shipId>t65xw</shipId>
+		<unique>true</unique>
+		<name>Leevan Tenza</name>
+		<cost>25</cost>
+		<level>5</level>
+		<text>After you perform a boost action, you may receive 1 stress token to receive an evade token.</text>
+		<upgradeSlots>
+			<upgradeSlot>
+				<type>torpedo</type>
+			</upgradeSlot>
+			<upgradeSlot>
+				<type>astromech</type>
+			</upgradeSlot>
+			<upgradeSlot>
+				<type>modification</type>
+			</upgradeSlot>
+			<upgradeSlot>
+				<type>title</type>
+			</upgradeSlot>
+		</upgradeSlots>
+	</pilot>
+
 	<pilot>
 		<shipId>t65xw</shipId>
 		<unique>true</unique>
@@ -87,20 +183,113 @@
 			<upgradeSlot>
 				<type>modification</type>
 			</upgradeSlot>
+			<upgradeSlot>
+				<type>title</type>
+			</upgradeSlot>
 		</upgradeSlots>
-		<ability>
-			<phase>onSpendFocus</phase>
-			<target>friendly</target>
-			<targetScope>any</targetScope>
-			<targetRangeMin>1</targetRangeMin>
-			<targetRangeMax>2</targetRangeMax>
-			<valueToModify>focusTokenNumber</valueToModify>
-			<modifier>1</modifier>
-		  	<bonusAction></bonusAction>
-			<valueToCheck>agility</valueToCheck>
-			<conditionValue>0</conditionValue>
-			<conditionWay>greater_than</conditionWay>
-			<conditionCheckPhase>onAfterValueModified</conditionCheckPhase>
-		</ability>
+	</pilot>
+
+	<pilot>
+		<shipId>t65xw</shipId>
+		<unique>true</unique>
+		<name>Jek Porkins</name>
+		<cost>26</cost>
+		<level>7</level>
+		<text>When you receive a stress token, you may remove it and roll 1 attack die. On a hit result, deal 1 facedown Damage card to this ship.</text>
+		<upgradeSlots>
+			<upgradeSlot>
+				<type>torpedo</type>
+			</upgradeSlot>
+			<upgradeSlot>
+				<type>astromech</type>
+			</upgradeSlot>
+			<upgradeSlot>
+				<type>elite</type>
+			</upgradeSlot>
+			<upgradeSlot>
+				<type>modification</type>
+			</upgradeSlot>
+			<upgradeSlot>
+				<type>title</type>
+			</upgradeSlot>
+		</upgradeSlots>
+	</pilot>
+
+	<pilot>
+		<shipId>t65xw</shipId>
+		<unique>true</unique>
+		<name>Kullbee Sperado</name>
+		<cost>26</cost>
+		<level>7</level>
+		<text>After you perform a boost or barrel roll action, you may flip your equipped "Servomotor S-foils" upgrade card.</text>
+		<upgradeSlots>
+			<upgradeSlot>
+				<type>torpedo</type>
+			</upgradeSlot>
+			<upgradeSlot>
+				<type>astromech</type>
+			</upgradeSlot>
+			<upgradeSlot>
+				<type>elite</type>
+			</upgradeSlot>
+			<upgradeSlot>
+				<type>modification</type>
+			</upgradeSlot>
+			<upgradeSlot>
+				<type>title</type>
+			</upgradeSlot>
+		</upgradeSlots>
+	</pilot>
+
+	<pilot>
+		<shipId>t65xw</shipId>
+		<unique>true</unique>
+		<name>Wes Janson</name>
+		<cost>29</cost>
+		<level>8</level>
+		<text>After you perform an attack, you may remove 1 focus, evade, or blue target lock token from the defender</text>
+		<upgradeSlots>
+			<upgradeSlot>
+				<type>torpedo</type>
+			</upgradeSlot>
+			<upgradeSlot>
+				<type>astromech</type>
+			</upgradeSlot>
+			<upgradeSlot>
+				<type>elite</type>
+			</upgradeSlot>
+			<upgradeSlot>
+				<type>modification</type>
+			</upgradeSlot>
+			<upgradeSlot>
+				<type>title</type>
+			</upgradeSlot>
+		</upgradeSlots>
+	</pilot>
+	
+	<pilot>
+		<shipId>t65xw</shipId>
+		<unique>true</unique>
+		<name>Wedge Antilles</name>
+		<cost>29</cost>
+		<level>9</level>
+		<text>When attacking, reduce the defender's agility value by 1 (to a minimum of 0).</text>
+		<upgradeSlots>
+			<upgradeSlot>
+				<type>torpedo</type>
+			</upgradeSlot>
+			<upgradeSlot>
+				<type>astromech</type>
+			</upgradeSlot>
+			<upgradeSlot>
+				<type>elite</type>
+			</upgradeSlot>
+			<upgradeSlot>
+				<type>modification</type>
+			</upgradeSlot>
+			<upgradeSlot>
+				<type>title</type>
+			</upgradeSlot>
+		</upgradeSlots>
 	</pilot>
 </pilots>
