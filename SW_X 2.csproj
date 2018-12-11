@@ -103,6 +103,8 @@
     <Compile Include="Assets\Resources\Scripts\XMLLoader.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Resources\Fonts\Aerobus dotty\readme.txt" />
+    <None Include="Assets\Resources\Fonts\Digital play\00copyfont.txt" />
     <None Include="Assets\StreamingAssets\TIE Fighter_pilots.xml" />
     <None Include="Assets\StreamingAssets\abilities overview.txt" />
     <None Include="Assets\StreamingAssets\custom_events.txt" />

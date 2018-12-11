@@ -114,7 +114,7 @@ public class SquadBuilderHandler : MonoBehaviour {
             );
 
             shipPanel.transform.SetParent(shipsScroll.transform, false);
-            shipPanel.transform.Find("ShipName").gameObject.GetComponent<UnityEngine.UI.Text>().text = ship.ShipName.ToString();
+            shipPanel.transform.Find("ShipName").gameObject.GetComponent<UnityEngine.UI.Text>().text = ship.ShipName.ToLower();
             
             SquadBuilderShipPanelEvents shipPanelUIEvent = shipPanel.transform.GetComponent<SquadBuilderShipPanelEvents>();
             shipPanelUIEvent.setShip(ship);
@@ -150,7 +150,7 @@ public class SquadBuilderHandler : MonoBehaviour {
                 );
 
                 pilotPanel.transform.SetParent(pilotsScroll.transform, false);
-                pilotPanel.transform.Find("PilotName").gameObject.GetComponent<UnityEngine.UI.Text>().text = pilot.Name.ToString();
+                pilotPanel.transform.Find("PilotName").gameObject.GetComponent<UnityEngine.UI.Text>().text = pilot.Name.ToLower();
 
                 SquadBuilderPilotPanelEvents pilotPanelUIEvent = pilotPanel.transform.GetComponent<SquadBuilderPilotPanelEvents>();
                 pilotPanelUIEvent.setShip(pilot);
@@ -193,7 +193,7 @@ public class SquadBuilderHandler : MonoBehaviour {
 
         if (shipToShow != null)
         {
-            shipDataPreview.transform.Find("ShipDataShipName/ShipName").gameObject.GetComponent<UnityEngine.UI.Text>().text = shipToShow.ShipName;
+            shipDataPreview.transform.Find("ShipDataShipName/ShipName").gameObject.GetComponent<UnityEngine.UI.Text>().text = shipToShow.ShipName.ToLower();
             shipDataPreview.transform.Find("ShipDataShipDescription/ShipDescription").gameObject.GetComponent<UnityEngine.UI.Text>().text = shipToShow.ShipDescription;
 
             shipDataPreview.transform.Find("ShipDataShipAttributes/ShipDataAttackPower/Value").gameObject.GetComponent<UnityEngine.UI.Text>().text = shipToShow.Weapon.ToString();
