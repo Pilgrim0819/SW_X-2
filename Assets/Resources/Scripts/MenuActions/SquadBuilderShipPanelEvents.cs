@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using System.Collections;
 using ShipsXMLCSharp;
 
 public class SquadBuilderShipPanelEvents : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
@@ -20,21 +19,20 @@ public class SquadBuilderShipPanelEvents : MonoBehaviour, IPointerEnterHandler, 
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        Color background = new Color(255, 255, 255, 255);
+        Color background = SquadBuilderConstants.getHighlightPanelBackground();
         Image img = gameObject.GetComponent<Image>();
         img.color = background;
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        Color background = new Color(0, 0, 0, 255);
+        Color background = SquadBuilderConstants.getDefaultPanelBackground();
         Image img = gameObject.GetComponent<Image>();
         img.color = background;
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        PlayerDatas.setChosenShip(this.ship.ShipId.ToString());
         PlayerDatas.setSelectedShip(ship);
     }
 }

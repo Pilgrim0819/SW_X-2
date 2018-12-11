@@ -11,28 +11,13 @@ public class SquadBuilderHandler : MonoBehaviour {
     public GameObject pilotsScroll;
     public GameObject factionIconHolder;
     public GameObject shipDataPreview;
+    public GameObject pilotDataPreview;
 
     private string prevChosenShip = "";
+    private string prevChosenPilot = "";
 
     private Ships ships;
     private Pilots pilots;
-
-    private const string IMAGE_FOLDER_NAME = "images";
-    private const string REBEL_ICON_IMAGE = "rebels";
-    private const string EMPIRE_ICON_IMAGE = "imperials";
-    private const string PREFABS_FOLDER_NAME = "Prefabs";
-    private const string SHIP_NAME_PANEL = "ShipNamePanel";
-    private const string PILOT_NAME_PANEL = "PilotNamePanel";
-    private const string FACTION_REBELS = "Rebels";
-    private const string FACTION_EMPIRE = "Empire";
-
-    private const float SHIP_PANEL_X_OFFSET = 0.0f;
-    private const float SHIP_PANEL_Y_OFFSET = -15.0f;
-    private const float SHIP_PANEL_Z_OFFSET = 0.0f;
-
-    private const float PILOT_PANEL_X_OFFSET = 0.0f;
-    private const float PILOT_PANEL_Y_OFFSET = -15.0f;
-    private const float PILOT_PANEL_Z_OFFSET = 0.0f;
 
     void Start () {
         showChosenSideIcon();
@@ -47,11 +32,24 @@ public class SquadBuilderHandler : MonoBehaviour {
     {
         showCurrentSquadPoints();
 
-        if (!prevChosenShip.Equals(PlayerDatas.getChosenShip()))
+        //By default, load the first ship's pilots as it would be selected...
+        if (PlayerDatas.getSelectedShip() == null)
+        {
+            PlayerDatas.setSelectedShip(ships.Ship[0]);
+        }
+
+        if (!prevChosenShip.Equals(PlayerDatas.getSelectedShip().ShipId))
         {
             showPilots();
             showShipDataPreview();
-            prevChosenShip = PlayerDatas.getChosenShip();
+            prevChosenShip = PlayerDatas.getSelectedShip().ShipId;
+            prevChosenPilot = "";
+        }
+
+        if (!prevChosenPilot.Equals(PlayerDatas.getSelectedPilot().Name))
+        {
+            showPilotDataPreview();
+            prevChosenPilot = PlayerDatas.getSelectedPilot().Name;
         }
     }
 
@@ -105,21 +103,19 @@ public class SquadBuilderHandler : MonoBehaviour {
 
         foreach (Ship ship in ships.Ship)
         {
-            //Sprite shipSprite = Resources.Load<Sprite>(IMAGE_FOLDER_NAME + "/" + ship.ShipName.Replace("/", ""));
-            Transform shipPanelPrefab = Resources.Load<Transform>(PREFABS_FOLDER_NAME + "/" + SHIP_NAME_PANEL);
+            Transform shipPanelPrefab = Resources.Load<Transform>(SquadBuilderConstants.PREFABS_FOLDER_NAME + "/" + SquadBuilderConstants.SHIP_NAME_PANEL);
             RectTransform rt = (RectTransform)shipPanelPrefab;
             float shipPanelHeight = rt.rect.height;
 
             Transform shipPanel = (Transform)GameObject.Instantiate(
                 shipPanelPrefab,
-                new Vector3(SHIP_PANEL_X_OFFSET, (shipIndex * shipPanelHeight * -1) + SHIP_PANEL_Y_OFFSET, SHIP_PANEL_Z_OFFSET),
+                new Vector3(SquadBuilderConstants.SHIP_PANEL_X_OFFSET, (shipIndex * shipPanelHeight * -1) + SquadBuilderConstants.SHIP_PANEL_Y_OFFSET, SquadBuilderConstants.SHIP_PANEL_Z_OFFSET),
                 Quaternion.identity
             );
 
             shipPanel.transform.SetParent(shipsScroll.transform, false);
             shipPanel.transform.Find("ShipName").gameObject.GetComponent<UnityEngine.UI.Text>().text = ship.ShipName.ToString();
-
-            //Set parameter for click handler script here!!!
+            
             SquadBuilderShipPanelEvents shipPanelUIEvent = shipPanel.transform.GetComponent<SquadBuilderShipPanelEvents>();
             shipPanelUIEvent.setShip(ship);
 
@@ -131,33 +127,33 @@ public class SquadBuilderHandler : MonoBehaviour {
     {
         resetPilotsScroll(pilotsScroll);
 
-        string chosenShip = PlayerDatas.getChosenShip();
-
-        //By default, load the first ship's pilots as it would be selected...
-        if (chosenShip == null || chosenShip.Equals(""))
-        {
-            chosenShip = ships.Ship[0].ShipId.ToString();
-            PlayerDatas.setChosenShip(chosenShip);
-        }
-
         int pilotIndex = 0;
 
         foreach (PilotsXMLCSharp.Pilot pilot in pilots.Pilot)
         {
-            if (pilot.ShipId.Equals(chosenShip))
+            if (pilot.ShipId.Equals(PlayerDatas.getSelectedShip().ShipId))
             {
-                Transform pilotPanelPrefab = Resources.Load<Transform>(PREFABS_FOLDER_NAME + "/" + PILOT_NAME_PANEL);
+                //By default, load the first pilot as it would be selected...
+                if (PlayerDatas.getSelectedPilot() == null)
+                {
+                    PlayerDatas.setSelectedPilot(pilot);
+                }
+
+                Transform pilotPanelPrefab = Resources.Load<Transform>(SquadBuilderConstants.PREFABS_FOLDER_NAME + "/" + SquadBuilderConstants.PILOT_NAME_PANEL);
                 RectTransform rt = (RectTransform)pilotPanelPrefab;
                 float pilotPanelHeight = rt.rect.height;
 
                 Transform pilotPanel = (Transform)GameObject.Instantiate(
                     pilotPanelPrefab,
-                    new Vector3(PILOT_PANEL_X_OFFSET, (pilotIndex * pilotPanelHeight * -1) + PILOT_PANEL_Y_OFFSET, PILOT_PANEL_Z_OFFSET),
+                    new Vector3(SquadBuilderConstants.PILOT_PANEL_X_OFFSET, (pilotIndex * pilotPanelHeight * -1) + SquadBuilderConstants.PILOT_PANEL_Y_OFFSET, SquadBuilderConstants.PILOT_PANEL_Z_OFFSET),
                     Quaternion.identity
                 );
 
                 pilotPanel.transform.SetParent(pilotsScroll.transform, false);
                 pilotPanel.transform.Find("PilotName").gameObject.GetComponent<UnityEngine.UI.Text>().text = pilot.Name.ToString();
+
+                SquadBuilderPilotPanelEvents pilotPanelUIEvent = pilotPanel.transform.GetComponent<SquadBuilderPilotPanelEvents>();
+                pilotPanelUIEvent.setShip(pilot);
 
                 pilotIndex++;
             }
@@ -172,17 +168,17 @@ public class SquadBuilderHandler : MonoBehaviour {
         /*********************************TODO remove when testing is done!!*/
         if (chosenSide == null || chosenSide.Equals(""))
         {
-            chosenSide = FACTION_REBELS;
+            chosenSide = SquadBuilderConstants.FACTION_REBELS;
         }
         /*********************************TODO remove when testing is done!!*/
 
         switch(chosenSide)
         {
-            case FACTION_REBELS:
-                sideIcon = Resources.Load<Sprite>(IMAGE_FOLDER_NAME + "/" + REBEL_ICON_IMAGE);
+            case SquadBuilderConstants.FACTION_REBELS:
+                sideIcon = Resources.Load<Sprite>(SquadBuilderConstants.IMAGE_FOLDER_NAME + "/" + SquadBuilderConstants.REBEL_ICON_IMAGE);
                 break;
-            case FACTION_EMPIRE:
-                sideIcon = Resources.Load<Sprite>(IMAGE_FOLDER_NAME + "/" + EMPIRE_ICON_IMAGE);
+            case SquadBuilderConstants.FACTION_EMPIRE:
+                sideIcon = Resources.Load<Sprite>(SquadBuilderConstants.IMAGE_FOLDER_NAME + "/" + SquadBuilderConstants.EMPIRE_ICON_IMAGE);
                 break;
         }
 
@@ -193,7 +189,7 @@ public class SquadBuilderHandler : MonoBehaviour {
     {
         resetManeuverImages();
 
-        Ship shipToShow = getChosenShipData(PlayerDatas.getChosenShip());
+        Ship shipToShow = PlayerDatas.getSelectedShip();
 
         if (shipToShow != null)
         {
@@ -217,7 +213,7 @@ public class SquadBuilderHandler : MonoBehaviour {
             foreach (Maneuver maneuver in shipToShow.Maneuvers.Maneuver)
             {
                 Image image = null;
-                Sprite sprite = Resources.Load<Sprite>(IMAGE_FOLDER_NAME + "/" + maneuver.Bearing + "_" + maneuver.Difficulty);
+                Sprite sprite = Resources.Load<Sprite>(SquadBuilderConstants.IMAGE_FOLDER_NAME + "/" + maneuver.Bearing + "_" + maneuver.Difficulty);
                 string maneuverHolderName = maneuver.Speed + "_" + maneuver.Bearing;
 
                 if (maneuverHolderName.Contains("koiogran") || maneuverHolderName.Contains("segnor") || maneuverHolderName.Contains("tallon"))
@@ -251,7 +247,46 @@ public class SquadBuilderHandler : MonoBehaviour {
 
     private void showPilotDataPreview()
     {
-        // TODO
+        resetUpgradeImages();
+
+        Pilot pilotToShow = PlayerDatas.getSelectedPilot();
+
+        if (pilotToShow != null)
+        {
+            string pilotName = pilotToShow.Unique ? "*" + pilotToShow.Name : pilotToShow.Name;
+            string upgrades = "Upgrade: ";
+
+            pilotDataPreview.transform.Find("PilotLevel/Text").gameObject.GetComponent<UnityEngine.UI.Text>().text = pilotToShow.Level.ToString();
+            pilotDataPreview.transform.Find("PilotCost/Text").gameObject.GetComponent<UnityEngine.UI.Text>().text = pilotToShow.Cost.ToString();
+            pilotDataPreview.transform.Find("PilotDataPilotName/Text").gameObject.GetComponent<UnityEngine.UI.Text>().text = pilotName;
+            pilotDataPreview.transform.Find("PilotDataPilotDescription/Text").gameObject.GetComponent<UnityEngine.UI.Text>().text = pilotToShow.Text;
+
+            int upgradeIndex = 0;
+
+            foreach (UpgradeSlot upgrade in pilotToShow.UpgradeSlots.UpgradeSlot)
+            {
+                Sprite sprite = Resources.Load<Sprite>(SquadBuilderConstants.IMAGE_FOLDER_NAME + "/" + upgrade.Type);
+
+                Transform upgradeImageHolderPrefab = Resources.Load<Transform>(SquadBuilderConstants.PREFABS_FOLDER_NAME + "/" + SquadBuilderConstants.UPGRADE_IMAGE_HOLDER);
+                RectTransform rt = (RectTransform)upgradeImageHolderPrefab;
+                float upgradeImageHolderWidth = rt.rect.width;
+
+                Transform upgradeImageHolder = (Transform)GameObject.Instantiate(
+                    upgradeImageHolderPrefab,
+                    new Vector3((upgradeIndex * upgradeImageHolderWidth) +  SquadBuilderConstants.UPGRADE_IMAGE_X_OFFSET, SquadBuilderConstants.UPGRADE_IMAGE_Y_OFFSET, SquadBuilderConstants.UPGRADE_IMAGE_Z_OFFSET),
+                    Quaternion.identity
+                );
+
+                Transform upgradesBar = pilotDataPreview.transform.Find("PilotDataUpgradeSlots");
+                Image upgradeImage = upgradeImageHolder.gameObject.GetComponent<Image>();
+
+                upgradeImageHolder.transform.SetParent(upgradesBar, false);
+                upgradeImage.sprite = sprite;
+                upgradeImage.color = new Color(upgradeImage.color.r, upgradeImage.color.g, upgradeImage.color.b, 1.0f);
+
+                upgradeIndex++;
+            }
+        }
     }
 
     private void resetPilotsScroll(GameObject pilotsScroll)
@@ -262,22 +297,25 @@ public class SquadBuilderHandler : MonoBehaviour {
         }
     }
 
-    private Ship getChosenShipData(string shipId)
-    {
-        foreach (Ship ship in ships.Ship)
-        {
-            if (ship.ShipId.Equals(shipId))
-            {
-                return ship;
-            }
-        }
-
-        return null;
-    }
-
     private void resetManeuverImages()
     {
         foreach (Transform child in shipDataPreview.transform.Find("ShipDataManeuvers/ShipManeuvers").GetComponentsInChildren<Transform>())
+        {
+            if (child.GetComponent<Image>() != null)
+            {
+                Image image = child.GetComponent<Image>();
+
+                if (image != null)
+                {
+                    image.color = new Color(image.color.r, image.color.g, image.color.b, 0.0f);
+                }
+            }
+        }
+    }
+
+    private void resetUpgradeImages()
+    {
+        foreach (Transform child in pilotDataPreview.transform.Find("PilotDataUpgradeSlots").GetComponentsInChildren<Transform>())
         {
             if (child.GetComponent<Image>() != null)
             {

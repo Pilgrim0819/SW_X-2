@@ -38,7 +38,6 @@ public class ShipSelectorMouseClick : MonoBehaviour, IPointerEnterHandler, IPoin
     {
         LoadPilotsForSelector pilotLoader = new LoadPilotsForSelector();
         string shipName = currentObject.transform.Find("Ship Name").gameObject.GetComponent<UnityEngine.UI.Text>().text;
-        PlayerDatas.setChosenShip(shipName);
         PlayerDatas.setSelectedShip(ship);
         
         SceneManager.LoadScene("Scene 4", LoadSceneMode.Single);

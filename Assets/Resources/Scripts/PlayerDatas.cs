@@ -5,10 +5,9 @@ using ShipsXMLCSharp;
 using System.Collections.Generic;
 
 public class PlayerDatas {
-    private static Pilots pilots = new Pilots();
     private static Ship selectedShip;
+    private static Pilot selectedPilot;
     private static string chosenSide;
-    private static string chosenShip;
     private static int pointsToSpend = 100;
     private static List<LoadedShip> squadron = new List<LoadedShip>();
     private static int currentPilotId = 1;
@@ -38,21 +37,6 @@ public class PlayerDatas {
         return chosenSide;
     }
 
-    public static void setChosenShip(string ship)
-    {
-        chosenShip = ship;
-    }
-
-    public static string getChosenShip()
-    {
-        return chosenShip;
-    }
-
-    public static Pilots getPilots()
-    {
-        return pilots;
-    }
-
     public static void setSelectedShip(Ship ship)
     {
        selectedShip = ship;
@@ -61,6 +45,16 @@ public class PlayerDatas {
     public static Ship getSelectedShip()
     {
         return selectedShip;
+    }
+
+    public static void setSelectedPilot(Pilot pilot)
+    {
+        selectedPilot = pilot;
+    }
+
+    public static Pilot getSelectedPilot()
+    {
+        return selectedPilot;
     }
 
     public static void addPilotToSquadron(Pilot pilot)

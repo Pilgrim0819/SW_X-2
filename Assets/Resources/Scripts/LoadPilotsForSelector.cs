@@ -20,7 +20,7 @@ public class LoadPilotsForSelector : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         cardsHolder = GameObject.Find("Ships Scroll");
-        string chosenShip = PlayerDatas.getChosenShip();
+        string chosenShip = PlayerDatas.getSelectedShip().ShipId;
         Pilots pilots = new Pilots();
 
         /*********************************TODO remove when testing is done!!*/
