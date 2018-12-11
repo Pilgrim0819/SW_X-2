@@ -1,1 +1,131 @@
 
+<pilots>
+	<pilot>
+		<shipId>rz1aw</shipId>
+		<unique>false</unique>
+		<name>Prototype Pilot</name>
+		<cost>17</cost>
+		<level>1</level>
+		<text></text>
+		<upgradeSlots>
+			<upgradeSlot>
+				<type>missile</type>
+			</upgradeSlot>
+			<upgradeSlot>
+				<type>modification</type>
+			</upgradeSlot>
+			<upgradeSlot>
+				<type>title</type>
+			</upgradeSlot>
+		</upgradeSlots>
+	</pilot>
+
+	<pilot>
+		<shipId>rz1aw</shipId>
+		<unique>false</unique>
+		<name>Green Squadron Pilot</name>
+		<cost>19</cost>
+		<level>3</level>
+		<text></text>
+		<upgradeSlots>
+			<upgradeSlot>
+				<type>elite</type>
+			</upgradeSlot>
+			<upgradeSlot>
+				<type>missile</type>
+			</upgradeSlot>
+			<upgradeSlot>
+				<type>modification</type>
+			</upgradeSlot>
+			<upgradeSlot>
+				<type>title</type>
+			</upgradeSlot>
+		</upgradeSlots>
+	</pilot>
+
+	<pilot>
+		<shipId>rz1aw</shipId>
+		<unique>true</unique>
+		<name>Gemmer Sojan</name>
+		<cost>22</cost>
+		<level>5</level>
+		<text>While you are at Range 1 of at least 1 enemy ship, increase your agility value by 1.</text>
+		<upgradeSlots>
+			<upgradeSlot>
+				<type>missile</type>
+			</upgradeSlot>
+			<upgradeSlot>
+				<type>modification</type>
+			</upgradeSlot>
+			<upgradeSlot>
+				<type>title</type>
+			</upgradeSlot>
+		</upgradeSlots>
+	</pilot>
+
+	<pilot>
+		<shipId>rz1aw</shipId>
+		<unique>true</unique>
+		<name>Arvel Crynyd</name>
+		<cost>23</cost>
+		<level>6</level>
+		<text>You may declare an enemy ship inside your firing arc that you are touching as the target of your attack.</text>
+		<upgradeSlots>
+			<upgradeSlot>
+				<type>missile</type>
+			</upgradeSlot>
+			<upgradeSlot>
+				<type>modification</type>
+			</upgradeSlot>
+			<upgradeSlot>
+				<type>title</type>
+			</upgradeSlot>
+		</upgradeSlots>
+	</pilot>
+
+	<pilot>
+		<shipId>rz1aw</shipId>
+		<unique>true</unique>
+		<name>Jake Farrell</name>
+		<cost>24</cost>
+		<level>7</level>
+		<text>After you perform a focus action or are assigned a focus token, you may perform a free boost or barrel roll action.</text>
+		<upgradeSlots>
+			<upgradeSlot>
+				<type>missile</type>
+			</upgradeSlot>
+			<upgradeSlot>
+				<type>elite</type>
+			</upgradeSlot>
+			<upgradeSlot>
+				<type>modification</type>
+			</upgradeSlot>
+			<upgradeSlot>
+				<type>title</type>
+			</upgradeSlot>
+		</upgradeSlots>
+	</pilot>
+
+	<pilot>
+		<shipId>rz1aw</shipId>
+		<unique>true</unique>
+		<name>Tycho Celchu</name>
+		<cost>26</cost>
+		<level>8</level>
+		<text>You may perform actions even while you have stress tokens.</text>
+		<upgradeSlots>
+			<upgradeSlot>
+				<type>missile</type>
+			</upgradeSlot>
+			<upgradeSlot>
+				<type>elite</type>
+			</upgradeSlot>
+			<upgradeSlot>
+				<type>modification</type>
+			</upgradeSlot>
+			<upgradeSlot>
+				<type>title</type>
+			</upgradeSlot>
+		</upgradeSlots>
+	</pilot>
+</pilots>
