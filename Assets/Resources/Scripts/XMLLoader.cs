@@ -30,7 +30,7 @@ public class XMLLoader {
     public static Upgrades getUpgrades()
     {
         string filePath = Path.Combine(Application.streamingAssetsPath, "upgrades.xml");
-        XmlSerializer serializer = new XmlSerializer(typeof(Ships));
+        XmlSerializer serializer = new XmlSerializer(typeof(Upgrades));
         Upgrades result = (Upgrades)serializer.Deserialize(new XmlTextReader(filePath));
 
         return result;

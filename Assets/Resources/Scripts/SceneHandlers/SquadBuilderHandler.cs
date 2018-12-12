@@ -13,9 +13,11 @@ public class SquadBuilderHandler : MonoBehaviour {
     public GameObject factionIconHolder;
     public GameObject shipDataPreview;
     public GameObject pilotDataPreview;
+    public GameObject SquadronHolderContent;
 
     private string prevChosenShip = "";
     private string prevChosenPilot = "";
+    private int prevSquadronSize = 0;
 
     private Ships ships;
     private Pilots pilots;
@@ -56,6 +58,13 @@ public class SquadBuilderHandler : MonoBehaviour {
         {
             showPilotDataPreview();
             prevChosenPilot = PlayerDatas.getSelectedPilot().Name;
+        }
+
+        Debug.Log("Size: " + PlayerDatas.getSquadron().Count == null ? 0 : PlayerDatas.getSquadron().Count);
+        if (PlayerDatas.getSquadron() != null && prevSquadronSize != PlayerDatas.getSquadron().Count)
+        {
+            prevSquadronSize = PlayerDatas.getSquadron().Count;
+            showSquadron();
         }
     }
 
@@ -128,6 +137,7 @@ public class SquadBuilderHandler : MonoBehaviour {
             if (available)
             {
                 upgrades.Upgrade.Add(upgrade);
+                Debug.Log("Upgrade: " + upgrade.Name);
             }
         }
     }
@@ -174,7 +184,7 @@ public class SquadBuilderHandler : MonoBehaviour {
             if (pilot.ShipId.Equals(PlayerDatas.getSelectedShip().ShipId))
             {
                 //By default, load the first pilot as it would be selected...
-                if (PlayerDatas.getSelectedPilot() == null)
+                if (pilotIndex == 0)
                 {
                     PlayerDatas.setSelectedPilot(pilot);
                 }
@@ -293,7 +303,7 @@ public class SquadBuilderHandler : MonoBehaviour {
 
         if (pilotToShow != null)
         {
-            string pilotName = pilotToShow.Unique ? "*" + pilotToShow.Name : pilotToShow.Name;
+            string pilotName = pilotToShow.Unique ? "*" + pilotToShow.Name.ToLower() : pilotToShow.Name.ToLower();
             string upgrades = "Upgrade: ";
 
             pilotDataPreview.transform.Find("PilotLevel/Text").gameObject.GetComponent<UnityEngine.UI.Text>().text = pilotToShow.Level.ToString();
@@ -326,6 +336,64 @@ public class SquadBuilderHandler : MonoBehaviour {
 
                 upgradeIndex++;
             }
+        }
+    }
+
+    private void showSquadron()
+    {
+        int shipPanelIndex = 0;
+
+        foreach (LoadedShip loadedShip in PlayerDatas.getSquadron())
+        {
+            Transform shipPanelPrefab = Resources.Load<Transform>(SquadBuilderConstants.PREFABS_FOLDER_NAME + "/" + SquadBuilderConstants.SQUADRON_SHIP_HOLDER);
+            RectTransform rt = (RectTransform)shipPanelPrefab;
+            float shipPanelHeight = rt.rect.height;
+
+            Transform shipPanel = (Transform)GameObject.Instantiate(
+                shipPanelPrefab,
+                new Vector3(SquadBuilderConstants.SQUADRON_SHIP_PANEL_X_OFFSET, (shipPanelIndex * shipPanelHeight * -1) + SquadBuilderConstants.SQUADRON_SHIP_PANEL_Y_OFFSET, SquadBuilderConstants.SQUADRON_SHIP_PANEL_Z_OFFSET),
+                Quaternion.identity
+            );
+
+            shipPanel.transform.SetParent(SquadronHolderContent.transform, false);
+            
+            Sprite sprite = Resources.Load<Sprite>(SquadBuilderConstants.IMAGE_FOLDER_NAME + "/" + loadedShip.getShip().ShipId);
+            shipPanel.transform.Find("ShipImage").gameObject.GetComponent<Image>().sprite = sprite;
+            Image image = shipPanel.transform.Find("ShipImage").gameObject.GetComponent<Image>();
+            image.color = new Color(image.color.r, image.color.g, image.color.b, 1.0f);
+
+            shipPanel.transform.Find("AttackPower").gameObject.GetComponent<UnityEngine.UI.Text>().text = loadedShip.getShip().Weapon.ToString();
+            shipPanel.transform.Find("Agility").gameObject.GetComponent<UnityEngine.UI.Text>().text = loadedShip.getShip().Agility.ToString();
+            shipPanel.transform.Find("Shield").gameObject.GetComponent<UnityEngine.UI.Text>().text = loadedShip.getShip().Shield.ToString();
+            shipPanel.transform.Find("Hull").gameObject.GetComponent<UnityEngine.UI.Text>().text = loadedShip.getShip().Hull.ToString();
+            shipPanel.transform.Find("PilotName").gameObject.GetComponent<UnityEngine.UI.Text>().text = loadedShip.getPilot().Name.ToLower();
+            shipPanel.transform.Find("PilotDescription").gameObject.GetComponent<UnityEngine.UI.Text>().text = loadedShip.getPilot().Text;
+
+            int upgradeSlotIndex = 0;
+
+            foreach (UpgradeSlot upgrade in loadedShip.getPilot().UpgradeSlots.UpgradeSlot)
+            {
+                Transform upgradeSlotPrefab = Resources.Load<Transform>(SquadBuilderConstants.PREFABS_FOLDER_NAME + "/" + SquadBuilderConstants.UPGRADE_SLOT);
+                rt = (RectTransform)upgradeSlotPrefab;
+                float upgradeSlotWidth = rt.rect.width;
+
+                Transform upgradeSlot = (Transform)GameObject.Instantiate(
+                    upgradeSlotPrefab,
+                    new Vector3((upgradeSlotIndex * upgradeSlotWidth) + SquadBuilderConstants.UPGRADE_SLOT_X_OFFSET, SquadBuilderConstants.UPGRADE_SLOT_Y_OFFSET, SquadBuilderConstants.UPGRADE_SLOT_Z_OFFSET),
+                    Quaternion.identity
+                );
+
+                upgradeSlot.transform.SetParent(shipPanel.transform, false);
+
+                sprite = Resources.Load<Sprite>(SquadBuilderConstants.IMAGE_FOLDER_NAME + "/" + upgrade.Type);
+                upgradeSlot.transform.Find("Image").gameObject.GetComponent<Image>().sprite = sprite;
+                image = upgradeSlot.transform.Find("Image").gameObject.GetComponent<Image>();
+                image.color = new Color(image.color.r, image.color.g, image.color.b, 1.0f);
+
+                upgradeSlotIndex++;
+            }
+
+            shipPanelIndex++;
         }
     }
 

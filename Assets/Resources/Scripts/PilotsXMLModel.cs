@@ -4,36 +4,13 @@ using System.Collections.Generic;
 
 namespace PilotsXMLCSharp
 {
-    [XmlRoot(ElementName = "upgrade")]
-    public class Upgrade
-    {
-        [XmlElement(ElementName = "name")]
-        public string Name { get; set; }
-        [XmlElement(ElementName = "description")]
-        public string Description { get; set; }
-        [XmlElement(ElementName = "phase")]
-        public string Phase { get; set; }
-        [XmlElement(ElementName = "cost")]
-        public int Cost { get; set; }
-        [XmlElement(ElementName = "type")]
-        public string Type { get; set; }
-        [XmlElement(ElementName = "sideRestriction")]
-        public string SideRestriction { get; set; }
-        [XmlElement(ElementName = "sizeRestriction")]
-        public string SizeRestriction { get; set; }
-        [XmlElement(ElementName = "shipRestriction")]
-        public string ShipRestriction { get; set; }
-        [XmlElement(ElementName = "unique")]
-        public bool unique { get; set; }
-    }
-
     [XmlRoot(ElementName = "upgradeSlot")]
     public class UpgradeSlot
     {
         [XmlElement(ElementName = "type")]
         public string Type { get; set; }
-        [XmlElement(ElementName = "upgrade")]
-        public Upgrade upgrade { get; set; }
+
+        public UpgradesXMLCSharp.Upgrade upgrade { get; set; }
     }
 
     [XmlRoot(ElementName = "upgradeSlots")]

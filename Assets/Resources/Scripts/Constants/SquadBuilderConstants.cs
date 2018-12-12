@@ -9,6 +9,8 @@ public class SquadBuilderConstants {
     public const string SHIP_NAME_PANEL = "ShipNamePanel";
     public const string PILOT_NAME_PANEL = "PilotNamePanel";
     public const string UPGRADE_IMAGE_HOLDER = "UpgradeImageHolder";
+    public const string SQUADRON_SHIP_HOLDER = "SquadronShipHolder";
+    public const string UPGRADE_SLOT = "UpgradeSlot";
     public const string FACTION_REBELS = "Rebels";
     public const string FACTION_EMPIRE = "Empire";
 
@@ -21,6 +23,12 @@ public class SquadBuilderConstants {
     public const float UPGRADE_IMAGE_X_OFFSET = 22.5f;
     public const float UPGRADE_IMAGE_Y_OFFSET = -24.5f;
     public const float UPGRADE_IMAGE_Z_OFFSET = 0.0f;
+    public const float SQUADRON_SHIP_PANEL_X_OFFSET = 700.0f;
+    public const float SQUADRON_SHIP_PANEL_Y_OFFSET = -80.0f;
+    public const float SQUADRON_SHIP_PANEL_Z_OFFSET = 0.0f;
+    public const float UPGRADE_SLOT_X_OFFSET = 550.0f;
+    public const float UPGRADE_SLOT_Y_OFFSET = 0.0f;
+    public const float UPGRADE_SLOT_Z_OFFSET = 0.0f;
 
     private static Color PANEL_BACKGROUND_DEFAULT = new Color(0, 0, 0, 255);
     private static Color PANEL_BACKGROUND_HIGHLIGHT = new Color(255, 255, 255, 255);
