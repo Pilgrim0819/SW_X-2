@@ -24,6 +24,8 @@ public class SquadBuilderConstants {
 
     private static Color PANEL_BACKGROUND_DEFAULT = new Color(0, 0, 0, 255);
     private static Color PANEL_BACKGROUND_HIGHLIGHT = new Color(255, 255, 255, 255);
+    private static Color PANEL_BACKGROUND_SELECTED = new Color(76, 223, 255, 255);
+    private static Color ADD_PILOT_BACKGROUND_DEFAULT = new Color(0, 255, 45, 255);
 
     public static Color getDefaultPanelBackground()
     {
@@ -33,5 +35,15 @@ public class SquadBuilderConstants {
     public static Color getHighlightPanelBackground()
     {
         return PANEL_BACKGROUND_HIGHLIGHT;
+    }
+
+    public static Color getSelectedPanelBackground()
+    {
+        return PANEL_BACKGROUND_SELECTED;
+    }
+
+    public static Color getDefaultAddPilotBackground()
+    {
+        return ADD_PILOT_BACKGROUND_DEFAULT;
     }
 }

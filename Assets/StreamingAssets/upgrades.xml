@@ -1,0 +1,56 @@
+﻿<upgrades>
+	<upgrade>
+		<name>Expert Handling</name>
+		<description>ACTION: Perform a free barrel roll action. If you do not have the barrel roll action icon, receive 1 stress token.You may then remove 1 enemy target lock from your ship.</description>
+		<type>elite</type>
+		<cost>2</cost>
+		<unique>false</unique>
+		<size-restriction></size-restriction>
+		<side-restriction></side-restriction>
+		<ship-restriction></ship-restriction>
+	</upgrade>
+
+	<upgrade>
+		<name>Marksmanship</name>
+		<description>ACTION: When attacking this round, you may change 1 of your focus results to a critical result and all your other focus results to hit results.</description>
+		<type>elite</type>
+		<cost>3</cost>
+		<unique>false</unique>
+		<size-restriction></size-restriction>
+		<side-restriction></side-restriction>
+		<ship-restriction></ship-restriction>
+	</upgrade>
+
+	<upgrade>
+		<name>R5 Astromech</name>
+		<description>During the End phase, you may choose 1 of your faceup Damage cards with the Ship trait and flip it facedown.</description>
+		<type>astromech</type>
+		<cost>1</cost>
+		<unique>false</unique>
+		<size-restriction></size-restriction>
+		<side-restriction></side-restriction>
+		<ship-restriction></ship-restriction>
+	</upgrade>
+
+	<upgrade>
+		<name>R5-K6</name>
+		<description>After spending your target lock, roll 1 defense die.On an evade result, immediately acquire a target lock on that same ship. You cannot spend this target lock during this attack.</description>
+		<type>astromech</type>
+		<cost>2</cost>
+		<unique>false</unique>
+		<size-restriction></size-restriction>
+		<side-restriction></side-restriction>
+		<ship-restriction></ship-restriction>
+	</upgrade>
+
+	<upgrade>
+		<name>Proton Torpedoes</name>
+		<description>ATTACK (TARGET LOCK): Spend your target lock and discard this card to perform this attack.You may change 1 of your focus results to a critical result.</description>
+		<type>torpedo</type>
+		<cost>4</cost>
+		<unique>false</unique>
+		<size-restriction></size-restriction>
+		<side-restriction></side-restriction>
+		<ship-restriction></ship-restriction>
+	</upgrade>
+</upgrades>

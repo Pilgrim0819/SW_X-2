@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 using ShipsXMLCSharp;
 using PilotsXMLCSharp;
+using UpgradesXMLCSharp;
 
 public class SquadBuilderHandler : MonoBehaviour {
 
@@ -18,12 +19,17 @@ public class SquadBuilderHandler : MonoBehaviour {
 
     private Ships ships;
     private Pilots pilots;
+    private UpgradesXMLCSharp.Upgrades upgrades;
 
     void Start () {
+        upgrades = new Upgrades();
+        upgrades.Upgrade = new System.Collections.Generic.List<UpgradesXMLCSharp.Upgrade>();
+
         showChosenSideIcon();
         showCurrentSquadPoints();
         loadShipsForChosenSide();
         loadPilotsForEachShip();
+        loadUpgrades();
 
         showShips();
     }
@@ -88,6 +94,40 @@ public class SquadBuilderHandler : MonoBehaviour {
             else
             {
                 this.pilots.Pilot.AddRange(XMLLoader.getPilots(ship.ShipId.ToString() + "_pilots.xml").Pilot);
+            }
+        }
+    }
+
+    private void loadUpgrades()
+    {
+        Upgrades tempUpgrades = XMLLoader.getUpgrades();
+
+        foreach (UpgradesXMLCSharp.Upgrade upgrade in tempUpgrades.Upgrade)
+        {
+            bool available = true;
+
+            if (upgrade.SideRestriction != null && !upgrade.SideRestriction.Equals(""))
+            {
+                if (!upgrade.SideRestriction.Equals(PlayerDatas.getChosenSide()))
+                {
+                    available = false;
+                }
+            }
+
+            if (available)
+            {
+                if (upgrade.SizeRestriction != null && !upgrade.SizeRestriction.Equals(""))
+                {
+                    if (!upgrade.SizeRestriction.Equals(PlayerDatas.getChosenSize()))
+                    {
+                        available = false;
+                    }
+                }
+            }
+
+            if (available)
+            {
+                upgrades.Upgrade.Add(upgrade);
             }
         }
     }

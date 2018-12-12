@@ -8,6 +8,7 @@ public class PlayerDatas {
     private static Ship selectedShip;
     private static Pilot selectedPilot;
     private static string chosenSide;
+    private static string chosenSize;
     private static int pointsToSpend = 100;
     private static List<LoadedShip> squadron = new List<LoadedShip>();
     private static int currentPilotId = 1;
@@ -35,6 +36,16 @@ public class PlayerDatas {
     public static string getChosenSide()
     {
         return chosenSide;
+    }
+
+    public static void setChosenSize(string size)
+    {
+        chosenSize = size;
+    }
+
+    public static string getChosenSize()
+    {
+        return chosenSize;
     }
 
     public static void setSelectedShip(Ship ship)
