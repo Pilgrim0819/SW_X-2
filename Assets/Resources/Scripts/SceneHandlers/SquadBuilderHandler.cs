@@ -18,21 +18,19 @@ public class SquadBuilderHandler : MonoBehaviour {
     private string prevChosenShip = "";
     private string prevChosenPilot = "";
     private int prevSquadronSize = 0;
+    private int prevSquadronCost = 0;
 
     private Ships ships;
     private Pilots pilots;
     private UpgradesXMLCSharp.Upgrades upgrades;
 
     void Start () {
-        upgrades = new Upgrades();
-        upgrades.Upgrade = new System.Collections.Generic.List<UpgradesXMLCSharp.Upgrade>();
+        this.ships = SquadBuilderUtil.loadShipsForChosenSide();
+        this.pilots = SquadBuilderUtil.loadPilotsForEachShip(this.ships);
+        this.upgrades = SquadBuilderUtil.loadUpgrades(PlayerDatas.getChosenSide(), PlayerDatas.getChosenSize());
 
         showChosenSideIcon();
         showCurrentSquadPoints();
-        loadShipsForChosenSide();
-        loadPilotsForEachShip();
-        loadUpgrades();
-
         showShips();
     }
 
@@ -59,86 +57,13 @@ public class SquadBuilderHandler : MonoBehaviour {
             showPilotDataPreview();
             prevChosenPilot = PlayerDatas.getSelectedPilot().Name;
         }
-
-        Debug.Log("Size: " + PlayerDatas.getSquadron().Count == null ? 0 : PlayerDatas.getSquadron().Count);
-        if (PlayerDatas.getSquadron() != null && prevSquadronSize != PlayerDatas.getSquadron().Count)
+        
+        // TODO Examine if deleting the last ship from squadron causes any problem (maybe not calling re-render as the List is null??)
+        if ((PlayerDatas.getSquadron() != null && prevSquadronSize != PlayerDatas.getSquadron().Count) || prevSquadronCost != PlayerDatas.getCumulatedSquadPoints())
         {
+            prevSquadronCost = PlayerDatas.getCumulatedSquadPoints();
             prevSquadronSize = PlayerDatas.getSquadron().Count;
             showSquadron();
-        }
-    }
-
-    private void loadShipsForChosenSide()
-    {
-        string chosenSide = PlayerDatas.getChosenSide();
-
-        /*********************************TODO remove when testing is done!!*/
-        if (chosenSide == null || chosenSide.Equals(""))
-        {
-            chosenSide = "Rebels";
-        }
-        /*********************************TODO remove when testing is done!!*/
-        
-        this.ships = new Ships();
-
-        switch (chosenSide)
-        {
-            case "Rebels":
-                this.ships = XMLLoader.getShips("rebel_ships.xml");
-                break;
-            case "Empire":
-                this.ships = XMLLoader.getShips("imperial_ships.xml");
-                break;
-        }
-    }
-
-    private void loadPilotsForEachShip()
-    {
-        foreach (Ship ship in this.ships.Ship)
-        {
-            if (this.pilots == null || this.pilots.Pilot == null || this.pilots.Pilot.Capacity == 0)
-            {
-                this.pilots = XMLLoader.getPilots(ship.ShipId.ToString() + "_pilots.xml");
-            }
-            else
-            {
-                this.pilots.Pilot.AddRange(XMLLoader.getPilots(ship.ShipId.ToString() + "_pilots.xml").Pilot);
-            }
-        }
-    }
-
-    private void loadUpgrades()
-    {
-        Upgrades tempUpgrades = XMLLoader.getUpgrades();
-
-        foreach (UpgradesXMLCSharp.Upgrade upgrade in tempUpgrades.Upgrade)
-        {
-            bool available = true;
-
-            if (upgrade.SideRestriction != null && !upgrade.SideRestriction.Equals(""))
-            {
-                if (!upgrade.SideRestriction.Equals(PlayerDatas.getChosenSide()))
-                {
-                    available = false;
-                }
-            }
-
-            if (available)
-            {
-                if (upgrade.SizeRestriction != null && !upgrade.SizeRestriction.Equals(""))
-                {
-                    if (!upgrade.SizeRestriction.Equals(PlayerDatas.getChosenSize()))
-                    {
-                        available = false;
-                    }
-                }
-            }
-
-            if (available)
-            {
-                upgrades.Upgrade.Add(upgrade);
-                Debug.Log("Upgrade: " + upgrade.Name);
-            }
         }
     }
 
@@ -175,7 +100,7 @@ public class SquadBuilderHandler : MonoBehaviour {
 
     private void showPilots()
     {
-        resetPilotsScroll(pilotsScroll);
+        SquadBuilderUtil.resetScrollView(pilotsScroll);
 
         int pilotIndex = 0;
 
@@ -237,7 +162,7 @@ public class SquadBuilderHandler : MonoBehaviour {
 
     private void showShipDataPreview()
     {
-        resetManeuverImages();
+        SquadBuilderUtil.resetImagesInGameObject(shipDataPreview, "ShipDataManeuvers/ShipManeuvers");
 
         Ship shipToShow = PlayerDatas.getSelectedShip();
 
@@ -297,7 +222,7 @@ public class SquadBuilderHandler : MonoBehaviour {
 
     private void showPilotDataPreview()
     {
-        resetUpgradeImages();
+        SquadBuilderUtil.resetImagesInGameObject(pilotDataPreview, "PilotDataUpgradeSlots");
 
         Pilot pilotToShow = PlayerDatas.getSelectedPilot();
 
@@ -341,6 +266,8 @@ public class SquadBuilderHandler : MonoBehaviour {
 
     private void showSquadron()
     {
+        SquadBuilderUtil.resetScrollView(SquadronHolderContent);
+
         int shipPanelIndex = 0;
 
         foreach (LoadedShip loadedShip in PlayerDatas.getSquadron())
@@ -356,12 +283,18 @@ public class SquadBuilderHandler : MonoBehaviour {
             );
 
             shipPanel.transform.SetParent(SquadronHolderContent.transform, false);
-            
+
+            PilotRemoveEvents pilotRemoveEvent = shipPanel.transform.Find("DeleteButton").gameObject.GetComponent<PilotRemoveEvents>();
+            pilotRemoveEvent.setPilot(loadedShip.getPilot());
+            pilotRemoveEvent.setPilotId(loadedShip.getPilotId());
+
             Sprite sprite = Resources.Load<Sprite>(SquadBuilderConstants.IMAGE_FOLDER_NAME + "/" + loadedShip.getShip().ShipId);
             shipPanel.transform.Find("ShipImage").gameObject.GetComponent<Image>().sprite = sprite;
             Image image = shipPanel.transform.Find("ShipImage").gameObject.GetComponent<Image>();
             image.color = new Color(image.color.r, image.color.g, image.color.b, 1.0f);
 
+            shipPanel.transform.Find("ShipImage/PilotLevel").gameObject.GetComponent<UnityEngine.UI.Text>().text = loadedShip.getPilot().Level.ToString();
+            shipPanel.transform.Find("ShipImage/PilotCost").gameObject.GetComponent<UnityEngine.UI.Text>().text = loadedShip.getPilot().Cost.ToString();
             shipPanel.transform.Find("AttackPower").gameObject.GetComponent<UnityEngine.UI.Text>().text = loadedShip.getShip().Weapon.ToString();
             shipPanel.transform.Find("Agility").gameObject.GetComponent<UnityEngine.UI.Text>().text = loadedShip.getShip().Agility.ToString();
             shipPanel.transform.Find("Shield").gameObject.GetComponent<UnityEngine.UI.Text>().text = loadedShip.getShip().Shield.ToString();
@@ -390,50 +323,22 @@ public class SquadBuilderHandler : MonoBehaviour {
                 image = upgradeSlot.transform.Find("Image").gameObject.GetComponent<Image>();
                 image.color = new Color(image.color.r, image.color.g, image.color.b, 1.0f);
 
+                if (upgrade.upgrade == null)
+                {
+                    upgradeSlot.transform.Find("Cost").gameObject.GetComponent<UnityEngine.UI.Text>().text = "";
+                    upgradeSlot.transform.Find("UpgradeDescription").gameObject.GetComponent<UnityEngine.UI.Text>().text = "EMPTY";
+                } else
+                {
+                    upgradeSlot.transform.Find("Cost").gameObject.GetComponent<UnityEngine.UI.Text>().text = upgrade.upgrade.Cost.ToString();
+                    upgradeSlot.transform.Find("UpgradeDescription").gameObject.GetComponent<UnityEngine.UI.Text>().text = upgrade.upgrade.Description;
+
+                    // TODO If upgrade has attack power (and range), show them as well...
+                }
+
                 upgradeSlotIndex++;
             }
 
             shipPanelIndex++;
-        }
-    }
-
-    private void resetPilotsScroll(GameObject pilotsScroll)
-    {
-        foreach (Transform child in pilotsScroll.transform)
-        {
-            GameObject.Destroy(child.gameObject);
-        }
-    }
-
-    private void resetManeuverImages()
-    {
-        foreach (Transform child in shipDataPreview.transform.Find("ShipDataManeuvers/ShipManeuvers").GetComponentsInChildren<Transform>())
-        {
-            if (child.GetComponent<Image>() != null)
-            {
-                Image image = child.GetComponent<Image>();
-
-                if (image != null)
-                {
-                    image.color = new Color(image.color.r, image.color.g, image.color.b, 0.0f);
-                }
-            }
-        }
-    }
-
-    private void resetUpgradeImages()
-    {
-        foreach (Transform child in pilotDataPreview.transform.Find("PilotDataUpgradeSlots").GetComponentsInChildren<Transform>())
-        {
-            if (child.GetComponent<Image>() != null)
-            {
-                Image image = child.GetComponent<Image>();
-
-                if (image != null)
-                {
-                    image.color = new Color(image.color.r, image.color.g, image.color.b, 0.0f);
-                }
-            }
         }
     }
 }

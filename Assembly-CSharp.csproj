@@ -81,8 +81,10 @@
     <Compile Include="Assets\Resources\Scripts\MatchDatas.cs" />
     <Compile Include="Assets\Resources\Scripts\MenuAction.cs" />
     <Compile Include="Assets\Resources\Scripts\MenuActions\PilotAddEvents.cs" />
+    <Compile Include="Assets\Resources\Scripts\MenuActions\PilotRemoveEvents.cs" />
     <Compile Include="Assets\Resources\Scripts\MenuActions\SquadBuilderPilotPanelEvents.cs" />
     <Compile Include="Assets\Resources\Scripts\MenuActions\SquadBuilderShipPanelEvents.cs" />
+    <Compile Include="Assets\Resources\Scripts\MenuActions\SystemMessagePanelEvents.cs" />
     <Compile Include="Assets\Resources\Scripts\MenuElementMouseClick.cs" />
     <Compile Include="Assets\Resources\Scripts\Mocker.cs" />
     <Compile Include="Assets\Resources\Scripts\Models\UpgradesXMLModel.cs" />
@@ -95,6 +97,7 @@
     <Compile Include="Assets\Resources\Scripts\PlayerDatas.cs" />
     <Compile Include="Assets\Resources\Scripts\SceneChangerManuAction.cs" />
     <Compile Include="Assets\Resources\Scripts\SceneHandlers\SquadBuilderHandler.cs" />
+    <Compile Include="Assets\Resources\Scripts\Services\SystemMessageService.cs" />
     <Compile Include="Assets\Resources\Scripts\SetPlayerInitiative.cs" />
     <Compile Include="Assets\Resources\Scripts\ShipProperties.cs" />
     <Compile Include="Assets\Resources\Scripts\ShipSelectorMouseClick.cs" />
@@ -102,6 +105,7 @@
     <Compile Include="Assets\Resources\Scripts\SideSelectionStartup.cs" />
     <Compile Include="Assets\Resources\Scripts\SquadPointsChange.cs" />
     <Compile Include="Assets\Resources\Scripts\SummaryBeforeMatch.cs" />
+    <Compile Include="Assets\Resources\Scripts\Utils\SquadBuilderUtil.cs" />
     <Compile Include="Assets\Resources\Scripts\XMLLoader.cs" />
     <None Include="Assets\StreamingAssets\rebel_ships.xml" />
     <None Include="Assets\StreamingAssets\imperial_ships.xml" />

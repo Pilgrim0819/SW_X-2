@@ -2,6 +2,7 @@
 using System.Collections;
 using PilotsXMLCSharp;
 using ShipsXMLCSharp;
+using UpgradesXMLCSharp;
 using System.Collections.Generic;
 
 public class PlayerDatas {
@@ -72,6 +73,7 @@ public class PlayerDatas {
     {
         bool canAddPilot = true;
 		bool duplicate = false;
+        string errorMsg = "";
 
 		foreach (LoadedShip ls in squadron)
 		{
@@ -83,17 +85,18 @@ public class PlayerDatas {
 
 		if (pilot.Unique && duplicate) {
 			canAddPilot = false;
-		}
+            errorMsg = "The selected pilot is unique and has already been added to your squadron!";
+
+        }
 
         if ((getCumulatedSquadPoints() + pilot.Cost) > pointsToSpend)
         {
             canAddPilot = false;
+            errorMsg = "The selected pilot's cost is too high to fit into your current squadron!";
         }
 
         if (canAddPilot)
         {
-            //pilots.Pilot.Add(pilot);
-
             LoadedShip ls = new LoadedShip();
             ls.setShip(selectedShip);
             ls.setPilot(pilot);
@@ -104,8 +107,7 @@ public class PlayerDatas {
             currentPilotId++;
         } else
         {
-            //TODO show error messages!
-            Debug.Log("Unique pilot already added or squad point limit would be exceeded!");
+            throw new System.ApplicationException(errorMsg);
         }
     }
 
@@ -124,6 +126,18 @@ public class PlayerDatas {
         }
 
         squadron.Remove(shipToRemove);
+    }
+
+    // To remove an upgrade, make parameter "upgrade" null
+    public static void addUpgradeToShip(LoadedShip ship, Upgrade upgrade, int slotId)
+    {
+        foreach (UpgradeSlot slot in ship.getPilot().UpgradeSlots.UpgradeSlot)
+        {
+            if (slot.upgradeSlotId == slotId)
+            {
+                slot.upgrade = upgrade;
+            }
+        }
     }
 
     public static void setPointsToSpend(int points)
@@ -145,6 +159,14 @@ public class PlayerDatas {
             foreach (LoadedShip ls in squadron)
             {
                 total += System.Convert.ToInt32(ls.getPilot().Cost);
+
+                foreach (UpgradeSlot slot in ls.getPilot().UpgradeSlots.UpgradeSlot)
+                {
+                    if (slot.upgrade != null)
+                    {
+                        total += System.Convert.ToInt32(slot.upgrade.Cost);
+                    }
+                }
             }
         }
 

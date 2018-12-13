@@ -11,6 +11,7 @@ namespace PilotsXMLCSharp
         public string Type { get; set; }
 
         public UpgradesXMLCSharp.Upgrade upgrade { get; set; }
+        public int upgradeSlotId { get; set; }
     }
 
     [XmlRoot(ElementName = "upgradeSlots")]
