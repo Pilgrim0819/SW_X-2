@@ -10,6 +10,10 @@ public class PlayerDatas {
     private static Pilot selectedPilot;
     private static string chosenSide;
     private static string chosenSize;
+    private static LoadedShip chosenLoadedShip = null;
+    private static string chosenUpgradeType = "";
+    private static int chosenSlotId = 0;
+
     private static int pointsToSpend = 100;
     private static List<LoadedShip> squadron = new List<LoadedShip>();
     private static int currentPilotId = 1;
@@ -47,6 +51,36 @@ public class PlayerDatas {
     public static string getChosenSize()
     {
         return chosenSize;
+    }
+
+    public static void setChosenLoadedShip(LoadedShip ship)
+    {
+        chosenLoadedShip = ship;
+    }
+
+    public static LoadedShip getChosenLoadedShip()
+    {
+        return chosenLoadedShip;
+    }
+
+    public static void setChosenUpgraType(string type)
+    {
+        chosenUpgradeType = type;
+    }
+
+    public static string getChosenUpgradeType()
+    {
+        return chosenUpgradeType;
+    }
+
+    public static void setChosenSlotId(int id)
+    {
+        chosenSlotId = id;
+    }
+
+    public static int getChosenSlotId()
+    {
+        return chosenSlotId;
     }
 
     public static void setSelectedShip(Ship ship)

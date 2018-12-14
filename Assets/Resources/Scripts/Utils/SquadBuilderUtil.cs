@@ -61,7 +61,7 @@ public class SquadBuilderUtil {
         {
             bool available = true;
 
-            if (upgrade.SideRestriction != null && !upgrade.SideRestriction.Equals(side))
+            if (upgrade.SideRestriction != null && !upgrade.SideRestriction.Equals(""))
             {
                 if (!upgrade.SideRestriction.Equals(PlayerDatas.getChosenSide()))
                 {
@@ -71,7 +71,7 @@ public class SquadBuilderUtil {
 
             if (available)
             {
-                if (upgrade.SizeRestriction != null && !upgrade.SizeRestriction.Equals(size))
+                if (upgrade.SizeRestriction != null && !upgrade.SizeRestriction.Equals(""))
                 {
                     if (!upgrade.SizeRestriction.Equals(PlayerDatas.getChosenSize()))
                     {

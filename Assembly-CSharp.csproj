@@ -85,6 +85,8 @@
     <Compile Include="Assets\Resources\Scripts\MenuActions\SquadBuilderPilotPanelEvents.cs" />
     <Compile Include="Assets\Resources\Scripts\MenuActions\SquadBuilderShipPanelEvents.cs" />
     <Compile Include="Assets\Resources\Scripts\MenuActions\SystemMessagePanelEvents.cs" />
+    <Compile Include="Assets\Resources\Scripts\MenuActions\UpgradePanelEvents.cs" />
+    <Compile Include="Assets\Resources\Scripts\MenuActions\UpgradeSlotEvents.cs" />
     <Compile Include="Assets\Resources\Scripts\MenuElementMouseClick.cs" />
     <Compile Include="Assets\Resources\Scripts\Mocker.cs" />
     <Compile Include="Assets\Resources\Scripts\Models\UpgradesXMLModel.cs" />

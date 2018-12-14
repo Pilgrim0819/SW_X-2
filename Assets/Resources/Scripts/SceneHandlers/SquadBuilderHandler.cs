@@ -14,17 +14,31 @@ public class SquadBuilderHandler : MonoBehaviour {
     public GameObject shipDataPreview;
     public GameObject pilotDataPreview;
     public GameObject SquadronHolderContent;
+    public GameObject UpgradesPopup;
 
     private string prevChosenShip = "";
     private string prevChosenPilot = "";
     private int prevSquadronSize = 0;
     private int prevSquadronCost = 0;
+    private bool upgradesPopupActive = false;
 
     private Ships ships;
     private Pilots pilots;
     private UpgradesXMLCSharp.Upgrades upgrades;
 
     void Start () {
+        /*********************************TODO remove when testing is done!!*/
+        if (PlayerDatas.getChosenSide() == null || PlayerDatas.getChosenSide().Equals(""))
+        {
+            PlayerDatas.setChosenSide(SquadBuilderConstants.FACTION_REBELS);
+        }
+
+        if (PlayerDatas.getChosenSize() == null || PlayerDatas.getChosenSize().Equals(""))
+        {
+            PlayerDatas.setChosenSize("small");
+        }
+        /*********************************TODO remove when testing is done!!*/
+
         this.ships = SquadBuilderUtil.loadShipsForChosenSide();
         this.pilots = SquadBuilderUtil.loadPilotsForEachShip(this.ships);
         this.upgrades = SquadBuilderUtil.loadUpgrades(PlayerDatas.getChosenSide(), PlayerDatas.getChosenSize());
@@ -64,6 +78,17 @@ public class SquadBuilderHandler : MonoBehaviour {
             prevSquadronCost = PlayerDatas.getCumulatedSquadPoints();
             prevSquadronSize = PlayerDatas.getSquadron().Count;
             showSquadron();
+        }
+
+        if (!PlayerDatas.getChosenUpgradeType().Equals("") && PlayerDatas.getChosenSlotId() != 0 && PlayerDatas.getChosenLoadedShip() != null)
+        {
+            showUpgradesPopup();
+        } else
+        {
+            if (upgradesPopupActive)
+            {
+                closeUpgradesPopup();
+            }
         }
     }
 
@@ -139,13 +164,6 @@ public class SquadBuilderHandler : MonoBehaviour {
     {
         string chosenSide = PlayerDatas.getChosenSide();
         Sprite sideIcon = null;
-
-        /*********************************TODO remove when testing is done!!*/
-        if (chosenSide == null || chosenSide.Equals(""))
-        {
-            chosenSide = SquadBuilderConstants.FACTION_REBELS;
-        }
-        /*********************************TODO remove when testing is done!!*/
 
         switch(chosenSide)
         {
@@ -229,7 +247,6 @@ public class SquadBuilderHandler : MonoBehaviour {
         if (pilotToShow != null)
         {
             string pilotName = pilotToShow.Unique ? "*" + pilotToShow.Name.ToLower() : pilotToShow.Name.ToLower();
-            string upgrades = "Upgrade: ";
 
             pilotDataPreview.transform.Find("PilotLevel/Text").gameObject.GetComponent<UnityEngine.UI.Text>().text = pilotToShow.Level.ToString();
             pilotDataPreview.transform.Find("PilotCost/Text").gameObject.GetComponent<UnityEngine.UI.Text>().text = pilotToShow.Cost.ToString();
@@ -306,6 +323,8 @@ public class SquadBuilderHandler : MonoBehaviour {
 
             foreach (UpgradeSlot upgrade in loadedShip.getPilot().UpgradeSlots.UpgradeSlot)
             {
+                upgrade.upgradeSlotId = upgradeSlotIndex + 1;
+
                 Transform upgradeSlotPrefab = Resources.Load<Transform>(SquadBuilderConstants.PREFABS_FOLDER_NAME + "/" + SquadBuilderConstants.UPGRADE_SLOT);
                 rt = (RectTransform)upgradeSlotPrefab;
                 float upgradeSlotWidth = rt.rect.width;
@@ -323,14 +342,19 @@ public class SquadBuilderHandler : MonoBehaviour {
                 image = upgradeSlot.transform.Find("Image").gameObject.GetComponent<Image>();
                 image.color = new Color(image.color.r, image.color.g, image.color.b, 1.0f);
 
+                UpgradeSlotEvents upgradeSlotEvents = upgradeSlot.transform.GetComponent<UpgradeSlotEvents>();
+                upgradeSlotEvents.setUpgradeType(upgrade.Type);
+                upgradeSlotEvents.setShip(loadedShip);
+                upgradeSlotEvents.setSlotId(upgrade.upgradeSlotId);
+
                 if (upgrade.upgrade == null)
                 {
                     upgradeSlot.transform.Find("Cost").gameObject.GetComponent<UnityEngine.UI.Text>().text = "";
-                    upgradeSlot.transform.Find("UpgradeDescription").gameObject.GetComponent<UnityEngine.UI.Text>().text = "EMPTY";
+                    upgradeSlot.transform.Find("UpgradeDescription/Text").gameObject.GetComponent<UnityEngine.UI.Text>().text = "EMPTY";
                 } else
                 {
                     upgradeSlot.transform.Find("Cost").gameObject.GetComponent<UnityEngine.UI.Text>().text = upgrade.upgrade.Cost.ToString();
-                    upgradeSlot.transform.Find("UpgradeDescription").gameObject.GetComponent<UnityEngine.UI.Text>().text = upgrade.upgrade.Description;
+                    upgradeSlot.transform.Find("UpgradeDescription/Text").gameObject.GetComponent<UnityEngine.UI.Text>().text = upgrade.upgrade.Description;
 
                     // TODO If upgrade has attack power (and range), show them as well...
                 }
@@ -340,5 +364,75 @@ public class SquadBuilderHandler : MonoBehaviour {
 
             shipPanelIndex++;
         }
+    }
+
+    private void showUpgradesPopup()
+    {
+        UpgradesPopup.transform.Find("UpgradeType").gameObject.GetComponent<UnityEngine.UI.Text>().text = PlayerDatas.getChosenUpgradeType();
+
+        Transform scrollViewContent = UpgradesPopup.transform.Find("Scroll View/Viewport/Content");
+        Transform upgradePanelPrefab = Resources.Load<Transform>(SquadBuilderConstants.PREFABS_FOLDER_NAME + "/" + SquadBuilderConstants.UPGRADE_PANEL);
+        Transform upgradePanel = (Transform)GameObject.Instantiate(
+            upgradePanelPrefab,
+            new Vector3(SquadBuilderConstants.UPGRADE_PANEL_X_OFFSET, SquadBuilderConstants.UPGRADE_PANEL_Y_OFFSET, SquadBuilderConstants.UPGRADE_PANEL_Z_OFFSET),
+            Quaternion.identity
+        );
+
+        upgradePanel.transform.SetParent(scrollViewContent.transform, false);
+        upgradePanel.transform.Find("Name").gameObject.GetComponent<UnityEngine.UI.Text>().text = "none";
+
+        UpgradePanelEvents upgradePanelEvents = upgradePanel.GetComponent<UpgradePanelEvents>();
+
+        upgradePanelEvents.setShip(PlayerDatas.getChosenLoadedShip());
+        upgradePanelEvents.setSlotId(PlayerDatas.getChosenSlotId());
+        upgradePanelEvents.setUpgrade(null);
+
+        int upgradePanelIndex = 1;
+
+        foreach (Upgrade upgrade in this.upgrades.Upgrade)
+        {
+            if (upgrade.Type.Equals(PlayerDatas.getChosenUpgradeType()))
+            {
+                upgradePanelPrefab = Resources.Load<Transform>(SquadBuilderConstants.PREFABS_FOLDER_NAME + "/" + SquadBuilderConstants.UPGRADE_PANEL);
+                RectTransform rt = (RectTransform)upgradePanelPrefab;
+                float upgradePanelHeight = rt.rect.height;
+
+                upgradePanel = (Transform)GameObject.Instantiate(
+                    upgradePanelPrefab,
+                    new Vector3(SquadBuilderConstants.UPGRADE_PANEL_X_OFFSET, (upgradePanelIndex * upgradePanelHeight * -1) + SquadBuilderConstants.UPGRADE_PANEL_Y_OFFSET, SquadBuilderConstants.UPGRADE_PANEL_Z_OFFSET),
+                    Quaternion.identity
+                );
+
+                upgradePanel.transform.SetParent(scrollViewContent.transform, false);
+
+                upgradePanel.transform.Find("Name").gameObject.GetComponent<UnityEngine.UI.Text>().text = upgrade.Name;
+                upgradePanel.transform.Find("Description").gameObject.GetComponent<UnityEngine.UI.Text>().text = upgrade.Description;
+                upgradePanel.transform.Find("Cost").gameObject.GetComponent<UnityEngine.UI.Text>().text = upgrade.Cost.ToString();
+
+                // TODO Add attackpower and range attributes to Upgrade model!!!!
+                /*if (upgrade.AttackPower != 0 && upgrade.Range != 0)
+                {
+                    upgradePanel.transform.Find("AttackPower").gameObject.GetComponent<UnityEngine.UI.Text>().text = upgrade.AttackPower.ToString();
+                    upgradePanel.transform.Find("Range").gameObject.GetComponent<UnityEngine.UI.Text>().text = upgrade.Range.ToString();
+                }*/
+
+                upgradePanelEvents = upgradePanel.GetComponent<UpgradePanelEvents>();
+
+                upgradePanelEvents.setShip(PlayerDatas.getChosenLoadedShip());
+                upgradePanelEvents.setSlotId(PlayerDatas.getChosenSlotId());
+                upgradePanelEvents.setUpgrade(upgrade);
+
+                upgradePanelIndex++;
+            }
+        }
+
+        UpgradesPopup.SetActive(true);
+        upgradesPopupActive = true;
+    }
+
+    private void closeUpgradesPopup()
+    {
+        UpgradesPopup.SetActive(false);
+        SquadBuilderUtil.resetScrollView(UpgradesPopup.transform.Find("Scroll View/Viewport/Content").gameObject);
     }
 }
