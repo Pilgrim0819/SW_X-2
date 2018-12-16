@@ -82,7 +82,10 @@ public class SquadBuilderHandler : MonoBehaviour {
 
         if (!PlayerDatas.getChosenUpgradeType().Equals("") && PlayerDatas.getChosenSlotId() != 0 && PlayerDatas.getChosenLoadedShip() != null)
         {
-            showUpgradesPopup();
+            if (!upgradesPopupActive)
+            {
+                showUpgradesPopup();
+            }
         } else
         {
             if (upgradesPopupActive)
@@ -433,6 +436,7 @@ public class SquadBuilderHandler : MonoBehaviour {
     private void closeUpgradesPopup()
     {
         UpgradesPopup.SetActive(false);
+        upgradesPopupActive = false;
         SquadBuilderUtil.resetScrollView(UpgradesPopup.transform.Find("Scroll View/Viewport/Content").gameObject);
     }
 }

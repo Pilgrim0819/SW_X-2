@@ -326,8 +326,12 @@
     <Compile Include="Assets\Resources\Scripts\MatchDatas.cs" />
     <Compile Include="Assets\Resources\Scripts\MenuAction.cs" />
     <Compile Include="Assets\Resources\Scripts\MenuActions\PilotAddEvents.cs" />
+    <Compile Include="Assets\Resources\Scripts\MenuActions\PilotRemoveEvents.cs" />
     <Compile Include="Assets\Resources\Scripts\MenuActions\SquadBuilderPilotPanelEvents.cs" />
     <Compile Include="Assets\Resources\Scripts\MenuActions\SquadBuilderShipPanelEvents.cs" />
+    <Compile Include="Assets\Resources\Scripts\MenuActions\SystemMessagePanelEvents.cs" />
+    <Compile Include="Assets\Resources\Scripts\MenuActions\UpgradePanelEvents.cs" />
+    <Compile Include="Assets\Resources\Scripts\MenuActions\UpgradeSlotEvents.cs" />
     <Compile Include="Assets\Resources\Scripts\MenuElementMouseClick.cs" />
     <Compile Include="Assets\Resources\Scripts\Mocker.cs" />
     <Compile Include="Assets\Resources\Scripts\Models\UpgradesXMLModel.cs" />
@@ -340,6 +344,7 @@
     <Compile Include="Assets\Resources\Scripts\PlayerDatas.cs" />
     <Compile Include="Assets\Resources\Scripts\SceneChangerManuAction.cs" />
     <Compile Include="Assets\Resources\Scripts\SceneHandlers\SquadBuilderHandler.cs" />
+    <Compile Include="Assets\Resources\Scripts\Services\SystemMessageService.cs" />
     <Compile Include="Assets\Resources\Scripts\SetPlayerInitiative.cs" />
     <Compile Include="Assets\Resources\Scripts\ShipProperties.cs" />
     <Compile Include="Assets\Resources\Scripts\ShipSelectorMouseClick.cs" />
@@ -347,9 +352,12 @@
     <Compile Include="Assets\Resources\Scripts\SideSelectionStartup.cs" />
     <Compile Include="Assets\Resources\Scripts\SquadPointsChange.cs" />
     <Compile Include="Assets\Resources\Scripts\SummaryBeforeMatch.cs" />
+    <Compile Include="Assets\Resources\Scripts\Utils\SquadBuilderUtil.cs" />
     <Compile Include="Assets\Resources\Scripts\XMLLoader.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Plugins\GitHub\Editor\credits.txt" />
+    <None Include="Assets\Plugins\GitHub\Editor\eula.txt" />
     <None Include="Assets\Resources\Fonts\Aerobus dotty\readme.txt" />
     <None Include="Assets\Resources\Fonts\Digital play\00copyfont.txt" />
     <None Include="Assets\StreamingAssets\TIE Fighter_pilots.xml" />
