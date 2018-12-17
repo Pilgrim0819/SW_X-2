@@ -84,6 +84,7 @@
     <Compile Include="Assets\Resources\Scripts\MenuActions\PilotAddEvents.cs" />
     <Compile Include="Assets\Resources\Scripts\MenuActions\PilotRemoveEvents.cs" />
     <Compile Include="Assets\Resources\Scripts\MenuActions\SaveSquadronEvents.cs" />
+    <Compile Include="Assets\Resources\Scripts\MenuActions\ShowFileExplorerEvents.cs" />
     <Compile Include="Assets\Resources\Scripts\MenuActions\SquadBuilderPilotPanelEvents.cs" />
     <Compile Include="Assets\Resources\Scripts\MenuActions\SquadBuilderShipPanelEvents.cs" />
     <Compile Include="Assets\Resources\Scripts\MenuActions\SystemMessagePanelEvents.cs" />

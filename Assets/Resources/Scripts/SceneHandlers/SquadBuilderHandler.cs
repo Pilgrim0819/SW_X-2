@@ -16,6 +16,7 @@ public class SquadBuilderHandler : MonoBehaviour {
     public GameObject SquadronHolderContent;
     public GameObject UpgradesPopup;
     public GameObject SaveButton;
+    public GameObject fileExplorer;
 
     private string prevChosenShip = "";
     private string prevChosenPilot = "";
@@ -99,6 +100,14 @@ public class SquadBuilderHandler : MonoBehaviour {
             {
                 closeUpgradesPopup();
             }
+        }
+
+        if (PlayerDatas.isLoadingSquadrons() && !fileExplorer.activeSelf)
+        {
+            showFileExplorer();
+        } else if (!PlayerDatas.isLoadingSquadrons() && fileExplorer.activeSelf)
+        {
+            hideFileExplorer();
         }
     }
 
@@ -445,5 +454,39 @@ public class SquadBuilderHandler : MonoBehaviour {
         UpgradesPopup.SetActive(false);
         upgradesPopupActive = false;
         SquadBuilderUtil.resetScrollView(UpgradesPopup.transform.Find("Scroll View/Viewport/Content").gameObject);
+    }
+
+    private void showFileExplorer()
+    {
+        Transform scrollViewContent = fileExplorer.transform.Find("Scroll View/Viewport/Content");
+        int squadronIndex = 0;
+
+        foreach (string name in SquadPersistenceUtil.getSquadronNames())
+        {
+            Transform savedSquadronPanelPrefab = Resources.Load<Transform>(SquadBuilderConstants.PREFABS_FOLDER_NAME + "/" + SquadBuilderConstants.SAVED_SQUADRON_PANEL);
+            RectTransform rt = (RectTransform)savedSquadronPanelPrefab;
+            float savedSquadronPanelHeight = rt.rect.height;
+
+            Transform savedSquadronPanel = (Transform)GameObject.Instantiate(
+                savedSquadronPanelPrefab,
+                new Vector3(SquadBuilderConstants.SAVED_SQUADRON_PANEL_X_OFFSET, (squadronIndex * savedSquadronPanelHeight * -1) + SquadBuilderConstants.SAVED_SQUADRON_PANEL_Y_OFFSET, SquadBuilderConstants.SAVED_SQUADRON_PANEL_Z_OFFSET),
+                Quaternion.identity
+            );
+
+            savedSquadronPanel.transform.SetParent(scrollViewContent.transform, false);
+
+            savedSquadronPanel.transform.Find("Name").gameObject.GetComponent<UnityEngine.UI.Text>().text = name;
+
+            squadronIndex++;
+        }
+
+        fileExplorer.SetActive(true);
+    }
+
+    private void hideFileExplorer()
+    {
+        SquadBuilderUtil.resetScrollView(fileExplorer.transform.Find("Scroll View/Viewport/Content").gameObject);
+
+        fileExplorer.SetActive(false);
     }
 }

@@ -41,4 +41,18 @@ public class SquadPersistenceUtil {
             PlayerDatas.setSquadron(squadron);
         }
     }
+
+    public static List<string> getSquadronNames()
+    {
+        List<string> names = new List<string>();
+        DirectoryInfo dir = new DirectoryInfo(Path.Combine(Application.streamingAssetsPath, "Saves/"));
+        FileInfo[] info = dir.GetFiles("*.dat");
+
+        foreach (FileInfo f in info)
+        {
+            names.Add(f.Name.Split('.')[0]);
+        }
+
+        return names;
+    }
 }

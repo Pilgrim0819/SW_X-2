@@ -13,6 +13,7 @@ public class PlayerDatas {
     private static LoadedShip chosenLoadedShip = null;
     private static string chosenUpgradeType = "";
     private static int chosenSlotId = 0;
+    private static bool loadingSquadrons = false;
 
     private static int pointsToSpend = 100;
     private static List<LoadedShip> squadron = new List<LoadedShip>();
@@ -22,6 +23,16 @@ public class PlayerDatas {
     private static string playerName;
 
     public static int numberOfDice = 5;
+
+    public static void toggleLoadingSquadrons()
+    {
+        loadingSquadrons = !loadingSquadrons;
+    }
+
+    public static bool isLoadingSquadrons()
+    {
+        return loadingSquadrons;
+    }
 
     public static void setPlayerName(string name)
     {

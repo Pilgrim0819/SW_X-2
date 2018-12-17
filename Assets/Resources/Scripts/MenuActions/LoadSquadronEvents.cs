@@ -20,9 +20,9 @@ public class LoadSquadronEvents : MonoBehaviour, IPointerEnterHandler, IPointerE
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        // TODO Use selector to make the user select, which squadron they want to load!
-        string squadronName = "Name 1";
+        string squadronName = gameObject.transform.Find("Name").gameObject.GetComponent<UnityEngine.UI.Text>().text;
 
         SquadPersistenceUtil.loadSquadron(squadronName);
+        PlayerDatas.toggleLoadingSquadrons();
     }
 }
