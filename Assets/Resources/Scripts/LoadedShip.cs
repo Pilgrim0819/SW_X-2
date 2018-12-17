@@ -4,6 +4,7 @@ using PilotsXMLCSharp;
 using ShipsXMLCSharp;
 using System.Collections.Generic;
 
+[System.Serializable]
 public class LoadedShip {
 
     private Pilot pilot;

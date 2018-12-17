@@ -80,8 +80,10 @@
     <Compile Include="Assets\Resources\Scripts\ManeuverHandler.cs" />
     <Compile Include="Assets\Resources\Scripts\MatchDatas.cs" />
     <Compile Include="Assets\Resources\Scripts\MenuAction.cs" />
+    <Compile Include="Assets\Resources\Scripts\MenuActions\LoadSquadronEvents.cs" />
     <Compile Include="Assets\Resources\Scripts\MenuActions\PilotAddEvents.cs" />
     <Compile Include="Assets\Resources\Scripts\MenuActions\PilotRemoveEvents.cs" />
+    <Compile Include="Assets\Resources\Scripts\MenuActions\SaveSquadronEvents.cs" />
     <Compile Include="Assets\Resources\Scripts\MenuActions\SquadBuilderPilotPanelEvents.cs" />
     <Compile Include="Assets\Resources\Scripts\MenuActions\SquadBuilderShipPanelEvents.cs" />
     <Compile Include="Assets\Resources\Scripts\MenuActions\SystemMessagePanelEvents.cs" />
@@ -108,6 +110,7 @@
     <Compile Include="Assets\Resources\Scripts\SquadPointsChange.cs" />
     <Compile Include="Assets\Resources\Scripts\SummaryBeforeMatch.cs" />
     <Compile Include="Assets\Resources\Scripts\Utils\SquadBuilderUtil.cs" />
+    <Compile Include="Assets\Resources\Scripts\Utils\SquadPersistenceUtil.cs" />
     <Compile Include="Assets\Resources\Scripts\XMLLoader.cs" />
     <None Include="Assets\StreamingAssets\rebel_ships.xml" />
     <None Include="Assets\StreamingAssets\imperial_ships.xml" />

@@ -15,6 +15,7 @@ public class SquadBuilderHandler : MonoBehaviour {
     public GameObject pilotDataPreview;
     public GameObject SquadronHolderContent;
     public GameObject UpgradesPopup;
+    public GameObject SaveButton;
 
     private string prevChosenShip = "";
     private string prevChosenPilot = "";
@@ -73,11 +74,17 @@ public class SquadBuilderHandler : MonoBehaviour {
         }
         
         // TODO Examine if deleting the last ship from squadron causes any problem (maybe not calling re-render as the List is null??)
-        if ((PlayerDatas.getSquadron() != null && prevSquadronSize != PlayerDatas.getSquadron().Count) || prevSquadronCost != PlayerDatas.getCumulatedSquadPoints())
+        if (PlayerDatas.getSquadron() != null && (prevSquadronSize != PlayerDatas.getSquadron().Count || prevSquadronCost != PlayerDatas.getCumulatedSquadPoints()))
         {
             prevSquadronCost = PlayerDatas.getCumulatedSquadPoints();
             prevSquadronSize = PlayerDatas.getSquadron().Count;
             showSquadron();
+            SaveButton.SetActive(true);
+        }
+
+        if ((PlayerDatas.getSquadron().Count == 0 || PlayerDatas.getSquadron() == null) && SaveButton.activeSelf)
+        {
+            SaveButton.SetActive(false);
         }
 
         if (!PlayerDatas.getChosenUpgradeType().Equals("") && PlayerDatas.getChosenSlotId() != 0 && PlayerDatas.getChosenLoadedShip() != null)

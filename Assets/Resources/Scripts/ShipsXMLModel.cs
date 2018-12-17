@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace ShipsXMLCSharp
 {
+    [System.Serializable]
     [XmlRoot(ElementName = "actions")]
     public class Actions
     {
@@ -10,6 +11,7 @@ namespace ShipsXMLCSharp
         public List<string> Action { get; set; }
     }
 
+    [System.Serializable]
     [XmlRoot(ElementName = "maneuver")]
     public class Maneuver
     {
@@ -21,6 +23,7 @@ namespace ShipsXMLCSharp
         public string Difficulty { get; set; }
     }
 
+    [System.Serializable]
     [XmlRoot(ElementName = "maneuvers")]
     public class Maneuvers
     {
@@ -28,6 +31,7 @@ namespace ShipsXMLCSharp
         public List<Maneuver> Maneuver { get; set; }
     }
 
+    [System.Serializable]
     [XmlRoot(ElementName = "ship")]
     public class Ship
     {
@@ -53,6 +57,7 @@ namespace ShipsXMLCSharp
         public Maneuvers Maneuvers { get; set; }
     }
 
+    [System.Serializable]
     [XmlRoot(ElementName = "ships")]
     public class Ships
     {

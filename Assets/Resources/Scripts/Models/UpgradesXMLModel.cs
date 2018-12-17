@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace UpgradesXMLCSharp
 {
+    [System.Serializable]
     [XmlRoot(ElementName = "upgrade")]
     public class Upgrade
     {
@@ -24,6 +25,7 @@ namespace UpgradesXMLCSharp
         public string ShipRestriction { get; set; }
     }
 
+    [System.Serializable]
     [XmlRoot(ElementName = "upgrades")]
     public class Upgrades
     {

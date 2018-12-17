@@ -207,6 +207,11 @@ public class PlayerDatas {
         return total;
     }
 
+    public static void setSquadron(List<LoadedShip> ships)
+    {
+        squadron = ships;
+    }
+
     public static List<LoadedShip> getSquadron()
     {
         return squadron;

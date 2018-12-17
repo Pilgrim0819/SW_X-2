@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 namespace PilotsXMLCSharp
 {
+    [System.Serializable]
     [XmlRoot(ElementName = "upgradeSlot")]
     public class UpgradeSlot
     {
@@ -14,6 +15,7 @@ namespace PilotsXMLCSharp
         public int upgradeSlotId { get; set; }
     }
 
+    [System.Serializable]
     [XmlRoot(ElementName = "upgradeSlots")]
     public class UpgradeSlots
     {
@@ -21,6 +23,7 @@ namespace PilotsXMLCSharp
         public List<UpgradeSlot> UpgradeSlot { get; set; }
     }
 
+    [System.Serializable]
     [XmlRoot(ElementName = "ability")]
     public class Ability
     {
@@ -50,6 +53,7 @@ namespace PilotsXMLCSharp
         public string ConditionCheckPhase { get; set; }
     }
 
+    [System.Serializable]
     [XmlRoot(ElementName = "pilot")]
     public class Pilot
     {
@@ -71,6 +75,7 @@ namespace PilotsXMLCSharp
         public Ability Ability { get; set; }
     }
 
+    [System.Serializable]
     [XmlRoot(ElementName = "pilots")]
     public class Pilots
     {
