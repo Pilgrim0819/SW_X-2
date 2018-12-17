@@ -1,0 +1,111 @@
+<pilots>
+	<pilot>
+		<shipId>yt1300</shipId>
+		<unique>false</unique>
+		<name>Outer Rim Smuggler</name>
+		<cost>27</cost>
+    <level>1</level>
+		<text></text>
+		<upgradeSlots>
+			<upgradeSlot>
+				<type>crew</type>
+			</upgradeSlot>
+      <upgradeSlot>
+        <type>crew</type>
+      </upgradeSlot>
+      <upgradeSlot>
+        <type>title</type>
+      </upgradeSlot>
+      <upgradeSlot>
+        <type>modification</type>
+      </upgradeSlot>
+		</upgradeSlots>
+	</pilot>
+
+  <pilot>
+    <shipId>yt1300</shipId>
+    <unique>true</unique>
+    <name>Chewbacca</name>
+    <cost>42</cost>
+    <level>5</level>
+    <text>When you are dealt a faceup Damage card, immediately flip it facedown (without resolving its ability).</text>
+    <upgradeSlots>
+      <upgradeSlot>
+        <type>crew</type>
+      </upgradeSlot>
+      <upgradeSlot>
+        <type>crew</type>
+      </upgradeSlot>
+      <upgradeSlot>
+        <type>elite</type>
+      </upgradeSlot>
+      <upgradeSlot>
+        <type>missile</type>
+      </upgradeSlot>
+      <upgradeSlot>
+        <type>title</type>
+      </upgradeSlot>
+      <upgradeSlot>
+        <type>modification</type>
+      </upgradeSlot>
+    </upgradeSlots>
+  </pilot>
+
+  <pilot>
+    <shipId>yt1300</shipId>
+    <unique>true</unique>
+    <name>Lando Calrissian</name>
+    <cost>44</cost>
+    <level>7</level>
+    <text>After you execute a green maneuver, choose 1 other friendly ship at Range 1. That ship may perform 1 free action shown in its action bar</text>
+    <upgradeSlots>
+      <upgradeSlot>
+        <type>crew</type>
+      </upgradeSlot>
+      <upgradeSlot>
+        <type>crew</type>
+      </upgradeSlot>
+      <upgradeSlot>
+        <type>elite</type>
+      </upgradeSlot>
+      <upgradeSlot>
+        <type>missile</type>
+      </upgradeSlot>
+      <upgradeSlot>
+        <type>title</type>
+      </upgradeSlot>
+      <upgradeSlot>
+        <type>modification</type>
+      </upgradeSlot>
+    </upgradeSlots>
+  </pilot>
+
+  <pilot>
+    <shipId>yt1300</shipId>
+    <unique>true</unique>
+    <name>Han Solo</name>
+    <cost>46</cost>
+    <level>9</level>
+    <text>When attacking, you may reroll all of your dice. If you choose to do so, you must reroll as many of your dice as possible.</text>
+    <upgradeSlots>
+      <upgradeSlot>
+        <type>crew</type>
+      </upgradeSlot>
+      <upgradeSlot>
+        <type>crew</type>
+      </upgradeSlot>
+      <upgradeSlot>
+        <type>elite</type>
+      </upgradeSlot>
+      <upgradeSlot>
+        <type>missile</type>
+      </upgradeSlot>
+      <upgradeSlot>
+        <type>title</type>
+      </upgradeSlot>
+      <upgradeSlot>
+        <type>modification</type>
+      </upgradeSlot>
+    </upgradeSlots>
+  </pilot>
+</pilots>

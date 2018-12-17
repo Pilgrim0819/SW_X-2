@@ -18,11 +18,11 @@ public class SquadBuilderHandler : MonoBehaviour {
     public GameObject SaveButton;
     public GameObject fileExplorer;
 
+    private string prevChosenSize = "";
     private string prevChosenShip = "";
     private string prevChosenPilot = "";
     private int prevSquadronSize = 0;
     private int prevSquadronCost = 0;
-    private bool upgradesPopupActive = false;
 
     private Ships ships;
     private Pilots pilots;
@@ -47,39 +47,32 @@ public class SquadBuilderHandler : MonoBehaviour {
 
         showChosenSideIcon();
         showCurrentSquadPoints();
-        showShips();
     }
 
     void Update()
     {
         showCurrentSquadPoints();
 
-        //By default, load the first ship's pilots as it would be selected...
-        if (PlayerDatas.getSelectedShip() == null)
+        if (!prevChosenSize.Equals(PlayerDatas.getChosenSize()))
         {
-            PlayerDatas.setSelectedShip(ships.Ship[0]);
+            updateWholeView();
+            prevChosenSize = PlayerDatas.getChosenSize();
         }
 
         if (!prevChosenShip.Equals(PlayerDatas.getSelectedShip().ShipId))
         {
-            showPilots();
-            showShipDataPreview();
-            prevChosenShip = PlayerDatas.getSelectedShip().ShipId;
-            prevChosenPilot = "";
+            updateViewOnShipSelection();
         }
 
         if (!prevChosenPilot.Equals(PlayerDatas.getSelectedPilot().Name))
         {
-            showPilotDataPreview();
-            prevChosenPilot = PlayerDatas.getSelectedPilot().Name;
+            updateViewOnPilotSelection();
         }
         
         // TODO Examine if deleting the last ship from squadron causes any problem (maybe not calling re-render as the List is null??)
         if (PlayerDatas.getSquadron() != null && (prevSquadronSize != PlayerDatas.getSquadron().Count || prevSquadronCost != PlayerDatas.getCumulatedSquadPoints()))
         {
-            prevSquadronCost = PlayerDatas.getCumulatedSquadPoints();
-            prevSquadronSize = PlayerDatas.getSquadron().Count;
-            showSquadron();
+            updateViewOnSquadronChange();
             SaveButton.SetActive(true);
         }
 
@@ -90,13 +83,13 @@ public class SquadBuilderHandler : MonoBehaviour {
 
         if (!PlayerDatas.getChosenUpgradeType().Equals("") && PlayerDatas.getChosenSlotId() != 0 && PlayerDatas.getChosenLoadedShip() != null)
         {
-            if (!upgradesPopupActive)
+            if (!UpgradesPopup.activeSelf)
             {
                 showUpgradesPopup();
             }
         } else
         {
-            if (upgradesPopupActive)
+            if (UpgradesPopup.activeSelf)
             {
                 closeUpgradesPopup();
             }
@@ -107,8 +100,51 @@ public class SquadBuilderHandler : MonoBehaviour {
             showFileExplorer();
         } else if (!PlayerDatas.isLoadingSquadrons() && fileExplorer.activeSelf)
         {
-            hideFileExplorer();
+            SquadBuilderUtil.hideFileExplorer(fileExplorer);
         }
+    }
+
+    private void updateWholeView()
+    {
+        showShips();
+        updateViewOnShipSelection();
+    }
+
+    private void updateViewOnShipSelection()
+    {
+        if (PlayerDatas.getSelectedShip() == null)
+        {
+            Ship defaultShip = null;
+
+            foreach (Ship ship in ships.Ship)
+            {
+                if (ship.Size.Equals(PlayerDatas.getChosenSize()))
+                {
+                    defaultShip = ship;
+                    break;
+                }
+            }
+
+            PlayerDatas.setSelectedShip(defaultShip);
+        }
+        
+        showPilots();
+        showShipDataPreview();
+        prevChosenShip = PlayerDatas.getSelectedShip().ShipId;
+        prevChosenPilot = "";
+    }
+
+    private void updateViewOnPilotSelection()
+    {
+        showPilotDataPreview();
+        prevChosenPilot = PlayerDatas.getSelectedPilot().Name;
+    }
+
+    private void updateViewOnSquadronChange()
+    {
+        prevSquadronCost = PlayerDatas.getCumulatedSquadPoints();
+        prevSquadronSize = PlayerDatas.getSquadron().Count;
+        showSquadron();
     }
 
     private void showCurrentSquadPoints()
@@ -118,27 +154,32 @@ public class SquadBuilderHandler : MonoBehaviour {
 
     private void showShips()
     {
+        SquadBuilderUtil.resetScrollView(shipsScroll);
+
         int shipIndex = 0;
 
         foreach (Ship ship in ships.Ship)
         {
-            Transform shipPanelPrefab = Resources.Load<Transform>(SquadBuilderConstants.PREFABS_FOLDER_NAME + "/" + SquadBuilderConstants.SHIP_NAME_PANEL);
-            RectTransform rt = (RectTransform)shipPanelPrefab;
-            float shipPanelHeight = rt.rect.height;
+            if (ship.Size.Equals(PlayerDatas.getChosenSize()))
+            {
+                Transform shipPanelPrefab = Resources.Load<Transform>(SquadBuilderConstants.PREFABS_FOLDER_NAME + "/" + SquadBuilderConstants.SHIP_NAME_PANEL);
+                RectTransform rt = (RectTransform)shipPanelPrefab;
+                float shipPanelHeight = rt.rect.height;
 
-            Transform shipPanel = (Transform)GameObject.Instantiate(
-                shipPanelPrefab,
-                new Vector3(SquadBuilderConstants.SHIP_PANEL_X_OFFSET, (shipIndex * shipPanelHeight * -1) + SquadBuilderConstants.SHIP_PANEL_Y_OFFSET, SquadBuilderConstants.SHIP_PANEL_Z_OFFSET),
-                Quaternion.identity
-            );
+                Transform shipPanel = (Transform)GameObject.Instantiate(
+                    shipPanelPrefab,
+                    new Vector3(SquadBuilderConstants.SHIP_PANEL_X_OFFSET, (shipIndex * shipPanelHeight * -1) + SquadBuilderConstants.SHIP_PANEL_Y_OFFSET, SquadBuilderConstants.SHIP_PANEL_Z_OFFSET),
+                    Quaternion.identity
+                );
 
-            shipPanel.transform.SetParent(shipsScroll.transform, false);
-            shipPanel.transform.Find("ShipName").gameObject.GetComponent<UnityEngine.UI.Text>().text = ship.ShipName.ToLower();
-            
-            SquadBuilderShipPanelEvents shipPanelUIEvent = shipPanel.transform.GetComponent<SquadBuilderShipPanelEvents>();
-            shipPanelUIEvent.setShip(ship);
+                shipPanel.transform.SetParent(shipsScroll.transform, false);
+                shipPanel.transform.Find("ShipName").gameObject.GetComponent<UnityEngine.UI.Text>().text = ship.ShipName.ToLower();
 
-            shipIndex++;
+                SquadBuilderShipPanelEvents shipPanelUIEvent = shipPanel.transform.GetComponent<SquadBuilderShipPanelEvents>();
+                shipPanelUIEvent.setShip(ship);
+
+                shipIndex++;
+            }
         }
     }
 
@@ -446,13 +487,11 @@ public class SquadBuilderHandler : MonoBehaviour {
         }
 
         UpgradesPopup.SetActive(true);
-        upgradesPopupActive = true;
     }
 
     private void closeUpgradesPopup()
     {
         UpgradesPopup.SetActive(false);
-        upgradesPopupActive = false;
         SquadBuilderUtil.resetScrollView(UpgradesPopup.transform.Find("Scroll View/Viewport/Content").gameObject);
     }
 
@@ -481,12 +520,5 @@ public class SquadBuilderHandler : MonoBehaviour {
         }
 
         fileExplorer.SetActive(true);
-    }
-
-    private void hideFileExplorer()
-    {
-        SquadBuilderUtil.resetScrollView(fileExplorer.transform.Find("Scroll View/Viewport/Content").gameObject);
-
-        fileExplorer.SetActive(false);
     }
 }

@@ -84,6 +84,7 @@
     <Compile Include="Assets\Resources\Scripts\MenuActions\PilotAddEvents.cs" />
     <Compile Include="Assets\Resources\Scripts\MenuActions\PilotRemoveEvents.cs" />
     <Compile Include="Assets\Resources\Scripts\MenuActions\SaveSquadronEvents.cs" />
+    <Compile Include="Assets\Resources\Scripts\MenuActions\ShipSizeChangerEvents.cs" />
     <Compile Include="Assets\Resources\Scripts\MenuActions\ShowFileExplorerEvents.cs" />
     <Compile Include="Assets\Resources\Scripts\MenuActions\SquadBuilderPilotPanelEvents.cs" />
     <Compile Include="Assets\Resources\Scripts\MenuActions\SquadBuilderShipPanelEvents.cs" />
@@ -122,6 +123,7 @@
     <None Include="Assets\json\rebel_ships.json.txt" />
     <None Include="Assets\StreamingAssets\TIE Fighter_pilots.xml" />
     <None Include="Assets\StreamingAssets\upgrades.xml" />
+    <None Include="Assets\StreamingAssets\yt1300_pilots.xml" />
     <None Include="Assets\StreamingAssets\t65xw_pilots.xml" />
     <None Include="Assets\StreamingAssets\abilities overview.txt" />
     <None Include="Assets\Resources\Fonts\Digital play\00copyfont.txt" />

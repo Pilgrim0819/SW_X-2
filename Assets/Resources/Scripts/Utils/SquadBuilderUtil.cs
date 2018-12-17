@@ -112,4 +112,11 @@ public class SquadBuilderUtil {
             GameObject.Destroy(child.gameObject);
         }
     }
+
+    public static void hideFileExplorer(GameObject fileExplorer)
+    {
+        SquadBuilderUtil.resetScrollView(fileExplorer.transform.Find("Scroll View/Viewport/Content").gameObject);
+
+        fileExplorer.SetActive(false);
+    }
 }

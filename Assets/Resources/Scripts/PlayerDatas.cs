@@ -6,23 +6,28 @@ using UpgradesXMLCSharp;
 using System.Collections.Generic;
 
 public class PlayerDatas {
+    /* ---------------------------------------ONLY NEEDED FOR SQUADRON BUILDER SCENE-------------------------------------- */
     private static Ship selectedShip;
     private static Pilot selectedPilot;
     private static string chosenSide;
-    private static string chosenSize;
+    private static string chosenSize = "small";
+    private static bool loadingSquadrons = false;
+    // Needed to know which ship's which upgrade slot to be modified
     private static LoadedShip chosenLoadedShip = null;
     private static string chosenUpgradeType = "";
     private static int chosenSlotId = 0;
-    private static bool loadingSquadrons = false;
+    // Needed to know which ship's which upgrade slot to be modified
+    /* ------------------------------------------------------------------------------------------------------------------- */
 
+    // Persistent player datas!!
     private static int pointsToSpend = 100;
     private static List<LoadedShip> squadron = new List<LoadedShip>();
     private static int currentPilotId = 1;
     private static List<int> lastDiceResults = new List<int>();
     private static float dt = 0.0f;
     private static string playerName;
-
     public static int numberOfDice = 5;
+    // Persistent player datas!!
 
     public static void toggleLoadingSquadrons()
     {
