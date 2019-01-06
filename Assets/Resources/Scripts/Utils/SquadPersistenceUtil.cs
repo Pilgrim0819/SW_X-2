@@ -18,12 +18,10 @@ public class SquadPersistenceUtil {
 
         BinaryFormatter binaryFormatter = new BinaryFormatter();
 
-        using (FileStream fileStream = File.Open(Path.Combine(Application.streamingAssetsPath, SAVED_DATA_FOLDER + squadronName + SAVED_DATA_EXTENSION), FileMode.OpenOrCreate))
+        using (FileStream fileStream = File.Open(Path.Combine(Application.streamingAssetsPath, SAVED_DATA_FOLDER + PlayerDatas.getChosenSide() + "/" + squadronName + SAVED_DATA_EXTENSION), FileMode.OpenOrCreate))
         {
             binaryFormatter.Serialize(fileStream, PlayerDatas.getSquadron());
         }
-
-        Debug.Log("Ending save....");
     }
 
     public static void loadSquadron(string squadronName) {
@@ -34,7 +32,7 @@ public class SquadPersistenceUtil {
 
         BinaryFormatter binaryFormatter = new BinaryFormatter();
 
-        using (FileStream fileStream = File.Open(Path.Combine(Application.streamingAssetsPath, SAVED_DATA_FOLDER + squadronName + SAVED_DATA_EXTENSION), FileMode.Open))
+        using (FileStream fileStream = File.Open(Path.Combine(Application.streamingAssetsPath, SAVED_DATA_FOLDER + PlayerDatas.getChosenSide() + "/" + squadronName + SAVED_DATA_EXTENSION), FileMode.Open))
         {
             List<LoadedShip> squadron = (List<LoadedShip>)binaryFormatter.Deserialize(fileStream);
 
@@ -45,7 +43,7 @@ public class SquadPersistenceUtil {
     public static List<string> getSquadronNames()
     {
         List<string> names = new List<string>();
-        DirectoryInfo dir = new DirectoryInfo(Path.Combine(Application.streamingAssetsPath, "Saves/"));
+        DirectoryInfo dir = new DirectoryInfo(Path.Combine(Application.streamingAssetsPath, "Saves/" + PlayerDatas.getChosenSide() + "/"));
         FileInfo[] info = dir.GetFiles("*.dat");
 
         foreach (FileInfo f in info)

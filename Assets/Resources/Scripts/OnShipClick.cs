@@ -28,7 +28,7 @@ public class OnShipClick : MonoBehaviour {
 
             if (Physics.Raycast(ray, out hit))
             {
-                GameObject target = hit.transform.GetChild(0).gameObject;
+                GameObject target = hit.transform.gameObject;
                 LoadedShip activeShip = new LoadedShip();
 
                 //TODO Show basic ship info (level, attack, agility, shield, hull, pilot talent, upgrade slots(JUST text!!), actions (just image/text))

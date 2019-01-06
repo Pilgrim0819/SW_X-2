@@ -11,6 +11,7 @@ public class LoadedShip {
     private Ship ship;
 	private int pilotId;
     private bool alive = true;
+    private bool hasBeenActivatedThisRound = false;
     private LoadedShip target;
     private List<CustomEventBase> eventActions = new List<CustomEventBase>();
 
@@ -70,5 +71,15 @@ public class LoadedShip {
     public void setTarget(LoadedShip pTarget)
     {
         target = pTarget;
+    }
+
+    public void setHasBeenActivatedThisRound(bool value)
+    {
+        hasBeenActivatedThisRound = value;
+    }
+
+    public bool isHasBeenActivatedThisRound()
+    {
+        return hasBeenActivatedThisRound;
     }
 }

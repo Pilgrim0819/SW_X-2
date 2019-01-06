@@ -2,8 +2,16 @@
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+public delegate void PointerClickCallback();
+
 public class SystemMessagePanelEvents : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
+    private PointerClickCallback pointerClickCallback;
+
+    public void setCallback(PointerClickCallback callback)
+    {
+        pointerClickCallback = callback;
+    }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
@@ -21,7 +29,12 @@ public class SystemMessagePanelEvents : MonoBehaviour, IPointerEnterHandler, IPo
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        // Close system message panel (destroy it)
+        // DEFAULT ACTION: Close system message panel (destroy it)
         Destroy(gameObject.transform.parent.gameObject);
+
+        if (pointerClickCallback != null)
+        {
+            pointerClickCallback();
+        }
     }
 }

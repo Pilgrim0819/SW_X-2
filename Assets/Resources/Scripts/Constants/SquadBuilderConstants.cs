@@ -5,6 +5,7 @@ public class SquadBuilderConstants {
     public const string IMAGE_FOLDER_NAME = "images";
     public const string REBEL_ICON_IMAGE = "rebels";
     public const string EMPIRE_ICON_IMAGE = "imperials";
+    public const string SCUM_ICON_IMAGE = "scum";
     public const string PREFABS_FOLDER_NAME = "Prefabs";
     public const string SHIP_NAME_PANEL = "ShipNamePanel";
     public const string PILOT_NAME_PANEL = "PilotNamePanel";
@@ -16,6 +17,7 @@ public class SquadBuilderConstants {
     public const string SAVED_SQUADRON_PANEL = "SavedSquadronPanel";
     public const string FACTION_REBELS = "Rebels";
     public const string FACTION_EMPIRE = "Empire";
+    public const string FACTION_SCUM = "Scum";
 
     public const float SHIP_PANEL_X_OFFSET = 0.0f;
     public const float SHIP_PANEL_Y_OFFSET = -15.0f;

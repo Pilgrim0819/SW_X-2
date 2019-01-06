@@ -2,7 +2,7 @@
 
 public class SystemMessageService : MonoBehaviour {
 
-    public static void showErrorMsg(string msg, GameObject target, int level)
+    public static void showErrorMsg(string msg, GameObject target, int level, PointerClickCallback callback)
     {
         string header = "";
 
@@ -28,6 +28,9 @@ public class SystemMessageService : MonoBehaviour {
 
         systemMessageHolder.transform.SetParent(GameObject.Find("Canvas").transform, false);
         systemMessageHolder.transform.Find("SystemMessage").gameObject.GetComponent<UnityEngine.UI.Text>().text = header + msg;
+
+        SystemMessagePanelEvents panelEvents = systemMessageHolder.transform.Find("SystemMessageButton").GetComponent<SystemMessagePanelEvents>();
+        panelEvents.setCallback(callback);
 
         //Debug.Log("There was an exception, but could not find the error message holder gameobject! EXCEPTION: " + e.Message);
     }

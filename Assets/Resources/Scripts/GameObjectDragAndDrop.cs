@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 using System.Collections;
+using System.Linq;
 
 public class GameObjectDragAndDrop : MonoBehaviour {
 
@@ -9,6 +10,8 @@ public class GameObjectDragAndDrop : MonoBehaviour {
     private Vector3 prevPos;
 
     private const float dragSpeedMultiplier = 50.0f;
+
+    private string[] faces = { "FrontFace", "BackFace", "LeftFace", "RightFace" };
 
     GameObject ReturnClickedObject(out RaycastHit hit)
     {
@@ -42,13 +45,42 @@ public class GameObjectDragAndDrop : MonoBehaviour {
 
             if (target != null)
             {
+                if (!grabbed)
+                {
+                    if (MatchDatas.getActiveShip() == null || MatchDatas.getActiveShip() != target)
+                    {
+                        if (MatchDatas.getActiveShip() != null)
+                        {
+                            for (int i = 0; i < faces.Length; i++)
+                            {
+                                MatchDatas.getActiveShip().transform.Find(faces[i]).gameObject.SetActive(false);
+                            }
+                        }
+
+                        LoadedShip activeShip = new LoadedShip();
+                        ShipProperties sp = target.GetComponent<ShipProperties>();
+
+                        activeShip.setShip(target.GetComponent<ShipProperties>().getShip());
+                        activeShip.setPilot(target.GetComponent<ShipProperties>().getPilot());
+
+                        MatchDatas.getPlayers()[MatchDatas.getActivePlayerIndex()].setActiveShip(activeShip);
+
+                        for (int i = 0; i < faces.Length; i++)
+                        {
+                            target.transform.Find(faces[i]).gameObject.SetActive(true);
+                        }
+
+                        MatchDatas.setActiveShip(target);
+                    }
+                }
+
                 Cursor.visible = false;
                 grabbed = true;
                 prevPos = target.transform.position;
             }
         }
 
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0) && grabbed)
         {
             Cursor.visible = true;
             grabbed = false;

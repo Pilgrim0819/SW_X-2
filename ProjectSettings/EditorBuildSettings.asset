@@ -5,16 +5,28 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Resources/Scenes/Scene 1.unity
-    guid: 00000000000000000000000000000000
-  - enabled: 1
+    guid: f511cee6e6d34ab43bf99cefcb9f8e3e
+  - enabled: 0
     path: Assets/Resources/Scenes/Scene 2.unity
-    guid: 00000000000000000000000000000000
-  - enabled: 1
+    guid: 8f8b149b026c50f468843931d446178d
+  - enabled: 0
     path: Assets/Resources/Scenes/Scene 3.unity
-    guid: 00000000000000000000000000000000
-  - enabled: 1
+    guid: c72b494e7faaba6458d7a43aef8a3770
+  - enabled: 0
     path: Assets/Resources/Scenes/Scene 4.unity
-    guid: 00000000000000000000000000000000
+    guid: 84a153b505f6b3342896b8b776431cb7
+  - enabled: 1
+    path: Assets/Resources/Scenes/MainMenu.unity
+    guid: c3347bf6804a41b40b1f5ad24a0e9604
+  - enabled: 1
+    path: Assets/Resources/Scenes/SquadronBuilder.unity
+    guid: 022f16957bf7c0a4e8794e982ac5fb50
+  - enabled: 1
+    path: Assets/Resources/Scenes/Match.unity
+    guid: 3e0901fb31177e54292ea1e3aacf790d
+  - enabled: 1
+    path: Assets/Resources/Scenes/FactionSelection.unity
+    guid: b22f4d9f9d881e3498fe051e0d0eda68
   m_configObjects: {}

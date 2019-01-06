@@ -286,27 +286,6 @@
     <Reference Include="UnityEditor.WindowsStandalone.Extensions">
       <HintPath>C:/Program Files (x86)/Unity/Editor/Data/PlaybackEngines/windowsstandalonesupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
     </Reference>
-    <Reference Include="AsyncBridge.Net35">
-      <HintPath>Assets/Plugins/GitHub/Editor/AsyncBridge.Net35.dll</HintPath>
-    </Reference>
-    <Reference Include="GitHub.Api">
-      <HintPath>Assets/Plugins/GitHub/Editor/GitHub.Api.dll</HintPath>
-    </Reference>
-    <Reference Include="GitHub.Logging">
-      <HintPath>Assets/Plugins/GitHub/Editor/GitHub.Logging.dll</HintPath>
-    </Reference>
-    <Reference Include="GitHub.Unity">
-      <HintPath>Assets/Plugins/GitHub/Editor/GitHub.Unity.dll</HintPath>
-    </Reference>
-    <Reference Include="ReadOnlyCollectionsInterfaces">
-      <HintPath>Assets/Plugins/GitHub/Editor/ReadOnlyCollectionsInterfaces.dll</HintPath>
-    </Reference>
-    <Reference Include="sfw.net">
-      <HintPath>Assets/Plugins/GitHub/Editor/sfw.net.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Threading">
-      <HintPath>Assets/Plugins/GitHub/Editor/System.Threading.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEditor.Advertisements">
       <HintPath>C:/Users/Pilgrim/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.ads@2.0.8/Editor/UnityEditor.Advertisements.dll</HintPath>
     </Reference>
@@ -401,11 +380,8 @@
     <Compile Include="Packages\com.unity.textmeshpro\Scripts\Editor\TMPro_TexturePostProcessor.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Plugins\GitHub\Editor\credits.txt" />
-    <None Include="Assets\Plugins\GitHub\Editor\eula.txt" />
     <None Include="Assets\Resources\Fonts\Aerobus dotty\readme.txt" />
     <None Include="Assets\Resources\Fonts\Digital play\00copyfont.txt" />
-    <None Include="Assets\StreamingAssets\TIE Fighter_pilots.xml" />
     <None Include="Assets\StreamingAssets\abilities overview.txt" />
     <None Include="Assets\StreamingAssets\custom_events.txt" />
     <None Include="Assets\StreamingAssets\imperial_ships.xml" />
@@ -413,7 +389,11 @@
     <None Include="Assets\StreamingAssets\rz1aw_pilots.xml" />
     <None Include="Assets\StreamingAssets\t65xw_pilots.xml" />
     <None Include="Assets\StreamingAssets\t70xw_pilots.xml" />
+    <None Include="Assets\StreamingAssets\tief_pilots.xml" />
+    <None Include="Assets\StreamingAssets\tiefof_pilots.xml" />
+    <None Include="Assets\StreamingAssets\tieint_pilots.xml" />
     <None Include="Assets\StreamingAssets\upgrades.xml" />
+    <None Include="Assets\StreamingAssets\yt1300_pilots.xml" />
     <None Include="Assets\json\T-65_pilots.json.txt" />
     <None Include="Assets\json\TIE Fighter_pilots.json.txt" />
     <None Include="Assets\json\imperial_ships.json.txt" />

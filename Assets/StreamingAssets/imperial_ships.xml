@@ -1,79 +1,106 @@
 	<ships>
-		<ship>
-			<shipId>tief</shipId>
-			<shipName>TIE Fighter</shipName>
-			<weapon>2</weapon>
-			<agility>3</agility>
-			<hull>3</hull>
-			<shield>0</shield>
-			<size>small</size>
-			<actions>
-				<action>focus</action>
-				<action>evade</action>
-				<action>barrel roll</action>
-			</actions>
-			<maneuvers>
-				<maneuver>
-					<speed>1</speed>
-					<bearing>turn</bearing>
-					<difficulty>1</difficulty>
-				</maneuver>
-				<maneuver>
-					<speed>2</speed>
-					<bearing>straight</bearing>
-					<difficulty>0</difficulty>
-				</maneuver>
-				<maneuver>
-					<speed>2</speed>
-					<bearing>bank</bearing>
-					<difficulty>0</difficulty>
-				</maneuver>
-				<maneuver>
-					<speed>2</speed>
-					<bearing>turn</bearing>
-					<difficulty>1</difficulty>
-				</maneuver>
-				<maneuver>
-					<speed>3</speed>
-					<bearing>straight</bearing>
-					<difficulty>0</difficulty>
-				</maneuver>
-				<maneuver>
-					<speed>3</speed>
-					<bearing>bank</bearing>
-					<difficulty>1</difficulty>
-				</maneuver>
-				<maneuver>
-					<speed>3</speed>
-					<bearing>turn</bearing>
-					<difficulty>1</difficulty>
-				</maneuver>
-				<maneuver>
-					<speed>3</speed>
-					<bearing>koiogran</bearing>
-					<difficulty>2</difficulty>
-				</maneuver>
-				<maneuver>
-					<speed>4</speed>
-					<bearing>straight</bearing>
-					<difficulty>1</difficulty>
-				</maneuver>
-				<maneuver>
-					<speed>4</speed>
-					<bearing>koiogran</bearing>
-					<difficulty>2</difficulty>
-				</maneuver>
-				<maneuver>
-					<speed>5</speed>
-					<bearing>straight</bearing>
-					<difficulty>1</difficulty>
-				</maneuver>
-			</maneuvers>
-		</ship>
+    <ship>
+      <shipId>tief</shipId>
+      <shipName>TIE Fighter</shipName>
+      <shipDescription>Developed by Sienar Fleet Systems, the Empire used the fast and agile TIE/ln as its primary starfighter throughout most of the Galactic Civil War. The TIE fighter's Twin Ion Engine system was designed for speed, making the TIE one of the most maneuverable starships ever produced. The TIE fighter has no shields or life support systems, forcing TIE pilots to depend solely on their skills to survive.</shipDescription>
+      <weapon>2</weapon>
+      <agility>3</agility>
+      <hull>3</hull>
+      <shield>0</shield>
+      <size>small</size>
+      <actions>
+        <action>focus</action>
+        <action>evade</action>
+        <action>barrel roll</action>
+      </actions>
+      <maneuvers>
+        <maneuver>
+          <speed>1</speed>
+          <bearing>turn_left</bearing>
+          <difficulty>1</difficulty>
+        </maneuver>
+        <maneuver>
+          <speed>1</speed>
+          <bearing>turn_right</bearing>
+          <difficulty>1</difficulty>
+        </maneuver>
+        <maneuver>
+          <speed>2</speed>
+          <bearing>straight</bearing>
+          <difficulty>0</difficulty>
+        </maneuver>
+        <maneuver>
+          <speed>2</speed>
+          <bearing>bank_left</bearing>
+          <difficulty>0</difficulty>
+        </maneuver>
+        <maneuver>
+          <speed>2</speed>
+          <bearing>bank_right</bearing>
+          <difficulty>0</difficulty>
+        </maneuver>
+        <maneuver>
+          <speed>2</speed>
+          <bearing>turn_left</bearing>
+          <difficulty>1</difficulty>
+        </maneuver>
+        <maneuver>
+          <speed>2</speed>
+          <bearing>turn_right</bearing>
+          <difficulty>1</difficulty>
+        </maneuver>
+        <maneuver>
+          <speed>3</speed>
+          <bearing>straight</bearing>
+          <difficulty>0</difficulty>
+        </maneuver>
+        <maneuver>
+          <speed>3</speed>
+          <bearing>bank_left</bearing>
+          <difficulty>1</difficulty>
+        </maneuver>
+        <maneuver>
+          <speed>3</speed>
+          <bearing>bank_right</bearing>
+          <difficulty>1</difficulty>
+        </maneuver>
+        <maneuver>
+          <speed>3</speed>
+          <bearing>turn_left</bearing>
+          <difficulty>1</difficulty>
+        </maneuver>
+        <maneuver>
+          <speed>3</speed>
+          <bearing>turn_right</bearing>
+          <difficulty>1</difficulty>
+        </maneuver>
+        <maneuver>
+          <speed>3</speed>
+          <bearing>koiogran</bearing>
+          <difficulty>2</difficulty>
+        </maneuver>
+        <maneuver>
+          <speed>4</speed>
+          <bearing>straight</bearing>
+          <difficulty>1</difficulty>
+        </maneuver>
+        <maneuver>
+          <speed>4</speed>
+          <bearing>koiogran</bearing>
+          <difficulty>2</difficulty>
+        </maneuver>
+        <maneuver>
+          <speed>5</speed>
+          <bearing>straight</bearing>
+          <difficulty>1</difficulty>
+        </maneuver>
+      </maneuvers>
+    </ship>
 		
 		<ship>
 			<shipId>tiefof</shipId>
 			<shipName>TIE/fo Fighter</shipName>
+      <shipDescription>Following the tradition of the Galactic Empire, the First Order has kept the TIE fighter design in service, but has updated the craft to modern combat standards. The fragility of TIE fighters during the Galactic Civil War led engineers to improve survivability, resulting in a more durable starfighter. To attain a coveted position in the skilled Omega squadron, pilots had to demonstrate both their exceptional skill and their unwavering dedication to the First Order.</shipDescription>
 			<weapon>2</weapon>
 			<agility>3</agility>
 			<hull>3</hull>
@@ -88,9 +115,14 @@
 			<maneuvers>
 				<maneuver>
 					<speed>1</speed>
-					<bearing>turn</bearing>
+					<bearing>turn_left</bearing>
 					<difficulty>1</difficulty>
 				</maneuver>
+        <maneuver>
+          <speed>1</speed>
+          <bearing>turn_right</bearing>
+          <difficulty>1</difficulty>
+        </maneuver>
 				<maneuver>
 					<speed>2</speed>
 					<bearing>straight</bearing>
@@ -98,14 +130,24 @@
 				</maneuver>
 				<maneuver>
 					<speed>2</speed>
-					<bearing>bank</bearing>
+					<bearing>bank_left</bearing>
 					<difficulty>0</difficulty>
 				</maneuver>
+        <maneuver>
+          <speed>2</speed>
+          <bearing>bank_right</bearing>
+          <difficulty>0</difficulty>
+        </maneuver>
 				<maneuver>
 					<speed>2</speed>
-					<bearing>turn</bearing>
+					<bearing>turn_left</bearing>
 					<difficulty>0</difficulty>
 				</maneuver>
+        <maneuver>
+          <speed>2</speed>
+          <bearing>turn_right</bearing>
+          <difficulty>0</difficulty>
+        </maneuver>
 				<maneuver>
 					<speed>3</speed>
 					<bearing>straight</bearing>
@@ -113,14 +155,24 @@
 				</maneuver>
 				<maneuver>
 					<speed>3</speed>
-					<bearing>bank</bearing>
+					<bearing>bank_left</bearing>
 					<difficulty>1</difficulty>
 				</maneuver>
+        <maneuver>
+          <speed>3</speed>
+          <bearing>bank_right</bearing>
+          <difficulty>1</difficulty>
+        </maneuver>
 				<maneuver>
 					<speed>3</speed>
-					<bearing>turn</bearing>
+					<bearing>turn_left</bearing>
 					<difficulty>1</difficulty>
 				</maneuver>
+        <maneuver>
+          <speed>3</speed>
+          <bearing>turn_right</bearing>
+          <difficulty>1</difficulty>
+        </maneuver>
 				<maneuver>
 					<speed>4</speed>
 					<bearing>straight</bearing>
@@ -138,4 +190,103 @@
 				</maneuver>
 			</maneuvers>
 		</ship>
+
+    <ship>
+      <shipId>tieint</shipId>
+      <shipName>TIE Interceptor</shipName>
+      <shipDescription>Sienar Fleet Systems designed the TIE Interceptor with four wing-mounted laser cannons, easily allowing it to outgun its predecessors. The finest mass-produced starfighter of its time, the TIE Interceptor excels at dogfighting thanks to its heightened maneuverability and speed. Led by Baron Soontir Fel, the pilots of Saber Squadron are among the Empire's best. Their TIE Interceptors are marked with red stripes to designate pilots with at least ten confirmed kills.</shipDescription>
+      <weapon>3</weapon>
+      <agility>3</agility>
+      <hull>3</hull>
+      <shield>0</shield>
+      <size>small</size>
+      <actions>
+        <action>focus</action>
+        <action>evade</action>
+        <action>boost</action>
+        <action>barrel roll</action>
+      </actions>
+      <maneuvers>
+        <maneuver>
+          <speed>1</speed>
+          <bearing>turn_left</bearing>
+          <difficulty>1</difficulty>
+        </maneuver>
+        <maneuver>
+          <speed>1</speed>
+          <bearing>turn_right</bearing>
+          <difficulty>1</difficulty>
+        </maneuver>
+        <maneuver>
+          <speed>2</speed>
+          <bearing>turn_left</bearing>
+          <difficulty>0</difficulty>
+        </maneuver>
+        <maneuver>
+          <speed>2</speed>
+          <bearing>turn_right</bearing>
+          <difficulty>0</difficulty>
+        </maneuver>
+        <maneuver>
+          <speed>2</speed>
+          <bearing>bank_left</bearing>
+          <difficulty>0</difficulty>
+        </maneuver>
+        <maneuver>
+          <speed>2</speed>
+          <bearing>bank_right</bearing>
+          <difficulty>0</difficulty>
+        </maneuver>
+        <maneuver>
+          <speed>2</speed>
+          <bearing>straight</bearing>
+          <difficulty>0</difficulty>
+        </maneuver>
+        <maneuver>
+          <speed>3</speed>
+          <bearing>turn_left</bearing>
+          <difficulty>1</difficulty>
+        </maneuver>
+        <maneuver>
+          <speed>3</speed>
+          <bearing>turn_right</bearing>
+          <difficulty>1</difficulty>
+        </maneuver>
+        <maneuver>
+          <speed>3</speed>
+          <bearing>bank_left</bearing>
+          <difficulty>1</difficulty>
+        </maneuver>
+        <maneuver>
+          <speed>3</speed>
+          <bearing>bank_right</bearing>
+          <difficulty>1</difficulty>
+        </maneuver>
+        <maneuver>
+          <speed>3</speed>
+          <bearing>straight</bearing>
+          <difficulty>0</difficulty>
+        </maneuver>
+        <maneuver>
+          <speed>3</speed>
+          <bearing>koiogran</bearing>
+          <difficulty>2</difficulty>
+        </maneuver>
+        <maneuver>
+          <speed>4</speed>
+          <bearing>straight</bearing>
+          <difficulty>0</difficulty>
+        </maneuver>
+        <maneuver>
+          <speed>5</speed>
+          <bearing>straight</bearing>
+          <difficulty>1</difficulty>
+        </maneuver>
+        <maneuver>
+          <speed>5</speed>
+          <bearing>koiogran</bearing>
+          <difficulty>2</difficulty>
+        </maneuver>
+      </maneuvers>  
+    </ship>
 	</ships>

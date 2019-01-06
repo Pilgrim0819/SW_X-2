@@ -4,8 +4,10 @@ using System.Collections.Generic;
 
 public class MatchDatas {
 
-    private enum phases {
+    // These are not phases, but custom event indicators
+    /*public enum phases {
         INITIATIVE_ROLL,
+        ASTEROIDS_PLACEMENT,
         SQUADRON_PLACEMENT,
         PRE_PLANNING,
         POST_PLANNING,
@@ -19,21 +21,68 @@ public class MatchDatas {
         POST_DEFENSE,
         PRE_END,
         POST_END
-    };
+    };*/
 
-    private static int currentPhase;
-    private static int activePlayerIndex;
+    public enum phases
+    {
+        INITIATIVE_ROLL,
+        ASTEROIDS_PLACEMENT,
+        SQUADRON_PLACEMENT,
+        PLANNING,
+        ACTIVATION,
+        ATTACK,
+        END
+    };
+    
+    private static int activePlayerIndex = 0;
+    private static int initiativeChoserPlayerIndex = 0;
     private static List<Player> players = new List<Player>();
     private static int round = 0;
+    private static int currentLevel = 0;
+    private static phases phase = phases.INITIATIVE_ROLL;
+    // TODO Add missions later on! (This might change placement/rules/squadpoints/etc...)
+    private static string mission = "";
+    private static int totalSquadPoints = 100;
+    private static GameObject activeShip = null;
 
-    public static void setCurrentPhase(int phase)
+    public static void setInitiativeChoserPlayerIndex(int index)
     {
-        currentPhase = phase;
+        initiativeChoserPlayerIndex = index;
     }
 
-    public static int getCurrentPhase()
+    public static int getInitiativeChoserPlayerIndex()
     {
-        return currentPhase;
+        return initiativeChoserPlayerIndex;
+    }
+
+    public static void setActiveShip(GameObject ship)
+    {
+        activeShip = ship;
+    }
+
+    public static GameObject getActiveShip()
+    {
+        return activeShip;
+    }
+
+    public static int getTotalSquadPoints()
+    {
+        return totalSquadPoints;
+    }
+
+    public static void setTotalSquadPoints(int total)
+    {
+        totalSquadPoints = total;
+    }
+
+    public static void setMission(string m)
+    {
+        mission = m;
+    }
+
+    public static string getMission()
+    {
+        return mission;
     }
 
     public static void setActivePlayerIndex(int playerIndex)
@@ -80,5 +129,59 @@ public class MatchDatas {
     public static int getRound()
     {
         return round;
+    }
+
+    public static void nextPhase()
+    {
+        switch (phase)
+        {
+            case phases.INITIATIVE_ROLL:
+                phase = phases.ASTEROIDS_PLACEMENT;
+                break;
+            case phases.ASTEROIDS_PLACEMENT:
+                phase = phases.SQUADRON_PLACEMENT;
+                break;
+            case phases.SQUADRON_PLACEMENT:
+                phase = phases.PLANNING;
+                break;
+            case phases.PLANNING:
+                phase = phases.ACTIVATION;
+                break;
+            case phases.ACTIVATION:
+                phase = phases.ATTACK;
+                break;
+            case phases.ATTACK:
+                phase = phases.END;
+                break;
+            case phases.END:
+                if (!isMatchOver())
+                {
+                    phase = phases.PLANNING;
+                }
+                break;
+        }
+    }
+
+    private static bool isMatchOver()
+    {
+        foreach (Player player in players)
+        {
+            if (player.isDefeated())
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public static int getCurrentLevel()
+    {
+        return currentLevel;
+    }
+
+    public static void setCurrentLevel(int level)
+    {
+        currentLevel = level;
     }
 }

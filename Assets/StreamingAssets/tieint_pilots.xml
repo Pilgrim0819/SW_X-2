@@ -1,0 +1,112 @@
+<pilots>
+	<pilot>
+		<shipId>tieint</shipId>
+		<unique>false</unique>
+		<name>Alpha Squadron Pilot</name>
+		<cost>18</cost>
+		<level>1</level>
+		<text></text>
+    <upgradeSlots>
+      <upgradeSlot>
+        <type>title</type>
+      </upgradeSlot>
+      <upgradeSlot>
+        <type>modification</type>
+      </upgradeSlot>
+    </upgradeSlots>
+	</pilot>
+
+  <pilot>
+    <shipId>tieint</shipId>
+    <unique>false</unique>
+    <name>Avenger Squadron Pilot</name>
+    <cost>20</cost>
+    <level>3</level>
+    <text></text>
+    <upgradeSlots>
+      <upgradeSlot>
+        <type>title</type>
+      </upgradeSlot>
+      <upgradeSlot>
+        <type>modification</type>
+      </upgradeSlot>
+    </upgradeSlots>
+  </pilot>
+
+  <pilot>
+    <shipId>tieint</shipId>
+    <unique>false</unique>
+    <name>Saber Squadron Pilot</name>
+    <cost>21</cost>
+    <level>4</level>
+    <text></text>
+    <upgradeSlots>
+      <upgradeSlot>
+        <type>elite</type>
+      </upgradeSlot>
+      <upgradeSlot>
+        <type>title</type>
+      </upgradeSlot>
+      <upgradeSlot>
+        <type>modification</type>
+      </upgradeSlot>
+    </upgradeSlots>
+  </pilot>
+
+  <pilot>
+    <shipId>tieint</shipId>
+    <unique>true</unique>
+    <name>"Fel's Wrath"</name>
+    <cost>23</cost>
+    <level>5</level>
+    <text>When the number of Damage cards assigned to you equals or exceeds your hull value, you are not destroyed until the end of the Combat phase.</text>
+    <upgradeSlots>
+      <upgradeSlot>
+        <type>title</type>
+      </upgradeSlot>
+      <upgradeSlot>
+        <type>modification</type>
+      </upgradeSlot>
+    </upgradeSlots>
+  </pilot>
+
+  <pilot>
+    <shipId>tieint</shipId>
+    <unique>true</unique>
+    <name>Turr Phennir</name>
+    <cost>25</cost>
+    <level>7</level>
+    <text>After you perform an attack, you may perform a free boost or barrel roll action.</text>
+    <upgradeSlots>
+      <upgradeSlot>
+        <type>elite</type>
+      </upgradeSlot>
+      <upgradeSlot>
+        <type>title</type>
+      </upgradeSlot>
+      <upgradeSlot>
+        <type>modification</type>
+      </upgradeSlot>
+    </upgradeSlots>
+  </pilot>
+
+  <pilot>
+    <shipId>tieint</shipId>
+    <unique>true</unique>
+    <name>Soontir Fel</name>
+    <cost>27</cost>
+    <level>9</level>
+    <text>When you receive a stress token, you may assign 1 focus token to your ship.</text>
+    <upgradeSlots>
+      <upgradeSlot>
+        <type>elite</type>
+      </upgradeSlot>
+      <upgradeSlot>
+        <type>title</type>
+      </upgradeSlot>
+      <upgradeSlot>
+        <type>modification</type>
+      </upgradeSlot>
+    </upgradeSlots>
+  </pilot>
+</pilots>

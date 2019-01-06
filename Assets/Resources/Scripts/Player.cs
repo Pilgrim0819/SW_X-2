@@ -94,4 +94,43 @@ public class Player {
 
         return result;
     }
+
+    public bool isDefeated()
+    {
+        bool result = true;
+
+        foreach (LoadedShip ship in squadron)
+        {
+            // TODO DO NOT USE the hull value!!! Make another variable for ships which holds the CURRENT hull value!!
+            if (ship.getShip().Hull != 0)
+            {
+                result = false;
+                break;
+            }
+        }
+
+        return result;
+    }
+
+    public LoadedShip getNextShip(int currentLevel, bool ascending)
+    {
+        foreach (LoadedShip ship in squadron)
+        {
+            if (ascending)
+            {
+                if (ship.getPilot().Level >= currentLevel && !ship.isHasBeenActivatedThisRound())
+                {
+                    return ship;
+                }
+            } else
+            {
+                if (ship.getPilot().Level <= currentLevel && !ship.isHasBeenActivatedThisRound())
+                {
+                    return ship;
+                }
+            }
+        }
+
+        return null;
+    }
 }

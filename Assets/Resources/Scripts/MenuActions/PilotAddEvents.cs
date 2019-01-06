@@ -25,7 +25,7 @@ public class PilotAddEvents : MonoBehaviour, IPointerEnterHandler, IPointerExitH
             PlayerDatas.addPilotToSquadron(PlayerDatas.getSelectedPilot());
         } catch (System.ApplicationException e)
         {
-            SystemMessageService.showErrorMsg(e.Message, GameObject.Find("SystemMessagePanel"), 2);
+            SystemMessageService.showErrorMsg(e.Message, GameObject.Find("SystemMessagePanel"), 2, null);
         }
     }
 }

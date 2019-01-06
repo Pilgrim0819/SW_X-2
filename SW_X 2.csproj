@@ -325,17 +325,21 @@
     <Compile Include="Assets\Resources\Scripts\ManeuverHandler.cs" />
     <Compile Include="Assets\Resources\Scripts\MatchDatas.cs" />
     <Compile Include="Assets\Resources\Scripts\MenuAction.cs" />
+    <Compile Include="Assets\Resources\Scripts\MenuActions\FactionPanelVents.cs" />
+    <Compile Include="Assets\Resources\Scripts\MenuActions\LoadSquadronEvents.cs" />
     <Compile Include="Assets\Resources\Scripts\MenuActions\PilotAddEvents.cs" />
     <Compile Include="Assets\Resources\Scripts\MenuActions\PilotRemoveEvents.cs" />
+    <Compile Include="Assets\Resources\Scripts\MenuActions\SaveSquadronEvents.cs" />
+    <Compile Include="Assets\Resources\Scripts\MenuActions\ShipSizeChangerEvents.cs" />
+    <Compile Include="Assets\Resources\Scripts\MenuActions\ShowFileExplorerEvents.cs" />
     <Compile Include="Assets\Resources\Scripts\MenuActions\SquadBuilderPilotPanelEvents.cs" />
     <Compile Include="Assets\Resources\Scripts\MenuActions\SquadBuilderShipPanelEvents.cs" />
+    <Compile Include="Assets\Resources\Scripts\MenuActions\SquadronBuilderPanelEvents.cs" />
     <Compile Include="Assets\Resources\Scripts\MenuActions\SystemMessagePanelEvents.cs" />
     <Compile Include="Assets\Resources\Scripts\MenuActions\UpgradePanelEvents.cs" />
     <Compile Include="Assets\Resources\Scripts\MenuActions\UpgradeSlotEvents.cs" />
     <Compile Include="Assets\Resources\Scripts\MenuElementMouseClick.cs" />
-    <Compile Include="Assets\Resources\Scripts\Mocker.cs" />
     <Compile Include="Assets\Resources\Scripts\Models\UpgradesXMLModel.cs" />
-    <Compile Include="Assets\Resources\Scripts\OnMatchStart.cs" />
     <Compile Include="Assets\Resources\Scripts\OnShipClick.cs" />
     <Compile Include="Assets\Resources\Scripts\OnShipSelectionSceneLoad.cs" />
     <Compile Include="Assets\Resources\Scripts\PhaseChanger.cs" />
@@ -343,6 +347,8 @@
     <Compile Include="Assets\Resources\Scripts\Player.cs" />
     <Compile Include="Assets\Resources\Scripts\PlayerDatas.cs" />
     <Compile Include="Assets\Resources\Scripts\SceneChangerManuAction.cs" />
+    <Compile Include="Assets\Resources\Scripts\SceneHandlers\LobbyHandler.cs" />
+    <Compile Include="Assets\Resources\Scripts\SceneHandlers\MatchHandler.cs" />
     <Compile Include="Assets\Resources\Scripts\SceneHandlers\SquadBuilderHandler.cs" />
     <Compile Include="Assets\Resources\Scripts\Services\SystemMessageService.cs" />
     <Compile Include="Assets\Resources\Scripts\SetPlayerInitiative.cs" />
@@ -352,15 +358,14 @@
     <Compile Include="Assets\Resources\Scripts\SideSelectionStartup.cs" />
     <Compile Include="Assets\Resources\Scripts\SquadPointsChange.cs" />
     <Compile Include="Assets\Resources\Scripts\SummaryBeforeMatch.cs" />
+    <Compile Include="Assets\Resources\Scripts\Utils\Mocker.cs" />
     <Compile Include="Assets\Resources\Scripts\Utils\SquadBuilderUtil.cs" />
+    <Compile Include="Assets\Resources\Scripts\Utils\SquadPersistenceUtil.cs" />
     <Compile Include="Assets\Resources\Scripts\XMLLoader.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Plugins\GitHub\Editor\credits.txt" />
-    <None Include="Assets\Plugins\GitHub\Editor\eula.txt" />
     <None Include="Assets\Resources\Fonts\Aerobus dotty\readme.txt" />
     <None Include="Assets\Resources\Fonts\Digital play\00copyfont.txt" />
-    <None Include="Assets\StreamingAssets\TIE Fighter_pilots.xml" />
     <None Include="Assets\StreamingAssets\abilities overview.txt" />
     <None Include="Assets\StreamingAssets\custom_events.txt" />
     <None Include="Assets\StreamingAssets\imperial_ships.xml" />
@@ -368,7 +373,11 @@
     <None Include="Assets\StreamingAssets\rz1aw_pilots.xml" />
     <None Include="Assets\StreamingAssets\t65xw_pilots.xml" />
     <None Include="Assets\StreamingAssets\t70xw_pilots.xml" />
+    <None Include="Assets\StreamingAssets\tief_pilots.xml" />
+    <None Include="Assets\StreamingAssets\tiefof_pilots.xml" />
+    <None Include="Assets\StreamingAssets\tieint_pilots.xml" />
     <None Include="Assets\StreamingAssets\upgrades.xml" />
+    <None Include="Assets\StreamingAssets\yt1300_pilots.xml" />
     <None Include="Assets\json\T-65_pilots.json.txt" />
     <None Include="Assets\json\TIE Fighter_pilots.json.txt" />
     <None Include="Assets\json\imperial_ships.json.txt" />

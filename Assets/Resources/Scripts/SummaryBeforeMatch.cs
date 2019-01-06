@@ -28,7 +28,7 @@ public class SummaryBeforeMatch : MonoBehaviour {
 
     void Start()
     {
-        DiceRollerBase.setUpDiceRollerBase(ForceMode.VelocityChange, 10.0f, "Fire1");
+        DiceRollerBase.setUpDiceRollerBase(ForceMode.VelocityChange, 10.0f);
         StartCoroutine(populateSummaryView());
     }
 

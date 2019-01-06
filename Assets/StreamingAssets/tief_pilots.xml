@@ -1,0 +1,109 @@
+<pilots>
+	<pilot>
+		<shipId>tief</shipId>
+		<unique>false</unique>
+		<name>Academy Pilot</name>
+		<cost>12</cost>
+		<level>1</level>
+		<text></text>
+    <upgradeSlots>
+      <upgradeSlot>
+        <type>title</type>
+      </upgradeSlot>
+      <upgradeSlot>
+        <type>modification</type>
+      </upgradeSlot>
+    </upgradeSlots>
+	</pilot>
+	
+	<pilot>
+		<shipId>tief</shipId>
+		<unique>false</unique>
+		<name>Obsidian Squadron Pilot</name>
+		<cost>13</cost>
+		<level>3</level>
+		<text></text>
+    <upgradeSlots>
+      <upgradeSlot>
+        <type>title</type>
+      </upgradeSlot>
+      <upgradeSlot>
+        <type>modification</type>
+      </upgradeSlot>
+    </upgradeSlots>
+	</pilot>
+	
+	<pilot>
+		<shipId>tief</shipId>
+		<unique>false</unique>
+		<name>Black Squadron Pilot</name>
+		<cost>14</cost>
+		<level>4</level>
+		<text></text>
+    <upgradeSlots>
+      <upgradeSlot>
+        <type>elite</type>
+      </upgradeSlot>
+      <upgradeSlot>
+        <type>title</type>
+      </upgradeSlot>
+      <upgradeSlot>
+        <type>modification</type>
+      </upgradeSlot>
+    </upgradeSlots>
+	</pilot>
+	
+	<pilot>
+		<shipId>tief</shipId>
+		<unique>true</unique>
+		<name>"Winged Gundark"</name>
+		<cost>15</cost>
+		<level>5</level>
+		<text>When attacking at Range 1, you may change 1 of your hit results to a critical result.</text>
+    <upgradeSlots>
+      <upgradeSlot>
+        <type>title</type>
+      </upgradeSlot>
+      <upgradeSlot>
+        <type>modification</type>
+      </upgradeSlot>
+    </upgradeSlots>
+	</pilot>
+
+  <pilot>
+    <shipId>tief</shipId>
+    <unique>true</unique>
+    <name>"Backstabber"</name>
+    <cost>16</cost>
+    <level>6</level>
+    <text>When attacking from outside the defender's firing arc, roll 1 additional attack die.</text>
+    <upgradeSlots>
+      <upgradeSlot>
+        <type>title</type>
+      </upgradeSlot>
+      <upgradeSlot>
+        <type>modification</type>
+      </upgradeSlot>
+    </upgradeSlots>
+  </pilot>
+
+  <pilot>
+    <shipId>tief</shipId>
+    <unique>true</unique>
+    <name>"Howlrunner"</name>
+    <cost>18</cost>
+    <level>8</level>
+    <text>When another friendly ship at Range 1 is attacking with its primary weapon, it may reroll 1 attack die.</text>
+    <upgradeSlots>
+      <upgradeSlot>
+        <type>elite</type>
+      </upgradeSlot>
+      <upgradeSlot>
+        <type>title</type>
+      </upgradeSlot>
+      <upgradeSlot>
+        <type>modification</type>
+      </upgradeSlot>
+    </upgradeSlots>
+  </pilot>
+</pilots>

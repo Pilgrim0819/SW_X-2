@@ -1,0 +1,130 @@
+<pilots>
+	<pilot>
+		<shipId>tiefof</shipId>
+		<unique>false</unique>
+		<name>Epsilon Squadron Pilot</name>
+		<cost>15</cost>
+		<level>1</level>
+		<text></text>
+    <upgradeSlots>
+      <upgradeSlot>
+        <type>tech</type>
+      </upgradeSlot>
+      <upgradeSlot>
+        <type>title</type>
+      </upgradeSlot>
+      <upgradeSlot>
+        <type>modification</type>
+      </upgradeSlot>
+    </upgradeSlots>
+	</pilot>
+	
+	<pilot>
+		<shipId>tiefof</shipId>
+		<unique>false</unique>
+		<name>Zeta Squadron Pilot</name>
+		<cost>16</cost>
+		<level>3</level>
+		<text></text>
+    <upgradeSlots>
+      <upgradeSlot>
+        <type>tech</type>
+      </upgradeSlot>
+      <upgradeSlot>
+        <type>title</type>
+      </upgradeSlot>
+      <upgradeSlot>
+        <type>modification</type>
+      </upgradeSlot>
+    </upgradeSlots>
+	</pilot>
+	
+	<pilot>
+		<shipId>tiefof</shipId>
+		<unique>false</unique>
+		<name>Omega Squadron Pilot</name>
+		<cost>17</cost>
+		<level>4</level>
+		<text></text>
+    <upgradeSlots>
+      <upgradeSlot>
+        <type>elite</type>
+      </upgradeSlot>
+      <upgradeSlot>
+        <type>tech</type>
+      </upgradeSlot>
+      <upgradeSlot>
+        <type>title</type>
+      </upgradeSlot>
+      <upgradeSlot>
+        <type>modification</type>
+      </upgradeSlot>
+    </upgradeSlots>
+	</pilot>
+
+  <pilot>
+    <shipId>tiefof</shipId>
+    <unique>true</unique>
+    <name>"Epsilon Ace"</name>
+    <cost>17</cost>
+    <level>4</level>
+    <text>While you do not have any Damage cards, treat your pilot skill value as "12."</text>
+    <upgradeSlots>
+      <upgradeSlot>
+        <type>tech</type>
+      </upgradeSlot>
+      <upgradeSlot>
+        <type>title</type>
+      </upgradeSlot>
+      <upgradeSlot>
+        <type>modification</type>
+      </upgradeSlot>
+    </upgradeSlots>
+  </pilot>
+
+  <pilot>
+    <shipId>tiefof</shipId>
+    <unique>true</unique>
+    <name>"Zeta Leader"</name>
+    <cost>20</cost>
+    <level>7</level>
+    <text>When attacking, if you are not stressed, you may receive 1 stress token to roll 1 additional attack die.</text>
+    <upgradeSlots>
+      <upgradeSlot>
+        <type>elite</type>
+      </upgradeSlot>
+      <upgradeSlot>
+        <type>tech</type>
+      </upgradeSlot>
+      <upgradeSlot>
+        <type>title</type>
+      </upgradeSlot>
+      <upgradeSlot>
+        <type>modification</type>
+      </upgradeSlot>
+    </upgradeSlots>
+  </pilot>
+
+  <pilot>
+    <shipId>tiefof</shipId>
+    <unique>true</unique>
+    <name>"Omega Leader"</name>
+    <cost>21</cost>
+    <level>8</level>
+    <text>Enemy ships that you have locked cannot modify any dice when attacking you or defending against your attacks.</text>
+    <upgradeSlots>
+      <upgradeSlot>
+        <type>elite</type>
+      </upgradeSlot>
+      <upgradeSlot>
+        <type>tech</type>
+      </upgradeSlot>
+      <upgradeSlot>
+        <type>title</type>
+      </upgradeSlot>
+      <upgradeSlot>
+        <type>modification</type>
+      </upgradeSlot>
+    </upgradeSlots>
+  </pilot>
+</pilots>

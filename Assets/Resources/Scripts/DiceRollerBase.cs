@@ -5,6 +5,7 @@ public class DiceRollerBase : MonoBehaviour {
 
     private const string ATTACK_DYE_PREFAB_NAME = "Prefabs/attackDye";
     private const string DEFENSE_DYE_PREFAB_NAME = "Prefabs/defenseDye";
+    private const string ATTACK_DYE_TAG = "attackDye";
     public const int DICE_RESULT_MISS = 0;
     public const int DICE_RESULT_FOCUS = 1;
     public const int DICE_RESULT_HIT_OR_EVADE = 2;
@@ -14,38 +15,16 @@ public class DiceRollerBase : MonoBehaviour {
 
     private static ForceMode forceMode;
     private static float force = 10.0f;
-    private static string button = "Fire1";
+    //private static string button = "Fire1";
     private static bool resultChecked = false;
 
-    public static void setUpDiceRollerBase(ForceMode pforceMode, float pforce, string pbutton)
+    public static void setUpDiceRollerBase(ForceMode pforceMode, float pforce)
     {
         diceAreaHolder = GameObject.Find("DiceAreaHolder");
         diceAreaHolder.SetActive(false);
 
         forceMode = pforceMode;
         force = pforce;
-        button = pbutton;
-    }
-
-    private void Start()
-    {
-        
-    }
-
-
-    // Update is called once per frame
-    void Update () {
-        if (Input.GetMouseButtonDown(1))
-        {
-            resultChecked = false;
-            PlayerDatas.resetDeltaTime();
-            GetComponent<Rigidbody>().AddForce(Random.onUnitSphere * force, forceMode);
-
-            if (PlayerDatas.getDiceResults().Capacity == PlayerDatas.numberOfDice)
-            {
-                PlayerDatas.deleteDiceResults();
-            }
-        }
     }
 
     public static void getDiceResults(Rigidbody[] dice)
@@ -113,6 +92,8 @@ public class DiceRollerBase : MonoBehaviour {
 
     public static void showDiceArea(int numOfDice, bool attack)
     {
+        clearDiceArea();
+
         Transform dyePrefab = null;
 
         if (attack)
@@ -135,7 +116,7 @@ public class DiceRollerBase : MonoBehaviour {
             torque.x = Random.Range(-200, 200) * 100;
             torque.y = Random.Range(-200, 200) * 100;
             torque.z = Random.Range(-200, 200) * 100;
-
+            
             dye.transform.rotation = Random.rotation;
             dye.GetComponent<Rigidbody>().AddTorque(torque);
         }
@@ -148,7 +129,7 @@ public class DiceRollerBase : MonoBehaviour {
 
     public static void clearDiceArea()
     {
-        GameObject[] dice = GameObject.FindGameObjectsWithTag("attackDye");
+        GameObject[] dice = GameObject.FindGameObjectsWithTag(ATTACK_DYE_TAG);
 
         foreach (GameObject dye in dice)
         {
