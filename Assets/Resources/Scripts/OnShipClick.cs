@@ -29,23 +29,32 @@ public class OnShipClick : MonoBehaviour {
             if (Physics.Raycast(ray, out hit))
             {
                 GameObject target = hit.transform.gameObject;
-                LoadedShip activeShip = new LoadedShip();
+                LoadedShip clickedShip = new LoadedShip();
 
                 //TODO Show basic ship info (level, attack, agility, shield, hull, pilot talent, upgrade slots(JUST text!!), actions (just image/text))
 
-                //IF the selected ship is the current player's
-                foreach (LoadedShip ship in MatchDatas.getPlayers()[MatchDatas.getActivePlayerIndex()].getSquadron())
+                int playerIndex = 0;
+
+                foreach (Player player in MatchDatas.getPlayers())
                 {
-                    if (ship.getPilot().Equals(target.GetComponent<ShipProperties>().getPilot()))
+                    foreach (LoadedShip ship in player.getSquadron())
                     {
-                        //TODO Show extra ship info (actions (clickable), maneuvers (clickable ONLY in planning phase or in case of extra movement!!), upgrades (can be activated))
+                        if (ship.getPilot().Equals(target.GetComponent<ShipProperties>().getPilot()))
+                        {
+                            clickedShip.setShip(target.GetComponent<ShipProperties>().getShip());
+                            clickedShip.setPilot(target.GetComponent<ShipProperties>().getPilot());
 
-                        //Set as active ship
-                        activeShip.setShip(target.GetComponent<ShipProperties>().getShip());
-                        activeShip.setPilot(target.GetComponent<ShipProperties>().getPilot());
+                            MatchDatas.getPlayers()[playerIndex].setSelectedShip(clickedShip);
 
-                        MatchDatas.getPlayers()[MatchDatas.getActivePlayerIndex()].setActiveShip(activeShip);
+                            // TODO IF! this part is needed, get the player ID who clicked on the ship!!
+                            if (player.getPlayerID() == 1)
+                            {
+                                player.setActiveShip(clickedShip);
+                            }
+                        }
                     }
+
+                    playerIndex++;
                 }
             }
         }

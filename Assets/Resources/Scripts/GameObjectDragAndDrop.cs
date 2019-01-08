@@ -38,6 +38,14 @@ public class GameObjectDragAndDrop : MonoBehaviour {
     }
 	
 	void Update () {
+        if (MatchDatas.getPlayers()[MatchDatas.getActivePlayerIndex()].getSelectedhip() == null)
+        {
+            hideActiveShipHighlighters();
+
+            //TODO remove this if activeShip is not neede anymore!!!
+            MatchDatas.setActiveShip(null);
+        }
+
         if (Input.GetMouseButtonDown(0))
         {
             RaycastHit hitInfo;
@@ -49,21 +57,16 @@ public class GameObjectDragAndDrop : MonoBehaviour {
                 {
                     if (MatchDatas.getActiveShip() == null || MatchDatas.getActiveShip() != target)
                     {
-                        if (MatchDatas.getActiveShip() != null)
-                        {
-                            for (int i = 0; i < faces.Length; i++)
-                            {
-                                MatchDatas.getActiveShip().transform.Find(faces[i]).gameObject.SetActive(false);
-                            }
-                        }
+                        hideActiveShipHighlighters();
 
                         LoadedShip activeShip = new LoadedShip();
                         ShipProperties sp = target.GetComponent<ShipProperties>();
 
-                        activeShip.setShip(target.GetComponent<ShipProperties>().getShip());
-                        activeShip.setPilot(target.GetComponent<ShipProperties>().getPilot());
+                        activeShip.setShip(sp.getShip());
+                        activeShip.setPilot(sp.getPilot());
 
                         MatchDatas.getPlayers()[MatchDatas.getActivePlayerIndex()].setActiveShip(activeShip);
+                        MatchDatas.getPlayers()[MatchDatas.getActivePlayerIndex()].setSelectedShip(activeShip);
 
                         for (int i = 0; i < faces.Length; i++)
                         {
@@ -103,6 +106,20 @@ public class GameObjectDragAndDrop : MonoBehaviour {
             else if (Input.GetAxis("Mouse ScrollWheel") < 0f) // backwards
             {
                 target.transform.RotateAround(target.transform.position, target.transform.TransformDirection(Vector3.up), -2.5f);
+            }
+        }
+    }
+
+    private void hideActiveShipHighlighters()
+    {
+        for (int i = 0; i < faces.Length; i++)
+        {
+            foreach (GameObject go in GameObject.FindObjectsOfType<GameObject>())
+            {
+                if (go.name.Equals(faces[i]))
+                {
+                    go.SetActive(false);
+                }
             }
         }
     }

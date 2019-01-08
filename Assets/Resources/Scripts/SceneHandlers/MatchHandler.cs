@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class MatchHandler : MonoBehaviour {
 
     public GameObject initiativePanel;
+    public GameObject PilotCardPanel;
 
     private Mocker mocker = new Mocker();
 
@@ -65,11 +66,32 @@ public class MatchHandler : MonoBehaviour {
                 loopIndex++;
             };
         }
+
         determineInitiative();
     }
 
 	void Update() {
-	
+        if (Input.GetKey("escape"))
+        {
+            MatchDatas.getPlayers()[MatchDatas.getActivePlayerIndex()].setSelectedShip(null);
+        }
+
+	    if (MatchDatas.getPlayers()[MatchDatas.getActivePlayerIndex()].getSelectedhip() != null)
+        {
+            //TODO Check if comparing pilot names is enough/the right way!!!!!!!
+            if (!PilotCardPanel.transform.Find("PilotName").gameObject.GetComponent<UnityEngine.UI.Text>().text.Equals(MatchDatas.getPlayers()[MatchDatas.getActivePlayerIndex()].getSelectedhip().getPilot().Name))
+            {
+                hidePilotCard();
+            }
+
+            if (!PilotCardPanel.activeSelf)
+            {
+                showPilotCard();
+            }
+        } else
+        {
+            hidePilotCard();
+        }
 	}
 
     IEnumerator RollAttackDice()
@@ -110,6 +132,56 @@ public class MatchHandler : MonoBehaviour {
         displayInitiativeChoser(result);
     }
 
+    private void showPilotCard()
+    {
+        LoadedShip ship = MatchDatas.getPlayers()[MatchDatas.getActivePlayerIndex()].getSelectedhip();
+        string side = "";
+
+        foreach (Player player in MatchDatas.getPlayers())
+        {
+            foreach (LoadedShip ls in player.getSquadron())
+            {
+                if (ls.getShip().ShipId == ship.getShip().ShipId && ls.getPilot().Name.Equals(ship.getPilot().Name))
+                {
+                    side = player.getChosenSide();
+                    break;
+                }
+
+                if (!side.Equals(""))
+                {
+                    break;
+                }
+            }
+        }
+
+        PilotCardPanel.transform.Find("PilotName").gameObject.GetComponent<UnityEngine.UI.Text>().text = ship.getPilot().Name.ToLower();
+        PilotCardPanel.transform.Find("ShipType").gameObject.GetComponent<UnityEngine.UI.Text>().text = ship.getShip().ShipName.ToLower();
+        PilotCardPanel.transform.Find("Description").gameObject.GetComponent<UnityEngine.UI.Text>().text = ship.getPilot().Text.ToLower();
+        PilotCardPanel.transform.Find("BaseCostHolder/BaseCost").gameObject.GetComponent<UnityEngine.UI.Text>().text = ship.getPilot().Cost.ToString();
+        PilotCardPanel.transform.Find("ShieldValueHolder/Value").gameObject.GetComponent<UnityEngine.UI.Text>().text = ship.getShip().Shield.ToString();
+        PilotCardPanel.transform.Find("HullValueHolder/Value").gameObject.GetComponent<UnityEngine.UI.Text>().text = ship.getShip().Hull.ToString();
+        PilotCardPanel.transform.Find("AgilityValueHolder/Value").gameObject.GetComponent<UnityEngine.UI.Text>().text = ship.getShip().Agility.ToString();
+        PilotCardPanel.transform.Find("PowerValueHolder/Value").gameObject.GetComponent<UnityEngine.UI.Text>().text = ship.getShip().Weapon.ToString();
+        PilotCardPanel.transform.Find("PilotLevelHolder/Value").gameObject.GetComponent<UnityEngine.UI.Text>().text = ship.getPilot().Level.ToString();
+
+        Sprite sprite = Resources.Load<Sprite>(SquadBuilderConstants.IMAGE_FOLDER_NAME + "/" + side + "_pilot_card");
+        PilotCardPanel.transform.Find("CardImage").gameObject.GetComponent<Image>().sprite = sprite;
+        Image image = PilotCardPanel.transform.Find("CardImage").gameObject.GetComponent<Image>();
+        image.color = new Color(image.color.r, image.color.g, image.color.b, 1.0f);
+
+        Sprite sprite1 = Resources.Load<Sprite>(SquadBuilderConstants.IMAGE_FOLDER_NAME + "/" + ship.getShip().ShipId);
+        PilotCardPanel.transform.Find("CardImage/ShipImage").gameObject.GetComponent<Image>().sprite = sprite1;
+        Image image1 = PilotCardPanel.transform.Find("CardImage/ShipImage").gameObject.GetComponent<Image>();
+        image1.color = new Color(image1.color.r, image1.color.g, image1.color.b, 1.0f);
+
+        PilotCardPanel.SetActive(true);
+    }
+
+    private void hidePilotCard()
+    {
+        PilotCardPanel.SetActive(false);
+    }
+
     private Vector3 getShipCollectionHolderPosition(int playerID)
     {
         return GameObject.Find("ShipCollection" + playerID).transform.position;
@@ -142,7 +214,6 @@ public class MatchHandler : MonoBehaviour {
 
     public void displayInitiativeChooserCallback()
     {
-        Debug.Log("Displaying initiative chooser....");
         displayInitiativeChoser(getPlayerWithLowestSquadScore());
     }
 

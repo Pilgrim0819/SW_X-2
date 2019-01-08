@@ -9,6 +9,7 @@ public class Player {
     private string chosenSide;
     private List<int> lastDiceResults = new List<int>();
     private LoadedShip activeShip;
+    private LoadedShip selectedShip;
     private bool hasInitiative = false;
     private int playerID;
 
@@ -74,13 +75,22 @@ public class Player {
 
     public void setActiveShip(LoadedShip ship)
     {
-        Debug.Log("Active ship is set to: " + ship.getShip().ShipName + " - " + ship.getPilot().Name);
         this.activeShip = ship;
     }
 
     public LoadedShip getActiveShip()
     {
         return this.activeShip;
+    }
+
+    public void setSelectedShip(LoadedShip ship)
+    {
+        this.selectedShip = ship;
+    }
+
+    public LoadedShip getSelectedhip()
+    {
+        return this.selectedShip;
     }
 
     public int getCumulatedSquadPoints()
@@ -112,6 +122,7 @@ public class Player {
         return result;
     }
 
+    //TODO make it a List, so every ship with the same level (if not yet used!) will be returned
     public LoadedShip getNextShip(int currentLevel, bool ascending)
     {
         foreach (LoadedShip ship in squadron)
