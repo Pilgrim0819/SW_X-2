@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using PilotsXMLCSharp;
 using ShipsXMLCSharp;
 using UnityEngine.UI;
+using System;
 
 public class MatchHandler : MonoBehaviour {
 
@@ -22,7 +23,11 @@ public class MatchHandler : MonoBehaviour {
     private const int offsetY = 500;
     private const int offsetZ = 500;
 
-	void Start() {
+    //FOR TESTING ONLY!!!
+    private string[] keyCodes = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "v", "b", "n", "m", "g", "h", "j", "k", "t", "z", "u", "i"};
+    //FOR TESTING ONLY!!!
+
+    void Start() {
         mocker.mockPlayerSquadrons();
         DiceRollerBase.setUpDiceRollerBase(ForceMode.VelocityChange, 10.0f);
 
@@ -50,7 +55,7 @@ public class MatchHandler : MonoBehaviour {
                 );
 
                 // TODO change models, so offset is not needed anymore!
-                Vector3 shipOffset = new Vector3(2.81896f * 500.0f, 0.08181581f * 1000.0f, 3.286796f * 500.0f);
+                Vector3 shipOffset = new Vector3(2.81896f * 500.0f, 0.0f, 3.286796f * 500.0f);
 
                 GameObject shipGameObject = (GameObject)GameObject.Instantiate(
                     shipPrefab,
@@ -76,10 +81,95 @@ public class MatchHandler : MonoBehaviour {
             MatchDatas.getPlayers()[MatchDatas.getActivePlayerIndex()].setSelectedShip(null);
         }
 
-	    if (MatchDatas.getPlayers()[MatchDatas.getActivePlayerIndex()].getSelectedhip() != null)
+        //THIS IS ONLY FOR TESTING MOVEMENTS!!!!!! DELETE LATER ON!!!! (Also, ADD UNIQUE IDs during squad building to ships and pilots!!!! [use something like: playerIndex_shipIndex])
+        Maneuver man = new Maneuver();
+        man.Difficulty = "1";
+
+        for (int i = 0; i < keyCodes.Length; i++)
+        {
+            if (Input.GetKeyDown(keyCodes[i]))
+            {
+                int n;
+                bool isNumeric = int.TryParse(keyCodes[i], out n);
+
+                if (isNumeric)
+                {
+                    int s = Int32.Parse(keyCodes[i]);
+                    if (s < 6) {
+                        man.Bearing = "straight";
+                        man.Speed = keyCodes[i];
+                    } else
+                    {
+                        man.Bearing = "koiogran";
+                        man.Speed = (s - 5).ToString();
+                    }
+                } else
+                {
+                    switch (keyCodes[i])
+                    {
+                        case "v":
+                        case "g":
+                        case "t":
+                        case "i":
+                        case "k":
+                        case "m":
+                            man.Bearing = "turn_left";
+                            man.Speed = "1";
+
+                            if (keyCodes[i].Equals("i") || keyCodes[i].Equals("k") || keyCodes[i].Equals("m"))
+                            {
+                                man.Bearing = "turn_right";
+                            }
+
+                            if (keyCodes[i].Equals("g") || keyCodes[i].Equals("k"))
+                            {
+                                man.Speed = "2";
+                            }
+
+                            if (keyCodes[i].Equals("t") || keyCodes[i].Equals("i"))
+                            {
+                                man.Speed = "3";
+                            }
+
+                            break;
+                        case "b":
+                        case "h":
+                        case "z":
+                        case "u":
+                        case "j":
+                        case "n":
+                            man.Bearing = "bank_left";
+                            man.Speed = "1";
+
+                            if (keyCodes[i].Equals("u") || keyCodes[i].Equals("j") || keyCodes[i].Equals("n"))
+                            {
+                                man.Bearing = "bank_right";
+                            }
+
+                            if (keyCodes[i].Equals("h") || keyCodes[i].Equals("j"))
+                            {
+                                man.Speed = "2";
+                            }
+
+                            if (keyCodes[i].Equals("z") || keyCodes[i].Equals("u"))
+                            {
+                                man.Speed = "3";
+                            }
+
+                            break;
+                    }
+                }
+            }
+        }
+        
+        //Moving the second rebel ship....
+        StartCoroutine(MoveShipOverTime(GameObject.FindGameObjectsWithTag("SmallShipContainer")[1], man));
+        //THIS IS ONLY FOR TESTING MOVEMENTS!!!!!! DELETE LATER ON!!!! (Also, ADD UNIQUE IDs during squad building to ships and pilots!!!! [use something like: playerIndex_shipIndex])
+
+        if (MatchDatas.getPlayers()[MatchDatas.getActivePlayerIndex()].getSelectedhip() != null)
         {
             //TODO Check if comparing pilot names is enough/the right way!!!!!!!
-            if (!PilotCardPanel.transform.Find("PilotName").gameObject.GetComponent<UnityEngine.UI.Text>().text.Equals(MatchDatas.getPlayers()[MatchDatas.getActivePlayerIndex()].getSelectedhip().getPilot().Name))
+            if (!PilotCardPanel.transform.Find("PilotName").gameObject.GetComponent<UnityEngine.UI.Text>().text.Equals(MatchDatas.getPlayers()[MatchDatas.getActivePlayerIndex()].getSelectedhip().getPilot().Name.ToLower()))
             {
                 hidePilotCard();
             }
@@ -282,6 +372,143 @@ public class MatchHandler : MonoBehaviour {
         }
     }
     /* INITIATIVE DETERMINATION PART */
+
+    private IEnumerator TurnShipAround(GameObject objectToMove)
+    {
+        float elapsedTime = 0.0f;
+        float maneuverDurationInSeconds = 0.5f;
+        float rotationDegree = 180.0f;
+
+        Vector3 startingPos = objectToMove.transform.position;
+        Vector3 center = startingPos + objectToMove.transform.up * 500.0f;
+
+        while (elapsedTime < maneuverDurationInSeconds)
+        {
+            objectToMove.transform.RotateAround(center, -objectToMove.transform.right, (rotationDegree/maneuverDurationInSeconds) * Time.deltaTime);
+
+            elapsedTime += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+
+        Vector3 angles = objectToMove.transform.rotation.eulerAngles;
+        angles.z = rotationDegree;
+        objectToMove.transform.rotation = Quaternion.Euler(angles);
+
+        StartCoroutine(MoveAndRollShip(objectToMove, 180.0f, objectToMove.transform.up * 1000.0f));
+    }
+
+    private IEnumerator MoveAndRollShip(GameObject objectToMove, float rollDegree, Vector3 distance)
+    {
+        float elapsedTime = 0.0f;
+        float maneuverDurationInSeconds = 0.5f;
+
+        Vector3 startingPos = objectToMove.transform.position;
+        Vector3 end = startingPos + distance;
+        Vector3 angles = objectToMove.transform.rotation.eulerAngles;
+        float endAngleZ = angles.z + rollDegree;
+
+        while (elapsedTime < maneuverDurationInSeconds)
+        {
+            angles = objectToMove.transform.rotation.eulerAngles;
+            angles.z += rollDegree * Time.deltaTime * 2;
+            objectToMove.transform.rotation = Quaternion.Euler(angles);
+            objectToMove.transform.position = Vector3.Lerp(startingPos, end, (elapsedTime / maneuverDurationInSeconds));
+
+            elapsedTime += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+        
+        //Not sure if needed...
+        end.y = -500.0f;
+        //--
+        angles.x = 0.0f;
+        angles.z = endAngleZ;
+
+        objectToMove.transform.rotation = Quaternion.Euler(angles);
+        objectToMove.transform.position = end;
+    }
+    
+    private IEnumerator MoveShipOverTime(GameObject objectToMove, Maneuver maneuver)
+    {
+        /*if (isMoving)
+        {
+            yield break; ///exit if this is still running
+        }*/
+
+        float maneuverDurationInSeconds = 1.0f;
+        float elapsedTime = 0.0f;
+        int speed = Int32.Parse(maneuver.Speed);
+        Vector3 startingPos = objectToMove.transform.position;
+
+        switch (maneuver.Bearing)
+        {
+            case "koiogran":
+            case "straight":
+                Vector3 end = startingPos + objectToMove.transform.forward * (speed + 1) * 500;
+
+                while (elapsedTime < maneuverDurationInSeconds)
+                {
+                    objectToMove.transform.position = Vector3.Lerp(startingPos, end, (elapsedTime / maneuverDurationInSeconds));
+                    elapsedTime += Time.deltaTime;
+                    yield return new WaitForEndOfFrame();
+                }
+
+                objectToMove.transform.position = end;
+
+                if (maneuver.Bearing.Equals("koiogran"))
+                {
+                    StartCoroutine(TurnShipAround(objectToMove));
+                }
+
+                break;
+            case "bank_left":
+            case "bank_right":
+            case "turn_left":
+            case "turn_right":
+                float turnDegree = 90.0f;
+                float turnMultiplier = 0.875f;
+                float turnStep = 0.7f;
+
+                if (maneuver.Bearing.Contains("bank"))
+                {
+                    turnDegree = 45.0f;
+                    turnMultiplier = 2.0f;
+                    turnStep = 1.25f;
+                }
+
+                if (maneuver.Bearing.Contains("left"))
+                {
+                    turnDegree = turnDegree * (-1);
+                    turnMultiplier = turnMultiplier * (-1);
+                }
+
+                StartCoroutine(MoveAndRollShip(objectToMove, -turnDegree, objectToMove.transform.forward * 250.0f));
+
+                float distance = 500 * (turnMultiplier + ((speed - 1) * turnStep));
+                Vector3 center = startingPos + objectToMove.transform.right * distance;
+                float finalRotation = objectToMove.transform.eulerAngles.y + turnDegree;
+
+                if (finalRotation >= 360.0f)
+                {
+                    finalRotation = 0.0f;
+                }
+
+                while (elapsedTime < maneuverDurationInSeconds)
+                {
+                    objectToMove.transform.RotateAround(center, Vector3.up, turnDegree * Time.deltaTime);
+                    elapsedTime += Time.deltaTime;
+                    yield return new WaitForEndOfFrame();
+                }
+
+                Vector3 angles = objectToMove.transform.rotation.eulerAngles;
+                angles.y = finalRotation;
+                objectToMove.transform.rotation = Quaternion.Euler(angles);
+
+                StartCoroutine(MoveAndRollShip(objectToMove, turnDegree, objectToMove.transform.forward * 250.0f));
+
+                break;
+        }
+    }
 
     private LoadedShip getNextShip(bool ascending)
     {
