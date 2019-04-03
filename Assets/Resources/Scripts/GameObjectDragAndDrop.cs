@@ -1,8 +1,6 @@
 ﻿using UnityEngine;
-using UnityEngine.EventSystems;
-using System.Collections;
-using System.Linq;
 
+/*Handles drag'n drop functionalities for 3D gameobjects (the ships, mainly...)*/
 public class GameObjectDragAndDrop : MonoBehaviour {
 
     private GameObject target;
@@ -28,7 +26,7 @@ public class GameObjectDragAndDrop : MonoBehaviour {
 
     void OnMouseDrag()
     {
-        if (MatchDatas.getRound() == 0) {
+        if (MatchDatas.getRound() == 0 && shipCanBeMoved()) {
             float moveX = Input.GetAxis("Mouse X");
             float moveY = Input.GetAxis("Mouse Y");
             Vector3 newPos = new Vector3(transform.position.x + (moveX * dragSpeedMultiplier), transform.position.y, transform.position.z + (moveY * dragSpeedMultiplier));
@@ -62,8 +60,7 @@ public class GameObjectDragAndDrop : MonoBehaviour {
                         LoadedShip activeShip = new LoadedShip();
                         ShipProperties sp = target.GetComponent<ShipProperties>();
 
-                        activeShip.setShip(sp.getShip());
-                        activeShip.setPilot(sp.getPilot());
+                        activeShip = sp.getLoadedShip();
 
                         MatchDatas.getPlayers()[MatchDatas.getActivePlayerIndex()].setActiveShip(activeShip);
                         MatchDatas.getPlayers()[MatchDatas.getActivePlayerIndex()].setSelectedShip(activeShip);
@@ -76,7 +73,6 @@ public class GameObjectDragAndDrop : MonoBehaviour {
                         MatchDatas.setActiveShip(target);
                     }
                 }
-
                 Cursor.visible = false;
                 grabbed = true;
                 prevPos = target.transform.position;
@@ -94,10 +90,16 @@ public class GameObjectDragAndDrop : MonoBehaviour {
             if (!shipCollection.GetComponent<Collider>().bounds.Contains(target.transform.position) && !setupField.GetComponent<Collider>().bounds.Contains(target.transform.position))
             {
                 target.transform.position = prevPos;
+            } else
+            {
+                if (setupField.GetComponent<Collider>().bounds.Contains(target.transform.position) && shipCanBeMoved())
+                {
+                    togglePositionConfirmButton(true);
+                }
             }
         }
 
-        if (grabbed && MatchDatas.getRound() == 0)
+        if (grabbed && MatchDatas.getRound() == 0 && shipCanBeMoved())
         {
             if (Input.GetAxis("Mouse ScrollWheel") > 0f) // forward
             {
@@ -122,5 +124,48 @@ public class GameObjectDragAndDrop : MonoBehaviour {
                 }
             }
         }
+    }
+
+    private void togglePositionConfirmButton(bool active)
+    {
+        GameObject button = GameObjectUtil.FindChildByName("Canvas", "LocationConfirmButton");
+
+        if (button != null)
+        {
+            button.SetActive(active);
+        }
+    }
+
+    private bool shipCanBeMoved()
+    {
+        bool result = false;
+        bool shipIsAvailable = false;
+
+        foreach (LoadedShip ship in MatchHandler.getAvailablehips())
+        {
+            if (ship.getPilotId() == MatchDatas.getActiveShip().GetComponent<ShipProperties>().getLoadedShip().getPilotId())
+            {
+                shipIsAvailable = true;
+            }
+        }
+
+        if (shipIsAvailable)
+        {
+            foreach (LoadedShip ship in MatchDatas.getPlayers()[MatchDatas.getActivePlayerIndex()].getSquadron())
+            {
+                if (ship.getPilotId() == MatchDatas.getActiveShip().GetComponent<ShipProperties>().getLoadedShip().getPilotId())
+                {
+                    if (
+                        MatchDatas.getActiveShip().GetComponent<ShipProperties>().isMovable()
+                        && !MatchDatas.getActiveShip().GetComponent<ShipProperties>().getLoadedShip().isHasBeenActivatedThisRound()
+                    )
+                    {
+                        result = true;
+                    }
+                }
+            }
+        }
+
+        return result;
     }
 }

@@ -5,6 +5,7 @@ using ShipsXMLCSharp;
 using PilotsXMLCSharp;
 using UpgradesXMLCSharp;
 
+/*Handles everything that's happening during squadron building*/
 public class SquadBuilderHandler : MonoBehaviour {
 
     public GameObject squadPointsHolder;

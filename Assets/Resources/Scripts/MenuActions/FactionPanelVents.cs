@@ -3,6 +3,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+/*Sets the chosen side for current player*/
 public class FactionPanelVents : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     public string faction;
@@ -19,6 +20,7 @@ public class FactionPanelVents : MonoBehaviour, IPointerEnterHandler, IPointerEx
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        //TODO Check, if side can be chosen (if (squadTotal == 0){...})
         PlayerDatas.setChosenSide(faction);
         SceneManager.LoadScene("SquadronBuilder", LoadSceneMode.Single);
     }

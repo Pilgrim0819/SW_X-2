@@ -4,7 +4,31 @@ using PilotsXMLCSharp;
 using ShipsXMLCSharp;
 using System.Collections.Generic;
 
+/*ONLY FOR DEV TESTING!! Pre-loads two players to be used directly in the macth scene (without squadron building...)*/
 public class Mocker {
+
+    private List<Vector3> mockPositions = new List<Vector3>();
+    private int positionIndex = 0;
+
+    public Mocker()
+    {
+        //TODO Tune these predefined coordinates!!!
+        mockPositions.Add(new Vector3(6300.0f, -500.0f, 6750.0f));
+        mockPositions.Add(new Vector3(7300.0f, -500.0f, 6750.0f));
+        mockPositions.Add(new Vector3(8300.0f, -500.0f, 6750.0f));
+        mockPositions.Add(new Vector3(9300.0f, -500.0f, 6750.0f));
+        mockPositions.Add(new Vector3(10300.0f, -500.0f, 6750.0f));
+        mockPositions.Add(new Vector3(11300.0f, -500.0f, 6750.0f));
+        mockPositions.Add(new Vector3(12300.0f, -500.0f, 6750.0f));
+        mockPositions.Add(new Vector3(13300.0f, -500.0f, 6750.0f));
+        mockPositions.Add(new Vector3(14300.0f, -500.0f, 6750.0f));
+        mockPositions.Add(new Vector3(15300.0f, -500.0f, 6750.0f));
+    }
+
+    public Vector3 getNextMockPosition()
+    {
+        return mockPositions[positionIndex++];
+    }
 
 	public void mockPlayerSquadrons()
     {
@@ -40,9 +64,10 @@ public class Mocker {
 
         Player player1 = new Player();
         player1.setChosenSide("Rebels");
-        player1.setPlayerName("Player Number 1");
+        player1.setPlayerName("Human Player");
         player1.setPLayerID(1);
         player1.setSquadron(squadron1);
+        player1.setAI(false);
 
         PlayerDatas.deleteSquadron();
 
@@ -87,14 +112,14 @@ public class Mocker {
 
         Player player2 = new Player();
         player2.setChosenSide("Empire");
-        player2.setPlayerName("Player Number 2");
+        player2.setPlayerName("AI Player");
         player2.setPLayerID(2);
         player2.setSquadron(PlayerDatas.getSquadron());
+        player2.setAI(true);
 
         MatchDatas.addPlayer(player1);
         MatchDatas.addPlayer(player2);
 
-        PlayerDatas.setPlayerName("Player Number 1");
+        PlayerDatas.setPlayerName("Human Player");
     }
-
 }

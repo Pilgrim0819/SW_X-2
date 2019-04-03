@@ -3,6 +3,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using ShipsXMLCSharp;
 
+/*Sets the chosen ship for the details preview -> makes the pilots' list reload*/
 public class SquadBuilderShipPanelEvents : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     private Ship ship;

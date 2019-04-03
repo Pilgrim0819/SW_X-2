@@ -3,6 +3,7 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
+/*Handles squadron save/load functions*/
 public class SquadPersistenceUtil {
 
     private const string SAVED_DATA_FOLDER = "Saves/";

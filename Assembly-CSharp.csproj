@@ -61,11 +61,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Resources\Scripts\AddPilotToSquardon.cs" />
     <Compile Include="Assets\Resources\Scripts\CameraHandler.cs" />
     <Compile Include="Assets\Resources\Scripts\Constants\SquadBuilderConstants.cs" />
-    <Compile Include="Assets\Resources\Scripts\DiceRollerBase.cs" />
-    <Compile Include="Assets\Resources\Scripts\DiceStateChecker.cs" />
     <Compile Include="Assets\Resources\Scripts\Events\CustomEventBase.cs" />
     <Compile Include="Assets\Resources\Scripts\Events\CustomEventFactory.cs" />
     <Compile Include="Assets\Resources\Scripts\Events\CustomEventsHandler.cs" />
@@ -75,11 +72,9 @@
     <Compile Include="Assets\Resources\Scripts\Events\EventActions\EventActionWedgeAntilles.cs" />
     <Compile Include="Assets\Resources\Scripts\GameObjectDragAndDrop.cs" />
     <Compile Include="Assets\Resources\Scripts\GUIHandler.cs" />
-    <Compile Include="Assets\Resources\Scripts\LoadedShip.cs" />
-    <Compile Include="Assets\Resources\Scripts\LoadPilotsForSelector.cs" />
-    <Compile Include="Assets\Resources\Scripts\ManeuverHandler.cs" />
     <Compile Include="Assets\Resources\Scripts\MatchDatas.cs" />
     <Compile Include="Assets\Resources\Scripts\MenuAction.cs" />
+    <Compile Include="Assets\Resources\Scripts\MenuActions\ConfirmPositionEvent.cs" />
     <Compile Include="Assets\Resources\Scripts\MenuActions\FactionPanelVents.cs" />
     <Compile Include="Assets\Resources\Scripts\MenuActions\LoadSquadronEvents.cs" />
     <Compile Include="Assets\Resources\Scripts\MenuActions\PilotAddEvents.cs" />
@@ -94,29 +89,26 @@
     <Compile Include="Assets\Resources\Scripts\MenuActions\SystemMessagePanelEvents.cs" />
     <Compile Include="Assets\Resources\Scripts\MenuActions\UpgradePanelEvents.cs" />
     <Compile Include="Assets\Resources\Scripts\MenuActions\UpgradeSlotEvents.cs" />
-    <Compile Include="Assets\Resources\Scripts\MenuElementMouseClick.cs" />
+    <Compile Include="Assets\Resources\Scripts\Models\LoadedShip.cs" />
+    <Compile Include="Assets\Resources\Scripts\Models\PilotsXMLModel.cs" />
+    <Compile Include="Assets\Resources\Scripts\Models\Player.cs" />
+    <Compile Include="Assets\Resources\Scripts\Models\ShipProperties.cs" />
+    <Compile Include="Assets\Resources\Scripts\Models\ShipsXMLModel.cs" />
     <Compile Include="Assets\Resources\Scripts\Models\UpgradesXMLModel.cs" />
     <Compile Include="Assets\Resources\Scripts\OnShipClick.cs" />
-    <Compile Include="Assets\Resources\Scripts\OnShipSelectionSceneLoad.cs" />
-    <Compile Include="Assets\Resources\Scripts\PhaseChanger.cs" />
-    <Compile Include="Assets\Resources\Scripts\PilotsXMLModel.cs" />
-    <Compile Include="Assets\Resources\Scripts\Player.cs" />
     <Compile Include="Assets\Resources\Scripts\PlayerDatas.cs" />
     <Compile Include="Assets\Resources\Scripts\SceneChangerManuAction.cs" />
     <Compile Include="Assets\Resources\Scripts\SceneHandlers\LobbyHandler.cs" />
     <Compile Include="Assets\Resources\Scripts\SceneHandlers\MatchHandler.cs" />
     <Compile Include="Assets\Resources\Scripts\SceneHandlers\SquadBuilderHandler.cs" />
     <Compile Include="Assets\Resources\Scripts\Services\SystemMessageService.cs" />
-    <Compile Include="Assets\Resources\Scripts\ShipProperties.cs" />
-    <Compile Include="Assets\Resources\Scripts\ShipSelectorMouseClick.cs" />
-    <Compile Include="Assets\Resources\Scripts\ShipsXMLModel.cs" />
-    <Compile Include="Assets\Resources\Scripts\SideSelectionStartup.cs" />
     <Compile Include="Assets\Resources\Scripts\SquadPointsChange.cs" />
-    <Compile Include="Assets\Resources\Scripts\SummaryBeforeMatch.cs" />
+    <Compile Include="Assets\Resources\Scripts\Utils\DiceRollerBase.cs" />
+    <Compile Include="Assets\Resources\Scripts\Utils\GameObjectUtil.cs" />
     <Compile Include="Assets\Resources\Scripts\Utils\Mocker.cs" />
     <Compile Include="Assets\Resources\Scripts\Utils\SquadBuilderUtil.cs" />
     <Compile Include="Assets\Resources\Scripts\Utils\SquadPersistenceUtil.cs" />
-    <Compile Include="Assets\Resources\Scripts\XMLLoader.cs" />
+    <Compile Include="Assets\Resources\Scripts\Utils\XMLLoader.cs" />
     <None Include="Assets\StreamingAssets\rebel_ships.xml" />
     <None Include="Assets\StreamingAssets\imperial_ships.xml" />
     <None Include="Assets\json\imperial_ships.json.txt" />

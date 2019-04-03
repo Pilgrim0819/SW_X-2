@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+/*Generates the popup for system messages*/
 public class SystemMessageService : MonoBehaviour {
 
     public static void showErrorMsg(string msg, GameObject target, int level, PointerClickCallback callback)

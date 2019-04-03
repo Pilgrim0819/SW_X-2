@@ -252,6 +252,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b6a2d7e24e5d6149bbf1e10f61c1909, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PositionConfirmButton: {fileID: 1064787614935524, guid: e94c8d0ac71e3364a92f1ad29840ee96,
+    type: 2}
 --- !u!212 &212080883058116530
 SpriteRenderer:
   m_ObjectHideFlags: 1

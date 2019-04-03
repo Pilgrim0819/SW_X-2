@@ -3,6 +3,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using PilotsXMLCSharp;
 
+/*Sets the chosen pilot for the details preview*/
 public class SquadBuilderPilotPanelEvents : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     private Pilot pilot;

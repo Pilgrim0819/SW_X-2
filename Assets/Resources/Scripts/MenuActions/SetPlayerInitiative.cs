@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 
+/*Sets the initiative for the selected player*/
 public class SetPlayerInitiative : MonoBehaviour {
 
 	public void MENU_ACTION_setPlayerInitiative()
@@ -15,6 +16,7 @@ public class SetPlayerInitiative : MonoBehaviour {
             {
                 player.setInitiative();
                 Debug.Log(player.getPlayerName() + " now has initiative!");
+                MatchHandler.initNextShips(true);
                 Destroy(GameObject.Find("Initiative panel"));
             }
         }

@@ -1,17 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
-using PilotsXMLCSharp;
 using ShipsXMLCSharp;
 using UnityEngine.UI;
 using System;
+using System.Collections.Generic;
 
+/*Controls the whole match. (The server, basically...)*/
 public class MatchHandler : MonoBehaviour {
 
     public GameObject initiativePanel;
     public GameObject PilotCardPanel;
 
-    private Mocker mocker = new Mocker();
+    private static Mocker mocker = new Mocker();
 
     private const string PREFABS_FOLDER = "Prefabs";
     private const string INITIATIVE_BUTTON_PREFAB_NAME = "/InitiativeButtonPrefab";
@@ -22,6 +22,8 @@ public class MatchHandler : MonoBehaviour {
     private const int offsetX = 500;
     private const int offsetY = 500;
     private const int offsetZ = 500;
+
+    private static List<LoadedShip> availableShips = new List<LoadedShip>();
 
     //FOR TESTING ONLY!!!
     private string[] keyCodes = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "v", "b", "n", "m", "g", "h", "j", "k", "t", "z", "u", "i"};
@@ -65,8 +67,7 @@ public class MatchHandler : MonoBehaviour {
 
                 shipGameObject.transform.SetParent(shipHolderGameObject.transform, true);
 
-                shipHolderGameObject.GetComponent<ShipProperties>().setPilot(loadedShip.getPilot());
-                shipHolderGameObject.GetComponent<ShipProperties>().setShip(loadedShip.getShip());
+                shipHolderGameObject.GetComponent<ShipProperties>().setLoadedShip(loadedShip);
 
                 loopIndex++;
             };
@@ -510,49 +511,105 @@ public class MatchHandler : MonoBehaviour {
         }
     }
 
-    private LoadedShip getNextShip(bool ascending)
+    public static void initNextShips(bool ascending)
     {
-        LoadedShip ship1 = MatchDatas.getPlayers()[0].getNextShip(MatchDatas.getCurrentLevel(), ascending);
-        LoadedShip ship2 = MatchDatas.getPlayers()[1].getNextShip(MatchDatas.getCurrentLevel(), ascending);
+        List<LoadedShip> ships1 = MatchDatas.getPlayers()[0].getNextShips(MatchDatas.getCurrentLevel(), ascending);
+        List<LoadedShip> ships2 = MatchDatas.getPlayers()[1].getNextShips(MatchDatas.getCurrentLevel(), ascending);
         // TODO add this bit when 3 player rules are getting included!
         //LoadedShip ship3 = MatchDatas.getPlayers()[2].getNextShip(MatchDatas.getCurrentLevel(), ascending);
 
-        if (ship1 == null && ship2 != null)
+        if (ships1 == null && ships2 != null)
         {
-            return ship2;
+            availableShips = ships2;
+            MatchDatas.setActivePlayerIndex(1);
         }
 
-        if (ship2 == null && ship1 != null)
+        if (ships2 == null && ships1 != null)
         {
-            return ship1;
+            availableShips = ships1;
+            MatchDatas.setActivePlayerIndex(0);
         }
 
-        if (ship1 != null && ship2 != null)
+        if (ships1 != null && ships2 != null)
         {
-            if (ship1.getPilot().Level == ship2.getPilot().Level)
+            if (ships1[0].getPilot().Level == ships2[0].getPilot().Level)
             {
-                if (ship1.isHasBeenActivatedThisRound())
+                foreach (LoadedShip ship in ships1)
                 {
-                    return ship2;
-                } else if (ship2.isHasBeenActivatedThisRound())
+                    if (!ship.isHasBeenActivatedThisRound() && MatchDatas.getPlayers()[0].getHasInitiative())
+                    {
+                        availableShips = ships1;
+                        MatchDatas.setActivePlayerIndex(0);
+                        break;
+                    }
+                }
+
+                foreach (LoadedShip ship in ships2)
                 {
-                    return ship1;
-                } else
-                {
-                    return MatchDatas.getPlayers()[0].getHasInitiative() ? ship1 : ship2;
+                    if (!ship.isHasBeenActivatedThisRound() && MatchDatas.getPlayers()[1].getHasInitiative())
+                    {
+                        availableShips = ships2;
+                        MatchDatas.setActivePlayerIndex(1);
+                        break;
+                    }
                 }
             } else
             {
                 if (ascending)
                 {
-                    return ship1.getPilot().Level < ship2.getPilot().Level ? ship1 : ship2;
+                    if (ships1[0].getPilot().Level < ships2[0].getPilot().Level)
+                    {
+                        availableShips = ships1;
+                        MatchDatas.setActivePlayerIndex(0);
+                    } else
+                    {
+                        availableShips = ships2;
+                        MatchDatas.setActivePlayerIndex(1);
+                    }
                 } else
                 {
-                    return ship1.getPilot().Level > ship2.getPilot().Level ? ship1 : ship2;
+                    if (ships1[0].getPilot().Level > ships2[0].getPilot().Level)
+                    {
+                        availableShips = ships1;
+                        MatchDatas.setActivePlayerIndex(0);
+                    }
+                    else
+                    {
+                        availableShips = ships2;
+                        MatchDatas.setActivePlayerIndex(1);
+                    }
                 }
             }
         }
 
-        return null;
+        if (MatchDatas.getPlayers()[MatchDatas.getActivePlayerIndex()].isAI())
+        {
+            moveAIShips(ascending);
+        }
+    }
+
+    public static List<LoadedShip> getAvailablehips()
+    {
+        return availableShips;
+    }
+
+    private static void moveAIShips(bool ascending)
+    {
+        GameObject[] ships = GameObject.FindGameObjectsWithTag("SmallShipContainer");
+
+        foreach (GameObject shipObject in ships)
+        {
+            foreach (LoadedShip ship in availableShips)
+            {
+                if (ship.getPilotId() == shipObject.GetComponent<ShipProperties>().getLoadedShip().getPilotId())
+                {
+                    shipObject.transform.position = mocker.getNextMockPosition();
+                    shipObject.GetComponent<ShipProperties>().setMovable(false);
+                    shipObject.GetComponent<ShipProperties>().getLoadedShip().setHasBeenActivatedThisRound(true);
+                }
+            }
+        }
+
+        initNextShips(ascending);
     }
 }

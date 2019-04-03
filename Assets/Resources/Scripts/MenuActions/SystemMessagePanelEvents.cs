@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public delegate void PointerClickCallback();
 
+/*General popup for system messages*/
 public class SystemMessagePanelEvents : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     private PointerClickCallback pointerClickCallback;

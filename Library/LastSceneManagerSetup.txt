@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Resources/Scenes/Match.unity
+- path: Assets/Resources/Scenes/FactionSelection.unity
   isLoaded: 1
   isActive: 1

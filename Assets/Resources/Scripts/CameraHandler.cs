@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/*Basic camera handler to move around in the world...*/
 public class CameraHandler : MonoBehaviour {
 
     public float horizontalSpeed = 4.0f;
