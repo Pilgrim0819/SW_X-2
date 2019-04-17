@@ -3,6 +3,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using PilotsXMLCSharp;
 
+/*Tries to remove the chosen ship-pilot pair from the squadron*/
 public class PilotRemoveEvents : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
 

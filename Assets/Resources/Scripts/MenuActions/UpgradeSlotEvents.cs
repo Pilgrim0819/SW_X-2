@@ -3,6 +3,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using ShipsXMLCSharp;
 
+/*Sets the temp data for the upgrade selector's initialization*/
 public class UpgradeSlotEvents : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
 
@@ -58,6 +59,7 @@ public class UpgradeSlotEvents : MonoBehaviour, IPointerEnterHandler, IPointerEx
     {
         Debug.Log("Setting upgradeslot player data - slot: " + this.slotId + ", type: " + this.upgradeType + ", ship: " + this.ship.getShip().ShipName);
 
+        //When these 3 values are set, the upgrade selector popup will show the available options
         PlayerDatas.setChosenLoadedShip(this.ship);
         PlayerDatas.setChosenUpgraType(this.upgradeType);
         PlayerDatas.setChosenSlotId(this.slotId);

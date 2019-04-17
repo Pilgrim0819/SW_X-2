@@ -162,6 +162,11 @@ public class MatchDatas {
         }
     }
 
+    public static phases getCurrentPhase()
+    {
+        return phase;
+    }
+
     private static bool isMatchOver()
     {
         foreach (Player player in players)

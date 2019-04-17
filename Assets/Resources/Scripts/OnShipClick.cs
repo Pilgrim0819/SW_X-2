@@ -14,7 +14,6 @@ public class OnShipClick : MonoBehaviour {
         if (Physics.Raycast(ray.origin, ray.direction * 10, out hit))
         {
             target = hit.collider.gameObject;
-            Debug.Log("Selected ship and pilot: " + target.GetComponent<ShipProperties>().getShip().ShipName + " - " + target.GetComponent<ShipProperties>().getPilot().Name);
         }
 
         return target;
@@ -31,18 +30,16 @@ public class OnShipClick : MonoBehaviour {
                 GameObject target = hit.transform.gameObject;
                 LoadedShip clickedShip = new LoadedShip();
 
-                //TODO Show basic ship info (level, attack, agility, shield, hull, pilot talent, upgrade slots(JUST text!!), actions (just image/text))
-
                 int playerIndex = 0;
 
                 foreach (Player player in MatchDatas.getPlayers())
                 {
                     foreach (LoadedShip ship in player.getSquadron())
                     {
-                        if (ship.getPilot().Equals(target.GetComponent<ShipProperties>().getPilot()))
+                        if (ship.getPilot().Equals(target.GetComponent<ShipProperties>().getLoadedShip().getPilot()))
                         {
-                            clickedShip.setShip(target.GetComponent<ShipProperties>().getShip());
-                            clickedShip.setPilot(target.GetComponent<ShipProperties>().getPilot());
+                            clickedShip.setShip(target.GetComponent<ShipProperties>().getLoadedShip().getShip());
+                            clickedShip.setPilot(target.GetComponent<ShipProperties>().getLoadedShip().getPilot());
 
                             MatchDatas.getPlayers()[playerIndex].setSelectedShip(clickedShip);
 

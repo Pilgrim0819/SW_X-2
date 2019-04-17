@@ -27,7 +27,20 @@ public class PlayerDatas {
     private static float dt = 0.0f;
     private static string playerName;
     public static int numberOfDice = 5;
+
+    // This holds the data, handled by tha MatchHandler for the local player!!!
+    private static Player player;
     // Persistent player datas!!
+
+    public static void setPlayer(Player p)
+    {
+        player = p;
+    }
+
+    public static Player getPlayer()
+    {
+        return player;
+    }
 
     public static void toggleLoadingSquadrons()
     {

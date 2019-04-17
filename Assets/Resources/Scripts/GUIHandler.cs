@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 
+/*General UI handler to init/delete 2D UI elements*/
 public class GUIHandler : MonoBehaviour {
 
     private const string PREFAB_FOLDER_NAME = "Prefabs/ShipCardPrefab";

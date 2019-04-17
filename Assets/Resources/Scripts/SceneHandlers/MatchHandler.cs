@@ -1,17 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
-using PilotsXMLCSharp;
 using ShipsXMLCSharp;
 using UnityEngine.UI;
 using System;
+using System.Collections.Generic;
 
+/*Controls the whole match. (The server, basically...)*/
 public class MatchHandler : MonoBehaviour {
 
     public GameObject initiativePanel;
     public GameObject PilotCardPanel;
 
-    private Mocker mocker = new Mocker();
+    private static Mocker mocker = new Mocker();
 
     private const string PREFABS_FOLDER = "Prefabs";
     private const string INITIATIVE_BUTTON_PREFAB_NAME = "/InitiativeButtonPrefab";
@@ -22,6 +22,8 @@ public class MatchHandler : MonoBehaviour {
     private const int offsetX = 500;
     private const int offsetY = 500;
     private const int offsetZ = 500;
+
+    private static List<LoadedShip> availableShips = new List<LoadedShip>();
 
     //FOR TESTING ONLY!!!
     private string[] keyCodes = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "v", "b", "n", "m", "g", "h", "j", "k", "t", "z", "u", "i"};
@@ -65,8 +67,7 @@ public class MatchHandler : MonoBehaviour {
 
                 shipGameObject.transform.SetParent(shipHolderGameObject.transform, true);
 
-                shipHolderGameObject.GetComponent<ShipProperties>().setPilot(loadedShip.getPilot());
-                shipHolderGameObject.GetComponent<ShipProperties>().setShip(loadedShip.getShip());
+                shipHolderGameObject.GetComponent<ShipProperties>().setLoadedShip(loadedShip);
 
                 loopIndex++;
             };
@@ -177,6 +178,11 @@ public class MatchHandler : MonoBehaviour {
             if (!PilotCardPanel.activeSelf)
             {
                 showPilotCard();
+
+                if (MatchDatas.getCurrentPhase() == MatchDatas.phases.PLANNING && isPlayersOwnShip())
+                {
+                    showManeuverSelector();
+                }
             }
         } else
         {
@@ -264,12 +270,57 @@ public class MatchHandler : MonoBehaviour {
         Image image1 = PilotCardPanel.transform.Find("CardImage/ShipImage").gameObject.GetComponent<Image>();
         image1.color = new Color(image1.color.r, image1.color.g, image1.color.b, 1.0f);
 
+        PilotCardPanel.transform.Find("ShipDataManeuvers").gameObject.SetActive(false);
+
         PilotCardPanel.SetActive(true);
     }
 
     private void hidePilotCard()
     {
         PilotCardPanel.SetActive(false);
+    }
+
+    private void showManeuverSelector()
+    {
+        // DUPLACTE FRAGMENT!!!!! (also in squadron builder!)
+        foreach (Maneuver maneuver in MatchDatas.getActiveShip().GetComponent<ShipProperties>().getLoadedShip().getShip().Maneuvers.Maneuver)
+        {
+            Image image = null;
+            Sprite sprite = Resources.Load<Sprite>(SquadBuilderConstants.IMAGE_FOLDER_NAME + "/" + maneuver.Bearing + "_" + maneuver.Difficulty);
+            string maneuverHolderName = maneuver.Speed + "_" + maneuver.Bearing;
+
+            if (maneuverHolderName.Contains("koiogran") || maneuverHolderName.Contains("segnor") || maneuverHolderName.Contains("tallon"))
+            {
+                if (maneuverHolderName.Contains("left"))
+                {
+                    PilotCardPanel.transform.Find("ShipDataManeuvers/ShipManeuvers/Speed" + maneuver.Speed + "_special_left/Image").gameObject.GetComponent<Image>().sprite = sprite;
+                    image = PilotCardPanel.transform.Find("ShipDataManeuvers/ShipManeuvers/Speed" + maneuver.Speed + "_special_left/Image").gameObject.GetComponent<Image>();
+                }
+                else if (maneuverHolderName.Contains("right"))
+                {
+                    PilotCardPanel.transform.Find("ShipDataManeuvers/ShipManeuvers/Speed" + maneuver.Speed + "_special_right/Image").gameObject.GetComponent<Image>().sprite = sprite;
+                    image = PilotCardPanel.transform.Find("ShipDataManeuvers/ShipManeuvers/Speed" + maneuver.Speed + "_special_right/Image").gameObject.GetComponent<Image>();
+                }
+                else
+                {
+                    PilotCardPanel.transform.Find("ShipDataManeuvers/ShipManeuvers/Speed" + maneuver.Speed + "_special_left/Image").gameObject.GetComponent<Image>().sprite = sprite;
+                    image = PilotCardPanel.transform.Find("ShipDataManeuvers/ShipManeuvers/Speed" + maneuver.Speed + "_special_left/Image").gameObject.GetComponent<Image>();
+                }
+            }
+            else
+            {
+                PilotCardPanel.transform.Find("ShipDataManeuvers/ShipManeuvers/Speed" + maneuverHolderName + "/Image").gameObject.GetComponent<Image>().sprite = sprite;
+                image = PilotCardPanel.transform.Find("ShipDataManeuvers/ShipManeuvers/Speed" + maneuverHolderName + "/Image").gameObject.GetComponent<Image>();
+            }
+
+            if (image != null)
+            {
+                image.color = new Color(image.color.r, image.color.g, image.color.b, 1.0f);
+            }
+
+        }
+
+        PilotCardPanel.transform.Find("ShipDataManeuvers").gameObject.SetActive(true);
     }
 
     private Vector3 getShipCollectionHolderPosition(int playerID)
@@ -437,7 +488,7 @@ public class MatchHandler : MonoBehaviour {
 
         float maneuverDurationInSeconds = 1.0f;
         float elapsedTime = 0.0f;
-        int speed = Int32.Parse(maneuver.Speed);
+        int speed = Int32.Parse(maneuver.Speed == null ? "0" : maneuver.Speed);
         Vector3 startingPos = objectToMove.transform.position;
 
         switch (maneuver.Bearing)
@@ -510,49 +561,137 @@ public class MatchHandler : MonoBehaviour {
         }
     }
 
-    private LoadedShip getNextShip(bool ascending)
+    public static void initNextShips(bool ascending)
     {
-        LoadedShip ship1 = MatchDatas.getPlayers()[0].getNextShip(MatchDatas.getCurrentLevel(), ascending);
-        LoadedShip ship2 = MatchDatas.getPlayers()[1].getNextShip(MatchDatas.getCurrentLevel(), ascending);
+        List<LoadedShip> ships1 = MatchDatas.getPlayers()[0].getNextShips(MatchDatas.getCurrentLevel(), ascending);
+        List<LoadedShip> ships2 = MatchDatas.getPlayers()[1].getNextShips(MatchDatas.getCurrentLevel(), ascending);
         // TODO add this bit when 3 player rules are getting included!
         //LoadedShip ship3 = MatchDatas.getPlayers()[2].getNextShip(MatchDatas.getCurrentLevel(), ascending);
 
-        if (ship1 == null && ship2 != null)
-        {
-            return ship2;
-        }
+        bool ship1IsEmpty = ships1 == null || ships1.Capacity == 0;
+        bool ship2IsEmpty = ships2 == null || ships2.Capacity == 0;
 
-        if (ship2 == null && ship1 != null)
+        if (ship1IsEmpty && ship2IsEmpty)
         {
-            return ship1;
-        }
+            Debug.Log("Current phase: " + MatchDatas.getCurrentPhase());
 
-        if (ship1 != null && ship2 != null)
+            MatchDatas.nextPhase();
+
+            Debug.Log("No more available ships, setting phase to PLANNING...");
+            Debug.Log("Next phase has been set to: " + MatchDatas.getCurrentPhase());
+        } else
         {
-            if (ship1.getPilot().Level == ship2.getPilot().Level)
+            if (ship1IsEmpty && !ship2IsEmpty)
             {
-                if (ship1.isHasBeenActivatedThisRound())
+                availableShips = ships2;
+                MatchDatas.setActivePlayerIndex(1);
+            }
+
+            if (ship2IsEmpty && !ship1IsEmpty)
+            {
+                availableShips = ships1;
+                MatchDatas.setActivePlayerIndex(0);
+            }
+
+            if (!ship1IsEmpty && !ship2IsEmpty)
+            {
+                if (ships1[0].getPilot().Level == ships2[0].getPilot().Level)
                 {
-                    return ship2;
-                } else if (ship2.isHasBeenActivatedThisRound())
-                {
-                    return ship1;
-                } else
-                {
-                    return MatchDatas.getPlayers()[0].getHasInitiative() ? ship1 : ship2;
+                    foreach (LoadedShip ship in ships1)
+                    {
+                        if (!ship.isHasBeenActivatedThisRound() && MatchDatas.getPlayers()[0].getHasInitiative())
+                        {
+                            availableShips = ships1;
+                            MatchDatas.setActivePlayerIndex(0);
+                            break;
+                        }
+                    }
+
+                    foreach (LoadedShip ship in ships2)
+                    {
+                        if (!ship.isHasBeenActivatedThisRound() && MatchDatas.getPlayers()[1].getHasInitiative())
+                        {
+                            availableShips = ships2;
+                            MatchDatas.setActivePlayerIndex(1);
+                            break;
+                        }
+                    }
                 }
-            } else
+                else
+                {
+                    if (ascending)
+                    {
+                        if (ships1[0].getPilot().Level < ships2[0].getPilot().Level)
+                        {
+                            availableShips = ships1;
+                            MatchDatas.setActivePlayerIndex(0);
+                        }
+                        else
+                        {
+                            availableShips = ships2;
+                            MatchDatas.setActivePlayerIndex(1);
+                        }
+                    }
+                    else
+                    {
+                        if (ships1[0].getPilot().Level > ships2[0].getPilot().Level)
+                        {
+                            availableShips = ships1;
+                            MatchDatas.setActivePlayerIndex(0);
+                        }
+                        else
+                        {
+                            availableShips = ships2;
+                            MatchDatas.setActivePlayerIndex(1);
+                        }
+                    }
+                }
+            }
+
+            if (MatchDatas.getPlayers()[MatchDatas.getActivePlayerIndex()].isAI())
             {
-                if (ascending)
+                moveAIShips(ascending);
+            }
+        }
+    }
+
+    public static List<LoadedShip> getAvailablehips()
+    {
+        return availableShips;
+    }
+
+    private static void moveAIShips(bool ascending)
+    {
+        GameObject[] ships = GameObject.FindGameObjectsWithTag("SmallShipContainer");
+
+        foreach (GameObject shipObject in ships)
+        {
+            foreach (LoadedShip ship in availableShips)
+            {
+                if (ship.getPilotId() == shipObject.GetComponent<ShipProperties>().getLoadedShip().getPilotId())
                 {
-                    return ship1.getPilot().Level < ship2.getPilot().Level ? ship1 : ship2;
-                } else
-                {
-                    return ship1.getPilot().Level > ship2.getPilot().Level ? ship1 : ship2;
+                    shipObject.transform.position = mocker.getNextMockPosition();
+                    shipObject.GetComponent<ShipProperties>().setMovable(false);
+                    shipObject.GetComponent<ShipProperties>().getLoadedShip().setHasBeenActivatedThisRound(true);
                 }
             }
         }
 
-        return null;
+        initNextShips(ascending);
+    }
+
+
+    // DUPLICATED FRAGMENT!!!
+    private bool isPlayersOwnShip()
+    {
+        foreach (LoadedShip ship in PlayerDatas.getPlayer().getSquadron())
+        {
+            if (ship.getPilotId() == MatchDatas.getActiveShip().GetComponent<ShipProperties>().getLoadedShip().getPilotId())
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

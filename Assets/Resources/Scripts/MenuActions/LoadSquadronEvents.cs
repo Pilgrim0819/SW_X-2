@@ -2,6 +2,7 @@
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+/*Calls the persistence util to load a squadron by name*/
 public class LoadSquadronEvents : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     public void OnPointerEnter(PointerEventData eventData)

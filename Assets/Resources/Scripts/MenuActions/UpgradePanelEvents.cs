@@ -3,6 +3,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UpgradesXMLCSharp;
 
+/*Adds the selected upgrade for the current ship's current slot*/
 public class UpgradePanelEvents : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     private Upgrade upgrade;

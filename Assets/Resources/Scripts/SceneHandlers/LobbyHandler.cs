@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/*Summary view with the players and their squadrons before the match*/
 public class LobbyHandler : MonoBehaviour {
     public GameObject mainCanvas;
 

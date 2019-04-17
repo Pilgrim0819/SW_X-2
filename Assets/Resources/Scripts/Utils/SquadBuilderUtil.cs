@@ -4,6 +4,7 @@ using ShipsXMLCSharp;
 using PilotsXMLCSharp;
 using UpgradesXMLCSharp;
 
+/*Helper functions for THE squadron builder*/
 public class SquadBuilderUtil {
 
     public static Ships loadShipsForChosenSide()
