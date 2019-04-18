@@ -121,8 +121,7 @@ public class Mocker {
         ship8.setPilot(pilots2.Pilot[0]);
         player2.setSelectedEmptyShip(ship8.getShip());
         player2.addPilotToSquadron(ship8.getPilot());
-
-        player2.setSquadron(LocalDataWrapper.getPlayer().getSquadron());
+        
         player2.setAI(true);
 
         MatchDatas.addPlayer(LocalDataWrapper.getPlayer());
