@@ -148,7 +148,7 @@ public class GameObjectDragAndDrop : MonoBehaviour {
                 shipIsAvailable = true;
             }
         }
-
+        
         if (shipIsAvailable && isPlayersOwnShip())
         {
             if (
@@ -166,16 +166,14 @@ public class GameObjectDragAndDrop : MonoBehaviour {
     // DUPLICATED FRAGMENT!!!!
     private bool isPlayersOwnShip()
     {
-        bool result = false;
-
-        foreach (LoadedShip ship in MatchDatas.getPlayers()[MatchDatas.getActivePlayerIndex()].getSquadron())
+        foreach (LoadedShip ship in PlayerDatas.getPlayer().getSquadron())
         {
             if (ship.getPilotId() == MatchDatas.getActiveShip().GetComponent<ShipProperties>().getLoadedShip().getPilotId())
             {
-                result = true;
+                return true;
             }
         }
 
-        return result;
+        return false;
     }
 }

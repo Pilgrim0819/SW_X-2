@@ -567,7 +567,7 @@ public class MatchHandler : MonoBehaviour {
         List<LoadedShip> ships2 = MatchDatas.getPlayers()[1].getNextShips(MatchDatas.getCurrentLevel(), ascending);
         // TODO add this bit when 3 player rules are getting included!
         //LoadedShip ship3 = MatchDatas.getPlayers()[2].getNextShip(MatchDatas.getCurrentLevel(), ascending);
-
+        
         bool ship1IsEmpty = ships1 == null || ships1.Capacity == 0;
         bool ship2IsEmpty = ships2 == null || ships2.Capacity == 0;
 
