@@ -70,7 +70,6 @@ public class SquadBuilderHandler : MonoBehaviour {
             updateViewOnPilotSelection();
         }
         
-        // TODO Examine if deleting the last ship from squadron causes any problem (maybe not calling re-render as the List is null??)
         if (LocalDataWrapper.getPlayer().getSquadron() != null && (prevSquadronSize != LocalDataWrapper.getPlayer().getSquadron().Count || prevSquadronCost != LocalDataWrapper.getPlayer().getCumulatedSquadPoints()))
         {
             updateViewOnSquadronChange();

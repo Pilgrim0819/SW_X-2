@@ -164,8 +164,8 @@ public class MatchHandler : MonoBehaviour {
                 }
             }
         }
-        
-        //Moving the second rebel ship....
+
+        //THIS IS ONLY FOR TESTING MOVEMENTS!!!!!! DELETE LATER ON!!!! (Also, ADD UNIQUE IDs during squad building to ships and pilots!!!! [use something like: playerIndex_shipIndex])
         StartCoroutine(MoveShipOverTime(GameObject.FindGameObjectsWithTag("SmallShipContainer")[1], man));
         //THIS IS ONLY FOR TESTING MOVEMENTS!!!!!! DELETE LATER ON!!!! (Also, ADD UNIQUE IDs during squad building to ships and pilots!!!! [use something like: playerIndex_shipIndex])
 
@@ -191,44 +191,6 @@ public class MatchHandler : MonoBehaviour {
             hidePilotCard();
         }
 	}
-
-    IEnumerator RollAttackDice()
-    {
-        DiceRollerBase.showDiceArea(1, true);
-        Rigidbody[] GOS = FindObjectsOfType(typeof(Rigidbody)) as Rigidbody[];
-        bool allSleeping = false;
-
-        while (!allSleeping)
-        {
-            allSleeping = true;
-
-            foreach (Rigidbody GO in GOS)
-            {
-                if (!GO.IsSleeping())
-                {
-                    allSleeping = false;
-                    yield return null;
-                    break;
-                }
-            }
-
-        }
-        
-        DiceRollerBase.getDiceResults(GOS);
-
-        Player result = null;
-
-        if (LocalDataWrapper.getPlayer().getLastDiceResults()[0] == DiceRollerBase.DICE_RESULT_HIT_OR_EVADE || LocalDataWrapper.getPlayer().getLastDiceResults()[0] == DiceRollerBase.DICE_RESULT_CRIT)
-        {
-            result = MatchDatas.getPlayers()[0];
-        }
-        else
-        {
-            result = MatchDatas.getPlayers()[1];
-        }
-        
-        displayInitiativeChoser(result);
-    }
 
     private void showPilotCard()
     {
@@ -352,7 +314,7 @@ public class MatchHandler : MonoBehaviour {
 
     public void rollAttackDiceCallback()
     {
-        StartCoroutine(RollAttackDice());
+        StartCoroutine(DiceRollerBase.RollAttackDice(displayInitiativeChoser));
     }
 
     public void displayInitiativeChooserCallback()

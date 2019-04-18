@@ -61,7 +61,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Resources\Scripts\CameraHandler.cs" />
     <Compile Include="Assets\Resources\Scripts\Constants\SquadBuilderConstants.cs" />
     <Compile Include="Assets\Resources\Scripts\Events\CustomEventBase.cs" />
     <Compile Include="Assets\Resources\Scripts\Events\CustomEventFactory.cs" />
@@ -70,9 +69,6 @@
     <Compile Include="Assets\Resources\Scripts\Events\EventActionRegister.cs" />
     <Compile Include="Assets\Resources\Scripts\Events\EventActions\EventActionExpertHandling.cs" />
     <Compile Include="Assets\Resources\Scripts\Events\EventActions\EventActionWedgeAntilles.cs" />
-    <Compile Include="Assets\Resources\Scripts\GameObjectDragAndDrop.cs" />
-    <Compile Include="Assets\Resources\Scripts\GUIHandler.cs" />
-    <Compile Include="Assets\Resources\Scripts\MatchDatas.cs" />
     <Compile Include="Assets\Resources\Scripts\MenuAction.cs" />
     <Compile Include="Assets\Resources\Scripts\MenuActions\ConfirmPositionEvent.cs" />
     <Compile Include="Assets\Resources\Scripts\MenuActions\FactionPanelVents.cs" />
@@ -91,19 +87,23 @@
     <Compile Include="Assets\Resources\Scripts\MenuActions\UpgradeSlotEvents.cs" />
     <Compile Include="Assets\Resources\Scripts\Models\LoadedShip.cs" />
     <Compile Include="Assets\Resources\Scripts\Models\LocalDataWrapper.cs" />
+    <Compile Include="Assets\Resources\Scripts\Models\MatchDatas.cs" />
     <Compile Include="Assets\Resources\Scripts\Models\PilotsXMLModel.cs" />
     <Compile Include="Assets\Resources\Scripts\Models\Player.cs" />
     <Compile Include="Assets\Resources\Scripts\Models\ShipProperties.cs" />
     <Compile Include="Assets\Resources\Scripts\Models\ShipsXMLModel.cs" />
     <Compile Include="Assets\Resources\Scripts\Models\UpgradesXMLModel.cs" />
-    <Compile Include="Assets\Resources\Scripts\OnShipClick.cs" />
     <Compile Include="Assets\Resources\Scripts\SceneChangerManuAction.cs" />
     <Compile Include="Assets\Resources\Scripts\SceneHandlers\LobbyHandler.cs" />
     <Compile Include="Assets\Resources\Scripts\SceneHandlers\MainMenuHandler.cs" />
     <Compile Include="Assets\Resources\Scripts\SceneHandlers\MatchHandler.cs" />
     <Compile Include="Assets\Resources\Scripts\SceneHandlers\SquadBuilderHandler.cs" />
+    <Compile Include="Assets\Resources\Scripts\Services\CameraHandler.cs" />
+    <Compile Include="Assets\Resources\Scripts\Services\GameObjectDragAndDrop.cs" />
+    <Compile Include="Assets\Resources\Scripts\Services\GUIHandler.cs" />
+    <Compile Include="Assets\Resources\Scripts\Services\OnShipClick.cs" />
+    <Compile Include="Assets\Resources\Scripts\Services\SquadPointsChange.cs" />
     <Compile Include="Assets\Resources\Scripts\Services\SystemMessageService.cs" />
-    <Compile Include="Assets\Resources\Scripts\SquadPointsChange.cs" />
     <Compile Include="Assets\Resources\Scripts\Utils\DiceRollerBase.cs" />
     <Compile Include="Assets\Resources\Scripts\Utils\GameObjectUtil.cs" />
     <Compile Include="Assets\Resources\Scripts\Utils\Mocker.cs" />
