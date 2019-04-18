@@ -9,7 +9,7 @@ public class SquadBuilderUtil {
 
     public static Ships loadShipsForChosenSide()
     {
-        string chosenSide = PlayerDatas.getChosenSide();
+        string chosenSide = LocalDataWrapper.getPlayer().getChosenSide();
 
         /*********************************TODO remove when testing is done!!*/
         if (chosenSide == null || chosenSide.Equals(""))
@@ -64,7 +64,7 @@ public class SquadBuilderUtil {
 
             if (upgrade.SideRestriction != null && !upgrade.SideRestriction.Equals(""))
             {
-                if (!upgrade.SideRestriction.Equals(PlayerDatas.getChosenSide()))
+                if (!upgrade.SideRestriction.Equals(LocalDataWrapper.getPlayer().getChosenSide()))
                 {
                     available = false;
                 }
@@ -74,7 +74,7 @@ public class SquadBuilderUtil {
             {
                 if (upgrade.SizeRestriction != null && !upgrade.SizeRestriction.Equals(""))
                 {
-                    if (!upgrade.SizeRestriction.Equals(PlayerDatas.getChosenSize()))
+                    if (!upgrade.SizeRestriction.Equals(LocalDataWrapper.getPlayer().getChosenSize()))
                     {
                         available = false;
                     }

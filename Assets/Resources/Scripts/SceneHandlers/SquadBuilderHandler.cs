@@ -31,20 +31,20 @@ public class SquadBuilderHandler : MonoBehaviour {
 
     void Start () {
         /*********************************TODO remove when testing is done!!*/
-        if (PlayerDatas.getChosenSide() == null || PlayerDatas.getChosenSide().Equals(""))
+        if (LocalDataWrapper.getPlayer().getChosenSide() == null || LocalDataWrapper.getPlayer().getChosenSide().Equals(""))
         {
-            PlayerDatas.setChosenSide(SquadBuilderConstants.FACTION_REBELS);
+            LocalDataWrapper.getPlayer().setChosenSide(SquadBuilderConstants.FACTION_REBELS);
         }
 
-        if (PlayerDatas.getChosenSize() == null || PlayerDatas.getChosenSize().Equals(""))
+        if (LocalDataWrapper.getPlayer().getChosenSize() == null || LocalDataWrapper.getPlayer().getChosenSize().Equals(""))
         {
-            PlayerDatas.setChosenSize("small");
+            LocalDataWrapper.getPlayer().setChosenSize("small");
         }
         /*********************************TODO remove when testing is done!!*/
 
         this.ships = SquadBuilderUtil.loadShipsForChosenSide();
         this.pilots = SquadBuilderUtil.loadPilotsForEachShip(this.ships);
-        this.upgrades = SquadBuilderUtil.loadUpgrades(PlayerDatas.getChosenSide(), PlayerDatas.getChosenSize());
+        this.upgrades = SquadBuilderUtil.loadUpgrades(LocalDataWrapper.getPlayer().getChosenSide(), LocalDataWrapper.getPlayer().getChosenSize());
 
         showChosenSideIcon();
         showCurrentSquadPoints();
@@ -54,35 +54,35 @@ public class SquadBuilderHandler : MonoBehaviour {
     {
         showCurrentSquadPoints();
 
-        if (!prevChosenSize.Equals(PlayerDatas.getChosenSize()))
+        if (!prevChosenSize.Equals(LocalDataWrapper.getPlayer().getChosenSize()))
         {
             updateWholeView();
-            prevChosenSize = PlayerDatas.getChosenSize();
+            prevChosenSize = LocalDataWrapper.getPlayer().getChosenSize();
         }
 
-        if (!prevChosenShip.Equals(PlayerDatas.getSelectedShip().ShipId))
+        if (!prevChosenShip.Equals(LocalDataWrapper.getPlayer().getSelectedEmptyShip().ShipId))
         {
             updateViewOnShipSelection();
         }
 
-        if (!prevChosenPilot.Equals(PlayerDatas.getSelectedPilot().Name))
+        if (!prevChosenPilot.Equals(LocalDataWrapper.getPlayer().getSelectedPilot().Name))
         {
             updateViewOnPilotSelection();
         }
         
         // TODO Examine if deleting the last ship from squadron causes any problem (maybe not calling re-render as the List is null??)
-        if (PlayerDatas.getSquadron() != null && (prevSquadronSize != PlayerDatas.getSquadron().Count || prevSquadronCost != PlayerDatas.getCumulatedSquadPoints()))
+        if (LocalDataWrapper.getPlayer().getSquadron() != null && (prevSquadronSize != LocalDataWrapper.getPlayer().getSquadron().Count || prevSquadronCost != LocalDataWrapper.getPlayer().getCumulatedSquadPoints()))
         {
             updateViewOnSquadronChange();
             SaveButton.SetActive(true);
         }
 
-        if ((PlayerDatas.getSquadron().Count == 0 || PlayerDatas.getSquadron() == null) && SaveButton.activeSelf)
+        if ((LocalDataWrapper.getPlayer().getSquadron().Count == 0 || LocalDataWrapper.getPlayer().getSquadron() == null) && SaveButton.activeSelf)
         {
             SaveButton.SetActive(false);
         }
 
-        if (!PlayerDatas.getChosenUpgradeType().Equals("") && PlayerDatas.getChosenSlotId() != 0 && PlayerDatas.getChosenLoadedShip() != null)
+        if (!LocalDataWrapper.getPlayer().getChosenUpgradeType().Equals("") && LocalDataWrapper.getPlayer().getChosenSlotId() != 0 && LocalDataWrapper.getPlayer().getChosenLoadedShip() != null)
         {
             if (!UpgradesPopup.activeSelf)
             {
@@ -96,10 +96,10 @@ public class SquadBuilderHandler : MonoBehaviour {
             }
         }
 
-        if (PlayerDatas.isLoadingSquadrons() && !fileExplorer.activeSelf)
+        if (LocalDataWrapper.getPlayer().isLoadingSquadrons() && !fileExplorer.activeSelf)
         {
             showFileExplorer();
-        } else if (!PlayerDatas.isLoadingSquadrons() && fileExplorer.activeSelf)
+        } else if (!LocalDataWrapper.getPlayer().isLoadingSquadrons() && fileExplorer.activeSelf)
         {
             SquadBuilderUtil.hideFileExplorer(fileExplorer);
         }
@@ -113,44 +113,44 @@ public class SquadBuilderHandler : MonoBehaviour {
 
     private void updateViewOnShipSelection()
     {
-        if (PlayerDatas.getSelectedShip() == null)
+        if (LocalDataWrapper.getPlayer().getSelectedEmptyShip() == null)
         {
             Ship defaultShip = null;
 
             foreach (Ship ship in ships.Ship)
             {
-                if (ship.Size.Equals(PlayerDatas.getChosenSize()))
+                if (ship.Size.Equals(LocalDataWrapper.getPlayer().getChosenSize()))
                 {
                     defaultShip = ship;
                     break;
                 }
             }
 
-            PlayerDatas.setSelectedShip(defaultShip);
+            LocalDataWrapper.getPlayer().setSelectedEmptyShip(defaultShip);
         }
         
         showPilots();
         showShipDataPreview();
-        prevChosenShip = PlayerDatas.getSelectedShip().ShipId;
+        prevChosenShip = LocalDataWrapper.getPlayer().getSelectedEmptyShip().ShipId;
         prevChosenPilot = "";
     }
 
     private void updateViewOnPilotSelection()
     {
         showPilotDataPreview();
-        prevChosenPilot = PlayerDatas.getSelectedPilot().Name;
+        prevChosenPilot = LocalDataWrapper.getPlayer().getSelectedPilot().Name;
     }
 
     private void updateViewOnSquadronChange()
     {
-        prevSquadronCost = PlayerDatas.getCumulatedSquadPoints();
-        prevSquadronSize = PlayerDatas.getSquadron().Count;
+        prevSquadronCost = LocalDataWrapper.getPlayer().getCumulatedSquadPoints();
+        prevSquadronSize = LocalDataWrapper.getPlayer().getSquadron().Count;
         showSquadron();
     }
 
     private void showCurrentSquadPoints()
     {
-        squadPointsHolder.GetComponent<Text>().text = PlayerDatas.getCumulatedSquadPoints() + "/" + PlayerDatas.getPointsToSpend();
+        squadPointsHolder.GetComponent<Text>().text = LocalDataWrapper.getPlayer().getCumulatedSquadPoints() + "/" + LocalDataWrapper.getPlayer().getPointsToSpend();
     }
 
     private void showShips()
@@ -161,7 +161,7 @@ public class SquadBuilderHandler : MonoBehaviour {
 
         foreach (Ship ship in ships.Ship)
         {
-            if (ship.Size.Equals(PlayerDatas.getChosenSize()))
+            if (ship.Size.Equals(LocalDataWrapper.getPlayer().getChosenSize()))
             {
                 Transform shipPanelPrefab = Resources.Load<Transform>(SquadBuilderConstants.PREFABS_FOLDER_NAME + "/" + SquadBuilderConstants.SHIP_NAME_PANEL);
                 RectTransform rt = (RectTransform)shipPanelPrefab;
@@ -192,12 +192,12 @@ public class SquadBuilderHandler : MonoBehaviour {
 
         foreach (PilotsXMLCSharp.Pilot pilot in pilots.Pilot)
         {
-            if (pilot.ShipId.Equals(PlayerDatas.getSelectedShip().ShipId))
+            if (pilot.ShipId.Equals(LocalDataWrapper.getPlayer().getSelectedEmptyShip().ShipId))
             {
                 //By default, load the first pilot as it would be selected...
                 if (pilotIndex == 0)
                 {
-                    PlayerDatas.setSelectedPilot(pilot);
+                    LocalDataWrapper.getPlayer().setSelectedPilot(pilot);
                 }
 
                 Transform pilotPanelPrefab = Resources.Load<Transform>(SquadBuilderConstants.PREFABS_FOLDER_NAME + "/" + SquadBuilderConstants.PILOT_NAME_PANEL);
@@ -223,7 +223,7 @@ public class SquadBuilderHandler : MonoBehaviour {
 
     private void showChosenSideIcon()
     {
-        string chosenSide = PlayerDatas.getChosenSide();
+        string chosenSide = LocalDataWrapper.getPlayer().getChosenSide();
         Sprite sideIcon = null;
 
         switch(chosenSide)
@@ -243,7 +243,7 @@ public class SquadBuilderHandler : MonoBehaviour {
     {
         SquadBuilderUtil.resetImagesInGameObject(shipDataPreview, "ShipDataManeuvers/ShipManeuvers");
 
-        Ship shipToShow = PlayerDatas.getSelectedShip();
+        Ship shipToShow = LocalDataWrapper.getPlayer().getSelectedEmptyShip();
 
         if (shipToShow != null)
         {
@@ -303,7 +303,7 @@ public class SquadBuilderHandler : MonoBehaviour {
     {
         SquadBuilderUtil.resetImagesInGameObject(pilotDataPreview, "PilotDataUpgradeSlots");
 
-        Pilot pilotToShow = PlayerDatas.getSelectedPilot();
+        Pilot pilotToShow = LocalDataWrapper.getPlayer().getSelectedPilot();
 
         if (pilotToShow != null)
         {
@@ -348,7 +348,7 @@ public class SquadBuilderHandler : MonoBehaviour {
 
         int shipPanelIndex = 0;
 
-        foreach (LoadedShip loadedShip in PlayerDatas.getSquadron())
+        foreach (LoadedShip loadedShip in LocalDataWrapper.getPlayer().getSquadron())
         {
             Transform shipPanelPrefab = Resources.Load<Transform>(SquadBuilderConstants.PREFABS_FOLDER_NAME + "/" + SquadBuilderConstants.SQUADRON_SHIP_HOLDER);
             RectTransform rt = (RectTransform)shipPanelPrefab;
@@ -429,7 +429,7 @@ public class SquadBuilderHandler : MonoBehaviour {
 
     private void showUpgradesPopup()
     {
-        UpgradesPopup.transform.Find("UpgradeType").gameObject.GetComponent<UnityEngine.UI.Text>().text = PlayerDatas.getChosenUpgradeType();
+        UpgradesPopup.transform.Find("UpgradeType").gameObject.GetComponent<UnityEngine.UI.Text>().text = LocalDataWrapper.getPlayer().getChosenUpgradeType();
 
         Transform scrollViewContent = UpgradesPopup.transform.Find("Scroll View/Viewport/Content");
         Transform upgradePanelPrefab = Resources.Load<Transform>(SquadBuilderConstants.PREFABS_FOLDER_NAME + "/" + SquadBuilderConstants.UPGRADE_PANEL);
@@ -444,15 +444,15 @@ public class SquadBuilderHandler : MonoBehaviour {
 
         UpgradePanelEvents upgradePanelEvents = upgradePanel.GetComponent<UpgradePanelEvents>();
 
-        upgradePanelEvents.setShip(PlayerDatas.getChosenLoadedShip());
-        upgradePanelEvents.setSlotId(PlayerDatas.getChosenSlotId());
+        upgradePanelEvents.setShip(LocalDataWrapper.getPlayer().getChosenLoadedShip());
+        upgradePanelEvents.setSlotId(LocalDataWrapper.getPlayer().getChosenSlotId());
         upgradePanelEvents.setUpgrade(null);
 
         int upgradePanelIndex = 1;
 
         foreach (Upgrade upgrade in this.upgrades.Upgrade)
         {
-            if (upgrade.Type.Equals(PlayerDatas.getChosenUpgradeType()))
+            if (upgrade.Type.Equals(LocalDataWrapper.getPlayer().getChosenUpgradeType()))
             {
                 upgradePanelPrefab = Resources.Load<Transform>(SquadBuilderConstants.PREFABS_FOLDER_NAME + "/" + SquadBuilderConstants.UPGRADE_PANEL);
                 RectTransform rt = (RectTransform)upgradePanelPrefab;
@@ -479,8 +479,8 @@ public class SquadBuilderHandler : MonoBehaviour {
 
                 upgradePanelEvents = upgradePanel.GetComponent<UpgradePanelEvents>();
 
-                upgradePanelEvents.setShip(PlayerDatas.getChosenLoadedShip());
-                upgradePanelEvents.setSlotId(PlayerDatas.getChosenSlotId());
+                upgradePanelEvents.setShip(LocalDataWrapper.getPlayer().getChosenLoadedShip());
+                upgradePanelEvents.setSlotId(LocalDataWrapper.getPlayer().getChosenSlotId());
                 upgradePanelEvents.setUpgrade(upgrade);
 
                 upgradePanelIndex++;

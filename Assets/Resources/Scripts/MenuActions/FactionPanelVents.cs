@@ -21,7 +21,7 @@ public class FactionPanelVents : MonoBehaviour, IPointerEnterHandler, IPointerEx
     public void OnPointerClick(PointerEventData eventData)
     {
         //TODO Check, if side can be chosen (if (squadTotal == 0){...})
-        PlayerDatas.setChosenSide(faction);
+        LocalDataWrapper.getPlayer().setChosenSide(faction);
         SceneManager.LoadScene("SquadronBuilder", LoadSceneMode.Single);
     }
 }

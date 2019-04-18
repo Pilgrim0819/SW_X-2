@@ -23,7 +23,7 @@ public class ShipSizeChangerEvents : MonoBehaviour, IPointerEnterHandler, IPoint
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        PlayerDatas.setChosenSize(size);
-        PlayerDatas.setSelectedShip(null);
+        LocalDataWrapper.getPlayer().setChosenSize(size);
+        LocalDataWrapper.getPlayer().setSelectedShip(null);
     }
 }

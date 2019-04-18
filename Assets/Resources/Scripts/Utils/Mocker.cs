@@ -30,6 +30,15 @@ public class Mocker {
         return mockPositions[positionIndex++];
     }
 
+    public void mockLocalPlayer()
+    {
+        Player player = new Player();
+
+        player.setPlayerName("Human Player");
+
+        LocalDataWrapper.setPlayer(player);
+    }
+
 	public void mockPlayerSquadrons()
     {
         Ships ships = XMLLoader.getShips("rebel_ships.xml");
@@ -41,17 +50,18 @@ public class Mocker {
         //Adding event actions to be registered for event handling.
         //TODO Is the input parameter correct/enough??????
         ship1.addEventAction(new EventActionWedgeAntilles(ship1));
-		PlayerDatas.setSelectedShip(ship1.getShip());
-		PlayerDatas.addPilotToSquadron(ship1.getPilot());
+		LocalDataWrapper.getPlayer().setSelectedEmptyShip(ship1.getShip());
+        LocalDataWrapper.getPlayer().addPilotToSquadron(ship1.getPilot());
 
         LoadedShip ship2 = new LoadedShip();
         ship2.setShip(ships.Ship[0]);
         ship2.setPilot(pilots.Pilot[1]);
-		PlayerDatas.setSelectedShip(ship2.getShip());
-		PlayerDatas.addPilotToSquadron(ship2.getPilot());
+        LocalDataWrapper.getPlayer().setSelectedEmptyShip(ship2.getShip());
+        LocalDataWrapper.getPlayer().addPilotToSquadron(ship2.getPilot());
 
         List<LoadedShip> squadron1 = new List<LoadedShip>();
-        foreach (LoadedShip ship in PlayerDatas.getSquadron())
+
+        foreach (LoadedShip ship in LocalDataWrapper.getPlayer().getSquadron())
         {
             squadron1.Add(ship);
 
@@ -61,17 +71,17 @@ public class Mocker {
                 EventActionRegister.registerEventAction(eventAction);
             }
         }
+        
+        LocalDataWrapper.getPlayer().setChosenSide("Rebels");
+        LocalDataWrapper.getPlayer().setPLayerID(1);
+        LocalDataWrapper.getPlayer().setSquadron(squadron1);
+        LocalDataWrapper.getPlayer().setAI(false);
 
-        Player player1 = new Player();
-        player1.setChosenSide("Rebels");
-        player1.setPlayerName("Human Player");
-        player1.setPLayerID(1);
-        player1.setSquadron(squadron1);
-        player1.setAI(false);
-
-        PlayerDatas.setPlayer(player1);
-
-        PlayerDatas.deleteSquadron();
+        //AI PLAYER!!
+        Player player2 = new Player();
+        player2.setChosenSide("Empire");
+        player2.setPlayerName("AI Player");
+        player2.setPLayerID(2);
 
         Ships ships2 = XMLLoader.getShips("imperial_ships.xml");
         Pilots pilots2 = XMLLoader.getPilots("tief_pilots.xml");
@@ -79,49 +89,43 @@ public class Mocker {
         LoadedShip ship3 = new LoadedShip();
         ship3.setShip(ships2.Ship[0]);
         ship3.setPilot(pilots2.Pilot[0]);
-        PlayerDatas.setSelectedShip(ship3.getShip());
-        PlayerDatas.addPilotToSquadron(ship3.getPilot());
+        player2.setSelectedEmptyShip(ship3.getShip());
+        player2.addPilotToSquadron(ship3.getPilot());
 
         LoadedShip ship4 = new LoadedShip();
         ship4.setShip(ships2.Ship[0]);
         ship4.setPilot(pilots2.Pilot[1]);
-        PlayerDatas.setSelectedShip(ship4.getShip());
-        PlayerDatas.addPilotToSquadron(ship4.getPilot());
+        player2.setSelectedEmptyShip(ship4.getShip());
+        player2.addPilotToSquadron(ship4.getPilot());
 
         LoadedShip ship5 = new LoadedShip();
         ship5.setShip(ships2.Ship[0]);
         ship5.setPilot(pilots2.Pilot[2]);
-        PlayerDatas.setSelectedShip(ship5.getShip());
-        PlayerDatas.addPilotToSquadron(ship5.getPilot());
+        player2.setSelectedEmptyShip(ship5.getShip());
+        player2.addPilotToSquadron(ship5.getPilot());
 
         LoadedShip ship6 = new LoadedShip();
         ship6.setShip(ships2.Ship[0]);
         ship6.setPilot(pilots2.Pilot[0]);
-        PlayerDatas.setSelectedShip(ship6.getShip());
-        PlayerDatas.addPilotToSquadron(ship6.getPilot());
+        player2.setSelectedEmptyShip(ship6.getShip());
+        player2.addPilotToSquadron(ship6.getPilot());
 
         LoadedShip ship7 = new LoadedShip();
         ship7.setShip(ships2.Ship[0]);
         ship7.setPilot(pilots2.Pilot[0]);
-        PlayerDatas.setSelectedShip(ship7.getShip());
-        PlayerDatas.addPilotToSquadron(ship7.getPilot());
+        player2.setSelectedEmptyShip(ship7.getShip());
+        player2.addPilotToSquadron(ship7.getPilot());
 
         LoadedShip ship8 = new LoadedShip();
         ship8.setShip(ships2.Ship[0]);
         ship8.setPilot(pilots2.Pilot[0]);
-        PlayerDatas.setSelectedShip(ship8.getShip());
-        PlayerDatas.addPilotToSquadron(ship8.getPilot());
+        player2.setSelectedEmptyShip(ship8.getShip());
+        player2.addPilotToSquadron(ship8.getPilot());
 
-        Player player2 = new Player();
-        player2.setChosenSide("Empire");
-        player2.setPlayerName("AI Player");
-        player2.setPLayerID(2);
-        player2.setSquadron(PlayerDatas.getSquadron());
+        player2.setSquadron(LocalDataWrapper.getPlayer().getSquadron());
         player2.setAI(true);
 
-        MatchDatas.addPlayer(player1);
+        MatchDatas.addPlayer(LocalDataWrapper.getPlayer());
         MatchDatas.addPlayer(player2);
-
-        PlayerDatas.setPlayerName("Human Player");
     }
 }

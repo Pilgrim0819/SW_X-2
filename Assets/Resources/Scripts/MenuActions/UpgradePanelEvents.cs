@@ -56,9 +56,9 @@ public class UpgradePanelEvents : MonoBehaviour, IPointerEnterHandler, IPointerE
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        PlayerDatas.addUpgradeToShip(ship, upgrade, slotId);
-        PlayerDatas.setChosenLoadedShip(null);
-        PlayerDatas.setChosenSlotId(0);
-        PlayerDatas.setChosenUpgraType("");
+        LocalDataWrapper.getPlayer().addUpgradeToShip(ship, upgrade, slotId);
+        LocalDataWrapper.getPlayer().setChosenLoadedShip(null);
+        LocalDataWrapper.getPlayer().setChosenSlotId(0);
+        LocalDataWrapper.getPlayer().setChosenUpgraType("");
     }
 }

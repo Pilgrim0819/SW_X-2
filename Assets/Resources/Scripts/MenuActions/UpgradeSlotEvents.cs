@@ -60,8 +60,8 @@ public class UpgradeSlotEvents : MonoBehaviour, IPointerEnterHandler, IPointerEx
         Debug.Log("Setting upgradeslot player data - slot: " + this.slotId + ", type: " + this.upgradeType + ", ship: " + this.ship.getShip().ShipName);
 
         //When these 3 values are set, the upgrade selector popup will show the available options
-        PlayerDatas.setChosenLoadedShip(this.ship);
-        PlayerDatas.setChosenUpgraType(this.upgradeType);
-        PlayerDatas.setChosenSlotId(this.slotId);
+        LocalDataWrapper.getPlayer().setChosenLoadedShip(this.ship);
+        LocalDataWrapper.getPlayer().setChosenUpgraType(this.upgradeType);
+        LocalDataWrapper.getPlayer().setChosenSlotId(this.slotId);
     }
 }

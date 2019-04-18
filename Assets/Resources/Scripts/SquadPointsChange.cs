@@ -8,7 +8,7 @@ public class SquadPointsChange : MonoBehaviour {
     {
         string squadPoints = gameObj.text;
         int points = System.Convert.ToInt32(squadPoints);
-        PlayerDatas.setPointsToSpend(points);
+        LocalDataWrapper.getPlayer().setPointsToSpend(points);
     }
 
 	// Use this for initialization

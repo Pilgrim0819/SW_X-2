@@ -30,7 +30,9 @@ public class MatchHandler : MonoBehaviour {
     //FOR TESTING ONLY!!!
 
     void Start() {
+        mocker.mockLocalPlayer();
         mocker.mockPlayerSquadrons();
+
         DiceRollerBase.setUpDiceRollerBase(ForceMode.VelocityChange, 10.0f);
 
         foreach (Player player in MatchDatas.getPlayers())
@@ -216,7 +218,7 @@ public class MatchHandler : MonoBehaviour {
 
         Player result = null;
 
-        if (PlayerDatas.getDiceResults()[0] == DiceRollerBase.DICE_RESULT_HIT_OR_EVADE || PlayerDatas.getDiceResults()[0] == DiceRollerBase.DICE_RESULT_CRIT)
+        if (LocalDataWrapper.getPlayer().getLastDiceResults()[0] == DiceRollerBase.DICE_RESULT_HIT_OR_EVADE || LocalDataWrapper.getPlayer().getLastDiceResults()[0] == DiceRollerBase.DICE_RESULT_CRIT)
         {
             result = MatchDatas.getPlayers()[0];
         }
@@ -402,7 +404,7 @@ public class MatchHandler : MonoBehaviour {
         Debug.Log(player.getPlayerName() + " can chose who gets initiative!");
         int playerIndex = 0;
 
-        if (PlayerDatas.getPlayerName().Equals(player.getPlayerName()))
+        if (LocalDataWrapper.getPlayer().getPlayerName().Equals(player.getPlayerName()))
         {
             foreach (Player currentPlayer in MatchDatas.getPlayers())
             {
@@ -684,7 +686,7 @@ public class MatchHandler : MonoBehaviour {
     // DUPLICATED FRAGMENT!!!
     private bool isPlayersOwnShip()
     {
-        foreach (LoadedShip ship in PlayerDatas.getPlayer().getSquadron())
+        foreach (LoadedShip ship in LocalDataWrapper.getPlayer().getSquadron())
         {
             if (ship.getPilotId() == MatchDatas.getActiveShip().GetComponent<ShipProperties>().getLoadedShip().getPilotId())
             {

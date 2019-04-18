@@ -21,6 +21,6 @@ public class ShowFileExplorerEvents : MonoBehaviour, IPointerEnterHandler, IPoin
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        PlayerDatas.toggleLoadingSquadrons();
+        LocalDataWrapper.getPlayer().toggleLoadingSquadrons();
     }
 }

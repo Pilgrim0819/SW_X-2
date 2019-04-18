@@ -34,6 +34,6 @@ public class SquadBuilderPilotPanelEvents : MonoBehaviour, IPointerEnterHandler,
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        PlayerDatas.setSelectedPilot(pilot);
+        LocalDataWrapper.getPlayer().setSelectedPilot(pilot);
     }
 }

@@ -48,7 +48,7 @@ public class PilotRemoveEvents : MonoBehaviour, IPointerEnterHandler, IPointerEx
     {
         try
         {
-            PlayerDatas.removePilotFromSquadron(this.pilot, this.pilotId);
+            LocalDataWrapper.getPlayer().removePilotFromSquadron(this.pilot, this.pilotId);
         }
         catch (System.ApplicationException e)
         {

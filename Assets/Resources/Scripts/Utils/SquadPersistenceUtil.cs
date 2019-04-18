@@ -19,9 +19,9 @@ public class SquadPersistenceUtil {
 
         BinaryFormatter binaryFormatter = new BinaryFormatter();
 
-        using (FileStream fileStream = File.Open(Path.Combine(Application.streamingAssetsPath, SAVED_DATA_FOLDER + PlayerDatas.getChosenSide() + "/" + squadronName + SAVED_DATA_EXTENSION), FileMode.OpenOrCreate))
+        using (FileStream fileStream = File.Open(Path.Combine(Application.streamingAssetsPath, SAVED_DATA_FOLDER + LocalDataWrapper.getPlayer().getChosenSide() + "/" + squadronName + SAVED_DATA_EXTENSION), FileMode.OpenOrCreate))
         {
-            binaryFormatter.Serialize(fileStream, PlayerDatas.getSquadron());
+            binaryFormatter.Serialize(fileStream, LocalDataWrapper.getPlayer().getSquadron());
         }
     }
 
@@ -33,18 +33,18 @@ public class SquadPersistenceUtil {
 
         BinaryFormatter binaryFormatter = new BinaryFormatter();
 
-        using (FileStream fileStream = File.Open(Path.Combine(Application.streamingAssetsPath, SAVED_DATA_FOLDER + PlayerDatas.getChosenSide() + "/" + squadronName + SAVED_DATA_EXTENSION), FileMode.Open))
+        using (FileStream fileStream = File.Open(Path.Combine(Application.streamingAssetsPath, SAVED_DATA_FOLDER + LocalDataWrapper.getPlayer().getChosenSide() + "/" + squadronName + SAVED_DATA_EXTENSION), FileMode.Open))
         {
             List<LoadedShip> squadron = (List<LoadedShip>)binaryFormatter.Deserialize(fileStream);
 
-            PlayerDatas.setSquadron(squadron);
+            LocalDataWrapper.getPlayer().setSquadron(squadron);
         }
     }
 
     public static List<string> getSquadronNames()
     {
         List<string> names = new List<string>();
-        DirectoryInfo dir = new DirectoryInfo(Path.Combine(Application.streamingAssetsPath, "Saves/" + PlayerDatas.getChosenSide() + "/"));
+        DirectoryInfo dir = new DirectoryInfo(Path.Combine(Application.streamingAssetsPath, "Saves/" + LocalDataWrapper.getPlayer().getChosenSide() + "/"));
         FileInfo[] info = dir.GetFiles("*.dat");
 
         foreach (FileInfo f in info)

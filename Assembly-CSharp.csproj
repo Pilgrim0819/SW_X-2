@@ -90,15 +90,16 @@
     <Compile Include="Assets\Resources\Scripts\MenuActions\UpgradePanelEvents.cs" />
     <Compile Include="Assets\Resources\Scripts\MenuActions\UpgradeSlotEvents.cs" />
     <Compile Include="Assets\Resources\Scripts\Models\LoadedShip.cs" />
+    <Compile Include="Assets\Resources\Scripts\Models\LocalDataWrapper.cs" />
     <Compile Include="Assets\Resources\Scripts\Models\PilotsXMLModel.cs" />
     <Compile Include="Assets\Resources\Scripts\Models\Player.cs" />
     <Compile Include="Assets\Resources\Scripts\Models\ShipProperties.cs" />
     <Compile Include="Assets\Resources\Scripts\Models\ShipsXMLModel.cs" />
     <Compile Include="Assets\Resources\Scripts\Models\UpgradesXMLModel.cs" />
     <Compile Include="Assets\Resources\Scripts\OnShipClick.cs" />
-    <Compile Include="Assets\Resources\Scripts\PlayerDatas.cs" />
     <Compile Include="Assets\Resources\Scripts\SceneChangerManuAction.cs" />
     <Compile Include="Assets\Resources\Scripts\SceneHandlers\LobbyHandler.cs" />
+    <Compile Include="Assets\Resources\Scripts\SceneHandlers\MainMenuHandler.cs" />
     <Compile Include="Assets\Resources\Scripts\SceneHandlers\MatchHandler.cs" />
     <Compile Include="Assets\Resources\Scripts\SceneHandlers\SquadBuilderHandler.cs" />
     <Compile Include="Assets\Resources\Scripts\Services\SystemMessageService.cs" />

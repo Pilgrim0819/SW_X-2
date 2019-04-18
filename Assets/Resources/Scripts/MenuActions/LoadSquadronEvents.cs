@@ -24,6 +24,6 @@ public class LoadSquadronEvents : MonoBehaviour, IPointerEnterHandler, IPointerE
         string squadronName = gameObject.transform.Find("Name").gameObject.GetComponent<UnityEngine.UI.Text>().text;
 
         SquadPersistenceUtil.loadSquadron(squadronName);
-        PlayerDatas.toggleLoadingSquadrons();
+        LocalDataWrapper.getPlayer().toggleLoadingSquadrons();
     }
 }

@@ -34,6 +34,6 @@ public class SquadBuilderShipPanelEvents : MonoBehaviour, IPointerEnterHandler, 
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        PlayerDatas.setSelectedShip(ship);
+        LocalDataWrapper.getPlayer().setSelectedEmptyShip(ship);
     }
 }

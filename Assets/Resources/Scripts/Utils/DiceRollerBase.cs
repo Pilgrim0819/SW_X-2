@@ -42,22 +42,22 @@ public class DiceRollerBase : MonoBehaviour {
                 {
                     if (forward.y > 0)
                     {
-                        PlayerDatas.addDiceResult(DICE_RESULT_FOCUS);
+                        LocalDataWrapper.getPlayer().addDiceResult(DICE_RESULT_FOCUS);
                     }
                     else
                     {
-                        PlayerDatas.addDiceResult(DICE_RESULT_MISS);
+                        LocalDataWrapper.getPlayer().addDiceResult(DICE_RESULT_MISS);
                     }
                 }
                 else
                 {
                     if (right.y > 0)
                     {
-                        PlayerDatas.addDiceResult(DICE_RESULT_CRIT);
+                        LocalDataWrapper.getPlayer().addDiceResult(DICE_RESULT_CRIT);
                     }
                     else
                     {
-                        PlayerDatas.addDiceResult(DICE_RESULT_HIT_OR_EVADE);
+                        LocalDataWrapper.getPlayer().addDiceResult(DICE_RESULT_HIT_OR_EVADE);
                     }
                 }
             }
@@ -67,22 +67,22 @@ public class DiceRollerBase : MonoBehaviour {
                 {
                     if (forward.y > 0)
                     {
-                        PlayerDatas.addDiceResult(DICE_RESULT_MISS);
+                        LocalDataWrapper.getPlayer().addDiceResult(DICE_RESULT_MISS);
                     }
                     else
                     {
-                        PlayerDatas.addDiceResult(DICE_RESULT_FOCUS);
+                        LocalDataWrapper.getPlayer().addDiceResult(DICE_RESULT_FOCUS);
                     }
                 }
                 else
                 {
                     if (right.y > 0)
                     {
-                        PlayerDatas.addDiceResult(DICE_RESULT_HIT_OR_EVADE);
+                        LocalDataWrapper.getPlayer().addDiceResult(DICE_RESULT_HIT_OR_EVADE);
                     }
                     else
                     {
-                        PlayerDatas.addDiceResult(DICE_RESULT_HIT_OR_EVADE);
+                        LocalDataWrapper.getPlayer().addDiceResult(DICE_RESULT_HIT_OR_EVADE);
                     }
                 }
             }

@@ -166,7 +166,7 @@ public class GameObjectDragAndDrop : MonoBehaviour {
     // DUPLICATED FRAGMENT!!!!
     private bool isPlayersOwnShip()
     {
-        foreach (LoadedShip ship in PlayerDatas.getPlayer().getSquadron())
+        foreach (LoadedShip ship in LocalDataWrapper.getPlayer().getSquadron())
         {
             if (ship.getPilotId() == MatchDatas.getActiveShip().GetComponent<ShipProperties>().getLoadedShip().getPilotId())
             {
