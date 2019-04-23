@@ -15,6 +15,16 @@ public class LoadedShip {
     private bool hasBeenActivatedThisRound = false;
     private LoadedShip target;
     private List<CustomEventBase> eventActions = new List<CustomEventBase>();
+    private Maneuver plannedManeuver;
+
+    public void setPlannedManeuver(Maneuver m) {
+        this.plannedManeuver = m;
+    }
+
+    public Maneuver getPlannedManeuver()
+    {
+        return this.plannedManeuver;
+    }
 
     public List<CustomEventBase> getEventActions()
     {

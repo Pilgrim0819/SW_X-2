@@ -246,6 +246,15 @@ public class MatchHandler : MonoBehaviour {
 
     private void showManeuverSelector()
     {
+        // TODO Check why this throws NullReferenceException!!
+        /*foreach (Transform child in PilotCardPanel.transform.Find("ShipDataManeuvers/ShipManeuvers"))
+        {
+            if (child.Find("Image").gameObject.GetComponent<ManeuverSelectionEvent>() != null)
+            {
+                Destroy(child.Find("Image").gameObject.GetComponent<ManeuverSelectionEvent>());
+            }
+        }*/
+
         // DUPLACTE FRAGMENT!!!!! (also in squadron builder!)
         foreach (Maneuver maneuver in MatchDatas.getActiveShip().GetComponent<ShipProperties>().getLoadedShip().getShip().Maneuvers.Maneuver)
         {
@@ -258,22 +267,26 @@ public class MatchHandler : MonoBehaviour {
                 if (maneuverHolderName.Contains("left"))
                 {
                     PilotCardPanel.transform.Find("ShipDataManeuvers/ShipManeuvers/Speed" + maneuver.Speed + "_special_left/Image").gameObject.GetComponent<Image>().sprite = sprite;
+                    PilotCardPanel.transform.Find("ShipDataManeuvers/ShipManeuvers/Speed" + maneuver.Speed + "_special_left/Image").gameObject.AddComponent<ManeuverSelectionEvent>();
                     image = PilotCardPanel.transform.Find("ShipDataManeuvers/ShipManeuvers/Speed" + maneuver.Speed + "_special_left/Image").gameObject.GetComponent<Image>();
                 }
                 else if (maneuverHolderName.Contains("right"))
                 {
                     PilotCardPanel.transform.Find("ShipDataManeuvers/ShipManeuvers/Speed" + maneuver.Speed + "_special_right/Image").gameObject.GetComponent<Image>().sprite = sprite;
+                    PilotCardPanel.transform.Find("ShipDataManeuvers/ShipManeuvers/Speed" + maneuver.Speed + "_special_right/Image").gameObject.AddComponent<ManeuverSelectionEvent>();
                     image = PilotCardPanel.transform.Find("ShipDataManeuvers/ShipManeuvers/Speed" + maneuver.Speed + "_special_right/Image").gameObject.GetComponent<Image>();
                 }
                 else
                 {
                     PilotCardPanel.transform.Find("ShipDataManeuvers/ShipManeuvers/Speed" + maneuver.Speed + "_special_left/Image").gameObject.GetComponent<Image>().sprite = sprite;
+                    PilotCardPanel.transform.Find("ShipDataManeuvers/ShipManeuvers/Speed" + maneuver.Speed + "_special_left/Image").gameObject.AddComponent<ManeuverSelectionEvent>();
                     image = PilotCardPanel.transform.Find("ShipDataManeuvers/ShipManeuvers/Speed" + maneuver.Speed + "_special_left/Image").gameObject.GetComponent<Image>();
                 }
             }
             else
             {
                 PilotCardPanel.transform.Find("ShipDataManeuvers/ShipManeuvers/Speed" + maneuverHolderName + "/Image").gameObject.GetComponent<Image>().sprite = sprite;
+                PilotCardPanel.transform.Find("ShipDataManeuvers/ShipManeuvers/Speed" + maneuverHolderName + "/Image").gameObject.AddComponent<ManeuverSelectionEvent>();
                 image = PilotCardPanel.transform.Find("ShipDataManeuvers/ShipManeuvers/Speed" + maneuverHolderName + "/Image").gameObject.GetComponent<Image>();
             }
 
@@ -657,5 +670,38 @@ public class MatchHandler : MonoBehaviour {
         }
 
         return false;
+    }
+
+    public static bool maneuversPlanned()
+    {
+        bool result = true;
+
+        foreach (Player player in MatchDatas.getPlayers())
+        {
+            foreach (LoadedShip ship in player.getSquadron())
+            {
+                if (ship.getPlannedManeuver() == null)
+                {
+                    result = false;
+                    break;
+                }
+            }
+        }
+
+        return result;
+    }
+
+    public static void setAIManeuvers()
+    {
+        foreach (Player player in MatchDatas.getPlayers())
+        {
+            if (player.isAI())
+            {
+                foreach (LoadedShip ship in player.getSquadron())
+                {
+                    ship.setPlannedManeuver(ship.getShip().Maneuvers.Maneuver[0]);
+                }
+            }
+        }
     }
 }
