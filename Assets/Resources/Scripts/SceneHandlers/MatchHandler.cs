@@ -704,4 +704,15 @@ public class MatchHandler : MonoBehaviour {
             }
         }
     }
+
+    public static void deleteSelectedManeuvers()
+    {
+        foreach (Player player in MatchDatas.getPlayers())
+        {
+            foreach (LoadedShip ship in player.getSquadron())
+            {
+                ship.setPlannedManeuver(null);
+            }
+        }
+    }
 }

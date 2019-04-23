@@ -131,6 +131,7 @@ public class MatchDatas {
         return round;
     }
 
+    // TODO Move this to a Util/Service and have it handle any/every sideeffects of phase changes!!
     public static void nextPhase()
     {
         switch (phase)
@@ -143,6 +144,9 @@ public class MatchDatas {
                 break;
             case phases.SQUADRON_PLACEMENT:
                 phase = phases.PLANNING;
+                // Move this elsewhere!!
+                MatchHandler.deleteSelectedManeuvers();
+                MatchHandler.setAIManeuvers();
                 break;
             case phases.PLANNING:
                 phase = phases.ACTIVATION;
@@ -157,6 +161,8 @@ public class MatchDatas {
                 if (!isMatchOver())
                 {
                     phase = phases.PLANNING;
+                    MatchHandler.deleteSelectedManeuvers();
+                    MatchHandler.setAIManeuvers();
                 }
                 break;
         }
