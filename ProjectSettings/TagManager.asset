@@ -6,6 +6,7 @@ TagManager:
   tags:
   - attackDye
   - SmallShipContainer
+  - ForceField
   layers:
   - Default
   - TransparentFX

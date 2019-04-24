@@ -61,6 +61,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Resources\Scripts\Constants\MatchHandlerConstants.cs" />
     <Compile Include="Assets\Resources\Scripts\Constants\SquadBuilderConstants.cs" />
     <Compile Include="Assets\Resources\Scripts\Events\CustomEventBase.cs" />
     <Compile Include="Assets\Resources\Scripts\Events\CustomEventFactory.cs" />
@@ -100,13 +101,16 @@
     <Compile Include="Assets\Resources\Scripts\SceneHandlers\MatchHandler.cs" />
     <Compile Include="Assets\Resources\Scripts\SceneHandlers\SquadBuilderHandler.cs" />
     <Compile Include="Assets\Resources\Scripts\Services\CameraHandler.cs" />
+    <Compile Include="Assets\Resources\Scripts\Services\CoroutineHandler.cs" />
     <Compile Include="Assets\Resources\Scripts\Services\GameObjectDragAndDrop.cs" />
     <Compile Include="Assets\Resources\Scripts\Services\GUIHandler.cs" />
+    <Compile Include="Assets\Resources\Scripts\Services\MatchHandlerService.cs" />
     <Compile Include="Assets\Resources\Scripts\Services\OnShipClick.cs" />
     <Compile Include="Assets\Resources\Scripts\Services\SquadPointsChange.cs" />
     <Compile Include="Assets\Resources\Scripts\Services\SystemMessageService.cs" />
     <Compile Include="Assets\Resources\Scripts\Utils\DiceRollerBase.cs" />
     <Compile Include="Assets\Resources\Scripts\Utils\GameObjectUtil.cs" />
+    <Compile Include="Assets\Resources\Scripts\Utils\MatchHandlerUtil.cs" />
     <Compile Include="Assets\Resources\Scripts\Utils\Mocker.cs" />
     <Compile Include="Assets\Resources\Scripts\Utils\SquadBuilderUtil.cs" />
     <Compile Include="Assets\Resources\Scripts\Utils\SquadPersistenceUtil.cs" />

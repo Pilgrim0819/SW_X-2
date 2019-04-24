@@ -268,7 +268,7 @@ GameObject:
   - component: {fileID: 24057689}
   m_Layer: 2
   m_Name: New Sprite
-  m_TagString: Untagged
+  m_TagString: ForceField
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2280,7 +2280,7 @@ GameObject:
   - component: {fileID: 436454963}
   m_Layer: 2
   m_Name: New Sprite (3)
-  m_TagString: Untagged
+  m_TagString: ForceField
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5106,7 +5106,7 @@ GameObject:
   - component: {fileID: 953821898}
   m_Layer: 2
   m_Name: New Sprite (2)
-  m_TagString: Untagged
+  m_TagString: ForceField
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5754,7 +5754,7 @@ GameObject:
   - component: {fileID: 1087648432}
   m_Layer: 2
   m_Name: New Sprite
-  m_TagString: Untagged
+  m_TagString: ForceField
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7426,7 +7426,7 @@ GameObject:
   - component: {fileID: 1345268049}
   m_Layer: 2
   m_Name: New Sprite (1)
-  m_TagString: Untagged
+  m_TagString: ForceField
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8285,7 +8285,7 @@ GameObject:
   - component: {fileID: 1479929054}
   m_Layer: 2
   m_Name: New Sprite (2)
-  m_TagString: Untagged
+  m_TagString: ForceField
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9750,7 +9750,7 @@ GameObject:
   - component: {fileID: 1698400408}
   m_Layer: 2
   m_Name: New Sprite (1)
-  m_TagString: Untagged
+  m_TagString: ForceField
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11391,7 +11391,7 @@ GameObject:
   - component: {fileID: 1986812584}
   m_Layer: 2
   m_Name: New Sprite (3)
-  m_TagString: Untagged
+  m_TagString: ForceField
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

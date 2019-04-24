@@ -137,42 +137,4 @@ public class DiceRollerBase : MonoBehaviour {
             Destroy(dye);
         }
     }
-
-    public static IEnumerator RollAttackDice(System.Action<Player> callBack)
-    {
-        showDiceArea(1, true);
-        Rigidbody[] GOS = FindObjectsOfType(typeof(Rigidbody)) as Rigidbody[];
-        bool allSleeping = false;
-
-        while (!allSleeping)
-        {
-            allSleeping = true;
-
-            foreach (Rigidbody GO in GOS)
-            {
-                if (!GO.IsSleeping())
-                {
-                    allSleeping = false;
-                    yield return null;
-                    break;
-                }
-            }
-
-        }
-
-        getDiceResults(GOS);
-
-        Player result = null;
-
-        if (LocalDataWrapper.getPlayer().getLastDiceResults()[0] == DICE_RESULT_HIT_OR_EVADE || LocalDataWrapper.getPlayer().getLastDiceResults()[0] == DICE_RESULT_CRIT)
-        {
-            result = MatchDatas.getPlayers()[0];
-        }
-        else
-        {
-            result = MatchDatas.getPlayers()[1];
-        }
-
-        callBack(result);
-    }
 }

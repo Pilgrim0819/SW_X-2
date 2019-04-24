@@ -143,10 +143,11 @@ public class MatchDatas {
                 phase = phases.SQUADRON_PLACEMENT;
                 break;
             case phases.SQUADRON_PLACEMENT:
+                MatchHandlerUtil.hideForceFields();
                 phase = phases.PLANNING;
                 // Move this elsewhere!!
-                MatchHandler.deleteSelectedManeuvers();
-                MatchHandler.setAIManeuvers();
+                MatchHandlerUtil.deleteSelectedManeuvers();
+                MatchHandlerUtil.setAIManeuvers();
                 break;
             case phases.PLANNING:
                 phase = phases.ACTIVATION;
@@ -161,8 +162,8 @@ public class MatchDatas {
                 if (!isMatchOver())
                 {
                     phase = phases.PLANNING;
-                    MatchHandler.deleteSelectedManeuvers();
-                    MatchHandler.setAIManeuvers();
+                    MatchHandlerUtil.deleteSelectedManeuvers();
+                    MatchHandlerUtil.setAIManeuvers();
                 }
                 break;
         }

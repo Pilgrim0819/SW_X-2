@@ -30,7 +30,7 @@ public class ManeuverSelectionEvent : MonoBehaviour, IPointerClickHandler
 
         MatchDatas.getActiveShip().GetComponent<ShipProperties>().getLoadedShip().setPlannedManeuver(selected);
 
-        if (MatchHandler.maneuversPlanned())
+        if (MatchHandlerUtil.maneuversPlanned())
         {
             Debug.Log("All maneuvers are planned, ready for next phase...");
         }
