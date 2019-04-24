@@ -32,7 +32,7 @@ public class ManeuverSelectionEvent : MonoBehaviour, IPointerClickHandler
 
         if (MatchHandlerUtil.maneuversPlanned())
         {
-            Debug.Log("All maneuvers are planned, ready for next phase...");
+            PhaseHandlerService.nextPhase();
         }
     }
 }

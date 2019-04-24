@@ -174,6 +174,11 @@ public class MatchDatas {
         return phase;
     }
 
+    public static void setCurrentPhase(phases p)
+    {
+        phase = p;
+    }
+
     private static bool isMatchOver()
     {
         foreach (Player player in players)

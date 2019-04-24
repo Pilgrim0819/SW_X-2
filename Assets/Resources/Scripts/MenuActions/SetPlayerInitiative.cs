@@ -21,7 +21,7 @@ public class SetPlayerInitiative : MonoBehaviour {
                 // THIS IS ONLY FOR TESTING!! IT SKIPS THE ASTEROID PLACEMENT PHASE!!!!!
                 MatchDatas.nextPhase();
                 // This call should be placed elsewhere, after asteroid placement is done!!
-                MatchHandler.initNextShips(true);
+                MatchHandler.collectUpcomingAvailableShips(true);
 
                 Destroy(GameObject.Find("Initiative panel"));
             }

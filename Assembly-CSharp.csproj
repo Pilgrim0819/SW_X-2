@@ -106,6 +106,7 @@
     <Compile Include="Assets\Resources\Scripts\Services\GUIHandler.cs" />
     <Compile Include="Assets\Resources\Scripts\Services\MatchHandlerService.cs" />
     <Compile Include="Assets\Resources\Scripts\Services\OnShipClick.cs" />
+    <Compile Include="Assets\Resources\Scripts\Services\PhaseHandlerService.cs" />
     <Compile Include="Assets\Resources\Scripts\Services\SquadPointsChange.cs" />
     <Compile Include="Assets\Resources\Scripts\Services\SystemMessageService.cs" />
     <Compile Include="Assets\Resources\Scripts\Utils\DiceRollerBase.cs" />

@@ -148,7 +148,7 @@ public class MatchHandler : MonoBehaviour {
         }
 	}
 
-    public static void initNextShips(bool ascending)
+    public static void collectUpcomingAvailableShips(bool ascending)
     {
         List<LoadedShip> ships1 = MatchDatas.getPlayers()[0].getNextShips(MatchDatas.getCurrentLevel(), ascending);
         List<LoadedShip> ships2 = MatchDatas.getPlayers()[1].getNextShips(MatchDatas.getCurrentLevel(), ascending);
@@ -259,6 +259,6 @@ public class MatchHandler : MonoBehaviour {
             }
         }
 
-        initNextShips(ascending);
+        collectUpcomingAvailableShips(ascending);
     }
 }

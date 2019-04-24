@@ -38,7 +38,7 @@ public class ConfirmPositionEvent : MonoBehaviour, IPointerEnterHandler, IPointe
 
         if (allShipsActivated)
         {
-            MatchHandler.initNextShips(true);
+            MatchHandler.collectUpcomingAvailableShips(true);
         }
 
         this.gameObject.SetActive(false);

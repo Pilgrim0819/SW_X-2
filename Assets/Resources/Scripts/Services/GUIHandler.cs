@@ -105,6 +105,15 @@ public class GUIHandler {
             Sprite sprite = Resources.Load<Sprite>(SquadBuilderConstants.IMAGE_FOLDER_NAME + "/" + maneuver.Bearing + "_" + maneuver.Difficulty);
             string maneuverHolderName = maneuver.Speed + "_" + maneuver.Bearing;
 
+            // Maneuver overlay not showing!! Check why....
+            Maneuver selectedManeuver = MatchDatas.getActiveShip().GetComponent<ShipProperties>().getLoadedShip().getPlannedManeuver();
+            bool isSelected = false;
+
+            if (selectedManeuver != null && maneuver.Speed.Equals(selectedManeuver.Speed) && maneuver.Bearing.Equals(selectedManeuver.Bearing))
+            {
+                isSelected = true;
+            }
+
             if (maneuverHolderName.Contains("koiogran") || maneuverHolderName.Contains("segnor") || maneuverHolderName.Contains("tallon"))
             {
                 if (maneuverHolderName.Contains("left"))
@@ -112,18 +121,21 @@ public class GUIHandler {
                     target.transform.Find("ShipDataManeuvers/ShipManeuvers/Speed" + maneuver.Speed + "_special_left/Image").gameObject.GetComponent<Image>().sprite = sprite;
                     target.transform.Find("ShipDataManeuvers/ShipManeuvers/Speed" + maneuver.Speed + "_special_left/Image").gameObject.AddComponent<ManeuverSelectionEvent>();
                     image = target.transform.Find("ShipDataManeuvers/ShipManeuvers/Speed" + maneuver.Speed + "_special_left/Image").gameObject.GetComponent<Image>();
+                    target.transform.Find("ShipDataManeuvers/ShipManeuvers/Speed" + maneuver.Speed + "_special_left/ManeuverOverlay").gameObject.SetActive(isSelected);
                 }
                 else if (maneuverHolderName.Contains("right"))
                 {
                     target.transform.Find("ShipDataManeuvers/ShipManeuvers/Speed" + maneuver.Speed + "_special_right/Image").gameObject.GetComponent<Image>().sprite = sprite;
                     target.transform.Find("ShipDataManeuvers/ShipManeuvers/Speed" + maneuver.Speed + "_special_right/Image").gameObject.AddComponent<ManeuverSelectionEvent>();
                     image = target.transform.Find("ShipDataManeuvers/ShipManeuvers/Speed" + maneuver.Speed + "_special_right/Image").gameObject.GetComponent<Image>();
+                    target.transform.Find("ShipDataManeuvers/ShipManeuvers/Speed" + maneuver.Speed + "_special_left/ManeuverOverlay").gameObject.SetActive(isSelected);
                 }
                 else
                 {
                     target.transform.Find("ShipDataManeuvers/ShipManeuvers/Speed" + maneuver.Speed + "_special_left/Image").gameObject.GetComponent<Image>().sprite = sprite;
                     target.transform.Find("ShipDataManeuvers/ShipManeuvers/Speed" + maneuver.Speed + "_special_left/Image").gameObject.AddComponent<ManeuverSelectionEvent>();
                     image = target.transform.Find("ShipDataManeuvers/ShipManeuvers/Speed" + maneuver.Speed + "_special_left/Image").gameObject.GetComponent<Image>();
+                    target.transform.Find("ShipDataManeuvers/ShipManeuvers/Speed" + maneuver.Speed + "_special_left/ManeuverOverlay").gameObject.SetActive(isSelected);
                 }
             }
             else
@@ -131,13 +143,13 @@ public class GUIHandler {
                 target.transform.Find("ShipDataManeuvers/ShipManeuvers/Speed" + maneuverHolderName + "/Image").gameObject.GetComponent<Image>().sprite = sprite;
                 target.transform.Find("ShipDataManeuvers/ShipManeuvers/Speed" + maneuverHolderName + "/Image").gameObject.AddComponent<ManeuverSelectionEvent>();
                 image = target.transform.Find("ShipDataManeuvers/ShipManeuvers/Speed" + maneuverHolderName + "/Image").gameObject.GetComponent<Image>();
+                target.transform.Find("ShipDataManeuvers/ShipManeuvers/Speed" + maneuver.Speed + "_special_left/ManeuverOverlay").gameObject.SetActive(isSelected);
             }
 
             if (image != null)
             {
                 image.color = new Color(image.color.r, image.color.g, image.color.b, 1.0f);
             }
-
         }
 
         target.transform.Find("ShipDataManeuvers").gameObject.SetActive(true);
