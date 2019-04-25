@@ -5,6 +5,17 @@ using UnityEngine.UI;
 /*This fixes the ship's position during setup phase.*/
 public class ConfirmPositionEvent : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
+    private GameObject target;
+
+    public void setTarget(GameObject t)
+    {
+        this.target = t;
+    }
+
+    public GameObject getTarget()
+    {
+        return this.target;
+    }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
@@ -22,7 +33,17 @@ public class ConfirmPositionEvent : MonoBehaviour, IPointerEnterHandler, IPointe
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        Debug.Log("Position fixing button clicked!");
+        if (this.target != null)
+        {
+            if (this.target.transform.GetComponent<ShipProperties>() != null)
+            {
+                Debug.Log("It's a ship!!");
+            } else
+            {
+                Debug.Log("It's not a ship!!");
+            }
+        }
+
         MatchDatas.getActiveShip().GetComponent<ShipProperties>().setMovable(false);
         MatchDatas.getActiveShip().GetComponent<ShipProperties>().getLoadedShip().setHasBeenActivatedThisRound(true);
 

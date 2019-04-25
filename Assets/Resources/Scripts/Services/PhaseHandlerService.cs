@@ -1,9 +1,12 @@
-﻿public class PhaseHandlerService {
+﻿using UnityEngine;
+
+public class PhaseHandlerService {
     
     // TODO Make this class handle all phase changes and the required checks, cleanups, inits, etc.....
 
     public static void nextPhase()
     {
+        Debug.Log("Initiating next phase from " + MatchDatas.getCurrentPhase());
         switch (MatchDatas.getCurrentPhase())
         {
             case MatchDatas.phases.INITIATIVE_ROLL:
@@ -71,6 +74,17 @@
     private static void startActivationPhase()
     {
         MatchDatas.setCurrentPhase(MatchDatas.phases.ACTIVATION);
+        MatchDatas.setCurrentLevel(0);
+
+        foreach(Player player in MatchDatas.getPlayers())
+        {
+            foreach(LoadedShip ship in player.getSquadron())
+            {
+                ship.setHasBeenActivatedThisRound(false);
+            }
+        }
+
+        MatchHandler.collectUpcomingAvailableShips(true);
     }
 
     private static void startAttackPhase()

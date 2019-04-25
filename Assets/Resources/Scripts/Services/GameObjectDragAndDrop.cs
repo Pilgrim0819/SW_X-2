@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+// TODO Rewrite to handle asteroids (and other) as well
 /*Handles drag'n drop functionalities for 3D gameobjects (the ships, mainly...)*/
 public class GameObjectDragAndDrop : MonoBehaviour {
 
@@ -87,6 +88,7 @@ public class GameObjectDragAndDrop : MonoBehaviour {
             GameObject shipCollection = GameObject.Find("ShipCollection1");
             GameObject setupField = GameObject.Find("Player1SetupField");
 
+            // TODO check if this part can be simplyfied....
             if (!shipCollection.GetComponent<Collider>().bounds.Contains(target.transform.position) && !setupField.GetComponent<Collider>().bounds.Contains(target.transform.position))
             {
                 target.transform.position = prevPos;
@@ -97,6 +99,12 @@ public class GameObjectDragAndDrop : MonoBehaviour {
                     togglePositionConfirmButton(true);
                 }
             }
+
+            if (!setupField.GetComponent<Collider>().bounds.Contains(target.transform.position))
+            {
+                togglePositionConfirmButton(false);
+            }
+            // TODO check if this part can be simplyfied....
         }
 
         if (grabbed && MatchDatas.getRound() == 0 && shipCanBeMoved())
@@ -132,6 +140,7 @@ public class GameObjectDragAndDrop : MonoBehaviour {
 
         if (button != null)
         {
+            button.transform.GetComponent<ConfirmPositionEvent>().setTarget(target);
             button.SetActive(active);
         }
     }

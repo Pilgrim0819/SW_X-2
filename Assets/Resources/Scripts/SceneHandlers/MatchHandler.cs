@@ -10,6 +10,8 @@ public class MatchHandler : MonoBehaviour {
 
     public GameObject initiativePanel;
     public GameObject PilotCardPanel;
+    public GameObject GameInfoPanel;
+    public GameObject[] asteroids = new GameObject[6];
 
     private static Mocker mocker = new Mocker();
     private static MatchHandlerService matchHandlerService = new MatchHandlerService();
@@ -146,7 +148,40 @@ public class MatchHandler : MonoBehaviour {
         {
             guiHandler.hideGameObject(PilotCardPanel);
         }
-	}
+
+        if (MatchDatas.getCurrentPhase() == MatchDatas.phases.ACTIVATION)
+        {
+            if (availableShips.Capacity > 1 && !GameInfoPanel.activeSelf)
+            {
+                GameInfoPanel.SetActive(true);
+
+                foreach(LoadedShip ship in availableShips)
+                {
+                    foreach(GameObject go in GameObject.FindGameObjectsWithTag("SmallShipContainer"))
+                    {
+                        if (go.transform.GetComponent<ShipProperties>().getLoadedShip().getShip().ShipId.Equals(ship.getShip().ShipId) && go.transform.GetComponent<ShipProperties>().getLoadedShip().getPilotId() == ship.getPilotId())
+                        {
+                            Debug.Log("Ship is available, putting some highlight on it.........");
+
+                            go.transform.GetComponent<ShipProperties>().getLoadedShip().setHasBeenActivatedThisRound(false);
+                        }
+                    }
+                }
+            } else if (availableShips.Capacity == 1)
+            {
+                if (GameInfoPanel.activeSelf)
+                {
+                    GameInfoPanel.SetActive(false);
+                }
+
+                Debug.Log("Only available ship is: " + availableShips[0].getShip().ShipName);
+            } else
+            {
+                Debug.Log("No available ship remains.....");
+            }
+        }
+
+    }
 
     public static void collectUpcomingAvailableShips(bool ascending)
     {
@@ -160,7 +195,7 @@ public class MatchHandler : MonoBehaviour {
 
         if (ship1IsEmpty && ship2IsEmpty)
         {
-            MatchDatas.nextPhase();
+            PhaseHandlerService.nextPhase();
         } else
         {
             if (ship1IsEmpty && !ship2IsEmpty)

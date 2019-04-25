@@ -16,10 +16,10 @@ public class SetPlayerInitiative : MonoBehaviour {
             {
                 player.setInitiative();
                 Debug.Log(player.getPlayerName() + " now has initiative!");
-                MatchDatas.nextPhase();
+                PhaseHandlerService.nextPhase();
 
                 // THIS IS ONLY FOR TESTING!! IT SKIPS THE ASTEROID PLACEMENT PHASE!!!!!
-                MatchDatas.nextPhase();
+                PhaseHandlerService.nextPhase();
                 // This call should be placed elsewhere, after asteroid placement is done!!
                 MatchHandler.collectUpcomingAvailableShips(true);
 

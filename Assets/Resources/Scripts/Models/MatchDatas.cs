@@ -131,44 +131,6 @@ public class MatchDatas {
         return round;
     }
 
-    // TODO Move this to a Util/Service and have it handle any/every sideeffects of phase changes!!
-    public static void nextPhase()
-    {
-        switch (phase)
-        {
-            case phases.INITIATIVE_ROLL:
-                phase = phases.ASTEROIDS_PLACEMENT;
-                break;
-            case phases.ASTEROIDS_PLACEMENT:
-                phase = phases.SQUADRON_PLACEMENT;
-                break;
-            case phases.SQUADRON_PLACEMENT:
-                MatchHandlerUtil.hideForceFields();
-                phase = phases.PLANNING;
-                // Move this elsewhere!!
-                MatchHandlerUtil.deleteSelectedManeuvers();
-                MatchHandlerUtil.setAIManeuvers();
-                break;
-            case phases.PLANNING:
-                phase = phases.ACTIVATION;
-                break;
-            case phases.ACTIVATION:
-                phase = phases.ATTACK;
-                break;
-            case phases.ATTACK:
-                phase = phases.END;
-                break;
-            case phases.END:
-                if (!isMatchOver())
-                {
-                    phase = phases.PLANNING;
-                    MatchHandlerUtil.deleteSelectedManeuvers();
-                    MatchHandlerUtil.setAIManeuvers();
-                }
-                break;
-        }
-    }
-
     public static phases getCurrentPhase()
     {
         return phase;
