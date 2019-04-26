@@ -42,6 +42,22 @@ public class MatchHandler : MonoBehaviour {
             MatchDatas.getPlayers()[MatchDatas.getActivePlayerIndex()].setSelectedShip(null);
         }
 
+        /*switch (MatchDatas.getCurrentPhase())
+        {
+            case MatchDatas.phases.ASTEROIDS_PLACEMENT:
+                break;
+            case MatchDatas.phases.SQUADRON_PLACEMENT:
+                break;
+            case MatchDatas.phases.PLANNING:
+                break;
+            case MatchDatas.phases.ACTIVATION:
+                break;
+            case MatchDatas.phases.ATTACK:
+                break;
+            case MatchDatas.phases.END:
+                break;
+        }*/
+
         //THIS IS ONLY FOR TESTING MOVEMENTS!!!!!! DELETE LATER ON!!!! (Also, ADD UNIQUE IDs during squad building to ships and pilots!!!! [use something like: playerIndex_shipIndex])
         Maneuver man = new Maneuver();
         man.Difficulty = "1";
@@ -149,38 +165,68 @@ public class MatchHandler : MonoBehaviour {
             guiHandler.hideGameObject(PilotCardPanel);
         }
 
+        if (MatchDatas.getCurrentPhase() == MatchDatas.phases.PLANNING)
+        {
+            if (MatchHandlerUtil.maneuversPlanned())
+            {
+                PhaseHandlerService.nextPhase();
+            }
+        }
+
         if (MatchDatas.getCurrentPhase() == MatchDatas.phases.ACTIVATION)
         {
-            if (availableShips.Capacity > 1 && !GameInfoPanel.activeSelf)
-            {
-                GameInfoPanel.SetActive(true);
+            toggleGameInfoPanel();
 
+            // TODO Only show this to the current player!!
+            if (availableShips.Count > 1)
+            {
                 foreach(LoadedShip ship in availableShips)
                 {
                     foreach(GameObject go in GameObject.FindGameObjectsWithTag("SmallShipContainer"))
                     {
                         if (go.transform.GetComponent<ShipProperties>().getLoadedShip().getShip().ShipId.Equals(ship.getShip().ShipId) && go.transform.GetComponent<ShipProperties>().getLoadedShip().getPilotId() == ship.getPilotId())
                         {
-                            Debug.Log("Ship is available, putting some highlight on it.........");
-
+                            // Do we need this?? In PhaseHandler, all players' all ships' value has been set....
                             go.transform.GetComponent<ShipProperties>().getLoadedShip().setHasBeenActivatedThisRound(false);
+                            // ****
+
+                            MatchHandlerUtil.setShipHighlighters(go, true);
                         }
                     }
                 }
-            } else if (availableShips.Capacity == 1)
+            } else if (availableShips.Count == 1)
             {
-                if (GameInfoPanel.activeSelf)
+                foreach (GameObject go in GameObject.FindGameObjectsWithTag("SmallShipContainer"))
                 {
-                    GameInfoPanel.SetActive(false);
+                    if (
+                        go.transform.GetComponent<ShipProperties>().getLoadedShip().getShip().ShipId.Equals(availableShips[0].getShip().ShipId)
+                        && go.transform.GetComponent<ShipProperties>().getLoadedShip().getPilotId() == availableShips[0].getPilotId()
+                        && !go.transform.GetComponent<ShipProperties>().getLoadedShip().isHasBeenActivatedThisRound()
+                    )
+                    {
+                        go.transform.GetComponent<ShipProperties>().getLoadedShip().setHasBeenActivatedThisRound(true);
+                        StartCoroutine(GameObject.Find("ScriptHolder").GetComponent<CoroutineHandler>().MoveShipOverTime(go, go.transform.GetComponent<ShipProperties>().getLoadedShip().getPlannedManeuver()));
+                    }
                 }
-
-                Debug.Log("Only available ship is: " + availableShips[0].getShip().ShipName);
             } else
             {
-                Debug.Log("No available ship remains.....");
+                MatchHandlerUtil.hideActiveShipHighlighters();
+                PhaseHandlerService.nextPhase();
             }
         }
 
+    }
+
+    private void toggleGameInfoPanel()
+    {
+        if (availableShips.Capacity < 1 && GameInfoPanel.activeSelf)
+        {
+            GameInfoPanel.SetActive(false);
+        }
+        else if (availableShips.Capacity > 1 && !GameInfoPanel.activeSelf)
+        {
+            GameInfoPanel.SetActive(true);
+        }
     }
 
     public static void collectUpcomingAvailableShips(bool ascending)
@@ -265,7 +311,7 @@ public class MatchHandler : MonoBehaviour {
                 }
             }
 
-            if (MatchDatas.getPlayers()[MatchDatas.getActivePlayerIndex()].isAI())
+            if (MatchDatas.getPlayers()[MatchDatas.getActivePlayerIndex()].isAI() && MatchDatas.getCurrentPhase() == MatchDatas.phases.SQUADRON_PLACEMENT)
             {
                 moveAIShips(ascending);
             }

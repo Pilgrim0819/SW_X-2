@@ -12333,6 +12333,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initiativePanel: {fileID: 736565158}
   PilotCardPanel: {fileID: 1364520319}
+  GameInfoPanel: {fileID: 220212874}
   asteroids:
   - {fileID: 1331673788}
   - {fileID: 105355509}

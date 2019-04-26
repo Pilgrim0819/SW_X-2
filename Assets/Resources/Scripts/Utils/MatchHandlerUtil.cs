@@ -7,6 +7,8 @@ public class MatchHandlerUtil {
 
     private static GameObject initiativePanel;
 
+    private static string[] faces = { "FrontFace", "BackFace", "LeftFace", "RightFace" };
+
     public static void setInitiativePanel(GameObject panel)
     {
         initiativePanel = panel;
@@ -108,6 +110,29 @@ public class MatchHandlerUtil {
             }
 
             initiativePanel.SetActive(true);
+        }
+    }
+
+    public static void setShipHighlighters(GameObject target, bool active)
+    {
+        for (int i = 0; i < faces.Length; i++)
+        {
+            target.transform.Find(faces[i]).gameObject.SetActive(active);
+        }
+    }
+
+    // This one hides ALL ship highlighters!!!
+    public static void hideActiveShipHighlighters()
+    {
+        for (int i = 0; i < faces.Length; i++)
+        {
+            foreach (GameObject go in GameObject.FindObjectsOfType<GameObject>())
+            {
+                if (go.name.Equals(faces[i]))
+                {
+                    go.SetActive(false);
+                }
+            }
         }
     }
 

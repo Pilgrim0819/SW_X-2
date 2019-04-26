@@ -73,6 +73,7 @@ public class PhaseHandlerService {
 
     private static void startActivationPhase()
     {
+        MatchHandlerUtil.hideActiveShipHighlighters();
         MatchDatas.setCurrentPhase(MatchDatas.phases.ACTIVATION);
         MatchDatas.setCurrentLevel(0);
 

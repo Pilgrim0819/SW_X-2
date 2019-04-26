@@ -29,10 +29,5 @@ public class ManeuverSelectionEvent : MonoBehaviour, IPointerClickHandler
         }
 
         MatchDatas.getActiveShip().GetComponent<ShipProperties>().getLoadedShip().setPlannedManeuver(selected);
-
-        if (MatchHandlerUtil.maneuversPlanned())
-        {
-            PhaseHandlerService.nextPhase();
-        }
     }
 }
