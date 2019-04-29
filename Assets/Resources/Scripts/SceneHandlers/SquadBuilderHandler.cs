@@ -18,6 +18,7 @@ public class SquadBuilderHandler : MonoBehaviour {
     public GameObject UpgradesPopup;
     public GameObject SaveButton;
     public GameObject fileExplorer;
+    public GameObject PlayButton;
 
     private string prevChosenSize = "";
     private string prevChosenShip = "";
@@ -31,6 +32,8 @@ public class SquadBuilderHandler : MonoBehaviour {
 
     void Start () {
         /*********************************TODO remove when testing is done!!*/
+        LocalDataWrapper.setPlayer(new Player());
+
         if (LocalDataWrapper.getPlayer().getChosenSide() == null || LocalDataWrapper.getPlayer().getChosenSide().Equals(""))
         {
             LocalDataWrapper.getPlayer().setChosenSide(SquadBuilderConstants.FACTION_REBELS);
@@ -53,6 +56,8 @@ public class SquadBuilderHandler : MonoBehaviour {
     void Update()
     {
         showCurrentSquadPoints();
+
+        togglePlayButton();
 
         if (!prevChosenSize.Equals(LocalDataWrapper.getPlayer().getChosenSize()))
         {
@@ -150,6 +155,22 @@ public class SquadBuilderHandler : MonoBehaviour {
     private void showCurrentSquadPoints()
     {
         squadPointsHolder.GetComponent<Text>().text = LocalDataWrapper.getPlayer().getCumulatedSquadPoints() + "/" + LocalDataWrapper.getPlayer().getPointsToSpend();
+    }
+
+    private void togglePlayButton()
+    {
+        if (LocalDataWrapper.getPlayer().getCumulatedSquadPoints() > 0)
+        {
+            if (!PlayButton.activeSelf) {
+                PlayButton.SetActive(true);
+            }
+        } else
+        {
+            if (PlayButton.activeSelf)
+            {
+                PlayButton.SetActive(false);
+            }
+        }
     }
 
     private void showShips()

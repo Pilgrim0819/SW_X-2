@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class MatchHandlerService {
 
+    private bool levitateShipsUpwards = true;
+
 	public void instantiateShips()
     {
         foreach (Player player in MatchDatas.getPlayers())
@@ -45,6 +47,19 @@ public class MatchHandlerService {
 
                 loopIndex++;
             };
+        }
+    }
+
+    public void levitateShips()
+    {
+        foreach (GameObject go in GameObject.FindGameObjectsWithTag("SmallShipContainer"))
+        {
+            go.transform.Translate(Vector3.up * (levitateShipsUpwards ? 1 : -1));
+
+            if (go.transform.position.y <= -550 || go.transform.position.y >= -450)
+            {
+                levitateShipsUpwards = !levitateShipsUpwards;
+            }
         }
     }
 }

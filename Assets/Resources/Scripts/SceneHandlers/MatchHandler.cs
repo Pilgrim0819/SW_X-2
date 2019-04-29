@@ -19,6 +19,8 @@ public class MatchHandler : MonoBehaviour {
 
     private static List<LoadedShip> availableShips = new List<LoadedShip>();
 
+    private static string MULTIPLE_AVAILABLE_SHIPS_INFO = "Chose which of the available ships should go first!";
+
     //FOR TESTING ONLY!!!
     private string[] keyCodes = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "v", "b", "n", "m", "g", "h", "j", "k", "t", "z", "u", "i"};
     //FOR TESTING ONLY!!!
@@ -37,6 +39,8 @@ public class MatchHandler : MonoBehaviour {
     }
 
 	void Update() {
+        matchHandlerService.levitateShips();
+
         if (Input.GetKey("escape"))
         {
             MatchDatas.getPlayers()[MatchDatas.getActivePlayerIndex()].setSelectedShip(null);
@@ -190,6 +194,7 @@ public class MatchHandler : MonoBehaviour {
                             go.transform.GetComponent<ShipProperties>().getLoadedShip().setHasBeenActivatedThisRound(false);
                             // ****
 
+                            guiHandler.setGameObjectText(GameInfoPanel, MULTIPLE_AVAILABLE_SHIPS_INFO);
                             MatchHandlerUtil.setShipHighlighters(go, true);
                         }
                     }
@@ -219,13 +224,13 @@ public class MatchHandler : MonoBehaviour {
 
     private void toggleGameInfoPanel()
     {
-        if (availableShips.Capacity < 1 && GameInfoPanel.activeSelf)
+        if (availableShips.Count < 1 && GameInfoPanel.activeSelf)
         {
-            GameInfoPanel.SetActive(false);
+            guiHandler.hideGameObject(GameInfoPanel);
         }
-        else if (availableShips.Capacity > 1 && !GameInfoPanel.activeSelf)
+        else if (availableShips.Count > 1 && !GameInfoPanel.activeSelf)
         {
-            GameInfoPanel.SetActive(true);
+            guiHandler.showGameObject(GameInfoPanel);
         }
     }
 

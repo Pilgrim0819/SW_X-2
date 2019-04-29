@@ -87,6 +87,16 @@ public class GUIHandler {
         target.SetActive(false);
     }
 
+    public void showGameObject(GameObject target)
+    {
+        target.SetActive(true);
+    }
+
+    public void setGameObjectText(GameObject target, string text)
+    {
+        target.GetComponent<UnityEngine.UI.Text>().text = text;
+    }
+
     public void showManeuverSelector(GameObject target)
     {
         // TODO Check why this throws NullReferenceException!!
