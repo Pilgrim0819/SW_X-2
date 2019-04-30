@@ -10,6 +10,7 @@ public class SquadBuilderConstants {
     public const string SHIP_NAME_PANEL = "ShipNamePanel";
     public const string PILOT_NAME_PANEL = "PilotNamePanel";
     public const string UPGRADE_IMAGE_HOLDER = "UpgradeImageHolder";
+    public const string ACTION_ICON = "ActionIcon";
     public const string SQUADRON_SHIP_HOLDER = "SquadronShipHolder";
     public const string SYSTEM_MESSAGE_PANEL = "SystemMessagePanel";
     public const string UPGRADE_SLOT = "UpgradeSlot";

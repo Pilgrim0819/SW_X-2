@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-using System.Collections;
-using PilotsXMLCSharp;
+﻿using PilotsXMLCSharp;
 using ShipsXMLCSharp;
 using System.Collections.Generic;
 
@@ -16,6 +14,7 @@ public class LoadedShip {
     private LoadedShip target;
     private List<CustomEventBase> eventActions = new List<CustomEventBase>();
     private Maneuver plannedManeuver;
+    private List<IToken> tokens = new List<IToken>();
 
     public void setPlannedManeuver(Maneuver m) {
         this.plannedManeuver = m;
@@ -92,5 +91,15 @@ public class LoadedShip {
     public bool isHasBeenActivatedThisRound()
     {
         return hasBeenActivatedThisRound;
+    }
+
+    public void addToken(IToken token)
+    {
+        this.tokens.Add(token);
+    }
+
+    public void removeToken(IToken token)
+    {
+        tokens.Remove(token);
     }
 }

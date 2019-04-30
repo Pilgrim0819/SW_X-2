@@ -71,6 +71,7 @@
     <Compile Include="Assets\Resources\Scripts\Events\EventActions\EventActionExpertHandling.cs" />
     <Compile Include="Assets\Resources\Scripts\Events\EventActions\EventActionWedgeAntilles.cs" />
     <Compile Include="Assets\Resources\Scripts\MenuAction.cs" />
+    <Compile Include="Assets\Resources\Scripts\MenuActions\ActionIconEvents.cs" />
     <Compile Include="Assets\Resources\Scripts\MenuActions\ConfirmPositionEvent.cs" />
     <Compile Include="Assets\Resources\Scripts\MenuActions\FactionPanelVents.cs" />
     <Compile Include="Assets\Resources\Scripts\MenuActions\LoadSquadronEvents.cs" />

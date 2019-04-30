@@ -80,17 +80,22 @@ public class GUIHandler {
             image = null;
             sprite = Resources.Load<Sprite>(SquadBuilderConstants.IMAGE_FOLDER_NAME + "/" + action.Replace(" ", "-"));
 
-            image = NewObj.AddComponent<Image>();
-            image.sprite = sprite;
-            image.color = new Color(image.color.r, image.color.g, image.color.b, 1.0f);
+            Transform actionIconPrefab = Resources.Load<Transform>(SquadBuilderConstants.PREFABS_FOLDER_NAME + "/" + SquadBuilderConstants.ACTION_ICON);
+            RectTransform rt = (RectTransform)actionIconPrefab;
+            float actionIconWidth = rt.rect.width;
 
-            NewObj.GetComponent<RectTransform>().SetParent(target.transform.Find("ActionIcons"));
-            NewObj.GetComponent<RectTransform>().anchorMin = new Vector2(0.0f, 1.0f);
-            NewObj.GetComponent<RectTransform>().anchorMax = new Vector2(0.0f, 1.0f);
-            NewObj.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
-            NewObj.GetComponent<RectTransform>().sizeDelta = new Vector2(actionImageSize, actionImageSize);
-            NewObj.GetComponent<RectTransform>().localPosition = new Vector3(actionImageSize * actionIndex + actionImageSize/2 - target.transform.Find("ActionIcons").GetComponent<RectTransform>().rect.width/2, 0.0f, 0.0f);
-            NewObj.SetActive(true);
+            Transform actionIcon = (Transform)GameObject.Instantiate(
+                actionIconPrefab,
+                new Vector3((actionIndex * actionIconWidth) + SquadBuilderConstants.UPGRADE_IMAGE_X_OFFSET, SquadBuilderConstants.UPGRADE_IMAGE_Y_OFFSET, SquadBuilderConstants.UPGRADE_IMAGE_Z_OFFSET),
+                Quaternion.identity
+            );
+
+            Transform actionsBar = target.transform.Find("ActionIcons");
+            Image actionIconImage = actionIcon.gameObject.GetComponent<Image>();
+
+            actionIcon.transform.SetParent(actionsBar, false);
+            actionIconImage.sprite = sprite;
+            actionIconImage.color = new Color(actionIconImage.color.r, actionIconImage.color.g, actionIconImage.color.b, 1.0f);
 
             actionIndex++;
         }
