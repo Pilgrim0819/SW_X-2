@@ -7,6 +7,7 @@ public class GUIHandler {
 
     private const string PREFAB_FOLDER_NAME = "Prefabs/ShipCardPrefab";
     private const string IMAGE_FOLDER_NAME = "images";
+    private const float actionImageSize = 15.0f;
 
     public GameObject TargetCanvas;
 
@@ -39,6 +40,8 @@ public class GUIHandler {
     {
         LoadedShip ship = MatchDatas.getPlayers()[MatchDatas.getActivePlayerIndex()].getSelectedhip();
         string side = "";
+        Image image;
+        Sprite sprite;
 
         foreach (Player player in MatchDatas.getPlayers())
         {
@@ -67,15 +70,40 @@ public class GUIHandler {
         target.transform.Find("PowerValueHolder/Value").gameObject.GetComponent<UnityEngine.UI.Text>().text = ship.getShip().Weapon.ToString();
         target.transform.Find("PilotLevelHolder/Value").gameObject.GetComponent<UnityEngine.UI.Text>().text = ship.getPilot().Level.ToString();
 
-        Sprite sprite = Resources.Load<Sprite>(SquadBuilderConstants.IMAGE_FOLDER_NAME + "/" + side + "_pilot_card");
+        int actionIndex = 0;
+
+
+        // TODO use prefabs instead???
+        foreach (string action in ship.getShip().Actions.Action)
+        {
+            GameObject NewObj = new GameObject();
+            image = null;
+            sprite = Resources.Load<Sprite>(SquadBuilderConstants.IMAGE_FOLDER_NAME + "/" + action.Replace(" ", "-"));
+
+            image = NewObj.AddComponent<Image>();
+            image.sprite = sprite;
+            image.color = new Color(image.color.r, image.color.g, image.color.b, 1.0f);
+
+            NewObj.GetComponent<RectTransform>().SetParent(target.transform.Find("ActionIcons"));
+            NewObj.GetComponent<RectTransform>().anchorMin = new Vector2(0.0f, 1.0f);
+            NewObj.GetComponent<RectTransform>().anchorMax = new Vector2(0.0f, 1.0f);
+            NewObj.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
+            NewObj.GetComponent<RectTransform>().sizeDelta = new Vector2(actionImageSize, actionImageSize);
+            NewObj.GetComponent<RectTransform>().localPosition = new Vector3(actionImageSize * actionIndex + actionImageSize/2 - target.transform.Find("ActionIcons").GetComponent<RectTransform>().rect.width/2, 0.0f, 0.0f);
+            NewObj.SetActive(true);
+
+            actionIndex++;
+        }
+
+        sprite = Resources.Load<Sprite>(SquadBuilderConstants.IMAGE_FOLDER_NAME + "/" + side + "_pilot_card");
         target.transform.Find("CardImage").gameObject.GetComponent<Image>().sprite = sprite;
-        Image image = target.transform.Find("CardImage").gameObject.GetComponent<Image>();
+        image = target.transform.Find("CardImage").gameObject.GetComponent<Image>();
         image.color = new Color(image.color.r, image.color.g, image.color.b, 1.0f);
 
-        Sprite sprite1 = Resources.Load<Sprite>(SquadBuilderConstants.IMAGE_FOLDER_NAME + "/" + ship.getShip().ShipId);
-        target.transform.Find("CardImage/ShipImage").gameObject.GetComponent<Image>().sprite = sprite1;
-        Image image1 = target.transform.Find("CardImage/ShipImage").gameObject.GetComponent<Image>();
-        image1.color = new Color(image1.color.r, image1.color.g, image1.color.b, 1.0f);
+        sprite = Resources.Load<Sprite>(SquadBuilderConstants.IMAGE_FOLDER_NAME + "/" + ship.getShip().ShipId);
+        target.transform.Find("CardImage/ShipImage").gameObject.GetComponent<Image>().sprite = sprite;
+        image = target.transform.Find("CardImage/ShipImage").gameObject.GetComponent<Image>();
+        image.color = new Color(image.color.r, image.color.g, image.color.b, 1.0f);
 
         target.transform.Find("ShipDataManeuvers").gameObject.SetActive(false);
 

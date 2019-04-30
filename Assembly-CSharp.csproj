@@ -88,6 +88,9 @@
     <Compile Include="Assets\Resources\Scripts\MenuActions\SystemMessagePanelEvents.cs" />
     <Compile Include="Assets\Resources\Scripts\MenuActions\UpgradePanelEvents.cs" />
     <Compile Include="Assets\Resources\Scripts\MenuActions\UpgradeSlotEvents.cs" />
+    <Compile Include="Assets\Resources\Scripts\Models\EvadeToken.cs" />
+    <Compile Include="Assets\Resources\Scripts\Models\FocusToken.cs" />
+    <Compile Include="Assets\Resources\Scripts\Models\IToken.cs" />
     <Compile Include="Assets\Resources\Scripts\Models\LoadedShip.cs" />
     <Compile Include="Assets\Resources\Scripts\Models\LocalDataWrapper.cs" />
     <Compile Include="Assets\Resources\Scripts\Models\MatchDatas.cs" />
@@ -95,6 +98,8 @@
     <Compile Include="Assets\Resources\Scripts\Models\Player.cs" />
     <Compile Include="Assets\Resources\Scripts\Models\ShipProperties.cs" />
     <Compile Include="Assets\Resources\Scripts\Models\ShipsXMLModel.cs" />
+    <Compile Include="Assets\Resources\Scripts\Models\StressToken.cs" />
+    <Compile Include="Assets\Resources\Scripts\Models\TargetLockToken.cs" />
     <Compile Include="Assets\Resources\Scripts\Models\UpgradesXMLModel.cs" />
     <Compile Include="Assets\Resources\Scripts\SceneChangerManuAction.cs" />
     <Compile Include="Assets\Resources\Scripts\SceneHandlers\LobbyHandler.cs" />

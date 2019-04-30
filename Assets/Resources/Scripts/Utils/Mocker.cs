@@ -58,7 +58,7 @@ public class Mocker {
         LoadedShip ship2 = new LoadedShip();
         ship2.setShip(ships.Ship[0]);
         ship2.setPilot(pilots.Pilot[1]);
-        //ship2.getPilot().Level = ship1.getPilot().Level;
+        ship2.getPilot().Level = ship1.getPilot().Level;
 
         //List<LoadedShip> squadron1 = new List<LoadedShip>();
 

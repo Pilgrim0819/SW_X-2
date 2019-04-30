@@ -1,6 +1,7 @@
 ﻿using ShipsXMLCSharp;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class MatchHandlerService {
@@ -54,14 +55,34 @@ public class MatchHandlerService {
     // Buggy!! Works, but keeps speeding up (like a ping pong ball....)
     public void levitateShips()
     {
-        foreach (GameObject go in GameObject.FindGameObjectsWithTag("SmallShipContainer"))
+        /*foreach (GameObject gameObj in GameObject.FindGameObjectsWithTag("SmallShipContainer"))
         {
-            go.transform.Translate(Vector3.up * (levitateShipsUpwards ? 1 : -1));
+            gameObj.transform.Translate(Vector3.up * (levitateShipsUpwards ? 1 : -1));
 
-            if (go.transform.position.y <= -550 || go.transform.position.y >= -450)
+            if (gameObj.transform.position.y <= -550 || gameObj.transform.position.y >= -450)
             {
                 levitateShipsUpwards = !levitateShipsUpwards;
             }
-        }
+        }*/
     }
+
+    // This is just an idea!!! Needs further development......
+    public float getTargetDistance(GameObject origin, GameObject target)
+    {
+        float result = 0.0f;
+
+        RaycastHit hit;
+        Ray downRay = new Ray(origin.transform.position, -Vector3.up);
+        
+        // TODO check, if target is even inside the firing arc!!!
+
+        // Hit should be the first target the ray touches...
+        if (Physics.Raycast(downRay, out hit))
+        {
+            result = hit.distance;
+        }
+
+            return result;
+    }
+    // *****************************************************
 }

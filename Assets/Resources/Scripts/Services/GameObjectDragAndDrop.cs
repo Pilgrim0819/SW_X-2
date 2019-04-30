@@ -68,9 +68,28 @@ public class GameObjectDragAndDrop : MonoBehaviour {
                         MatchDatas.setActiveShip(target);
                     }
                 }
-                Cursor.visible = false;
-                grabbed = true;
-                prevPos = target.transform.position;
+
+                if (MatchDatas.getCurrentPhase() == MatchDatas.phases.SQUADRON_PLACEMENT)
+                {
+                    Cursor.visible = false;
+                    grabbed = true;
+                    prevPos = target.transform.position;
+                } else if (MatchDatas.getCurrentPhase() == MatchDatas.phases.ACTIVATION)
+                {
+                    // DUPLICATED IN MatchHandler!!!
+                    foreach (GameObject go in GameObject.FindGameObjectsWithTag("SmallShipContainer"))
+                    {
+                        if (
+                            go.transform.GetComponent<ShipProperties>().getLoadedShip().getShip().ShipId.Equals(MatchHandler.getAvailableShips()[0].getShip().ShipId)
+                            && go.transform.GetComponent<ShipProperties>().getLoadedShip().getPilotId() == MatchHandler.getAvailableShips()[0].getPilotId()
+                            && !go.transform.GetComponent<ShipProperties>().getLoadedShip().isHasBeenActivatedThisRound()
+                        )
+                        {
+                            go.transform.GetComponent<ShipProperties>().getLoadedShip().setHasBeenActivatedThisRound(true);
+                            StartCoroutine(GameObject.Find("ScriptHolder").GetComponent<CoroutineHandler>().MoveShipOverTime(go, go.transform.GetComponent<ShipProperties>().getLoadedShip().getPlannedManeuver()));
+                        }
+                    }
+                }
             }
         }
 
@@ -130,7 +149,7 @@ public class GameObjectDragAndDrop : MonoBehaviour {
         bool result = false;
         bool shipIsAvailable = false;
 
-        foreach (LoadedShip ship in MatchHandler.getAvailablehips())
+        foreach (LoadedShip ship in MatchHandler.getAvailableShips())
         {
             if (ship.getPilotId() == MatchDatas.getActiveShip().GetComponent<ShipProperties>().getLoadedShip().getPilotId())
             {

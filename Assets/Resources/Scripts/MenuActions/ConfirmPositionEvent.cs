@@ -49,7 +49,7 @@ public class ConfirmPositionEvent : MonoBehaviour, IPointerEnterHandler, IPointe
 
         bool allShipsActivated = true;
 
-        foreach (LoadedShip ship in MatchHandler.getAvailablehips())
+        foreach (LoadedShip ship in MatchHandler.getAvailableShips())
         {
             if (!ship.isHasBeenActivatedThisRound())
             {

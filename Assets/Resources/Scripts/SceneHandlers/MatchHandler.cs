@@ -19,7 +19,7 @@ public class MatchHandler : MonoBehaviour {
 
     private static List<LoadedShip> availableShips = new List<LoadedShip>();
 
-    private static string MULTIPLE_AVAILABLE_SHIPS_INFO = "Chose which of the available ships should go first!";
+    private const string MULTIPLE_AVAILABLE_SHIPS_INFO = "Chose which of the available ships should go first!";
 
     //FOR TESTING ONLY!!!
     private string[] keyCodes = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "v", "b", "n", "m", "g", "h", "j", "k", "t", "z", "u", "i"};
@@ -144,7 +144,7 @@ public class MatchHandler : MonoBehaviour {
         }
 
         //THIS IS ONLY FOR TESTING MOVEMENTS!!!!!! DELETE LATER ON!!!! (Also, ADD UNIQUE IDs during squad building to ships and pilots!!!! [use something like: playerIndex_shipIndex])
-        StartCoroutine(GameObject.Find("ScriptHolder").GetComponent<CoroutineHandler>().MoveShipOverTime(GameObject.FindGameObjectsWithTag("SmallShipContainer")[1], man));
+        //StartCoroutine(GameObject.Find("ScriptHolder").GetComponent<CoroutineHandler>().MoveShipOverTime(GameObject.FindGameObjectsWithTag("SmallShipContainer")[1], man));
         //THIS IS ONLY FOR TESTING MOVEMENTS!!!!!! DELETE LATER ON!!!! (Also, ADD UNIQUE IDs during squad building to ships and pilots!!!! [use something like: playerIndex_shipIndex])
 
         if (MatchDatas.getPlayers()[MatchDatas.getActivePlayerIndex()].getSelectedhip() != null)
@@ -194,13 +194,14 @@ public class MatchHandler : MonoBehaviour {
                             go.transform.GetComponent<ShipProperties>().getLoadedShip().setHasBeenActivatedThisRound(false);
                             // ****
 
-                            guiHandler.setGameObjectText(GameInfoPanel, MULTIPLE_AVAILABLE_SHIPS_INFO);
+                            guiHandler.setGameObjectText(GameInfoPanel.transform.Find("InfoText").gameObject, MULTIPLE_AVAILABLE_SHIPS_INFO);
                             MatchHandlerUtil.setShipHighlighters(go, true);
                         }
                     }
                 }
             } else if (availableShips.Count == 1)
             {
+                // DUPLICATED IN GameObjectDragAndDrop!!
                 foreach (GameObject go in GameObject.FindGameObjectsWithTag("SmallShipContainer"))
                 {
                     if (
@@ -323,7 +324,7 @@ public class MatchHandler : MonoBehaviour {
         }
     }
 
-    public static List<LoadedShip> getAvailablehips()
+    public static List<LoadedShip> getAvailableShips()
     {
         return availableShips;
     }
