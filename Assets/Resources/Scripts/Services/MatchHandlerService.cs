@@ -50,6 +50,8 @@ public class MatchHandlerService {
         }
     }
 
+
+    // Buggy!! Works, but keeps speeding up (like a ping pong ball....)
     public void levitateShips()
     {
         foreach (GameObject go in GameObject.FindGameObjectsWithTag("SmallShipContainer"))

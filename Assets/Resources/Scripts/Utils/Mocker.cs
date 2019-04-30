@@ -34,6 +34,10 @@ public class Mocker {
     {
         Player player = new Player();
 
+        if (LocalDataWrapper.getPlayer() != null) {
+            player = LocalDataWrapper.getPlayer();
+        }
+
         player.setPlayerName("Human Player");
 
         LocalDataWrapper.setPlayer(player);
@@ -50,19 +54,15 @@ public class Mocker {
         //Adding event actions to be registered for event handling.
         //TODO Is the input parameter correct/enough??????
         ship1.addEventAction(new EventActionWedgeAntilles(ship1));
-		LocalDataWrapper.getPlayer().setSelectedEmptyShip(ship1.getShip());
-        LocalDataWrapper.getPlayer().addPilotToSquadron(ship1.getPilot());
 
         LoadedShip ship2 = new LoadedShip();
         ship2.setShip(ships.Ship[0]);
         ship2.setPilot(pilots.Pilot[1]);
-        ship2.getPilot().Level = ship1.getPilot().Level;
-        LocalDataWrapper.getPlayer().setSelectedEmptyShip(ship2.getShip());
-        LocalDataWrapper.getPlayer().addPilotToSquadron(ship2.getPilot());
+        //ship2.getPilot().Level = ship1.getPilot().Level;
 
-        List<LoadedShip> squadron1 = new List<LoadedShip>();
+        //List<LoadedShip> squadron1 = new List<LoadedShip>();
 
-        foreach (LoadedShip ship in LocalDataWrapper.getPlayer().getSquadron())
+        /*foreach (LoadedShip ship in LocalDataWrapper.getPlayer().getSquadron())
         {
             squadron1.Add(ship);
 
@@ -71,12 +71,22 @@ public class Mocker {
             {
                 EventActionRegister.registerEventAction(eventAction);
             }
-        }
+        }*/
         
         LocalDataWrapper.getPlayer().setChosenSide("Rebels");
         LocalDataWrapper.getPlayer().setPLayerID(1);
-        LocalDataWrapper.getPlayer().setSquadron(squadron1);
         LocalDataWrapper.getPlayer().setAI(false);
+
+        if (LocalDataWrapper.getPlayer().getSquadron() == null || LocalDataWrapper.getPlayer().getSquadron().Count == 0)
+        {
+            LocalDataWrapper.getPlayer().setSelectedEmptyShip(ship1.getShip());
+            LocalDataWrapper.getPlayer().addPilotToSquadron(ship1.getPilot());
+
+            LocalDataWrapper.getPlayer().setSelectedEmptyShip(ship2.getShip());
+            LocalDataWrapper.getPlayer().addPilotToSquadron(ship2.getPilot());
+
+            //LocalDataWrapper.getPlayer().setSquadron(squadron1);
+        }
 
         //AI PLAYER!!
         Player player2 = new Player();
