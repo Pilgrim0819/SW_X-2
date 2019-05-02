@@ -89,6 +89,7 @@
     <Compile Include="Assets\Resources\Scripts\MenuActions\SystemMessagePanelEvents.cs" />
     <Compile Include="Assets\Resources\Scripts\MenuActions\UpgradePanelEvents.cs" />
     <Compile Include="Assets\Resources\Scripts\MenuActions\UpgradeSlotEvents.cs" />
+    <Compile Include="Assets\Resources\Scripts\Models\AsteroidProperties.cs" />
     <Compile Include="Assets\Resources\Scripts\Models\EvadeToken.cs" />
     <Compile Include="Assets\Resources\Scripts\Models\FocusToken.cs" />
     <Compile Include="Assets\Resources\Scripts\Models\IToken.cs" />

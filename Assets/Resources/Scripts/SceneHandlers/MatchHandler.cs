@@ -166,6 +166,8 @@ public class MatchHandler : MonoBehaviour {
             }
         } else
         {
+            MatchHandlerUtil.hideActiveShipHighlighters();
+            MatchDatas.setActiveShip(null);
             guiHandler.hideGameObject(PilotCardPanel);
         }
 

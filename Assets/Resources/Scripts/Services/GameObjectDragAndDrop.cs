@@ -5,10 +5,15 @@
 public class GameObjectDragAndDrop : MonoBehaviour {
 
     private GameObject target;
-    private bool grabbed = false;
+    private bool grabbed;
     private Vector3 prevPos;
 
     private const float dragSpeedMultiplier = 50.0f;
+
+    void Start()
+    {
+        grabbed = false;
+    }
 
     GameObject ReturnClickedObject(out RaycastHit hit)
     {
@@ -25,24 +30,39 @@ public class GameObjectDragAndDrop : MonoBehaviour {
 
     void OnMouseDrag()
     {
-        if (MatchDatas.getRound() == 0 && shipCanBeMoved()) {
-            float moveX = Input.GetAxis("Mouse X");
-            float moveY = Input.GetAxis("Mouse Y");
-            Vector3 newPos = new Vector3(transform.position.x + (moveX * dragSpeedMultiplier), transform.position.y, transform.position.z + (moveY * dragSpeedMultiplier));
+        if (target == null)
+        {
+            RaycastHit hitInfo;
+            target = ReturnClickedObject(out hitInfo);
+        }
 
-            transform.position = newPos;
+        float moveX = Input.GetAxis("Mouse X");
+        float moveY = Input.GetAxis("Mouse Y");
+
+        if (target.GetComponent<ShipProperties>() != null)
+        {
+            if (MatchDatas.getCurrentPhase() == MatchDatas.phases.SQUADRON_PLACEMENT && shipCanBeMoved())
+            {
+                Vector3 newPos = new Vector3(transform.position.x + (moveX * dragSpeedMultiplier), transform.position.y, transform.position.z + (moveY * dragSpeedMultiplier));
+
+                transform.position = newPos;
+            }
+        }
+
+        if (target.GetComponent<AsteroidProperties>() != null)
+        {
+            Debug.Log("Asteroid");
+            if (MatchDatas.getCurrentPhase() == MatchDatas.phases.SQUADRON_PLACEMENT && asteroidCanBeMoved())
+            {
+                Debug.Log(" can be moved...");
+                Vector3 newPos = new Vector3(transform.position.x + (moveX * dragSpeedMultiplier), transform.position.y, transform.position.z + (moveY * dragSpeedMultiplier));
+
+                transform.position = newPos;
+            }
         }
     }
 	
 	void Update () {
-        if (MatchDatas.getPlayers()[MatchDatas.getActivePlayerIndex()].getSelectedhip() == null)
-        {
-            MatchHandlerUtil.hideActiveShipHighlighters();
-
-            //TODO remove this if activeShip is not neede anymore!!!
-            MatchDatas.setActiveShip(null);
-        }
-
         if (Input.GetMouseButtonDown(0))
         {
             RaycastHit hitInfo;
@@ -52,7 +72,7 @@ public class GameObjectDragAndDrop : MonoBehaviour {
             {
                 if (!grabbed)
                 {
-                    if (MatchDatas.getActiveShip() == null || MatchDatas.getActiveShip() != target)
+                    if ((MatchDatas.getActiveShip() == null || MatchDatas.getActiveShip() != target) && target.GetComponent<ShipProperties>() != null)
                     {
                         MatchHandlerUtil.hideActiveShipHighlighters();
 
@@ -69,12 +89,12 @@ public class GameObjectDragAndDrop : MonoBehaviour {
                     }
                 }
 
-                if (MatchDatas.getCurrentPhase() == MatchDatas.phases.SQUADRON_PLACEMENT)
+                if (MatchDatas.getCurrentPhase() == MatchDatas.phases.SQUADRON_PLACEMENT || MatchDatas.getCurrentPhase() == MatchDatas.phases.ASTEROIDS_PLACEMENT)
                 {
                     Cursor.visible = false;
                     grabbed = true;
                     prevPos = target.transform.position;
-                } else if (MatchDatas.getCurrentPhase() == MatchDatas.phases.ACTIVATION)
+                } else if (MatchDatas.getCurrentPhase() == MatchDatas.phases.ACTIVATION && target.GetComponent<ShipProperties>() != null)
                 {
                     foreach (LoadedShip ship in MatchHandler.getAvailableShips())
                     {
@@ -97,29 +117,49 @@ public class GameObjectDragAndDrop : MonoBehaviour {
             Cursor.visible = true;
             grabbed = false;
 
-            GameObject shipCollection = GameObject.Find("ShipCollection1");
-            GameObject setupField = GameObject.Find("Player1SetupField");
+            if (target.GetComponent<ShipProperties>() != null)
+            {
+                GameObject shipCollection = GameObject.Find("ShipCollection1");
+                GameObject setupField = GameObject.Find("Player1SetupField");
 
-            // TODO check if this part can be simplyfied....
-            if (!shipCollection.GetComponent<Collider>().bounds.Contains(target.transform.position) && !setupField.GetComponent<Collider>().bounds.Contains(target.transform.position))
-            {
-                target.transform.position = prevPos;
-            } else
-            {
-                if (setupField.GetComponent<Collider>().bounds.Contains(target.transform.position) && shipCanBeMoved())
+                // TODO check if this part can be simplyfied....
+                if (!shipCollection.GetComponent<Collider>().bounds.Contains(target.transform.position) && !setupField.GetComponent<Collider>().bounds.Contains(target.transform.position))
                 {
-                    togglePositionConfirmButton(true);
+                    target.transform.position = prevPos;
+                }
+                else
+                {
+                    if (setupField.GetComponent<Collider>().bounds.Contains(target.transform.position) && shipCanBeMoved())
+                    {
+                        togglePositionConfirmButton(true);
+                    }
+                }
+
+                if (!setupField.GetComponent<Collider>().bounds.Contains(target.transform.position))
+                {
+                    togglePositionConfirmButton(false);
+                }
+                // TODO check if this part can be simplyfied....
+            }
+
+            if (target.GetComponent<AsteroidProperties>() != null)
+            {
+                GameObject playField = GameObject.Find("Playfield");
+
+                if (!playField.GetComponent<Collider>().bounds.Contains(target.transform.position))
+                {
+                    target.transform.position = prevPos;
+                } else
+                {
+                    if (asteroidCanBeMoved())
+                    {
+                        togglePositionConfirmButton(true);
+                    }
                 }
             }
-
-            if (!setupField.GetComponent<Collider>().bounds.Contains(target.transform.position))
-            {
-                togglePositionConfirmButton(false);
-            }
-            // TODO check if this part can be simplyfied....
         }
 
-        if (grabbed && MatchDatas.getRound() == 0 && shipCanBeMoved())
+        if (grabbed && MatchDatas.getCurrentPhase() == MatchDatas.phases.SQUADRON_PLACEMENT && shipCanBeMoved())
         {
             if (Input.GetAxis("Mouse ScrollWheel") > 0f) // forward
             {
@@ -148,26 +188,34 @@ public class GameObjectDragAndDrop : MonoBehaviour {
         bool result = false;
         bool shipIsAvailable = false;
 
-        foreach (LoadedShip ship in MatchHandler.getAvailableShips())
+        if (MatchDatas.getActiveShip() != null)
         {
-            if (ship.getPilotId() == MatchDatas.getActiveShip().GetComponent<ShipProperties>().getLoadedShip().getPilotId())
+            foreach (LoadedShip ship in MatchHandler.getAvailableShips())
             {
-                shipIsAvailable = true;
+                if (ship.getPilotId() == MatchDatas.getActiveShip().GetComponent<ShipProperties>().getLoadedShip().getPilotId())
+                {
+                    shipIsAvailable = true;
+                }
             }
-        }
-        
-        if (shipIsAvailable && isPlayersOwnShip())
-        {
-            if (
-                MatchDatas.getActiveShip().GetComponent<ShipProperties>().isMovable()
-                && !MatchDatas.getActiveShip().GetComponent<ShipProperties>().getLoadedShip().isHasBeenActivatedThisRound()
-            )
+
+            if (shipIsAvailable && isPlayersOwnShip())
             {
-                result = true;
+                if (
+                    MatchDatas.getActiveShip().GetComponent<ShipProperties>().isMovable()
+                    && !MatchDatas.getActiveShip().GetComponent<ShipProperties>().getLoadedShip().isHasBeenActivatedThisRound()
+                )
+                {
+                    result = true;
+                }
             }
         }
 
         return result;
+    }
+
+    private bool asteroidCanBeMoved()
+    {
+        return target.GetComponent<AsteroidProperties>().isCanBeMoved();
     }
 
     // DUPLICATED FRAGMENT!!!!
