@@ -51,10 +51,8 @@ public class GameObjectDragAndDrop : MonoBehaviour {
 
         if (target.GetComponent<AsteroidProperties>() != null)
         {
-            Debug.Log("Asteroid");
-            if (MatchDatas.getCurrentPhase() == MatchDatas.phases.SQUADRON_PLACEMENT && asteroidCanBeMoved())
+            if (MatchDatas.getCurrentPhase() == MatchDatas.phases.ASTEROIDS_PLACEMENT && asteroidCanBeMoved())
             {
-                Debug.Log(" can be moved...");
                 Vector3 newPos = new Vector3(transform.position.x + (moveX * dragSpeedMultiplier), transform.position.y, transform.position.z + (moveY * dragSpeedMultiplier));
 
                 transform.position = newPos;
