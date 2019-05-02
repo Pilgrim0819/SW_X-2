@@ -86,6 +86,10 @@ public class PhaseHandlerService {
         }
 
         MatchHandler.collectUpcomingAvailableShips(true);
+
+        // TODO Active player index is not always right/sufficient!!
+        MatchDatas.getPlayers()[MatchDatas.getActivePlayerIndex()].setActiveShip(null);
+        MatchDatas.getPlayers()[MatchDatas.getActivePlayerIndex()].setSelectedShip(null);
     }
 
     private static void startAttackPhase()

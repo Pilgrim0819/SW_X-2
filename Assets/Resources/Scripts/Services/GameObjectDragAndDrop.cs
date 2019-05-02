@@ -76,17 +76,16 @@ public class GameObjectDragAndDrop : MonoBehaviour {
                     prevPos = target.transform.position;
                 } else if (MatchDatas.getCurrentPhase() == MatchDatas.phases.ACTIVATION)
                 {
-                    // DUPLICATED IN MatchHandler!!!
-                    foreach (GameObject go in GameObject.FindGameObjectsWithTag("SmallShipContainer"))
+                    foreach (LoadedShip ship in MatchHandler.getAvailableShips())
                     {
                         if (
-                            go.transform.GetComponent<ShipProperties>().getLoadedShip().getShip().ShipId.Equals(MatchHandler.getAvailableShips()[0].getShip().ShipId)
-                            && go.transform.GetComponent<ShipProperties>().getLoadedShip().getPilotId() == MatchHandler.getAvailableShips()[0].getPilotId()
-                            && !go.transform.GetComponent<ShipProperties>().getLoadedShip().isHasBeenActivatedThisRound()
-                        )
+                        target.transform.GetComponent<ShipProperties>().getLoadedShip().getShip().ShipId.Equals(ship.getShip().ShipId)
+                        && target.transform.GetComponent<ShipProperties>().getLoadedShip().getPilotId() == ship.getPilotId()
+                        && !target.transform.GetComponent<ShipProperties>().getLoadedShip().isHasBeenActivatedThisRound()
+                    )
                         {
-                            go.transform.GetComponent<ShipProperties>().getLoadedShip().setHasBeenActivatedThisRound(true);
-                            StartCoroutine(GameObject.Find("ScriptHolder").GetComponent<CoroutineHandler>().MoveShipOverTime(go, go.transform.GetComponent<ShipProperties>().getLoadedShip().getPlannedManeuver()));
+                            target.transform.GetComponent<ShipProperties>().getLoadedShip().setHasBeenActivatedThisRound(true);
+                            StartCoroutine(GameObject.Find("ScriptHolder").GetComponent<CoroutineHandler>().MoveShipOverTime(target, target.transform.GetComponent<ShipProperties>().getLoadedShip().getPlannedManeuver()));
                         }
                     }
                 }

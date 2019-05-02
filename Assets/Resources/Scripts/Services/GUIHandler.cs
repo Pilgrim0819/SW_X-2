@@ -76,7 +76,6 @@ public class GUIHandler {
         // TODO use prefabs instead???
         foreach (string action in ship.getShip().Actions.Action)
         {
-            GameObject NewObj = new GameObject();
             image = null;
             sprite = Resources.Load<Sprite>(SquadBuilderConstants.IMAGE_FOLDER_NAME + "/" + action.Replace(" ", "-"));
 

@@ -190,10 +190,6 @@ public class MatchHandler : MonoBehaviour {
                     {
                         if (go.transform.GetComponent<ShipProperties>().getLoadedShip().getShip().ShipId.Equals(ship.getShip().ShipId) && go.transform.GetComponent<ShipProperties>().getLoadedShip().getPilotId() == ship.getPilotId())
                         {
-                            // Do we need this?? In PhaseHandler, all players' all ships' value has been set....
-                            go.transform.GetComponent<ShipProperties>().getLoadedShip().setHasBeenActivatedThisRound(false);
-                            // ****
-
                             guiHandler.setGameObjectText(GameInfoPanel.transform.Find("InfoText").gameObject, MULTIPLE_AVAILABLE_SHIPS_INFO);
                             MatchHandlerUtil.setShipHighlighters(go, true);
                         }
