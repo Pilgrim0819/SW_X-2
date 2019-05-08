@@ -131,6 +131,8 @@ public class GUIHandler {
 
     public void showManeuverSelector(GameObject target)
     {
+        resetManeuverSelector();
+
         // TODO Check why this throws NullReferenceException!!
         /*foreach (Transform child in PilotCardPanel.transform.Find("ShipDataManeuvers/ShipManeuvers"))
         {
@@ -146,6 +148,7 @@ public class GUIHandler {
             Image image = null;
             Sprite sprite = Resources.Load<Sprite>(SquadBuilderConstants.IMAGE_FOLDER_NAME + "/" + maneuver.Bearing + "_" + maneuver.Difficulty);
             string maneuverHolderName = maneuver.Speed + "_" + maneuver.Bearing;
+            string maneuverHolderPath = "ShipDataManeuvers/ShipManeuvers/Speed" + maneuverHolderName;
 
             // Maneuver overlay not showing!! Check why....
             Maneuver selectedManeuver = MatchDatas.getActiveShip().GetComponent<ShipProperties>().getLoadedShip().getPlannedManeuver();
@@ -158,35 +161,20 @@ public class GUIHandler {
 
             if (maneuverHolderName.Contains("koiogran") || maneuverHolderName.Contains("segnor") || maneuverHolderName.Contains("tallon"))
             {
-                if (maneuverHolderName.Contains("left"))
+                if (maneuverHolderName.Contains("right"))
                 {
-                    target.transform.Find("ShipDataManeuvers/ShipManeuvers/Speed" + maneuver.Speed + "_special_left/Image").gameObject.GetComponent<Image>().sprite = sprite;
-                    target.transform.Find("ShipDataManeuvers/ShipManeuvers/Speed" + maneuver.Speed + "_special_left/Image").gameObject.AddComponent<ManeuverSelectionEvent>();
-                    image = target.transform.Find("ShipDataManeuvers/ShipManeuvers/Speed" + maneuver.Speed + "_special_left/Image").gameObject.GetComponent<Image>();
-                    target.transform.Find("ShipDataManeuvers/ShipManeuvers/Speed" + maneuver.Speed + "_special_left/ManeuverOverlay").gameObject.SetActive(isSelected);
-                }
-                else if (maneuverHolderName.Contains("right"))
+                    maneuverHolderPath = "ShipDataManeuvers/ShipManeuvers/Speed" + maneuver.Speed + "_special_right";
+                } else
                 {
-                    target.transform.Find("ShipDataManeuvers/ShipManeuvers/Speed" + maneuver.Speed + "_special_right/Image").gameObject.GetComponent<Image>().sprite = sprite;
-                    target.transform.Find("ShipDataManeuvers/ShipManeuvers/Speed" + maneuver.Speed + "_special_right/Image").gameObject.AddComponent<ManeuverSelectionEvent>();
-                    image = target.transform.Find("ShipDataManeuvers/ShipManeuvers/Speed" + maneuver.Speed + "_special_right/Image").gameObject.GetComponent<Image>();
-                    target.transform.Find("ShipDataManeuvers/ShipManeuvers/Speed" + maneuver.Speed + "_special_left/ManeuverOverlay").gameObject.SetActive(isSelected);
-                }
-                else
-                {
-                    target.transform.Find("ShipDataManeuvers/ShipManeuvers/Speed" + maneuver.Speed + "_special_left/Image").gameObject.GetComponent<Image>().sprite = sprite;
-                    target.transform.Find("ShipDataManeuvers/ShipManeuvers/Speed" + maneuver.Speed + "_special_left/Image").gameObject.AddComponent<ManeuverSelectionEvent>();
-                    image = target.transform.Find("ShipDataManeuvers/ShipManeuvers/Speed" + maneuver.Speed + "_special_left/Image").gameObject.GetComponent<Image>();
-                    target.transform.Find("ShipDataManeuvers/ShipManeuvers/Speed" + maneuver.Speed + "_special_left/ManeuverOverlay").gameObject.SetActive(isSelected);
+                    maneuverHolderPath = "ShipDataManeuvers/ShipManeuvers/Speed" + maneuver.Speed + "_special_left";
                 }
             }
-            else
-            {
-                target.transform.Find("ShipDataManeuvers/ShipManeuvers/Speed" + maneuverHolderName + "/Image").gameObject.GetComponent<Image>().sprite = sprite;
-                target.transform.Find("ShipDataManeuvers/ShipManeuvers/Speed" + maneuverHolderName + "/Image").gameObject.AddComponent<ManeuverSelectionEvent>();
-                image = target.transform.Find("ShipDataManeuvers/ShipManeuvers/Speed" + maneuverHolderName + "/Image").gameObject.GetComponent<Image>();
-                target.transform.Find("ShipDataManeuvers/ShipManeuvers/Speed" + maneuver.Speed + "_special_left/ManeuverOverlay").gameObject.SetActive(isSelected);
-            }
+
+            target.transform.Find(maneuverHolderPath + "/Image").gameObject.GetComponent<Image>().sprite = sprite;
+            target.transform.Find(maneuverHolderPath + "/Image").gameObject.AddComponent<ManeuverSelectionEvent>();
+            target.transform.Find(maneuverHolderPath + "/Image").gameObject.GetComponent<ManeuverSelectionEvent>().setManeuver(maneuver);
+            image = target.transform.Find(maneuverHolderPath + "/Image").gameObject.GetComponent<Image>();
+            target.transform.Find(maneuverHolderPath + "/ManeuverOverlay").gameObject.SetActive(isSelected);
 
             if (image != null)
             {
@@ -195,5 +183,18 @@ public class GUIHandler {
         }
 
         target.transform.Find("ShipDataManeuvers").gameObject.SetActive(true);
+    }
+
+    private void resetManeuverSelector()
+    {
+        GameObject maneuversHolder = GameObject.Find("Canvas/PilotCardPanel/ShipDataManeuvers/ShipManeuvers");
+
+        foreach (Transform maneuverHolder in maneuversHolder.GetComponentsInChildren<Transform>())
+        {
+            if (maneuverHolder.Find("Image") != null)
+            {
+                maneuverHolder.Find("Image").gameObject.GetComponent<Image>().sprite = null;
+            }
+        }
     }
 }

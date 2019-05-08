@@ -19,7 +19,10 @@ public class MatchHandler : MonoBehaviour {
 
     private static List<LoadedShip> availableShips = new List<LoadedShip>();
 
-    private const string MULTIPLE_AVAILABLE_SHIPS_INFO = "Chose which of the available ships should go first!";
+    private const string MULTIPLE_AVAILABLE_SHIPS_INFO = "Chose which of the available ships should execute its planned maneuver!";
+    private const string PLANNING_INFO = "Please choose a valid maneuver for each of your ships.";
+    private const string SQUADRON_PLACEMENT_INFO = "Please put an available ship into the highlighted setup area.";
+    private const string EMPTY_TEXT = "";
 
     //FOR TESTING ONLY!!!
     private string[] keyCodes = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "v", "b", "n", "m", "g", "h", "j", "k", "t", "z", "u", "i"};
@@ -38,6 +41,7 @@ public class MatchHandler : MonoBehaviour {
         MatchHandlerUtil.determineInitiative();
     }
 
+    // TODO Can we make the method calls inside to run only ONCE(!), when necessary??
 	void Update() {
         matchHandlerService.levitateShips();
 
@@ -171,18 +175,24 @@ public class MatchHandler : MonoBehaviour {
             guiHandler.hideGameObject(PilotCardPanel);
         }
 
+        if (MatchDatas.getCurrentPhase() == MatchDatas.phases.SQUADRON_PLACEMENT)
+        {
+            updateInfoPanel(SQUADRON_PLACEMENT_INFO);
+        }
+
         if (MatchDatas.getCurrentPhase() == MatchDatas.phases.PLANNING)
         {
+            updateInfoPanel(PLANNING_INFO);
+
             if (MatchHandlerUtil.maneuversPlanned())
             {
+                updateInfoPanel(EMPTY_TEXT);
                 PhaseHandlerService.nextPhase();
             }
         }
 
         if (MatchDatas.getCurrentPhase() == MatchDatas.phases.ACTIVATION)
         {
-            toggleGameInfoPanel();
-
             // TODO Only show this to the current player!!
             if (availableShips.Count > 1)
             {
@@ -192,7 +202,7 @@ public class MatchHandler : MonoBehaviour {
                     {
                         if (go.transform.GetComponent<ShipProperties>().getLoadedShip().getShip().ShipId.Equals(ship.getShip().ShipId) && go.transform.GetComponent<ShipProperties>().getLoadedShip().getPilotId() == ship.getPilotId())
                         {
-                            guiHandler.setGameObjectText(GameInfoPanel.transform.Find("InfoText").gameObject, MULTIPLE_AVAILABLE_SHIPS_INFO);
+                            updateInfoPanel(MULTIPLE_AVAILABLE_SHIPS_INFO);
                             MatchHandlerUtil.setShipHighlighters(go, true);
                         }
                     }
@@ -214,6 +224,7 @@ public class MatchHandler : MonoBehaviour {
                 }
             } else
             {
+                updateInfoPanel(EMPTY_TEXT);
                 MatchHandlerUtil.hideActiveShipHighlighters();
                 PhaseHandlerService.nextPhase();
             }
@@ -221,7 +232,7 @@ public class MatchHandler : MonoBehaviour {
 
     }
 
-    private void toggleGameInfoPanel()
+    /*private void toggleGameInfoPanel()
     {
         if (availableShips.Count < 1 && GameInfoPanel.activeSelf)
         {
@@ -230,6 +241,52 @@ public class MatchHandler : MonoBehaviour {
         else if (availableShips.Count > 1 && !GameInfoPanel.activeSelf)
         {
             guiHandler.showGameObject(GameInfoPanel);
+        }
+    }*/
+
+    private void updateInfoPanel(string infoText)
+    {
+        if (infoText.Equals(EMPTY_TEXT) || infoText == null)
+        {
+            if (GameInfoPanel.activeSelf)
+            {
+                guiHandler.hideGameObject(GameInfoPanel);
+            }
+        } else
+        {
+            GameInfoPanel.transform.Find("InfoText").gameObject.GetComponent<UnityEngine.UI.Text>().text = infoText;
+
+            if (!GameInfoPanel.activeSelf)
+            {
+                guiHandler.showGameObject(GameInfoPanel);
+            }
+        }
+    }
+
+    public static void handleManeuverSelection(Maneuver selectedManeuver)
+    {
+        // Hide (all) previous highlight
+        foreach (Transform maneuverHolder in GameObject.Find("ShipManeuvers").GetComponentsInChildren<Transform>())
+        {
+            if (maneuverHolder.Find("ManeuverOverlay") != null && maneuverHolder.Find("ManeuverOverlay").gameObject.activeSelf)
+            {
+                maneuverHolder.Find("ManeuverOverlay").gameObject.SetActive(false);
+            }
+        }
+
+        // Highlight the selected maneuver
+        foreach (Transform maneuverHolder in GameObject.Find("ShipManeuvers").GetComponentsInChildren<Transform>())
+        {
+            if (maneuverHolder.gameObject.GetComponent<ManeuverSelectionEvent>() != null)
+            {
+                Maneuver maneuver = maneuverHolder.gameObject.GetComponent<ManeuverSelectionEvent>().maneuver;
+
+                if (maneuver.Speed.Equals(selectedManeuver.Speed) && maneuver.Bearing.Equals(selectedManeuver.Bearing) && maneuverHolder.Find("ManeuverOverlay") != null)
+                {
+                    maneuverHolder.Find("ManeuverOverlay").gameObject.SetActive(true);
+                    break;
+                }
+            }
         }
     }
 
