@@ -1,11 +1,15 @@
-﻿public class EvadeToken : IToken
+﻿using System.Threading;
+
+public class EvadeToken : IToken
 {
     private const string NAME = "Evade";
-    private int id;
+    public int id;
 
-    public int getId()
+    static int nextId;
+
+    public EvadeToken()
     {
-        return this.id;
+        id = Interlocked.Increment(ref nextId);
     }
 
     public string getName()
@@ -13,8 +17,8 @@
         return NAME;
     }
 
-    public void setId(int id)
+    public int getId()
     {
-        this.id = id;
+        return this.id;
     }
 }

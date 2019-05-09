@@ -194,6 +194,11 @@ public class GUIHandler {
             if (maneuverHolder.Find("Image") != null)
             {
                 maneuverHolder.Find("Image").gameObject.GetComponent<Image>().sprite = null;
+                // TODO Check if this destroy method works properly!
+                if (maneuverHolder.Find("Image").gameObject.GetComponent<ManeuverSelectionEvent>() as ManeuverSelectionEvent != null)
+                {
+                    maneuverHolder.Find("Image").gameObject.GetComponent<ManeuverSelectionEvent>().setManeuver(null);
+                }
             }
         }
     }

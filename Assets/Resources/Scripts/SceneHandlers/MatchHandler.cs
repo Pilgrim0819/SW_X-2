@@ -277,11 +277,11 @@ public class MatchHandler : MonoBehaviour {
         // Highlight the selected maneuver
         foreach (Transform maneuverHolder in GameObject.Find("ShipManeuvers").GetComponentsInChildren<Transform>())
         {
-            if (maneuverHolder.gameObject.GetComponent<ManeuverSelectionEvent>() != null)
+            if (maneuverHolder.Find("Image") != null && maneuverHolder.Find("Image").gameObject.GetComponent<ManeuverSelectionEvent>() as ManeuverSelectionEvent != null)
             {
-                Maneuver maneuver = maneuverHolder.gameObject.GetComponent<ManeuverSelectionEvent>().maneuver;
+                Maneuver maneuver = maneuverHolder.Find("Image").gameObject.GetComponent<ManeuverSelectionEvent>().maneuver;
 
-                if (maneuver.Speed.Equals(selectedManeuver.Speed) && maneuver.Bearing.Equals(selectedManeuver.Bearing) && maneuverHolder.Find("ManeuverOverlay") != null)
+                if (maneuver.Speed.Equals(selectedManeuver.Speed) && maneuver.Bearing.Equals(selectedManeuver.Bearing))
                 {
                     maneuverHolder.Find("ManeuverOverlay").gameObject.SetActive(true);
                     break;

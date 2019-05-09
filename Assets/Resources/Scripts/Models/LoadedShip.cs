@@ -1,5 +1,6 @@
 ﻿using PilotsXMLCSharp;
 using ShipsXMLCSharp;
+using System;
 using System.Collections.Generic;
 
 /*This represents a whole ship with a pilot and upgrades*/
@@ -65,32 +66,32 @@ public class LoadedShip {
 
     public void setAlive(bool alive)
     {
-        alive = alive;
+        this.alive = alive;
     }
 
     public bool isAlive()
     {
-        return alive;
+        return this.alive;
     }
 
     public LoadedShip getTarget()
     {
-        return target;
+        return this.target;
     }
 
     public void setTarget(LoadedShip pTarget)
     {
-        target = pTarget;
+        this.target = pTarget;
     }
 
     public void setHasBeenActivatedThisRound(bool value)
     {
-        hasBeenActivatedThisRound = value;
+        this.hasBeenActivatedThisRound = value;
     }
 
     public bool isHasBeenActivatedThisRound()
     {
-        return hasBeenActivatedThisRound;
+        return this.hasBeenActivatedThisRound;
     }
 
     public void addToken(IToken token)
@@ -100,6 +101,37 @@ public class LoadedShip {
 
     public void removeToken(IToken token)
     {
-        tokens.Remove(token);
+        this.tokens.Remove(token);
+    }
+
+    public int getTokenIdByType(Type clazz)
+    {
+        int result = 0;
+
+        foreach (IToken t in this.tokens)
+        {
+            if (t.GetType() == clazz)
+            {
+                result = t.getId();
+            }
+        }
+
+        return result;
+    }
+
+    public void removeTokenById(Type clazz, int id)
+    {
+        foreach (IToken t in this.tokens)
+        {
+            if (t.GetType() == clazz && t.getId() == id)
+            {
+                tokens.Remove(t);
+            }
+        }
+    }
+
+    public List<IToken> getTokens()
+    {
+        return this.tokens;
     }
 }

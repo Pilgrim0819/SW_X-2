@@ -1,17 +1,21 @@
-﻿public class TargetLockToken : IToken
+﻿using System.Threading;
+
+public class TargetLockToken : IToken
 {
     // Is it better, to have this token duplicated (with same ID!) and the "own" bool set OR
     // to have the "targetId" attribute, which holds the id of the paired token????
 
     private const string NAME = "Target Lock";
-    private int id;
+    public int id;
 
-    private bool own;
-    private int targetId;
+    static int nextId;
 
-    public int getId()
+    public bool own { get; set; }
+    public int targetId { get; set; }
+
+    public TargetLockToken()
     {
-        return this.id;
+        id = Interlocked.Increment(ref nextId);
     }
 
     public string getName()
@@ -19,28 +23,8 @@
         return NAME;
     }
 
-    public void setId(int id)
+    public int getId()
     {
-        this.id = id;
-    }
-
-    public void setOwn(bool own)
-    {
-        this.own = own;
-    }
-
-    public bool isOwn()
-    {
-        return this.own;
-    }
-
-    public void setTargetId(int id)
-    {
-        this.targetId = id;
-    }
-
-    public int getTargetId()
-    {
-        return this.targetId;
+        return this.id;
     }
 }

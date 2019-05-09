@@ -145,6 +145,20 @@ public class CoroutineHandler : MonoBehaviour
 
                 break;
         }
+
+        // TODO Make player chosen an action (if available)
+        if (maneuver.Difficulty.Equals("2"))
+        {
+            Debug.Log("Adding stress token!");
+            objectToMove.transform.GetComponent<ShipProperties>().getLoadedShip().addToken(new StressToken());
+        } else if (maneuver.Difficulty.Equals("0"))
+        {
+            Debug.Log("Removing stress token!");
+            objectToMove.transform.GetComponent<ShipProperties>().getLoadedShip().removeTokenById(
+                typeof(StressToken),
+                objectToMove.transform.GetComponent<ShipProperties>().getLoadedShip().getTokenIdByType(typeof(StressToken))
+            );
+        }
     }
 
     public IEnumerator RollAttackDice(System.Action<Player> callBack)
