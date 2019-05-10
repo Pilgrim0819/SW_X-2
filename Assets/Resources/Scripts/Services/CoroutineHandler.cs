@@ -5,12 +5,15 @@ using UnityEngine;
 
 public class CoroutineHandler : MonoBehaviour
 {
+    private Maneuver maneuverToComplete = null;
+    private GameObject target = null;
+
     public void rollAttackDiceCallback()
     {
         StartCoroutine(RollAttackDice(MatchHandlerUtil.displayInitiativeChoser));
     }
 
-    public IEnumerator TurnShipAround(GameObject objectToMove)
+    public IEnumerator TurnShipAround(GameObject objectToMove, bool lastMovement)
     {
         float elapsedTime = 0.0f;
         float maneuverDurationInSeconds = 0.5f;
@@ -31,10 +34,10 @@ public class CoroutineHandler : MonoBehaviour
         angles.z = rotationDegree;
         objectToMove.transform.rotation = Quaternion.Euler(angles);
 
-        StartCoroutine(MoveAndRollShip(objectToMove, 180.0f, objectToMove.transform.up * 1000.0f));
+        StartCoroutine(MoveAndRollShip(objectToMove, 180.0f, objectToMove.transform.up * 1000.0f, lastMovement));
     }
 
-    public IEnumerator MoveAndRollShip(GameObject objectToMove, float rollDegree, Vector3 distance)
+    public IEnumerator MoveAndRollShip(GameObject objectToMove, float rollDegree, Vector3 distance, bool lastMovement)
     {
         float elapsedTime = 0.0f;
         float maneuverDurationInSeconds = 0.5f;
@@ -63,6 +66,11 @@ public class CoroutineHandler : MonoBehaviour
 
         objectToMove.transform.rotation = Quaternion.Euler(angles);
         objectToMove.transform.position = end;
+
+        if (lastMovement)
+        {
+            afterManeuver();
+        }
     }
 
     public IEnumerator MoveShipOverTime(GameObject objectToMove, Maneuver maneuver)
@@ -71,6 +79,8 @@ public class CoroutineHandler : MonoBehaviour
         {
             yield break; ///exit if this is still running
         }*/
+
+        beforeManeuver(objectToMove, maneuver);
 
         float maneuverDurationInSeconds = 1.0f;
         float elapsedTime = 0.0f;
@@ -94,7 +104,10 @@ public class CoroutineHandler : MonoBehaviour
 
                 if (maneuver.Bearing.Equals("koiogran"))
                 {
-                    StartCoroutine(this.TurnShipAround(objectToMove));
+                    StartCoroutine(this.TurnShipAround(objectToMove, true));
+                } else
+                {
+                    afterManeuver();
                 }
 
                 break;
@@ -119,7 +132,7 @@ public class CoroutineHandler : MonoBehaviour
                     turnMultiplier = turnMultiplier * (-1);
                 }
 
-                StartCoroutine(this.MoveAndRollShip(objectToMove, -turnDegree, objectToMove.transform.forward * 250.0f));
+                StartCoroutine(this.MoveAndRollShip(objectToMove, -turnDegree, objectToMove.transform.forward * 250.0f, false));
 
                 float distance = 500 * (turnMultiplier + ((speed - 1) * turnStep));
                 Vector3 center = startingPos + objectToMove.transform.right * distance;
@@ -141,23 +154,9 @@ public class CoroutineHandler : MonoBehaviour
                 angles.y = finalRotation;
                 objectToMove.transform.rotation = Quaternion.Euler(angles);
 
-                StartCoroutine(this.MoveAndRollShip(objectToMove, turnDegree, objectToMove.transform.forward * 250.0f));
-
+                StartCoroutine(this.MoveAndRollShip(objectToMove, turnDegree, objectToMove.transform.forward * 250.0f, true));
+                
                 break;
-        }
-
-        // TODO Make player chosen an action (if available)
-        if (maneuver.Difficulty.Equals("2"))
-        {
-            Debug.Log("Adding stress token!");
-            objectToMove.transform.GetComponent<ShipProperties>().getLoadedShip().addToken(new StressToken());
-        } else if (maneuver.Difficulty.Equals("0"))
-        {
-            Debug.Log("Removing stress token!");
-            objectToMove.transform.GetComponent<ShipProperties>().getLoadedShip().removeTokenById(
-                typeof(StressToken),
-                objectToMove.transform.GetComponent<ShipProperties>().getLoadedShip().getTokenIdByType(typeof(StressToken))
-            );
         }
     }
 
@@ -197,5 +196,29 @@ public class CoroutineHandler : MonoBehaviour
         }
 
         callBack(result);
+    }
+
+    private void beforeManeuver(GameObject objectToMove, Maneuver maneuver)
+    {
+        if (target == null || maneuver == null)
+        {
+            target = objectToMove;
+            maneuverToComplete = maneuver;
+        }
+    }
+
+    private void afterManeuver()
+    {
+        MatchHandlerUtil.applyManeuverBonus(target, maneuverToComplete.Difficulty);
+
+        // TODO Make player chosen an action (if available)
+        if (target.transform.GetComponent<ShipProperties>().getLoadedShip().getTokenIdByType(typeof(StressToken)) == 0)
+        {
+            //Action choser.....
+            target.transform.GetComponent<ShipProperties>().getLoadedShip().setBeforeAction(true);
+        }
+
+        maneuverToComplete = null;
+        target = null;
     }
 }

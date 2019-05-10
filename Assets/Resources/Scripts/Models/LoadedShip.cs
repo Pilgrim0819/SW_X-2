@@ -12,10 +12,12 @@ public class LoadedShip {
 	private int pilotId;
     private bool alive = true;
     private bool hasBeenActivatedThisRound = false;
+    private bool beforeAction = false;
     private LoadedShip target;
     private List<CustomEventBase> eventActions = new List<CustomEventBase>();
     private Maneuver plannedManeuver;
     private List<IToken> tokens = new List<IToken>();
+    private List<string> prevActions = new List<string>();
 
     public void setPlannedManeuver(Maneuver m) {
         this.plannedManeuver = m;
@@ -133,5 +135,30 @@ public class LoadedShip {
     public List<IToken> getTokens()
     {
         return this.tokens;
+    }
+
+    public bool isBeforeAction()
+    {
+        return this.beforeAction;
+    }
+
+    public void setBeforeAction(bool beforeAction)
+    {
+        this.beforeAction = beforeAction;
+    }
+
+    public void registerPreviousAction(string action)
+    {
+        this.prevActions.Add(action);
+    }
+
+    public List<string> getPreviousActions()
+    {
+        return this.prevActions;
+    }
+
+    public void deletePreviousActions()
+    {
+        this.prevActions.Clear();
     }
 }

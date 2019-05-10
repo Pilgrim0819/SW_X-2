@@ -5,6 +5,7 @@ public class ShipProperties : MonoBehaviour {
 
     private LoadedShip loadedShip;
     private bool movable = true;
+    private int ownerId;
 
     public void setLoadedShip(LoadedShip ship)
     {
@@ -24,5 +25,15 @@ public class ShipProperties : MonoBehaviour {
     public void setMovable(bool m)
     {
         this.movable = m;
+    }
+
+    public void setOwnerId(int playerId)
+    {
+        this.ownerId = playerId;
+    }
+
+    public int getOwnerId()
+    {
+        return this.ownerId;
     }
 }

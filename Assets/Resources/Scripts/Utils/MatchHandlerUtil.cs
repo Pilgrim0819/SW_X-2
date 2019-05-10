@@ -121,6 +121,40 @@ public class MatchHandlerUtil {
         }
     }
 
+    public static void applyManeuverBonus(GameObject ship, string difficulty)
+    {
+        if (difficulty.Equals("2"))
+        {
+            ship.transform.GetComponent<ShipProperties>().getLoadedShip().addToken(new StressToken());
+
+            // TODO handle stress indicator elsewhere...
+            ship.transform.Find("StressIndicator").gameObject.SetActive(true);
+        }
+        else if (difficulty.Equals("0"))
+        {
+            ship.transform.GetComponent<ShipProperties>().getLoadedShip().removeTokenById(
+                typeof(StressToken),
+                ship.transform.GetComponent<ShipProperties>().getLoadedShip().getTokenIdByType(typeof(StressToken))
+            );
+        }
+    }
+
+    public static GameObject getShipInActionPhase()
+    {
+        GameObject result = null;
+
+        foreach (GameObject go in GameObject.FindGameObjectsWithTag("SmallShipContainer"))
+        {
+            // if ownerId == playerId !!!
+            if (go.GetComponent<ShipProperties>().getLoadedShip().isBeforeAction())
+            {
+                result = go;
+            }
+        }
+
+        return result;
+    }
+
     // This one hides ALL ship highlighters!!!
     public static void hideActiveShipHighlighters()
     {
