@@ -3,7 +3,7 @@
 public class AsteroidProperties : MonoBehaviour
 {
 
-    private bool canBeMoved;
+    private bool canBeMoved = true;
 
     public int id;
 

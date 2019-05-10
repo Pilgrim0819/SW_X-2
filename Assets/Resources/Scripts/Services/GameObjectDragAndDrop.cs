@@ -30,7 +30,6 @@ public class GameObjectDragAndDrop : MonoBehaviour {
 
     void OnMouseDrag()
     {
-        Debug.Log("Dragged");
         if (target == null)
         {
             RaycastHit hitInfo;
@@ -42,7 +41,6 @@ public class GameObjectDragAndDrop : MonoBehaviour {
 
         if (target.GetComponent<ShipProperties>() != null)
         {
-            Debug.Log(" a ship");
             if (MatchDatas.getCurrentPhase() == MatchDatas.phases.SQUADRON_PLACEMENT && shipCanBeMoved())
             {
                 Vector3 newPos = new Vector3(transform.position.x + (moveX * dragSpeedMultiplier), transform.position.y, transform.position.z + (moveY * dragSpeedMultiplier));
@@ -53,7 +51,6 @@ public class GameObjectDragAndDrop : MonoBehaviour {
 
         if (target.GetComponent<AsteroidProperties>() != null)
         {
-            Debug.Log(" an asteroid");
             if (MatchDatas.getCurrentPhase() == MatchDatas.phases.ASTEROIDS_PLACEMENT && asteroidCanBeMoved())
             {
                 Vector3 newPos = new Vector3(transform.position.x + (moveX * dragSpeedMultiplier), transform.position.y, transform.position.z + (moveY * dragSpeedMultiplier));
