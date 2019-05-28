@@ -13,6 +13,7 @@ public class LoadedShip {
     private bool alive = true;
     private bool hasBeenActivatedThisRound = false;
     private bool beforeAction = false;
+    private int numOfActions = 0;
     private LoadedShip target;
     private List<CustomEventBase> eventActions = new List<CustomEventBase>();
     private Maneuver plannedManeuver;
@@ -160,5 +161,25 @@ public class LoadedShip {
     public void deletePreviousActions()
     {
         this.prevActions.Clear();
+    }
+
+    public void setNumOfActions(int val)
+    {
+        this.numOfActions = val;
+    }
+
+    public int getNumOfActions()
+    {
+        return this.numOfActions;
+    }
+
+    public void addAction()
+    {
+        this.numOfActions++;
+    }
+
+    public void removeAction()
+    {
+        this.numOfActions--;
     }
 }

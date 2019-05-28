@@ -96,6 +96,11 @@ public class GUIHandler {
             actionIconImage.sprite = sprite;
             actionIconImage.color = new Color(actionIconImage.color.r, actionIconImage.color.g, actionIconImage.color.b, 1.0f);
 
+            if (ship.getNumOfActions() > 0 && ship.isBeforeAction() && !actionHasBeenUsed(ship, action))
+            {
+                addActionToSelector(target, action, actionIndex);
+            }
+
             actionIndex++;
         }
 
@@ -112,6 +117,19 @@ public class GUIHandler {
         target.transform.Find("ShipDataManeuvers").gameObject.SetActive(false);
 
         target.SetActive(true);
+    }
+
+    public bool actionHasBeenUsed(LoadedShip ship, string action)
+    {
+        foreach (string usedAction in ship.getPreviousActions())
+        {
+            if (usedAction.Equals(action))
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public void hideGameObject(GameObject target)
@@ -183,6 +201,24 @@ public class GUIHandler {
         }
 
         target.transform.Find("ShipDataManeuvers").gameObject.SetActive(true);
+    }
+
+    public void addActionToSelector(GameObject target, string action, int actionIndex)
+    {
+        Transform actionSelectorPrefab = Resources.Load<Transform>(SquadBuilderConstants.PREFABS_FOLDER_NAME + "/" + SquadBuilderConstants.ACTION_SELECTOR);
+
+        Transform actionSelector = (Transform)GameObject.Instantiate(
+            actionSelectorPrefab,
+            new Vector3(0, -45 - (actionIndex * 30), 0),
+            Quaternion.identity
+        );
+
+        Transform actionsHolder = target.transform.Find("ShipActions");
+
+        actionSelector.GetComponent<UnityEngine.UI.Text>().text = action;
+        actionSelector.GetComponent<ActionSelectorEvents>().setActionName(action);
+        actionSelector.transform.SetParent(actionsHolder, false);
+        actionsHolder.gameObject.SetActive(true);
     }
 
     private void resetManeuverSelector()

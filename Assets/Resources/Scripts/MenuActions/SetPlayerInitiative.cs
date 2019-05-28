@@ -19,7 +19,7 @@ public class SetPlayerInitiative : MonoBehaviour {
                 PhaseHandlerService.nextPhase();
 
                 // THIS IS ONLY FOR TESTING!! IT SKIPS THE ASTEROID PLACEMENT PHASE!!!!!
-                //PhaseHandlerService.nextPhase();
+                PhaseHandlerService.nextPhase();
                 // This call should be placed elsewhere, after asteroid placement is done!!
                 MatchHandler.collectUpcomingAvailableShips(true);
 
