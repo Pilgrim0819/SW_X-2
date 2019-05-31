@@ -144,12 +144,13 @@ public class GameObjectDragAndDrop : MonoBehaviour {
             {
                 GameObject playField = GameObject.Find("Playfield");
 
-                if (!playField.GetComponent<Collider>().bounds.Contains(target.transform.position))
+                // TODO Check distance from playfield borders and other asteroids!!
+                if (!playField.GetComponent<Collider>().bounds.Contains(target.transform.position) || isAsteroidTooClose())
                 {
                     target.transform.position = prevPos;
                 } else
                 {
-                    if (asteroidCanBeMoved())
+                    if (allAsteroidsAreInsidePlayfield())
                     {
                         togglePositionConfirmButton(true);
                     }
@@ -168,6 +169,38 @@ public class GameObjectDragAndDrop : MonoBehaviour {
                 target.transform.RotateAround(target.transform.position, target.transform.TransformDirection(Vector3.up), -2.5f);
             }
         }
+    }
+
+    private bool allAsteroidsAreInsidePlayfield()
+    {
+        GameObject[] asteroids = GameObject.FindGameObjectsWithTag("Asteroid");
+
+        for (int i = 0; i < asteroids.Length; i++)
+        {
+            if (!GameObject.Find("Playfield").GetComponent<Collider>().bounds.Contains(asteroids[i].transform.position))
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private bool isAsteroidTooClose()
+    {
+        GameObject[] asteroids = GameObject.FindGameObjectsWithTag("Asteroid");
+
+        for (int i=0; i < asteroids.Length; i++)
+        {
+            float distance = Vector3.Distance(target.transform.position, asteroids[i].transform.position);
+
+            if (distance != 0 && distance < 2500)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private void togglePositionConfirmButton(bool active)

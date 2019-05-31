@@ -60,6 +60,7 @@ public class PhaseHandlerService {
     private static void startSquadronPlacementPhase()
     {
         MatchDatas.setCurrentPhase(MatchDatas.phases.SQUADRON_PLACEMENT);
+        MatchHandler.collectUpcomingAvailableShips(true);
     }
 
     private static void startPlanningPhase()

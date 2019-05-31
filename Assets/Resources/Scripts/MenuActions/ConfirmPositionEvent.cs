@@ -37,13 +37,18 @@ public class ConfirmPositionEvent : MonoBehaviour, IPointerEnterHandler, IPointe
         {
             if (this.target.transform.GetComponent<ShipProperties>() != null)
             {
-                Debug.Log("It's a ship!!");
-            } else
+                setShipLocation();
+            } else if (this.target.transform.GetComponent<AsteroidProperties>() != null)
             {
-                Debug.Log("It's not a ship!!");
+                setAsteroidLocations();
             }
         }
+        
+        this.gameObject.SetActive(false);
+    }
 
+    private void setShipLocation()
+    {
         MatchDatas.getActiveShip().GetComponent<ShipProperties>().setMovable(false);
         MatchDatas.getActiveShip().GetComponent<ShipProperties>().getLoadedShip().setHasBeenActivatedThisRound(true);
 
@@ -61,7 +66,17 @@ public class ConfirmPositionEvent : MonoBehaviour, IPointerEnterHandler, IPointe
         {
             MatchHandler.collectUpcomingAvailableShips(true);
         }
+    }
 
-        this.gameObject.SetActive(false);
+    private void setAsteroidLocations()
+    {
+        GameObject[] asteroids = GameObject.FindGameObjectsWithTag("Asteroid");
+
+        for (int i = 0; i < asteroids.Length; i++)
+        {
+            asteroids[i].transform.GetComponent<AsteroidProperties>().setCanBeMoved(false);
+        }
+
+        PhaseHandlerService.nextPhase();
     }
 }
