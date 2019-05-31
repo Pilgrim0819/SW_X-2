@@ -30,7 +30,6 @@ public class MatchHandler : MonoBehaviour {
 
     void Start() {
         DiceRollerBase.setUpDiceRollerBase(ForceMode.VelocityChange, 10.0f);
-        GameObject.Find("ScriptHolder").AddComponent<CoroutineHandler>();
         MatchHandlerUtil.setInitiativePanel(initiativePanel);
 
         mocker.mockLocalPlayer();
@@ -41,7 +40,7 @@ public class MatchHandler : MonoBehaviour {
         MatchHandlerUtil.determineInitiative();
     }
 
-    // TODO Can we make the method calls inside to run only ONCE(!), when necessary??
+    // TODO Can we make the method calls inside to run only ONCE(!), when necessary?? Custom eventhandling maybe????
 	void Update() {
         matchHandlerService.levitateShips();
 
