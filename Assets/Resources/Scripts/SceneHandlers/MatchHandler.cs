@@ -11,7 +11,6 @@ public class MatchHandler : MonoBehaviour {
     public GameObject initiativePanel;
     public GameObject PilotCardPanel;
     public GameObject GameInfoPanel;
-    public static GameObject actionChoserPopup;
     public GameObject[] asteroids = new GameObject[6];
 
     private static Mocker mocker = new Mocker();

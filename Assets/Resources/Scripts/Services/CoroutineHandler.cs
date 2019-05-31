@@ -232,6 +232,7 @@ public class CoroutineHandler : MonoBehaviour
 
             if (actionChoserPopup != null)
             {
+                // TODO outsource this fragment to UI handler!!!!!!!
                 foreach (String action in MatchDatas.getPlayers()[MatchDatas.getActivePlayerIndex()].getActiveShip().getShip().Actions.Action)
                 {
                     Image image = null;
