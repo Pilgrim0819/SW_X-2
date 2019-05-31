@@ -96,10 +96,10 @@ public class GUIHandler {
             actionIconImage.sprite = sprite;
             actionIconImage.color = new Color(actionIconImage.color.r, actionIconImage.color.g, actionIconImage.color.b, 1.0f);
 
-            if (ship.getNumOfActions() > 0 && ship.isBeforeAction() && !actionHasBeenUsed(ship, action))
+            /*if (ship.getNumOfActions() > 0 && ship.isBeforeAction() && !actionHasBeenUsed(ship, action))
             {
                 addActionToSelector(target, action, actionIndex);
-            }
+            }*/
 
             actionIndex++;
         }
@@ -203,7 +203,7 @@ public class GUIHandler {
         target.transform.Find("ShipDataManeuvers").gameObject.SetActive(true);
     }
 
-    public void addActionToSelector(GameObject target, string action, int actionIndex)
+    /*public void addActionToSelector(GameObject target, string action, int actionIndex)
     {
         Transform actionSelectorPrefab = Resources.Load<Transform>(SquadBuilderConstants.PREFABS_FOLDER_NAME + "/" + SquadBuilderConstants.ACTION_SELECTOR);
 
@@ -219,7 +219,7 @@ public class GUIHandler {
         actionSelector.GetComponent<ActionSelectorEvents>().setActionName(action);
         actionSelector.transform.SetParent(actionsHolder, false);
         actionsHolder.gameObject.SetActive(true);
-    }
+    }*/
 
     private void resetManeuverSelector()
     {

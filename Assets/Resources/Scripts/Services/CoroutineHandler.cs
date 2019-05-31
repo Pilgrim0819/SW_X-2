@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CoroutineHandler : MonoBehaviour
 {
@@ -214,8 +215,51 @@ public class CoroutineHandler : MonoBehaviour
         // TODO Make player chosen an action (if available)
         if (target.transform.GetComponent<ShipProperties>().getLoadedShip().getTokenIdByType(typeof(StressToken)) == 0)
         {
+            target.transform.GetComponent<ShipProperties>().getLoadedShip().setNumOfActions(1);
             //Action choser.....
-            target.transform.GetComponent<ShipProperties>().getLoadedShip().setBeforeAction(true);
+            //target.transform.GetComponent<ShipProperties>().getLoadedShip().setBeforeAction(true);
+
+            GameObject actionChoserPopup = null;
+            int actionIndex = 0;
+
+            foreach(GameObject go in Resources.FindObjectsOfTypeAll(typeof(GameObject)))
+            {
+                if (go.name.Equals("ActionChoserPopup"))
+                {
+                    actionChoserPopup = go;
+                }
+            }
+
+            if (actionChoserPopup != null)
+            {
+                foreach (String action in MatchDatas.getPlayers()[MatchDatas.getActivePlayerIndex()].getActiveShip().getShip().Actions.Action)
+                {
+                    Image image = null;
+                    Sprite sprite = Resources.Load<Sprite>(SquadBuilderConstants.IMAGE_FOLDER_NAME + "/" + action.Replace(" ", "-"));
+
+                    Transform actionIconPrefab = Resources.Load<Transform>(SquadBuilderConstants.PREFABS_FOLDER_NAME + "/" + SquadBuilderConstants.ACTION_ICON);
+                    RectTransform rt = (RectTransform)actionIconPrefab;
+                    float actionIconWidth = rt.rect.width;
+
+                    Transform actionIcon = (Transform)GameObject.Instantiate(
+                        actionIconPrefab,
+                        new Vector3((actionIndex * actionIconWidth) + SquadBuilderConstants.UPGRADE_IMAGE_X_OFFSET + 15, SquadBuilderConstants.UPGRADE_IMAGE_Y_OFFSET - 30, SquadBuilderConstants.UPGRADE_IMAGE_Z_OFFSET),
+                        Quaternion.identity
+                    );
+
+                    Image actionIconImage = actionIcon.gameObject.GetComponent<Image>();
+
+                    actionIcon.gameObject.AddComponent<ActionSelectorEvents>();
+                    actionIcon.gameObject.GetComponent<ActionSelectorEvents>().setActionName(action);
+                    actionIcon.transform.SetParent(actionChoserPopup.transform, false);
+                    actionIconImage.sprite = sprite;
+                    actionIconImage.color = new Color(actionIconImage.color.r, actionIconImage.color.g, actionIconImage.color.b, 1.0f);
+
+                    actionIndex++;
+                }
+
+                actionChoserPopup.SetActive(true);
+            }
         }
 
         maneuverToComplete = null;

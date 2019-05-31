@@ -151,6 +151,7 @@ public class LoadedShip {
     public void registerPreviousAction(string action)
     {
         this.prevActions.Add(action);
+        numOfActions--;
     }
 
     public List<string> getPreviousActions()

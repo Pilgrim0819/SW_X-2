@@ -55,5 +55,10 @@ public class ActionSelectorEvents : MonoBehaviour, IPointerEnterHandler, IPointe
             // TODO Check if multiple actions can be chosen!
             // TODO Deactivate actions!!!!
         }
+
+        if (GameObject.Find("ActionChoserPopup") != null && MatchDatas.getPlayers()[MatchDatas.getActivePlayerIndex()].getActiveShip().getNumOfActions() == 0)
+        {
+            GameObject.Find("ActionChoserPopup").gameObject.SetActive(false);
+        }
     }
 }
