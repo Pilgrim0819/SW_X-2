@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 
 public class PhaseHandlerService {
+
+    private static MatchDatas.phases prevPhase = MatchDatas.phases.NONE;
     
     // TODO Make this class handle all phase changes and the required checks, cleanups, inits, etc.....
 
@@ -36,6 +38,21 @@ public class PhaseHandlerService {
                     // TODO Finish game!
                 }
                 break;
+        }
+    }
+
+    public static void initActionPhase()
+    {
+        prevPhase = MatchDatas.getCurrentPhase();
+        MatchDatas.setCurrentPhase(MatchDatas.phases.ACTION);
+    }
+
+    public static void endActionPhase()
+    {
+        if (MatchDatas.getCurrentPhase().Equals(MatchDatas.phases.ACTION) && !prevPhase.Equals(MatchDatas.phases.NONE))
+        {
+            MatchDatas.setCurrentPhase(prevPhase);
+            prevPhase = MatchDatas.phases.NONE;
         }
     }
 

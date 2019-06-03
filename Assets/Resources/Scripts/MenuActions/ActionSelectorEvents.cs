@@ -44,6 +44,28 @@ public class ActionSelectorEvents : MonoBehaviour, IPointerEnterHandler, IPointe
                     break;
                 case "target lock":
                     break;
+                case "boost":
+                    break;
+                case "barrel roll":
+                    break;
+                case "slam":
+                    break;
+                case "reinforce":
+                    break;
+                case "cloak":
+                    break;
+                case "decloak":
+                    break;
+                case "coordinate":
+                    break;
+                case "jam":
+                    break;
+                case "recover":
+                    break;
+                case "reload":
+                    break;
+                case "rotate arc":
+                    break;
             }
 
             if (token != null)
@@ -59,6 +81,7 @@ public class ActionSelectorEvents : MonoBehaviour, IPointerEnterHandler, IPointe
         if (GameObject.Find("ActionChoserPopup") != null && MatchDatas.getPlayers()[MatchDatas.getActivePlayerIndex()].getActiveShip().getNumOfActions() == 0)
         {
             GameObject.Find("ActionChoserPopup").gameObject.SetActive(false);
+            PhaseHandlerService.endActionPhase();
         }
     }
 }

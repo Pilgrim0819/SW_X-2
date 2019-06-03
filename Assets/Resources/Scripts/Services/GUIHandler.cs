@@ -203,24 +203,6 @@ public class GUIHandler {
         target.transform.Find("ShipDataManeuvers").gameObject.SetActive(true);
     }
 
-    /*public void addActionToSelector(GameObject target, string action, int actionIndex)
-    {
-        Transform actionSelectorPrefab = Resources.Load<Transform>(SquadBuilderConstants.PREFABS_FOLDER_NAME + "/" + SquadBuilderConstants.ACTION_SELECTOR);
-
-        Transform actionSelector = (Transform)GameObject.Instantiate(
-            actionSelectorPrefab,
-            new Vector3(0, -45 - (actionIndex * 30), 0),
-            Quaternion.identity
-        );
-
-        Transform actionsHolder = target.transform.Find("ShipActions");
-
-        actionSelector.GetComponent<UnityEngine.UI.Text>().text = action;
-        actionSelector.GetComponent<ActionSelectorEvents>().setActionName(action);
-        actionSelector.transform.SetParent(actionsHolder, false);
-        actionsHolder.gameObject.SetActive(true);
-    }*/
-
     private void resetManeuverSelector()
     {
         GameObject maneuversHolder = GameObject.Find("Canvas/PilotCardPanel/ShipDataManeuvers/ShipManeuvers");

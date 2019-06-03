@@ -30,8 +30,10 @@ public class MatchDatas {
         SQUADRON_PLACEMENT,
         PLANNING,
         ACTIVATION,
+        ACTION,
         ATTACK,
-        END
+        END,
+        NONE
     };
     
     private static int activePlayerIndex = 0;

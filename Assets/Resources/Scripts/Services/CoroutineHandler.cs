@@ -260,6 +260,7 @@ public class CoroutineHandler : MonoBehaviour
                 }
 
                 actionChoserPopup.SetActive(true);
+                PhaseHandlerService.initActionPhase();
             }
         }
 
