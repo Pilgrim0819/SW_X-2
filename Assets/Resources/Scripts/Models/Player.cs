@@ -23,14 +23,16 @@ public class Player {
     private string playerName;
     private List<LoadedShip> squadron = new List<LoadedShip>();
     private List<int> lastDiceResults = new List<int>();
-    private LoadedShip activeShip;
-    private LoadedShip selectedShip;
+    private LoadedShip activeShip; //The ship the user is currently working with (planning man./choosing action/etc)
+    private LoadedShip selectedShip; //The ship the user clicked on last time (even a ship of the enemy......)
     private bool hasInitiative = false;
     private int playerID;
     private bool AI;
     private int pointsToSpend = 100;
     private int currentPilotId = 1;
+    /* NEEDED??? */
     private int numberOfDice = 5;
+    /* NEEDED??? */
 
     //What was this used for?? Is it needed????
     private float dt = 0.0f;
@@ -232,6 +234,7 @@ public class Player {
     }
     /***********************************************************/
 
+    /* NEEDED??? */
     public void setNumberOfDice(int num)
     {
         this.numberOfDice = num;
@@ -241,6 +244,7 @@ public class Player {
     {
         return this.numberOfDice;
     }
+    /* NEEDED??? */
 
     public int getCumulatedSquadPoints()
     {

@@ -30,16 +30,11 @@ public class MatchHandlerUtil {
         {
             PointerClickCallback callback = GameObject.Find("ScriptHolder").GetComponent<CoroutineHandler>().rollAttackDiceCallback;
             SystemMessageService.showErrorMsg(MatchHandlerConstants.EQUAL_SQUAD_SCORE_TEXT + " " + MatchDatas.getPlayers()[0].getPlayerName() + MatchHandlerConstants.EQUAL_SQUAD_SCORE_TEXT_ENDING, GameObject.Find("SystemMessagePanel"), 1, callback);
-
-            //StartCoroutine(RollAttackDice());
         }
         else
         {
             PointerClickCallback callback = displayInitiativeChooserCallback;
             SystemMessageService.showErrorMsg(getPlayerWithLowestSquadScore().getPlayerName() + MatchHandlerConstants.NOT_EQUAL_SQUAD_SCORE_TEXT, GameObject.Find("SystemMessagePanel"), 1, callback);
-
-            //StartCoroutine(RollAttackDice());
-            //displayInitiativeChoser(getPlayerWithLowestSquadScore());
         }
     }
 
@@ -50,14 +45,14 @@ public class MatchHandlerUtil {
 
     public static bool squadScoresAreEqual()
     {
-        if (MatchDatas.getPlayers().Capacity == 2)
+        if (MatchDatas.getPlayers().Count == 2)
         {
             if (MatchDatas.getPlayers()[0].getCumulatedSquadPoints() == MatchDatas.getPlayers()[1].getCumulatedSquadPoints())
             {
                 return true;
             }
         }
-        else if (MatchDatas.getPlayers().Capacity == 3)
+        else if (MatchDatas.getPlayers().Count == 3)
         {
             if (MatchDatas.getPlayers()[0].getCumulatedSquadPoints() == MatchDatas.getPlayers()[1].getCumulatedSquadPoints() && MatchDatas.getPlayers()[0].getCumulatedSquadPoints() == MatchDatas.getPlayers()[2].getCumulatedSquadPoints())
             {
@@ -89,7 +84,6 @@ public class MatchHandlerUtil {
 
     public static void displayInitiativeChoser(Player player)
     {
-        Debug.Log(player.getPlayerName() + " can chose who gets initiative!");
         int playerIndex = 0;
 
         if (LocalDataWrapper.getPlayer().getPlayerName().Equals(player.getPlayerName()))
@@ -137,22 +131,6 @@ public class MatchHandlerUtil {
                 ship.transform.GetComponent<ShipProperties>().getLoadedShip().getTokenIdByType(typeof(StressToken))
             );
         }
-    }
-
-    public static GameObject getShipInActionPhase()
-    {
-        GameObject result = null;
-
-        foreach (GameObject go in GameObject.FindGameObjectsWithTag("SmallShipContainer"))
-        {
-            // if ownerId == playerId !!!
-            if (go.GetComponent<ShipProperties>().getLoadedShip().isBeforeAction())
-            {
-                result = go;
-            }
-        }
-
-        return result;
     }
 
     // This one hides ALL ship highlighters!!!

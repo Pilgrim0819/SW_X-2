@@ -92,6 +92,7 @@
     <Compile Include="Assets\Resources\Scripts\MenuActions\UpgradeSlotEvents.cs" />
     <Compile Include="Assets\Resources\Scripts\Models\AsteroidProperties.cs" />
     <Compile Include="Assets\Resources\Scripts\Models\EvadeToken.cs" />
+    <Compile Include="Assets\Resources\Scripts\Models\FiringArc.cs" />
     <Compile Include="Assets\Resources\Scripts\Models\FocusToken.cs" />
     <Compile Include="Assets\Resources\Scripts\Models\IToken.cs" />
     <Compile Include="Assets\Resources\Scripts\Models\LoadedShip.cs" />

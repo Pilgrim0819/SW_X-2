@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MatchHandlerService {
 
@@ -46,11 +47,60 @@ public class MatchHandlerService {
 
                 shipHolderGameObject.GetComponent<ShipProperties>().setLoadedShip(loadedShip);
 
+                /***********************************/
+                FiringArc arc = new FiringArc();
+                arc.leftBoundary = -45.0f;
+                arc.rightBoundary = 45.0f;
+                /***********************************/
+
+                generateFiringArc(shipHolderGameObject, arc);
+
                 loopIndex++;
             };
         }
     }
 
+    public void generateFiringArc(GameObject target, FiringArc arc)
+    {
+        Transform canvas = target.transform.Find("Canvas");
+        Transform firingArc = canvas.Find("FiringArc");
+        float angle = arc.rightBoundary - arc.leftBoundary;
+
+        firingArc.transform.position = new Vector3(0.0f, 0.0f, 0.0f);
+        firingArc.GetComponent<Image>().type = Image.Type.Filled;
+        firingArc.GetComponent<Image>().color = new Color(1, 0, 0);
+        firingArc.GetComponent<Image>().fillMethod = Image.FillMethod.Radial360;
+        firingArc.GetComponent<Image>().fillOrigin = (int)Image.Origin360.Top;
+        firingArc.GetComponent<Image>().fillAmount = 360.0f / angle;
+        firingArc.GetComponent<Image>().transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+
+        // Remove activators!! Handle toggle elsewhere....
+        firingArc.gameObject.SetActive(true);
+        canvas.gameObject.SetActive(true);
+    }
+
+    public bool isReachable()
+    {
+        // TODO
+
+        return false;
+    }
+
+    // Just the basic....
+    public bool isInsideFiringArc(List<FiringArc> arcs, GameObject ship, GameObject target)
+    {
+        float angle = Vector3.Angle(ship.transform.forward, ship.transform.position - target.transform.position);
+
+        foreach (FiringArc arc in arcs)
+        {
+            if (arc.leftBoundary <= angle && arc.rightBoundary >= angle)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
 
     // Buggy!! Works, but keeps speeding up (like a ping pong ball....)
     public void levitateShips()

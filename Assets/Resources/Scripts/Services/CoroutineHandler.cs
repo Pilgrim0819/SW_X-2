@@ -163,6 +163,7 @@ public class CoroutineHandler : MonoBehaviour
 
     public IEnumerator RollAttackDice(System.Action<Player> callBack)
     {
+        // TODO change the first param to be dynamic!
         DiceRollerBase.showDiceArea(1, true);
         Rigidbody[] GOS = FindObjectsOfType(typeof(Rigidbody)) as Rigidbody[];
         bool allSleeping = false;
