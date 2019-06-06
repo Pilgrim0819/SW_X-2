@@ -62,17 +62,14 @@ public class MatchHandlerService {
 
     public void generateFiringArc(GameObject target, FiringArc arc)
     {
-        Transform canvas = target.transform.Find("Canvas");
-        Transform firingArc = canvas.Find("FiringArc");
+        GameObject canvas = target.transform.Find("Canvas").gameObject;
+        GameObject firingArc = canvas.transform.Find("FiringArc").gameObject;
         float angle = arc.rightBoundary - arc.leftBoundary;
 
-        firingArc.transform.position = new Vector3(0.0f, 0.0f, 0.0f);
-        firingArc.GetComponent<Image>().type = Image.Type.Filled;
-        firingArc.GetComponent<Image>().color = new Color(1, 0, 0);
-        firingArc.GetComponent<Image>().fillMethod = Image.FillMethod.Radial360;
+        canvas.transform.localPosition = new Vector3(0.0f, 0.002f, 0.0f);
         firingArc.GetComponent<Image>().fillOrigin = (int)Image.Origin360.Top;
-        firingArc.GetComponent<Image>().fillAmount = 360.0f / angle;
-        firingArc.GetComponent<Image>().transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+        firingArc.GetComponent<Image>().fillAmount = angle / 360.0f;
+        firingArc.transform.Rotate(0.0f, 0.0f, angle/2, Space.Self);
 
         // Remove activators!! Handle toggle elsewhere....
         firingArc.gameObject.SetActive(true);
