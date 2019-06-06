@@ -147,6 +147,7 @@ public class MatchHandler : MonoBehaviour {
             if (!PilotCardPanel.activeSelf)
             {
                 guiHandler.showPilotCard(PilotCardPanel);
+                matchHandlerService.showFiringArc(matchHandlerService.getShipHolderForShip(MatchDatas.getPlayers()[MatchDatas.getActivePlayerIndex()].getSelectedhip()));
 
                 if (MatchDatas.getCurrentPhase() == MatchDatas.phases.PLANNING && MatchHandlerUtil.isPlayersOwnShip())
                 {
@@ -158,6 +159,7 @@ public class MatchHandler : MonoBehaviour {
             MatchHandlerUtil.hideActiveShipHighlighters();
             MatchDatas.setActiveShip(null);
             guiHandler.hideGameObject(PilotCardPanel);
+            matchHandlerService.hideFiringArcs();
         }
 
         if (MatchDatas.getCurrentPhase() == MatchDatas.phases.SQUADRON_PLACEMENT)

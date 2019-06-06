@@ -46,6 +46,14 @@ public class GameObjectDragAndDrop : MonoBehaviour {
                 Vector3 newPos = new Vector3(transform.position.x + (moveX * dragSpeedMultiplier), transform.position.y, transform.position.z + (moveY * dragSpeedMultiplier));
 
                 transform.position = newPos;
+
+                if (!GameObject.Find("Player1SetupField").GetComponent<Collider>().bounds.Contains(target.transform.position))
+                {
+                    GameObject.Find("Player1SetupField/New Sprite").gameObject.GetComponent<SpriteRenderer>().color = new Color(1.0f, 0.0f, 0.0f);
+                } else
+                {
+                    GameObject.Find("Player1SetupField/New Sprite").gameObject.GetComponent<SpriteRenderer>().color = new Color(0.0f, 0.0f, 0.0f);
+                }
             }
         }
 

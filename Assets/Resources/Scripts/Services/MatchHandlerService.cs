@@ -70,10 +70,38 @@ public class MatchHandlerService {
         firingArc.GetComponent<Image>().fillOrigin = (int)Image.Origin360.Top;
         firingArc.GetComponent<Image>().fillAmount = angle / 360.0f;
         firingArc.transform.Rotate(0.0f, 0.0f, angle/2, Space.Self);
+    }
 
-        // Remove activators!! Handle toggle elsewhere....
-        firingArc.gameObject.SetActive(true);
-        canvas.gameObject.SetActive(true);
+    public void showFiringArc(GameObject target)
+    {
+        target.transform.Find("Canvas").gameObject.SetActive(true);
+        target.transform.Find("Canvas/FiringArc").gameObject.SetActive(true);
+    }
+
+    public void hideFiringArcs()
+    {
+        GameObject[] shipHolders = GameObject.FindGameObjectsWithTag("SmallShipContainer");
+
+        foreach (GameObject shipHolder in shipHolders)
+        {
+            shipHolder.transform.Find("Canvas").gameObject.SetActive(false);
+            shipHolder.transform.Find("Canvas/FiringArc").gameObject.SetActive(false);
+        }
+    }
+
+    public GameObject getShipHolderForShip(LoadedShip target)
+    {
+        GameObject[] shipHolders = GameObject.FindGameObjectsWithTag("SmallShipContainer");
+
+        foreach (GameObject shipHolder in shipHolders)
+        {
+            if (shipHolder.GetComponent<ShipProperties>().getLoadedShip().Equals(target))
+            {
+                return shipHolder;
+            }
+        }
+
+        return null;
     }
 
     public bool isReachable()
