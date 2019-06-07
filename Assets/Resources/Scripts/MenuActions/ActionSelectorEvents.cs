@@ -29,8 +29,9 @@ public class ActionSelectorEvents : MonoBehaviour, IPointerEnterHandler, IPointe
     public void OnPointerClick(PointerEventData eventData)
     {
         Debug.Log("Action name: " + this.actionName);
+        Debug.Log("PHASE: " + MatchDatas.getCurrentPhase());
 
-        if (MatchDatas.getCurrentPhase() == MatchDatas.phases.ACTIVATION)
+        if (MatchDatas.getCurrentPhase() == MatchDatas.phases.ACTION)
         {
             IToken token = null;
 
@@ -70,6 +71,7 @@ public class ActionSelectorEvents : MonoBehaviour, IPointerEnterHandler, IPointe
 
             if (token != null)
             {
+                Debug.Log("Adding token...");
                 MatchDatas.getPlayers()[MatchDatas.getActivePlayerIndex()].getActiveShip().addToken(token);
                 MatchDatas.getPlayers()[MatchDatas.getActivePlayerIndex()].getActiveShip().registerPreviousAction(this.actionName);
             }

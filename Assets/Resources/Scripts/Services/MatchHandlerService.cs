@@ -145,7 +145,7 @@ public class MatchHandlerService {
     {
         foreach (GameObject gameObj in GameObject.FindGameObjectsWithTag("Asteroid"))
         {
-            gameObj.transform.Rotate(new Vector3(1.0f, 0.0f, 1.0f), Space.Self);
+            gameObj.transform.Rotate(new Vector3(0.5f, 0.0f, 0.5f), Space.Self);
         }
     }
 
