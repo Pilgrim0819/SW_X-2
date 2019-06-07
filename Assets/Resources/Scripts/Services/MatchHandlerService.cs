@@ -141,6 +141,14 @@ public class MatchHandlerService {
         }*/
     }
 
+    public void rotateAsteroids()
+    {
+        foreach (GameObject gameObj in GameObject.FindGameObjectsWithTag("Asteroid"))
+        {
+            gameObj.transform.Rotate(new Vector3(1.0f, 0.0f, 1.0f), Space.Self);
+        }
+    }
+
     // This is just an idea!!! Needs further development......
     public float getTargetDistance(GameObject origin, GameObject target)
     {

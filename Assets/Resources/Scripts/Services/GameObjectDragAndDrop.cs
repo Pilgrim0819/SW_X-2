@@ -50,10 +50,10 @@ public class GameObjectDragAndDrop : MonoBehaviour {
                 /*Prototype to highlight setup field boundaries when ship is not inside them. POLISH!!!!*/
                 if (!GameObject.Find("Player1SetupField").GetComponent<Collider>().bounds.Contains(target.transform.position))
                 {
-                    GameObject.Find("Player1SetupField/New Sprite").gameObject.GetComponent<SpriteRenderer>().color = new Color(1.0f, 0.0f, 0.0f);
+                    GameObject.Find("Player1SetupField/New Sprite").gameObject.GetComponent<SpriteRenderer>().color = new Color(1.0f, 0.0f, 0.0f, 0.31f);
                 } else
                 {
-                    GameObject.Find("Player1SetupField/New Sprite").gameObject.GetComponent<SpriteRenderer>().color = new Color(0.0f, 0.0f, 0.0f);
+                    GameObject.Find("Player1SetupField/New Sprite").gameObject.GetComponent<SpriteRenderer>().color = new Color(1.0f, 1.0f, 1.0f, 0.31f);
                 }
                 /*Prototype to highlight setup field boundaries when ship is not inside them. POLISH!!!!*/
             }

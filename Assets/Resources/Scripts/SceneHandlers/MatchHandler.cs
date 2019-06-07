@@ -43,6 +43,7 @@ public class MatchHandler : MonoBehaviour {
     // TODO Can we make the method calls inside to run only ONCE(!), when necessary?? Custom eventhandling maybe????
 	void Update() {
         matchHandlerService.levitateShips();
+        matchHandlerService.rotateAsteroids();
 
         if (Input.GetKey("escape"))
         {
