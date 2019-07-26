@@ -158,9 +158,9 @@ public class MatchHandler : MonoBehaviour {
         } else
         {
             MatchHandlerUtil.hideActiveShipHighlighters();
+            matchHandlerService.hideFiringArcs();
             MatchDatas.setActiveShip(null);
             guiHandler.hideGameObject(PilotCardPanel);
-            matchHandlerService.hideFiringArcs();
         }
 
         if (MatchDatas.getCurrentPhase() == MatchDatas.phases.SQUADRON_PLACEMENT)
