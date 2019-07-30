@@ -158,7 +158,7 @@ public class MatchHandler : MonoBehaviour {
         } else
         {
             MatchHandlerUtil.hideActiveShipHighlighters();
-            matchHandlerService.hideFiringArcs();
+            MatchHandlerUtil.hideFiringArcs();
             MatchDatas.setActiveShip(null);
             guiHandler.hideGameObject(PilotCardPanel);
         }

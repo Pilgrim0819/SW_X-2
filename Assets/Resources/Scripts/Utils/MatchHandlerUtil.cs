@@ -148,6 +148,17 @@ public class MatchHandlerUtil {
         }
     }
 
+    public static void hideFiringArcs()
+    {
+        GameObject[] shipHolders = GameObject.FindGameObjectsWithTag("SmallShipContainer");
+
+        foreach (GameObject shipHolder in shipHolders)
+        {
+            shipHolder.transform.Find("Canvas").gameObject.SetActive(false);
+            shipHolder.transform.Find("Canvas/FiringArc").gameObject.SetActive(false);
+        }
+    }
+
     // DUPLICATED FRAGMENT!!!
     public static bool isPlayersOwnShip()
     {

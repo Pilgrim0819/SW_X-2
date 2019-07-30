@@ -83,6 +83,7 @@ public class GameObjectDragAndDrop : MonoBehaviour {
                     if ((MatchDatas.getActiveShip() == null || MatchDatas.getActiveShip() != target) && target.GetComponent<ShipProperties>() != null)
                     {
                         MatchHandlerUtil.hideActiveShipHighlighters();
+                        MatchHandlerUtil.hideFiringArcs();
 
                         LoadedShip activeShip = new LoadedShip();
                         ShipProperties sp = target.GetComponent<ShipProperties>();

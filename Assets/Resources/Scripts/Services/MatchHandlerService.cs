@@ -78,17 +78,6 @@ public class MatchHandlerService {
         target.transform.Find("Canvas/FiringArc").gameObject.SetActive(true);
     }
 
-    public void hideFiringArcs()
-    {
-        GameObject[] shipHolders = GameObject.FindGameObjectsWithTag("SmallShipContainer");
-
-        foreach (GameObject shipHolder in shipHolders)
-        {
-            shipHolder.transform.Find("Canvas").gameObject.SetActive(false);
-            shipHolder.transform.Find("Canvas/FiringArc").gameObject.SetActive(false);
-        }
-    }
-
     public GameObject getShipHolderForShip(LoadedShip target)
     {
         GameObject[] shipHolders = GameObject.FindGameObjectsWithTag("SmallShipContainer");
